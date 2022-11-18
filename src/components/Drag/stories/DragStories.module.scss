@@ -1,0 +1,15 @@
+.c-general-container {
+    height: 160px;
+}
+
+.c-draggable {
+    background-color: inherit;
+}
+
+.c-draggable[data-validation="true"]>button {
+    background-color: #A3E4D7;
+}
+
+.c-draggable[data-validation="false"]>button {
+    background-color: #F1948A;
+}

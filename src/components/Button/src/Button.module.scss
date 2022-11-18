@@ -1,0 +1,85 @@
+.c-button {
+  --outline-color: var(--clr-primary-800);
+  --gap: 0.5em;
+}
+
+:where(.c-button) {
+  display: flex;
+  gap: var(--gap);
+  justify-content: center;
+  align-items: center;
+  border-color: transparent;
+  padding: var(--button-padding);
+  border: 2px solid var(--button-border-color);
+  color: var(--button-text-color);
+  background-color: var(--button-bg-color);
+  font-size: var(--button-font-size);
+  font-weight: bold;
+  border-radius: 100vh;
+  cursor: pointer;
+}
+
+// Hace que los botones que tengan sólo íconos sean redondos
+
+:where(.c-button.c-round) {
+  aspect-ratio: 1;
+}
+
+:where(.c-reverse) {
+  flex-flow: row-reverse;
+}
+
+// Definición de padding y font size
+
+.c-button:where(.c-small) {
+  --button-padding: var(--padding-1);
+  --button-font-size: var(--fs-200);
+}
+
+.c-button:where(.c-normal) {
+  --button-padding: var(--padding-1) var(--padding-2);
+  --button-font-size: var(--fs-300);
+}
+
+.c-button:where(.c-big) {
+  --button-padding: var(--padding-2) var(--padding-3);
+  --button-font-size: var(--fs-400);
+}
+
+.c-button:where(.c-round.c-small, .c-round.c-normal) {
+  --button-padding: var(--padding-1);
+}
+
+.c-button:where(.c-round.c-big) {
+  --button-padding: var(--padding-2);
+}
+
+// Definición de colores
+
+.c-button:where(.c-primary) {
+  --button-border-color: transparent;
+  --button-bg-color: var(--clr-primary-800);
+  --button-text-color: var(--clr-neutral-100);
+}
+
+.c-button:where(.c-secondary) {
+  --button-border-color: var(--clr-primary-800);
+  --button-bg-color: transparent;
+  --button-text-color: var(--clr-primary-800);
+}
+
+.c-button:where(.c-no-line) {
+  --button-border-color: transparent;
+  --button-bg-color: transparent;
+  --button-text-color: var(--clr-primary-800);
+}
+
+.c-button:where(.c-no-line:hover) {
+  --button-bg-color: var(--clr-primary-300);
+}
+
+.c-button:where([disabled]) {
+  --button-bg-color: var(--clr-neutral-500);
+  --button-text-color: var(--clr-primary-100);
+  cursor: not-allowed;
+}

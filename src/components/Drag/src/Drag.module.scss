@@ -1,0 +1,101 @@
+.c-droppable {
+  --clr-grey: rgba(201, 211, 219, 0.5);
+  --clr-grey-dark: rgba(201, 211, 219, 0.25);
+}
+
+:where(.c-droppable) {
+  margin: 2rem 0;
+  width: 100%;
+  height: 340px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: .8rem;
+  text-align: center;
+  border-radius: 10px;
+  box-sizing: border-box;
+  box-shadow: inset var(--clr-grey) 0 0 0 2px,
+    rgba(0, 0, 0, 0) 0 0 0 1px, var(--clr-grey-dark) 20px 14px 24px;
+  transition: box-shadow 250ms ease;
+  z-index: -2;
+}
+
+:where(.c-droppable--active) {
+  box-shadow: inset var(--clr-info-400) 0 0 0 3px, var(--clr-grey) 20px 14px 24px;
+  position: relative;
+}
+
+:where(.c-draggable) {
+  margin: .3rem 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  transition: transform 250ms ease;
+
+  * {
+    cursor: grab;
+  }
+
+  >button {
+    padding: 8px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 54px;
+    flex-shrink: 1;
+    appearance: none;
+    outline: none;
+    border: 0;
+    background-color: #181a22;
+    border-radius: 5px;
+    box-shadow: var(--box-shadow);
+    transform: translate3d(var(--translate-x, 0), var(--translate-y, 0), 0);
+    transition: box-shadow 300ms ease;
+    font-weight: bold;
+  }
+}
+
+:where(.c-draggable--active) {
+  z-index: 1;
+  transition: none;
+
+  * {
+    cursor: grabbing;
+  }
+}
+
+.c-draggable--active>button {
+  --box-shadow: -1px 0 15px 0 rgba(34, 33, 81, 0.01),
+    0px 15px 15px 0 rgba(34, 33, 81, 0.25);
+}
+
+.c-draggable--active>button:focus-visible {
+  --box-shadow: 0 0px 10px 2px var(--clr-primary-400);
+}
+
+
+:where(.c-draggable--active > button) {
+  animation: pop 250ms cubic-bezier(0.18, 0.67, 0.6, 1.22);
+}
+
+@keyframes pulse {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pop {
+  0% {
+    transform: translate3d(var(--translate-x, 0), var(--translate-y, 0), 0);
+  }
+
+  100% {
+    transform: translate3d(var(--translate-x, 0), var(--translate-y, 0), 0);
+    box-shadow: var(--box-shadow);
+  }
+}

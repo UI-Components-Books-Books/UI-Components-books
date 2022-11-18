@@ -1,0 +1,38 @@
+.c-label {
+    --textarea-border: var(--clr-neutral-400);
+    --textarea-focus: var(--clr-primary-400);
+}
+
+:where(.c-label) {
+    display: block;
+}
+
+.c-textarea {
+    --outline-size: 2px;
+    --outline-color: var(--textarea-focus);
+}
+
+:where(.c-textarea) {
+    position: relative;
+    padding: 0.5rem 0.75rem;
+    width: 100%;
+    min-height: 5rem;
+    height: 2rem;
+    appearance: none;
+    line-height: 1.375;
+    border-radius: 0.375rem;
+    border: 1px solid var(--textarea-border);
+    transition: background-color, border-color, color, fill, stroke, opacity, box-shadow, outline-offset, transform, 80ms;
+}
+
+.c-textarea--none {
+    resize: none;
+}
+
+.c-textarea--horizontal {
+    resize: horizontal;
+}
+
+.c-textarea--vertical {
+    resize: vertical;
+}

@@ -1,0 +1,46 @@
+:where(.c-accordion__item) {
+    border-top: 1px solid var(--clr-neutral-200);
+    margin-top: 2px;
+}
+
+:where(.c-accordion__item:last-of-type) {
+    border-bottom: 1px solid var(--clr-neutral-200);
+}
+
+:where(.c-accordion__button) {
+    --outline-color: var(--clr-primary-400);
+    width: 100%;
+    padding: 0.5rem 1rem;
+    align-items: center;
+    justify-content: space-between;
+    background: transparent;
+    cursor: pointer;
+    border: 0px;
+}
+
+:where(.c-accordion__button:focus) {
+    box-shadow: var(--clr-primary-400) 0px 0px 0px 2px;
+}
+
+:where(.c-accordion__button:hover) {
+    background-color: rgb(0, 0, 0, 0.04);
+}
+
+
+:where(.c-accordion) {
+    transition: height 0.2s ease 0s, opacity 0.2s ease-in-out 0s, transform 0.2s ease-in-out 0s; 
+}
+
+:where(.c-accordion__panel) {
+    height: 0px;
+    overflow: hidden;
+}
+
+:where(.c-accordion__panel--active) {
+    height: auto; // se necesita un tamaño para que funcione la transición
+}
+
+
+:where(.c-accordion__panel-content) {
+    padding: 0.5rem 1rem 1rem;
+}

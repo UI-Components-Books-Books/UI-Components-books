@@ -1,0 +1,45 @@
+body {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+
+/**
+    Add WCAG compliant focus styles to all focusable elements and links
+    them with custom properties for easier personalization
+**/
+
+:where(a, button, input, textarea, summary, [tabindex="0"]) {
+  --outline-size: max(2px, 0.08em); /* Outline thickness | Minimum 2px */
+  --outline-style: solid; /* Outline's line style (solid, dashed or dotted)  */
+  --outline-color: currentColor; /*Outline's color (uses text's color by default) */
+}
+
+:where(a, button, input, textarea, summary, [tabindex="0"]):focus {
+  outline: var(--outline-size) var(--outline-style) var(--outline-color);
+  outline-offset: var(--outline-offset, var(--outline-size));
+}
+
+@supports selector(:focus-visible) {
+  :where(a, button, input, textarea, summary, [tabindex="0"]):focus {
+    outline: none;
+  }
+
+  :where(a, button, input, textarea, summary, [tabindex="0"]):focus-visible {
+    outline: var(--outline-size) var(--outline-style) var(--outline-color);
+    outline-offset: var(--outline-offset, var(--outline-size));
+  }
+}
+
+// Add font size for headers
+
+h1 {
+  font-size: var(--fs-600);
+}
+
+h2 {
+  font-size: var(--fs-500);
+}
+
+h3 {
+  font-size: var(--fs-400);
+}

@@ -1,0 +1,92 @@
+{
+  "name": "ui-components-books",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "jest --watchAll",
+    "storybook": "start-storybook -p 6006 -s public",
+    "test-storybook": "test-storybook",
+    "build-storybook": "build-storybook -s public --no-dll",
+    "storybook-docs": "start-storybook --docs --no-manager-cache",
+    "build-storybook-docs": "build-storybook --docs"
+  },
+  "eslintConfig": {
+    "extends": [
+      "./node_modules/standard/eslintrc.json"
+    ],
+    "overrides": [
+      {
+        "files": [
+          "**/*.stories.*",
+          "**/*.test.jsx*"
+        ],
+        "rules": {
+          "import/no-anonymous-default-export": "off",
+          "no-undef": "off"
+        }
+      }
+    ]
+  },
+  "browserslist": {
+    "production": [
+      "> 0.5%, last 2 versions, Firefox ESR, not dead",
+      "> 5% in CO, not dead, last 2 versions"
+    ],
+    "development": [
+      "last 2 chrome version",
+      "last 2 firefox version",
+      "last 2 safari version"
+    ]
+  },
+  "dependencies": {
+    "@dnd-kit/core": "^6.0.5",
+    "@dnd-kit/modifiers": "^6.0.0",
+    "@popperjs/core": "^2.11.6",
+    "animate.css": "^4.1.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-popper": "^2.3.0",
+    "sass": "^1.56.1",
+    "uuid": "^8.3.2",
+    "wicg-inert": "^3.1.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.2",
+    "@babel/preset-env": "^7.20.2",
+    "@babel/preset-react": "^7.18.6",
+    "@storybook/addon-a11y": "^6.5.13",
+    "@storybook/addon-actions": "^6.5.13",
+    "@storybook/addon-essentials": "^6.5.13",
+    "@storybook/addon-interactions": "^6.5.13",
+    "@storybook/addon-links": "^6.5.13",
+    "@storybook/builder-vite": "^0.2.5",
+    "@storybook/jest": "^0.0.10",
+    "@storybook/react": "^6.5.13",
+    "@storybook/test-runner": "^0.9.0",
+    "@storybook/testing-library": "^0.0.13",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^14.4.3",
+    "@types/jest": "^29.2.3",
+    "@types/react": "^18.0.24",
+    "@types/react-dom": "^18.0.8",
+    "@vitejs/plugin-react": "^2.2.0",
+    "autoprefixer": "^10.4.13",
+    "axe-playwright": "^1.1.11",
+    "babel-jest": "^29.3.1",
+    "babel-loader": "^8.3.0",
+    "browserslist": "^4.21.4",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^29.3.1",
+    "jest-environment-jsdom": "^29.3.1",
+    "postcss": "^8.4.19",
+    "postcss-nesting": "^10.2.0",
+    "prop-types": "^15.8.1",
+    "standard": "^17.0.0",
+    "vite": "^3.2.3"
+  }
+}

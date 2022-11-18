@@ -1,0 +1,91 @@
+.c-input {
+  --gap: 0.5em;
+  --input-color: var(--clr-primary-700);
+  display: flex;
+  align-items: center
+}
+
+.c-input:where([data-state="right"]) {
+  --input-color: var(--clr-success-600);
+}
+
+.c-input:where([data-state="wrong"]) {
+  --input-color: var(--clr-error-600);
+}
+
+.c-input:where([data-type="radio"]) {
+  --input-border-radius: 50%;
+}
+
+.c-input:where([data-type="checkbox"]) {
+  --input-border-radius: 0.4375rem;
+}
+
+:where(.c-input__box) {
+  position: relative;
+  min-inline-size: 1.875rem;
+  min-block-size: 1.875rem;
+  color: var(--clr-primary-700);
+  border-radius: var(--input-border-radius);
+  border: 2px solid var(--clr-primary-700);
+}
+
+:where(.c-input__box:focus-within) {
+  outline: max(2px, 0.08em) solid var(--clr-primary-700);
+  outline-offset: max(2px, 0.08em);
+}
+
+:where(.c-input__check, .c-input__icon) {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+:where(.c-input__check) {
+  opacity: 0;
+  margin: 0;
+}
+
+:where(.c-input__icon) {
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  color: var(--clr-neutral-100);
+  isolation: isolate;
+}
+
+:where(.c-input__icon svg) {
+  display: none;
+}
+
+:where(.c-input__check:checked + .c-input__icon svg) {
+  display: block;
+}
+
+.c-input__icon::before {
+  content: "";
+  position: absolute;
+  width: 75%;
+  height: 75%;
+  border-radius: var(--input-border-radius);
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em var(--input-color);
+  z-index: -1;
+  forced-color-adjust: none;
+}
+
+@media screen and (forced-colors: active) {
+  :where(.c-input__icon) {
+    color: Canvas;
+  }
+
+  .c-input__icon::before {
+    box-shadow: inset 1em 1em Highlight;
+  }
+}
+
+.c-input__check:checked+.c-input__icon::before {
+  transform: scale(1);
+}

@@ -1,0 +1,13 @@
+@use "../settings/colors" as *;
+
+@each $key, $item in $colors {
+  @each $shade, $color in $item {
+    .u-bg-#{$key}-#{$shade} {
+      background-color: var(--clr-#{$key}-#{$shade});
+    }
+
+    .u-text-#{$key}-#{$shade} {
+      color: var(--clr-#{$key}-#{$shade});
+    }
+  }
+}

@@ -1,0 +1,54 @@
+.c-toggletip {
+    --toggletip-bg: var(--clr-neutral-800);
+    --toggletip-arrow-bg: var(--toggletip-bg);
+}
+
+:where(.c-toggletip) {
+    padding: 1rem;
+    max-width: 18rem;
+    width: 100%;
+    display: none;
+    font-size: 0.875rem;
+    color: var(--clr-common-white-100);
+    background: var(--toggletip-bg);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    z-index: 1800;
+}
+
+.c-toggletip--active {
+    display: grid;
+}
+
+.c-toggletip__arrow,
+.c-toggletip__arrow::before {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: var(--toggletip-arrow-bg);
+}
+
+:where(.c-toggletip__arrow) {
+    visibility: hidden;
+}
+
+.c-toggletip__arrow::before {
+    content: '';
+    transform: rotate(45deg);
+    visibility: visible;
+}
+
+:where(.c-toggletip[data-popper-placement^='top']>.c-toggletip__arrow) {
+    bottom: -4px;
+}
+
+:where(.c-toggletip[data-popper-placement^='bottom']>.c-toggletip__arrow) {
+    top: -4px;
+}
+
+:where(.c-toggletip[data-popper-placement^='left'] > .c-toggletip__arrow) {
+    right: -4px;
+}
+
+:where(.c-toggletip[data-popper-placement^='right'] > .c-toggletip__arrow) {
+    left: -4px;
+}

@@ -1,0 +1,7 @@
+.c-paper {
+    --clr-line: rgba(0, 0, 0, 0.3);
+    background-image: linear-gradient(var(--clr-line) 1px, transparent 0px);
+    background-size: 100% 2em;
+    background-position-y: 24px;
+    line-height: 2em;
+}

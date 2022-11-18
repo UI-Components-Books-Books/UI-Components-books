@@ -1,0 +1,47 @@
+@use "../settings/margins" as *;
+
+// Centrar un elemento horizontalmente
+
+.u-mx-auto {
+  margin-inline: auto;
+}
+
+// Centrar un elemento verticalmente
+
+.u-my-auto {
+  margin-block: auto;
+}
+
+@each $key, $item in $margins {
+  // Margin bottom con el sistema de diseño
+
+  .u-mt-#{$key} {
+    margin-block-start: var(--margin-#{$key});
+  }
+
+  // Margin bottom con el sistema de diseño
+
+  .u-mb-#{$key} {
+    margin-block-end: var(--margin-#{$key});
+  }
+
+  // Margen vertical con el sistema de diseño
+  .u-my-#{$key} {
+    margin-block: var(--margin-#{$key});
+  }
+
+  // Margin left con el sistema de diseño
+  .u-ml-#{$key} {
+    margin-inline-start: var(--margin-#{$key});
+  }
+
+  // Margin right con el sistema de diseño
+  .u-mr-#{$key} {
+    margin-inline-end: var(--margin-#{$key});
+  }
+
+  // Margin right con el sistema de diseño
+  .u-mx-#{$key} {
+    margin-inline: var(--margin-#{$key});
+  }
+}

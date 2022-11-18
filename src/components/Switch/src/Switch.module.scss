@@ -1,0 +1,79 @@
+.c-label {
+    display: inline-flex;
+    align-items: center;
+}
+
+.c-switch {
+    position: relative;
+    padding: 0.125rem;
+    display: inline-flex;
+    flex-shrink: 0;
+    justify-content: flex-start;
+    box-sizing: content-box;
+    width: var(--switch-width);
+    height: var(--switch-height);
+    cursor: pointer;
+    border-radius: 9999px;
+    background-color: var(--clr-neutral-200);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.c-switch::after {
+    content: "";
+    position: absolute;
+    left: 3px;
+    width: var(--switch-tumb);
+    height: var(--switch-tumb);
+    background-color: var(--clr-common-white-100);
+    border-radius: 50%;
+    transition: all 0.354s cubic-bezier(0.25, 0.1, 0.25, 1.65);
+}
+
+.c-switch:active:not(:disabled)::after {
+    width: calc(var(--switch-tumb) + 4px);
+}
+
+.c-switch:checked {
+    background-color: var(--clr-primary-500);
+}
+
+.c-switch:checked::after {
+    left: calc(100% - 3px);
+    transform: translateX(-100%);
+}
+
+.c-switch:disabled {
+    cursor: not-allowed;
+}
+
+.c-switch:disabled:checked {
+    background-color: var(--clr-primary-200);
+}
+
+.c-switch:disabled:not(:checked) {
+    background-color: var(--clr-neutral-100);
+}
+
+.c-switch:focus-visible {
+    --outline-color: var(--clr-primary-500);
+}
+
+.c-label:where(.is-sm) {
+    --switch-width: 1.375rem;
+    --switch-height: 0.75rem;
+    --switch-tumb: 0.75rem;
+}
+
+.c-label:where(.is-md) {
+    --switch-width: 1.875rem;
+    --switch-height: 1rem;
+    --switch-tumb: 1rem;
+}
+
+.c-label:where(.is-lg) {
+    --switch-width: 2.875rem;
+    --switch-height: 1.5rem;
+    --switch-tumb: 1.5rem;
+}

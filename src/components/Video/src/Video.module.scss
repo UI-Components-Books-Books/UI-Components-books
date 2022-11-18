@@ -1,0 +1,222 @@
+.c-vid {
+  --video-input-color: var(--clr-neutral-100);
+  --video-bg: var(--clr-complementary-900);
+  --video-caption-bg: var(--clr-complementary-800);
+  --video-progress-bg: var(--clr-primary-300);
+  --video-progress-focus: var(--clr-primary-500);
+  --video-button-disabled: var(--clr-complementary-300);
+}
+
+:where(.c-vid) {
+  margin-inline: auto;
+  color: var(--video-input-color);
+
+  @media screen and (forced-colors: active) {
+    border: 2px solid transparent;
+  }
+}
+
+:where(.c-vid__caption) {
+  margin-top: 1.5em;
+  text-align: center;
+}
+
+:where(.c-vid__container) {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto 6px 2.8125rem;
+
+  @media screen and (display-mode: fullscreen) {
+    display: grid;
+    height: 100vh;
+    grid-template-rows: calc(100vh - 6px - 3rem) 6px 3rem;
+
+    & > * {
+      width: 100%;
+    }
+
+    & video {
+      aspect-ratio: 19 / 6;
+    }
+  }
+}
+
+:where(.c-vid__video) {
+  height: 100%;
+  width: 100%;
+}
+
+.c-vid__video::cue {
+  visibility: visible;
+  color: var(--video-input-color);
+  background-color: var(--video-caption-bg);
+  line-height: 1.2;
+}
+
+.c-vid__video.no-captions::cue {
+  visibility: hidden;
+}
+
+:where(.c-vid__wrapper) {
+  display: grid;
+  grid-template-areas: "stack";
+  place-items: center;
+}
+
+:where(.c-vid__wrapper > *) {
+  grid-area: stack;
+}
+
+:where(.c-vid__icon-container) {
+  display: grid;
+  grid-auto-flow: column;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+:where(.c-vid__icon) {
+  display: grid;
+  place-items: center;
+  visibility: hidden;
+  aspect-ratio: 1;
+  height: 30%;
+  background-color: var(--video-bg);
+  font-size: 3.75rem;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+:where(.c-vid__icon.active) {
+  visibility: visible;
+  animation-name: iconPulse;
+  animation-duration: 700ms;
+}
+
+:where(.c-vid__icon svg) {
+  width: 60%;
+  height: 60%;
+}
+
+@keyframes iconPulse {
+  0% {
+    transform: scale(0.5);
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: scale(1.2);
+    opacity: 0;
+    display: none;
+  }
+}
+
+.c-vid__progress-bg {
+  --outline-color: var(--video-progress-focus);
+  --outline-offset: 0;
+}
+
+:where(.c-vid__progress-bg) {
+  position: relative;
+  display: flex;
+  flex-basis: 100%;
+  height: 6px;
+  transition: height 0.3s;
+  background: rgba(20 20 20 / 0.3);
+  cursor: pointer;
+  position: relative;
+  isolation: isolate;
+
+  @media screen and (forced-colors: active) {
+    border-block: 1px solid transparent;
+  }
+}
+
+:where(.c-vid__progress-bar) {
+  background-color: var(--video-progress-bg);
+  transform-origin: left;
+  width: 100%;
+}
+
+:where(.c-vid__progress-sphere) {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  aspect-ratio: 1;
+  background-color: var(--video-progress-bg);
+  height: calc(100% + 3px);
+}
+
+:where(.c-vid__controls) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.1rem 0.2rem;
+  height: 100%;
+  background-color: var(--video-bg);
+  color: var(--video-input-color);
+}
+
+:where(.c-vid__controls *) {
+  color: inherit;
+}
+
+:where(.c-vid__button) {
+  --outline-offset: -4px;
+  display: grid;
+  place-items: center;
+  height: 100%;
+  width: auto;
+  font-size: 1.5rem;
+  border: 0.125rem solid transparent;
+  background-color: transparent;
+  border-radius: 3.2px;
+  cursor: pointer;
+  border-radius: 0.5em;
+  aspect-ratio: 1;
+}
+
+:where(.c-vid__volume) {
+  display: grid;
+  place-items: center;
+  border-radius: 0.5rem;
+
+  @media screen and (max-width: 500px) {
+    display: none;
+  }
+}
+
+.c-vid__volume-item {
+  --outline-offset: max(4px, 0.08em);
+}
+
+:where(.c-vid__volume-item) {
+  display: block;
+  width: 5rem;
+  accent-color: var(--video-progress-bg);
+  border-radius: 0.5em;
+}
+
+:where(.c-vid__time) {
+  margin: 0;
+  width: 100%;
+  font-variant-numeric: tabular-nums;
+}
+
+:where(.c-vid__subtitles[aria-pressed="true"]) {
+  color: var(--video-bg);
+  background-color: var(--video-input-color);
+  border: 2px solid transparent;
+}
+
+:where(.c-vid__subtitles[disabled]) {
+  color: var(--video-button-disabled);
+  cursor: not-allowed;
+}
+
+:where(.c-vid__subtitles[aria-pressed="true"]:hover) {
+  background-color: rgb(255 255 255 / 30%);
+  color: var(--video-input-color);
+}

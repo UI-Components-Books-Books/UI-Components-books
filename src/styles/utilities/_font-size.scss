@@ -1,0 +1,10 @@
+@use "../settings/font-sizes" as *;
+
+// Crea utility classes para los tamaños de fuente.
+
+@each $key,
+$item in $font-sizes {
+  .u-fs-#{$key} {
+    font-size: var(--fs-#{$key});
+  }
+}

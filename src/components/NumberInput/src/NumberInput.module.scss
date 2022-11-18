@@ -1,0 +1,103 @@
+.c-number-input {
+    --input-border: var(--clr-neutral-400);
+    --input-focus: var(--clr-primary-400);
+    --input-size: 2.5rem;
+    --input-padding-right: 2.5rem;
+    --input-padding-left: 1rem;
+    --border-size: 0.375rem;
+    --transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, outline-offset, transform;
+}
+
+.c-number-input {
+    width: 100%;
+    position: relative;
+}
+
+:where(.c-number-input__label) {
+    display: block;
+}
+
+:where(.c-number-input__input) {
+    position: relative;
+    padding-block: 0 .0625rem;
+    padding-right: var(--input-padding-right);
+    padding-left: var(--input-padding-left);
+    width: 100%;
+    height: var(--input-size);
+    font-size: initial;
+    appearance: none;
+    border-radius: var(--border-size);
+    border: 1px solid var(--input-border);
+    background: inherit;
+    transition: var(--transition-property), 40ms;
+}
+
+.c-number-input__input {
+    --outline-size: 2px;
+    --outline-color: var(--input-focus);
+}
+
+.c-number-input__label:focus-within ~.c-number-input__stepper button > svg {
+    transform:scale(1.9);
+    fill: var(--input-focus);
+}
+
+:where(.c-number-input__stepper) {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 1px;
+    width: 1.8rem;
+    height: calc(100% - 2px);
+    display: inline-flex;
+    align-items: flex-end;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 2;
+}
+
+.c-number-input__button {
+    font: menu;
+}
+
+:where(.c-number-input__button) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    flex: 1 1 auto;
+    color: inherit;
+    background-color: transparent;
+    user-select: none;
+    cursor: pointer;
+    border: none;
+    border-inline-start-width: 1px;
+    border-inline-start-style: solid;
+    border-inline-start-color: var(--input-border);
+    transition: var(--transition-property), 300ms;
+}
+
+:where(.c-number-input__button:active) {
+    background-color: var(--clr-primary-200);
+}
+
+:where(.c-number-input__button:first-of-type) {
+    border-top-right-radius: var(--border-size);
+}
+
+:where(.c-number-input__button:last-of-type) {
+    margin-top: -1px;
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-top-color: var(--input-border);
+    border-bottom-right-radius: var(--border-size);
+}
+
+:where(.c-number-input__button > svg) {
+    transform: scale(1.4);
+}
+
+:where(.c-number-input__button[disabled]) {
+    opacity: 0.4;
+    cursor: not-allowed;
+}

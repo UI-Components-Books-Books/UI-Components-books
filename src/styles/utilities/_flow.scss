@@ -1,0 +1,8 @@
+/** 
+  Genera un margin-top a todos los elementos hijos directos 
+  excepto el primero, para generar espaciado entre elementos.
+**/
+
+.u-flow > * + * {
+  margin-block-start: var(--flow-space, 1em);
+}

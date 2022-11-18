@@ -1,0 +1,19 @@
+:where(.c-icon) {
+  display: block;
+  width: var(--icon-size);
+  height: var(--icon-size);
+  fill: currentColor;
+  forced-color-adjust: auto;
+}
+
+:where(.c-icon.c-small) {
+  --icon-size: 0.75em;
+}
+
+:where(.c-icon.c-normal) {
+  --icon-size: 1em;
+}
+
+:where(.c-icon.c-big) {
+  --icon-size: 1.25em;
+}

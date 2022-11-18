@@ -1,0 +1,35 @@
+@use "./margins" as *;
+@use "./font-sizes" as *;
+@use "./colors" as *;
+@use "./padding" as *;
+
+:root {
+
+  // Colores
+  @each $key,
+  $item in $colors {
+
+    @each $shade,
+    $color in $item {
+      --clr-#{$key}-#{$shade}: #{$color};
+    }
+  }
+
+  // Tamaños de letra
+  @each $key,
+  $item in $font-sizes {
+    --fs-#{$key}: #{$item};
+  }
+
+  // Márgenes
+  @each $key,
+  $item in $margins {
+    --margin-#{$key}: #{$item};
+  }
+
+  // Paddings
+  @each $key, $item in $paddings {
+    --padding-#{$key}: #{$item};
+  }
+}
+

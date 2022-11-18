@@ -1,0 +1,57 @@
+.c-tooltip {
+    --tooltip-bg: var(--clr-neutral-800);
+    --tooltip-arrow-bg: var(--tooltip-bg);
+}
+
+:where(.c-tooltip) {
+    padding: .25rem .5rem;
+    max-width: 320px;
+    min-width: max-content;
+    display: none;
+    font-size: 0.875rem;
+    font-weight: bold;
+    color: var(--clr-common-white-100);
+    border-radius: 0.225rem;
+    background: var(--tooltip-bg);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    pointer-events: none;
+    z-index: 1800;
+}
+
+.c-tooltip--active {
+    display: block;
+}
+
+.c-tooltip__arrow,
+.c-tooltip__arrow::before {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: var(--tooltip-arrow-bg);
+}
+
+:where(.c-tooltip__arrow) {
+    visibility: hidden;
+}
+
+.c-tooltip__arrow::before {
+    content: '';
+    transform: rotate(45deg);
+    visibility: visible;
+}
+
+:where(.c-tooltip[data-popper-placement^='top']>.c-tooltip__arrow) {
+    bottom: -4px;
+}
+
+:where(.c-tooltip[data-popper-placement^='bottom']>.c-tooltip__arrow) {
+    top: -4px;
+}
+
+:where(.c-tooltip[data-popper-placement^='left'] > .c-tooltip__arrow) {
+    right: -4px;
+}
+
+:where(.c-tooltip[data-popper-placement^='right'] > .c-tooltip__arrow) {
+    left: -4px;
+}

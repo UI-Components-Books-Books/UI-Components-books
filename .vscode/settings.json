@@ -1,0 +1,17 @@
+{
+  "files.exclude": {
+    "**/.vscode": false,
+    "**/node_modules": false,
+    "**.gitignore": false,
+    "**/.github": true,
+    "**/.storybook": true,
+    "**/tests": true,
+    ".npmrc": true,
+    ".env.production": true,
+    "babel.config.json": true,
+    "**jest.config.cjs": true,
+    "**jest.setup.js": true,
+    "package-lock.json": true,
+    "**setupTest.js": true
+  },
+}

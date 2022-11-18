@@ -1,0 +1,57 @@
+:where(.c-tab__button) {
+    padding: .5rem 2rem;
+    margin-bottom: -2px;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--fs-200);
+    border: 0px;
+    border-bottom-width: .125rem;
+    border-bottom-style: solid;
+    border-color: var(--clr-neutral-200);
+    background: transparent;
+    cursor: pointer;
+    transition: border-color, color, background, 200ms ease;
+}
+
+.c-tab__button {
+    --outline-color: var(--clr-primary-500);
+}
+
+:where(.c-tab__button:focus) {
+    box-shadow: var(--clr-primary-500) 0px 0px 0px 2px;
+    border-bottom-width: 0px;
+}
+
+:where(.c-tab__button[aria-selected="true"]) {
+    color: var(--clr-primary-500);
+    border-color: currentcolor;
+}
+
+:where(.c-tab__button:active) {
+    background: var(--clr-neutral-100);
+}
+
+:where(.c-tab__list) {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+    border-color: var(--clr-neutral-200);
+}
+
+:where(.c-tab__panels) {
+    width: 100%;
+}
+
+:where(.c-tab__panel) {
+    height: 0px;
+    overflow: hidden;
+}
+
+:where(.c-tab__panel--active) {
+    height: auto;
+    padding: 1rem;
+    transition: height 0.8s ease-in-out;
+}

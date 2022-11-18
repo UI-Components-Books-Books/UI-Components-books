@@ -1,0 +1,45 @@
+:where(.c-layout, .c-modal) {
+  position: fixed;
+}
+
+:where(.c-layout) {
+  inset: 0;
+  background-color: var(--clr-neutral-900);
+  opacity: 0.6;
+  backdrop-filter: blur(10px);
+}
+
+:where(.c-modal) {
+  position: fixed;
+  top: 50%;
+  left: 0;
+  right: 0;
+  width: 80vw;
+  margin-inline: auto;
+  max-inline-size: var(--modal-max-width, 59.375rem);
+  block-size: 80%;
+  transform: translateY(-50%);
+  background-color: var(--clr-neutral-100);
+  border-radius: 0.625rem;
+}
+
+@media screen and (forced-colors: active) {
+  :where(.c-modal) {
+    border: 0.1875rem solid currentColor;
+  }
+}
+
+:where(.c-modal-container) {
+  overflow-y: auto;
+}
+
+:where(.c-close-button) {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(50%, -50%);
+}
+
+:where(.c-modal:focus) {
+  outline: none;
+}

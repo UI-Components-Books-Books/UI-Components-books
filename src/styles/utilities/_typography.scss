@@ -1,0 +1,191 @@
+/** 
+    Utilities for controlling the alignment of text.
+**/
+
+.u-text-left {
+    text-align: left;
+}
+
+.u-text-center {
+    text-align: center;
+}
+
+.u-text-right {
+    text-align: right;
+}
+
+.u-text-justify {
+    text-align: justify;
+}
+
+.u-text-start {
+    text-align: start;
+}
+
+.u-text-end {
+    text-align: end;
+}
+
+
+/** 
+    Utilities for controlling the transformation of text.
+**/
+
+.u-uppercase {
+    text-transform: uppercase;
+}
+
+.u-lowercase {
+    text-transform: lowercase;
+}
+
+.u-capitalize {
+    text-transform: capitalize;
+}
+
+.u-normal-case {
+    text-transform: none;
+}
+
+
+/**
+    Utilities for controlling text overflow in an element.
+**/
+
+.u-truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.u-text-ellipsis {
+    text-overflow: ellipsis;
+}
+
+.u-text-clip {
+    text-overflow: clip;
+}
+
+
+/** 
+    Utilities for controlling the font weight of an element.
+**/
+
+.u-font-thin {
+    font-weight: 100;
+}
+
+.u-font-extralight {
+    font-weight: 200;
+}
+
+.u-font-light {
+    font-weight: 300;
+}
+
+.u-font-normal {
+    font-weight: 400;
+}
+
+.u-font-medium {
+    font-weight: 500;
+}
+
+.u-font-semibold {
+    font-weight: 600;
+}
+
+.u-font-bold {
+    font-weight: 700;
+}
+
+.u-font-extrabold {
+    font-weight: 800;
+}
+
+.u-font-black {
+    font-weight: 900;
+}
+
+
+/** 
+    Utilities for controlling the style of text.
+**/
+
+.u-italic {
+    font-style: italic;
+}
+
+.u-not-italic {
+    font-style: normal;
+}
+
+
+/** 
+    Utilities for controlling the variant of numbers.
+**/
+
+.u-normal-nums {
+    font-variant-numeric: normal;
+}
+
+.u-ordinal {
+    font-variant-numeric: ordinal;
+}
+
+.u-slashed-zero {
+    font-variant-numeric: slashed-zero;
+}
+
+.u-lining-nums {
+    font-variant-numeric: lining-nums;
+}
+
+.u-oldstyle-nums {
+    font-variant-numeric: oldstyle-nums;
+}
+
+.u-proportional-nums {
+    font-variant-numeric: proportional-nums;
+}
+
+.u-tabular-nums {
+    font-variant-numeric: tabular-nums;
+}
+
+.u-diagonal-fractions {
+    font-variant-numeric: diagonal-fractions;
+}
+
+.u-stacked-fractions {
+    font-variant-numeric: stacked-fractions;
+}
+
+
+/**
+    Utilities for controlling the bullet/number style of a list.
+**/
+
+.u-list-none {
+    list-style-type: none;
+}
+
+.u-list-disc {
+    list-style-type: disc;
+}
+
+.u-list-decimal {
+    list-style-type: decimal;
+}
+
+.u-list-number {
+    list-style-type: decimal;
+}
+
+.u-list-uppercase {
+    list-style-type: upper-alpha;
+}
+
+.u-list-lowercase {
+    list-style-type: lower-alpha;
+}

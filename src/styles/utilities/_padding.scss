@@ -1,0 +1,35 @@
+@use "../settings/padding" as *;
+
+@each $key, $item in $paddings {
+  // Padding top con el sistema de diseño
+
+  .u-pt-#{$key} {
+    padding-block-start: var(--padding-#{$key});
+  }
+
+  // Padding bottom con el sistema de diseño
+
+  .u-pb-#{$key} {
+    padding-block-end: var(--padding-#{$key});
+  }
+
+  // Padding vertical con el sistema de diseño
+  .u-py-#{$key} {
+    padding-block: var(--padding-#{$key});
+  }
+
+  // Padding left con el sistema de diseño
+  .u-pl-#{$key} {
+    padding-inline-start: var(--padding-#{$key});
+  }
+
+  // Padding right con el sistema de diseño
+  .u-pr-#{$key} {
+    padding-inline-end: var(--padding-#{$key});
+  }
+
+  // Padding right con el sistema de diseño
+  .u-px-#{$key} {
+    padding-inline: var(--padding-#{$key});
+  }
+}
