@@ -10,7 +10,7 @@ export default defineConfig({
       entry: resolve(__dirname, 'src/main.js'),
       name: 'UIComponentsBooks',
       // Se agregará la extension apropiada.
-      fileName: 'ui-components-books'
+      fileName: 'index'
     },
     rollupOptions: {
       // Asegúrate de externalizar las dependencias que no deberían estar empaquetadas
