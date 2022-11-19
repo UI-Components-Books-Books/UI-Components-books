@@ -8,9 +8,9 @@
     "build": "vite build",
     "preview": "vite preview",
     "test": "jest --watchAll",
-    "storybook": "start-storybook -p 6006 -s public",
+    "storybook": "start-storybook",
     "test-storybook": "test-storybook",
-    "build-storybook": "build-storybook -s public --no-dll",
+    "build-storybook": "build-storybook --no-dll",
     "storybook-docs": "start-storybook --docs --no-manager-cache",
     "build-storybook-docs": "build-storybook --docs",
     "chromatic": "npx chromatic --project-token=af31efc24b7f"
