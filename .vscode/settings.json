@@ -3,7 +3,7 @@
     "**/.vscode": false,
     "**/node_modules": false,
     "**.gitignore": false,
-    "**/.github": true,
+    "**/.github": false,
     "**/.storybook": true,
     "**/tests": true,
     ".npmrc": true,

@@ -1,25 +1,25 @@
-import React from 'react'
-import { Video } from '../../Video'
+// import React from 'react'
+// import { Video } from '../../Video'
 
-export default {
-  title: 'ui-components/Video',
-  component: Video
-}
+// export default {
+//   title: 'ui-components/Video',
+//   component: Video
+// }
 
-const Template = (args) => <Video {...args} />
+// const Template = (args) => <Video {...args} />
 
-export const Default = Template.bind({})
+// export const Default = Template.bind({})
 
-Default.args = {
-  src: {
-    video: 'https://media.w3.org/2010/05/sintel/trailer_hd.mp4',
-    caption: 'assets/others/video.vtt'
-  },
-  width: '600',
-  description: {
-    title: 'Video 1',
-    content: 'Video de prueba'
-  }
-}
+// Default.args = {
+//   src: {
+//     video: 'https://media.w3.org/2010/05/sintel/trailer_hd.mp4',
+//     caption: 'assets/others/video.vtt'
+//   },
+//   width: '600',
+//   description: {
+//     title: 'Video 1',
+//     content: 'Video de prueba'
+//   }
+// }
 
-Default.storyName = 'default'
+// Default.storyName = 'default'
