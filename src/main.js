@@ -6,4 +6,4 @@ export * from './components'
 export * from './hooks'
 
 // Export createTheme helper
-export { createTheme } from './helpers'
+export { createTheme } from './helpers/createTheme'
