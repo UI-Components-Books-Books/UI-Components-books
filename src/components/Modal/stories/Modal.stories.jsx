@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 
-import { Col, Row, Button, Link, Modal } from '../../../components'
+import { Col, Row, Button, Link, Modal, ModalContent, ModalOverlay } from '../../../components'
 
 export default {
   title: 'ui-components/Modal',
@@ -27,17 +27,47 @@ export const Default = () => {
     <>
       <Button ref={buttonRef} label='Open modal' onClick={() => setIsOpen(true)} />
       <Modal isOpen={isOpen} onClose={(value) => setIsOpen(value)} finalFocusRef={buttonRef}>
-        <h3 className='u-text-center'>Contenido de prueba</h3>
-        <p>
-          Contenido de prueba para ver si el feature funciona con un <Link>link de prueba</Link> para el focus trap
-        </p>
-        <details>
-          <summary>Y un details y summary de prueba</summary>
-          <p>Con texto de prueba</p>
-        </details>
+        <ModalOverlay />
+        <ModalContent>
+          <h3 className='u-text-center'>Contenido de prueba</h3>
+          <p>
+            Contenido de prueba para ver si el feature funciona con un <Link>link de prueba</Link> para el focus trap
+          </p>
+          <details>
+            <summary>Y un details y summary de prueba</summary>
+            <p>Con texto de prueba</p>
+          </details>
+        </ModalContent>
       </Modal>
     </>
   )
 }
 
 Default.storyName = 'default'
+
+export const WithOutOverlay = () => {
+  const [isOpen, setIsOpen] = useState(false)
+
+  const buttonRef = useRef()
+
+  return (
+    <>
+      <Button ref={buttonRef} label='Open modal' onClick={() => setIsOpen(true)} />
+      <Modal isOpen={isOpen} onClose={(value) => setIsOpen(value)} finalFocusRef={buttonRef}>
+
+        <ModalContent>
+          <h3 className='u-text-center'>Contenido de prueba</h3>
+          <p>
+            Contenido de prueba para ver si el feature funciona con un <Link>link de prueba</Link> para el focus trap
+          </p>
+          <details>
+            <summary>Y un details y summary de prueba</summary>
+            <p>Con texto de prueba</p>
+          </details>
+        </ModalContent>
+      </Modal>
+    </>
+  )
+}
+
+WithOutOverlay.storyName = 'without overlay'

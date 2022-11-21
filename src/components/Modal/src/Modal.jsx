@@ -1,10 +1,16 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, createContext } from 'react'
 import PropTypes from 'prop-types'
 import 'wicg-inert'
 
-import { Button, Portal } from '../../../components'
+import { Portal } from '../../../components'
+import { getChildrenByType } from '../../../utils/validations/getChildrenType'
 
-import css from './Modal.module.scss'
+/**
+ * Creamos un contexto para proveer a ciertos
+ * componentes hijos las funcionalidades creadas
+ * acá en el componente padre.
+ */
+export const ModalContext = createContext()
 
 /**
  * Se crea un objeto que no se puede cambiar para
@@ -14,7 +20,7 @@ const KEYCODE = Object.freeze({
   ESC: 27
 })
 
-export const Modal = ({ children, addClass, isOpen, onClose, finalFocusRef, label, ...props }) => {
+export const Modal = ({ children, isOpen, onClose, finalFocusRef }) => {
   /**
     * Obtenemos la referencia del modal para
     * agregarle el focus cuando este se abra.
@@ -68,23 +74,11 @@ export const Modal = ({ children, addClass, isOpen, onClose, finalFocusRef, labe
   }, [isOpen])
 
   return (
-    <Portal id='js-modal'>
-      <div className={css['c-layout']} onClick={onCloseModal} hidden={!isOpen} />
-      <div
-        role='dialog'
-        tabIndex='-1'
-        hidden={!isOpen}
-        aria-label={label}
-        ref={refModal}
-        onKeyDown={onKeyDown}
-        aria-modal='true'
-        className={`${css['c-modal']} u-px-3 u-py-3 ${addClass ?? ''}`}
-        {...props}
-      >
-        <div className={`${css['c-modal-container']} u-flow`}>{children}</div>
-        <Button addClass={css['c-close-button']} label='Cerrar modal' hasAriaLabel icon={{ name: 'close' }} onClick={onCloseModal} />
-      </div>
-    </Portal>
+    <ModalContext.Provider value={{ isOpen, onKeyDown, onCloseModal, refModal }}>
+      <Portal id='js-modal'>
+        {getChildrenByType(children, ['ModalContent', 'ModalOverlay'])}
+      </Portal>
+    </ModalContext.Provider>
   )
 }
 
