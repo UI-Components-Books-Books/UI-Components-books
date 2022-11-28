@@ -5,9 +5,34 @@
     gap: var(--gap, 1em);
 }
 
+.u-self-auto {
+    align-self: auto;
+}
+
+.u-self-start {
+    align-self: flex-start;
+}
+
+.u-self-end {
+    align-self: flex-end;
+}
+
+.u-self-center {
+    align-self: center;
+}
+
+.u-self-stretch {
+    align-self: stretch;
+}
+
+.u-self-baseline {
+    align-self: baseline;
+}
+
 /* Add grid display to any class that has the word "grid" on it */
 
 [class*="u-grid"] {
     display: grid;
     gap: var(--gap, 1em);
 }
+
