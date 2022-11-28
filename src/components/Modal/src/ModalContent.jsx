@@ -48,7 +48,7 @@ export const ModalContent = ({ label, addClass, children, onClick, onKeyDown, __
       aria-modal='true'
       data-type={__TYPE}
       onKeyDown={handleKeyDown}
-      className={`${css['c-modal']} u-px-3 u-py-3 ${addClass ?? ''}`}
+      className={`${css['c-modal']} animate__animated animate__fadeIn animate__faster u-px-3 u-py-3 ${addClass ?? ''}`}
       {...props}
     >
       <div className={`${css['c-modal-container']} u-flow`}>{children}</div>

@@ -50,13 +50,30 @@ export const Modal = ({ children, isOpen, onClose, finalFocusRef }) => {
   }
 
   /**
+   * Se utiliza está función para cambiar las clases
+   * del modal asi permite dar una transición tanto
+   * de entrada como da salida suave.
+   *
+   * @param {String} to - Clase a replazar
+   * @param {String} from - Clase que remplaza
+   */
+  const changeStyle = (to, from) => {
+    refModal.current.classList.replace(to, from)
+  }
+
+  /**
     * Función utilizada para cerrar el modal.
     * además agrega el focus al elemento contenido
     * en la propiedad finalFocusRef.
     */
   const onCloseModal = () => {
-    onClose(!isOpen)
-    inertToggle(false)
+    changeStyle('animate__fadeIn', 'animate__fadeOut')
+
+    setTimeout(() => {
+      changeStyle('animate__fadeOut', 'animate__fadeIn')
+      inertToggle(false)
+      onClose(!isOpen)
+    }, 400)
 
     if (finalFocusRef) finalFocusRef.current.focus()
   }

@@ -104,6 +104,7 @@ export const Tooltip = ({ children: childrenProps, id, label, placement, addClas
           id={tooltipId}
           ref={refTooltip}
           role='tooltip'
+          onMouseOver={onMouseOver}
           className={`${css['c-tooltip']} ${isOpen && css['c-tooltip--active']} ${addClass ?? ''}`}
           style={styles.popper}
           {...attributes.popper}
