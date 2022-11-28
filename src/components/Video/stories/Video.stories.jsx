@@ -13,7 +13,7 @@
 // Default.args = {
 //   src: {
 //     video: 'https://media.w3.org/2010/05/sintel/trailer_hd.mp4',
-//     caption: 'assets/others/video.vtt'
+//     caption: '/assets/others/video.vtt'
 //   },
 //   width: '600',
 //   description: {

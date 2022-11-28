@@ -2,7 +2,8 @@ import { useState } from 'react'
 import PropTypes from 'prop-types'
 
 import css from './Image.module.scss'
-import base from '../../../assets/images/base-image.png'
+// eslint-disable-next-line import/no-absolute-path
+import base from '/assets/images/base-image.png'
 
 export const Image = ({ url, alt, title, width, addClass, noCaption, ...props }) => {
   // Estado para determinar si se muestra la imagen por defecto.

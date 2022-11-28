@@ -4,7 +4,15 @@
   "version": "1.0.0",
   "license": "MIT",
   "type": "module",
-  "main": "dist/ui-components-books.js",
+  "files": ["dist"],
+  "main": "dist/ui-components-books.umd.csj",
+  "module": "./dist/ui-components-books.js",
+  "exports": {
+    ".": {
+      "import": "./dist/ui-components-books.js",
+      "require": "./dist/ui-components-books.umd.cjs"
+    }
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -50,6 +58,8 @@
     "react-dom": "18.2.0"
   },
   "dependencies": {
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
     "@dnd-kit/core": "^6.0.5",
     "@dnd-kit/modifiers": "^6.0.0",
     "@popperjs/core": "^2.11.6",

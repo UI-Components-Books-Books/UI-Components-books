@@ -31,7 +31,7 @@ export const Icon = ({ name, size, addClass }) => {
       aria-hidden='true'
       data-testid={name}
     >
-      <use xlinkHref={`/src/assets/icons/svg/${name}.svg#${name}`} />
+      <use xlinkHref={`/assets/icons/svg/${name}.svg#${name}`} />
     </svg>
   )
 }
