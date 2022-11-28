@@ -6115,10 +6115,10 @@ Yi.propTypes = {
   finalFocusRef: i.exports.object
 };
 const Pr = {
-  "c-layout": "_c-layout_12ccu_1",
-  "c-modal": "_c-modal_12ccu_1",
-  "c-modal-container": "_c-modal-container_12ccu_32",
-  "c-close-button": "_c-close-button_12ccu_36"
+  "c-layout": "_c-layout_1v1zx_1",
+  "c-modal": "_c-modal_1v1zx_1",
+  "c-modal-container": "_c-modal-container_1v1zx_33",
+  "c-close-button": "_c-close-button_1v1zx_37"
 }, qi = ({
   label: e,
   addClass: t,
@@ -6667,7 +6667,6 @@ const Xi = ({
   } = me(Gr), c = a(t);
   return /* @__PURE__ */ P("section", {
     role: "tabpanel",
-    tabIndex: -1,
     hidden: !c,
     "data-type": n,
     "aria-hidden": !c,

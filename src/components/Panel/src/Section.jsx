@@ -22,7 +22,6 @@ export const Section = ({ children, id, addClass, __TYPE, ...props }) => {
   return (
     <section
       role='tabpanel'
-      tabIndex={-1}
       hidden={!isSelected}
       data-type={__TYPE}
       aria-hidden={!isSelected}
