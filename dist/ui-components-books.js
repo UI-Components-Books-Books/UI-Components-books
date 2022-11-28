@@ -1817,7 +1817,6 @@ const Rs = {
   addClass: t,
   ...r
 }) => /* @__PURE__ */ h("section", {
-  tabIndex: -1,
   className: `${Rs["c-content"]} animate__animated animate__fadeInDown animate__faster ${t != null ? t : ""}`,
   ...r,
   children: e
@@ -6076,13 +6075,17 @@ const Yn = Ge(), Al = Object.freeze({
   onClose: r,
   finalFocusRef: n
 }) => {
-  const o = J(), a = (l) => {
-    const d = document.querySelector("#root");
-    d.inert = l;
-  }, c = (l) => {
-    (l.keyCode || l.which) === Al.ESC && s();
-  }, s = () => {
-    r(!t), a(!1), n && n.current.focus();
+  const o = J(), a = (d) => {
+    const u = document.querySelector("#root");
+    u.inert = d;
+  }, c = (d) => {
+    (d.keyCode || d.which) === Al.ESC && l();
+  }, s = (d, u) => {
+    o.current.classList.replace(d, u);
+  }, l = () => {
+    s("animate__fadeIn", "animate__fadeOut"), setTimeout(() => {
+      s("animate__fadeOut", "animate__fadeIn"), a(!1), r(!t);
+    }, 400), n && n.current.focus();
   };
   return W(() => {
     t && (a(!0), o.current && o.current.focus());
@@ -6090,7 +6093,7 @@ const Yn = Ge(), Al = Object.freeze({
     value: {
       isOpen: t,
       onKeyDown: c,
-      onCloseModal: s,
+      onCloseModal: l,
       refModal: o
     },
     children: /* @__PURE__ */ h(xr, {
@@ -6144,7 +6147,7 @@ const Pr = {
     onKeyDown: (g) => {
       o && typeof o == "function" && o(g), l(g);
     },
-    className: `${Pr["c-modal"]} u-px-3 u-py-3 ${t != null ? t : ""}`,
+    className: `${Pr["c-modal"]} animate__animated animate__fadeIn animate__faster u-px-3 u-py-3 ${t != null ? t : ""}`,
     ...c,
     children: [/* @__PURE__ */ h("div", {
       className: `${Pr["c-modal-container"]} u-flow`,
@@ -8604,9 +8607,9 @@ ga.defaultProps = {
   __TYPE: "ToggletipContent"
 };
 const _n = {
-  "c-tooltip": "_c-tooltip_1n6og_1",
-  "c-tooltip--active": "_c-tooltip--active_1n6og_21",
-  "c-tooltip__arrow": "_c-tooltip__arrow_1n6og_25"
+  "c-tooltip": "_c-tooltip_17pol_1",
+  "c-tooltip--active": "_c-tooltip--active_17pol_20",
+  "c-tooltip__arrow": "_c-tooltip__arrow_17pol_24"
 }, ha = ({
   children: e,
   id: t,
@@ -8661,6 +8664,7 @@ const _n = {
         id: p,
         ref: f,
         role: "tooltip",
+        onMouseOver: m,
         className: `${_n["c-tooltip"]} ${l && _n["c-tooltip--active"]} ${o != null ? o : ""}`,
         style: I.popper,
         ...D.popper,
