@@ -51,7 +51,7 @@ export const ModalContent = ({ label, addClass, children, onClick, onKeyDown, __
       className={`${css['c-modal']} animate__animated animate__fadeIn animate__faster u-px-3 u-py-3 ${addClass ?? ''}`}
       {...props}
     >
-      <div className={`${css['c-modal-container']} u-flow`}>{children}</div>
+      <div className={`${css['c-modal-container']}`}>{children}</div>
       <Button addClass={css['c-close-button']} label='Cerrar modal' hasAriaLabel icon={{ name: 'close' }} onClick={handleClick} />
     </div>
   )

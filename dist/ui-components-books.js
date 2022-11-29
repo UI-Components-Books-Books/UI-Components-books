@@ -6150,7 +6150,7 @@ const Cr = {
     className: `${Cr["c-modal"]} animate__animated animate__fadeIn animate__faster u-px-3 u-py-3 ${t != null ? t : ""}`,
     ...c,
     children: [/* @__PURE__ */ m("div", {
-      className: `${Cr["c-modal-container"]} u-flow`,
+      className: `${Cr["c-modal-container"]}`,
       children: r
     }), /* @__PURE__ */ m(Dt, {
       addClass: Cr["c-close-button"],
@@ -6892,7 +6892,7 @@ _r.propTypes = {
   children: i.exports.any,
   id: i.exports.string.isRequired
 };
-const Il = "_row_7j367_1", kl = {
+const Il = "_row_1adiy_1", kl = {
   row: Il
 }, Ml = ct(({
   addClass: e,
