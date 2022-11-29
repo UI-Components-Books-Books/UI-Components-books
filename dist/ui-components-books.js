@@ -5424,8 +5424,8 @@ const df = ({
     })
   })
 }), Co = {
-  "c-image": "_c-image_15sbg_1",
-  "c-image__figcaption": "_c-image__figcaption_15sbg_13"
+  "c-image": "_c-image_1lngo_1",
+  "c-image__figcaption": "_c-image__figcaption_1lngo_16"
 }, vl = "/assets/images/base-image.png", Ai = ({
   url: e,
   alt: t,
