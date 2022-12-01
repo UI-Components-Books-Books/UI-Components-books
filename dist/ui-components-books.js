@@ -6622,12 +6622,12 @@ Vn.defaultProps = {
   element: /* @__PURE__ */ m("button", {})
 };
 const jt = {
-  "c-panel": "_c-panel_15fck_1",
-  "c-section": "_c-section_15fck_9",
-  "c-navigation": "_c-navigation_15fck_15",
-  "c-navigation__item": "_c-navigation__item_15fck_29",
-  "c-navigation__section": "_c-navigation__section_15fck_33",
-  "c-navigation__button": "_c-navigation__button_15fck_51"
+  "c-panel": "_c-panel_swo2e_1",
+  "c-section": "_c-section_swo2e_10",
+  "c-navigation": "_c-navigation_swo2e_16",
+  "c-navigation__item": "_c-navigation__item_swo2e_30",
+  "c-navigation__section": "_c-navigation__section_swo2e_34",
+  "c-navigation__button": "_c-navigation__button_swo2e_52"
 }, Kr = Ke(), Tl = ({
   children: e,
   defaultIndex: t,
