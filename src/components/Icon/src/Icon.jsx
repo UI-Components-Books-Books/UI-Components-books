@@ -21,6 +21,10 @@ export const Icon = ({ name, size, addClass }) => {
     return <span>Doesn&apos;t exist</span>
   }
 
+  const getIconUrl = (name) => {
+    return new URL(`/assets/icons/svg/${name}.svg`, import.meta.url).href
+  }
+
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
@@ -31,7 +35,7 @@ export const Icon = ({ name, size, addClass }) => {
       aria-hidden='true'
       data-testid={name}
     >
-      <use xlinkHref={`/assets/icons/svg/${name}.svg#${name}`} />
+      <use xlinkHref={`${getIconUrl(name)}#${name}`} />
     </svg>
   )
 }

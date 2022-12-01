@@ -1457,20 +1457,27 @@ const Cn = [
   name: e,
   size: t,
   addClass: r
-}) => e ? Cn.includes(e) ? /* @__PURE__ */ m("svg", {
-  xmlns: "http://www.w3.org/2000/svg",
-  width: "48",
-  height: "48",
-  viewBox: "0 0 48 48",
-  className: `${fo["c-icon"]} ${fo[`c-${t}`]} ${r != null ? r : ""}`,
-  "aria-hidden": "true",
-  "data-testid": e,
-  children: /* @__PURE__ */ m("use", {
-    xlinkHref: `/assets/icons/svg/${e}.svg#${e}`
-  })
-}) : /* @__PURE__ */ m("span", {
-  children: "Doesn't exist"
-}) : null;
+}) => {
+  if (!e)
+    return null;
+  if (!Cn.includes(e))
+    return /* @__PURE__ */ m("span", {
+      children: "Doesn't exist"
+    });
+  const n = (o) => new URL((/* @__PURE__ */ Object.assign({}))[`/assets/icons/svg/${o}.svg`], self.location).href;
+  return /* @__PURE__ */ m("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "48",
+    height: "48",
+    viewBox: "0 0 48 48",
+    className: `${fo["c-icon"]} ${fo[`c-${t}`]} ${r != null ? r : ""}`,
+    "aria-hidden": "true",
+    "data-testid": e,
+    children: /* @__PURE__ */ m("use", {
+      xlinkHref: `${n(e)}#${e}`
+    })
+  });
+};
 De.propTypes = {
   name: i.exports.oneOf(Cn),
   size: i.exports.oneOf(["small", "normal", "big"]),
@@ -5435,7 +5442,7 @@ const ff = ({
   noCaption: a,
   ...c
 }) => {
-  const [s, l] = K(!1), d = new URL("/assets/images/base-image.png", self.location).href, u = (p) => l(p), f = s ? d : `${e}`;
+  const [s, l] = K(!1), d = new URL("/ui-components-books/dist/assets/images/base-image.png", self.location).href, u = (p) => l(p), f = s ? d : `${e}`;
   return /* @__PURE__ */ C("figure", {
     className: `${Co["c-image"]} ${o != null ? o : ""}`,
     ...n && {
