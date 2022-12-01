@@ -1,4 +1,4 @@
-import { cloneElement, useState, Children, isValidElement, useEffect, createContext, createElement } from 'react'
+import { cloneElement, useState, Children, isValidElement, useEffect, createContext } from 'react'
 import PropTypes from 'prop-types'
 import {
   DndContext,
@@ -6,15 +6,13 @@ import {
   MouseSensor,
   TouchSensor,
   useSensor,
-  useSensors,
-  DragOverlay,
-  defaultDropAnimationSideEffects
+  useSensors
+  // DragOverlay,
+  // defaultDropAnimationSideEffects
 } from '@dnd-kit/core'
 import { restrictToHorizontalAxis, restrictToVerticalAxis } from '@dnd-kit/modifiers'
 
 import { coordinateGetter } from './KeyboardCoordinates'
-
-import css from './Drag.module.scss'
 
 /**
  * Creamos el contexto que usamos
@@ -265,27 +263,27 @@ export const DragAndDrop = ({
     * @link https://docs.dndkit.com/api-documentation/draggable/drag-overlay
     * @returns {ReactElement} - Elemento hijo del draggable.
     */
-  const getDragOverlay = () => {
-    const child = getChildrenByType(childrenProps, 'draggable')
-      .filter((item) => item.props.id === activeId)
-      .reduce((object, item) => ({ ...object, ...item.props }), {})
+  // const getDragOverlay = () => {
+  //   const child = getChildrenByType(childrenProps, 'draggable')
+  //     .filter((item) => item.props.id === activeId)
+  //     .reduce((object, item) => ({ ...object, ...item.props }), {})
 
-    return createElement(child?.element || 'div', { className: `${css['c-draggable']} ${child?.addClass}` }, [child.children])
-  }
+  //   return createElement(child?.element || 'div', { className: `${css['c-draggable']} ${child?.addClass}` }, [child.children])
+  // }
 
   /**
     * Objeto que contiene las transiciones utilizadas
     * por el componente DragOverlay.
     */
-  const dropAnimation = {
-    sideEffects: defaultDropAnimationSideEffects({
-      styles: {
-        active: {
-          opacity: '0.5'
-        }
-      }
-    })
-  }
+  // const dropAnimation = {
+  //   sideEffects: defaultDropAnimationSideEffects({
+  //     styles: {
+  //       active: {
+  //         opacity: '0.5'
+  //       }
+  //     }
+  //   })
+  // }
 
   /**
     * Efecto que se encarga de mandar el valor el estado validateId
@@ -315,7 +313,7 @@ export const DragAndDrop = ({
       >
         {updatedChild(childrenProps)}
 
-        <DragOverlay dropAnimation={dropAnimation}>{activeId && getDragOverlay()}</DragOverlay>
+        {/* <DragOverlay dropAnimation={dropAnimation}>{activeId && getDragOverlay()}</DragOverlay> */}
       </DndContext>
     </DragAndDropContext.Provider>
   )
