@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "license": "MIT",
   "type": "module",
-  "files": ["dist"],
+  "files": ["/dist*"],
   "main": "dist/ui-components-books.umd.csj",
   "module": "./dist/ui-components-books.js",
   "exports": {
