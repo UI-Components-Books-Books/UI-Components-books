@@ -84,7 +84,8 @@ export const DragAndDrop = ({
   reboot,
   propValidate,
   modifiers: modifiersProp,
-  announcements
+  announcements,
+  onDragMove
 }) => {
   /**
     * Utilizamos este estado para almacenar la lista
@@ -308,6 +309,7 @@ export const DragAndDrop = ({
         accessibility={{ announcements }}
         onDragStart={({ active }) => setActiveId(active.id)}
         onDragEnd={onDragEnd}
+        {...(!!onDragMove && { onDragMove })}
         onDragCancel={() => setActiveId(null)}
         {...(modifiersProp && { modifiers: [modifiers[modifiersProp]] })}
       >
@@ -335,5 +337,6 @@ DragAndDrop.propTypes = {
   validate: PropTypes.bool.isRequired,
   propValidate: PropTypes.string.isRequired,
   modifiers: PropTypes.oneOf(['restrictToVerticalAxis', 'restrictToHorizontalAxis']),
-  announcements: PropTypes.object.isRequired
+  announcements: PropTypes.object.isRequired,
+  onDragMove: PropTypes.func
 }
