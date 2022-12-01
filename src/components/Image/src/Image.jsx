@@ -2,12 +2,12 @@ import { useState } from 'react'
 import PropTypes from 'prop-types'
 
 import css from './Image.module.scss'
-// eslint-disable-next-line import/no-absolute-path
-import base from '/assets/images/base-image.png'
 
 export const Image = ({ url, alt, title, width, addClass, noCaption, ...props }) => {
   // Estado para determinar si se muestra la imagen por defecto.
   const [error, setError] = useState(false)
+
+  const base = new URL('/assets/images/base-image.png', import.meta.url).href
 
   /**
     * Función de error, al no conseguir la imagen cambia el estado setError
