@@ -21,8 +21,21 @@ export const Icon = ({ name, size, addClass }) => {
     return <span>Doesn&apos;t exist</span>
   }
 
-  const getIconUrl = (name) => {
-    return new URL(`/assets/icons/svg/${name}.svg`, import.meta.url).href
+  /**
+   * Utilizado para mantener la cadena de texto de URL estática.
+   */
+  const PATH = `/assets/icons/svg/${name}.svg#${name}`
+
+  /**
+   *
+   * Se encarga de generar la ruta para obtener
+   * el svg.
+   *
+   * @url https://es.vitejs.dev/guide/assets.html#new-url-url-import-meta-url
+   * @returns {String} New URL
+   */
+  const getIconUrl = () => {
+    return new URL(PATH, import.meta.url)
   }
 
   return (
@@ -35,7 +48,7 @@ export const Icon = ({ name, size, addClass }) => {
       aria-hidden='true'
       data-testid={name}
     >
-      <use xlinkHref={`${getIconUrl(name)}#${name}`} />
+      <use xlinkHref={getIconUrl()} />
     </svg>
   )
 }
@@ -49,5 +62,6 @@ Icon.propTypes = {
 
 Icon.defaultProps = {
   size: 'normal',
+  name: 'play',
   __TYPE: 'Icon'
 }
