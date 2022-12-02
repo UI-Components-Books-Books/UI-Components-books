@@ -23,7 +23,7 @@ export const ToggletipButton = ({ children }) => {
 }
 
 ToggletipButton.propTypes = {
-  children: PropTypes.element,
+  children: PropTypes.any, // Se cambia a any para aceptar etiquetas de svg
   __TYPE: typeValidation('ToggletipButton')
 }
 

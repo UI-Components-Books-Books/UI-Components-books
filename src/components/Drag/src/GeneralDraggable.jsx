@@ -6,7 +6,7 @@ import { typeValidation } from '../../../utils/validations/typeValidation'
 
 import css from './Drag.module.scss'
 
-export const GeneralDraggable = ({ children, addClass, id, label, element }) => {
+export const GeneralDraggable = ({ children, addClass, id, label, element, ...props }) => {
   /**
     * Creamos una variable con el elemento a generar
     * por el componente, esto nos permite usar
@@ -29,7 +29,7 @@ export const GeneralDraggable = ({ children, addClass, id, label, element }) => 
   })
 
   return (
-    <Element id={id} ref={setNodeRef} className={`${css['c-droppable']} ${addClass ?? ''}`}>
+    <Element id={id} ref={setNodeRef} className={`${css['c-droppable']} ${addClass ?? ''}`}{...props}>
       {children}
     </Element>
   )

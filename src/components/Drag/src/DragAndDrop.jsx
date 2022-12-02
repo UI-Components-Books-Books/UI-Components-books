@@ -1,4 +1,4 @@
-import { cloneElement, useState, Children, isValidElement, useEffect, createContext } from 'react'
+import { cloneElement, useState, Children, isValidElement, useEffect, createContext,createElement  } from 'react'
 import PropTypes from 'prop-types'
 import {
   DndContext,
@@ -6,14 +6,15 @@ import {
   MouseSensor,
   TouchSensor,
   useSensor,
-  useSensors
-  // DragOverlay,
+  useSensors,
+  DragOverlay,
   // defaultDropAnimationSideEffects
 } from '@dnd-kit/core'
 import { restrictToHorizontalAxis, restrictToVerticalAxis } from '@dnd-kit/modifiers'
 
 import { coordinateGetter } from './KeyboardCoordinates'
 
+import css from './Drag.module.scss'
 /**
  * Creamos el contexto que usamos
  * para poder pasar diferentes valores
@@ -264,13 +265,13 @@ export const DragAndDrop = ({
     * @link https://docs.dndkit.com/api-documentation/draggable/drag-overlay
     * @returns {ReactElement} - Elemento hijo del draggable.
     */
-  // const getDragOverlay = () => {
-  //   const child = getChildrenByType(childrenProps, 'draggable')
-  //     .filter((item) => item.props.id === activeId)
-  //     .reduce((object, item) => ({ ...object, ...item.props }), {})
+  const getDragOverlay = () => {
+    const child = getChildrenByType(childrenProps, 'draggable')
+      .filter((item) => item.props.id === activeId)
+      .reduce((object, item) => ({ ...object, ...item.props }), {})
 
-  //   return createElement(child?.element || 'div', { className: `${css['c-draggable']} ${child?.addClass}` }, [child.children])
-  // }
+    return createElement(child?.element || 'div', { className: `${css['c-draggable']} ${child?.addClass}` }, [child.children])
+  }
 
   /**
     * Objeto que contiene las transiciones utilizadas
@@ -315,7 +316,7 @@ export const DragAndDrop = ({
       >
         {updatedChild(childrenProps)}
 
-        {/* <DragOverlay dropAnimation={dropAnimation}>{activeId && getDragOverlay()}</DragOverlay> */}
+        <DragOverlay>{getDragOverlay()}</DragOverlay>
       </DndContext>
     </DragAndDropContext.Provider>
   )
