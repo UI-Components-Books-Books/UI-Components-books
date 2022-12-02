@@ -1464,7 +1464,7 @@ const Pn = [
     return /* @__PURE__ */ m("span", {
       children: "Doesn't exist"
     });
-  const n = `/assets/icons/svg/${e}.svg#${e}`, i = () => new URL(n, import.meta.url);
+  const n = `/ui-components-books/dist/assets/icons/svg/${e}.svg#${e}`, i = new URL(n, import.meta.url).href;
   return /* @__PURE__ */ m("svg", {
     xmlns: "http://www.w3.org/2000/svg",
     width: "48",
@@ -1474,7 +1474,7 @@ const Pn = [
     "aria-hidden": "true",
     "data-testid": e,
     children: /* @__PURE__ */ m("use", {
-      xlinkHref: i()
+      xlinkHref: i
     })
   });
 };
