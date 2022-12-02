@@ -387,7 +387,7 @@ export const Video = ({ src, width = '1000', hasDescription, description, addCla
             onLoadedData={(event) => initialValues(event.target)}
             onClick={handlePlay}
             className={`${css['c-vid__video']} ${captions ? '' : css['no-captions']}`}
-            poster={poster ? `assets/images/${poster}.png` : undefined}
+            {...(poster && { poster })}
           >
             <source src={src.video} />
             {src.caption

@@ -8797,7 +8797,9 @@ const Bu = () => {
           onLoadedData: (C) => A(C.target),
           onClick: _e,
           className: `${pe["c-vid__video"]} ${de ? "" : pe["no-captions"]}`,
-          poster: a ? `assets/images/${a}.png` : void 0,
+          ...a && {
+            poster: a
+          },
           children: [/* @__PURE__ */ m("source", {
             src: e.video
           }), e.caption ? /* @__PURE__ */ m("track", {
