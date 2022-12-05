@@ -8,7 +8,7 @@ import { DragAndDropContext } from '../../../components'
 
 import css from './Drag.module.scss'
 
-export const Draggable = ({ children, id, addClass, dragging, label, attribute, disabledDefaultAttributes, element }) => {
+export const Draggable = ({ children, id, addClass, dragging, label, attribute, disabledDefaultAttributes, element, ...props }) => {
   /**
     * Creamos una variable con el elemento a generar
     * por el componente, esto nos permite usar
@@ -47,6 +47,7 @@ export const Draggable = ({ children, id, addClass, dragging, label, attribute, 
       {...(validate && { [propValidate]: !!listId.includes(id) })}
       {...(!disabledDefaultAttributes && { ...attributes })}
       {...listeners}
+      {...props}
     >
       {children}
     </Element>

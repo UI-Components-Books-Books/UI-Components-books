@@ -23,7 +23,7 @@ export const ToggletipButton = ({ children }) => {
 }
 
 ToggletipButton.propTypes = {
-  children: PropTypes.element,
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.arrayOf(PropTypes.element), PropTypes.element, PropTypes.node]),
   __TYPE: typeValidation('ToggletipButton')
 }
 
