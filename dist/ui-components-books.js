@@ -1547,7 +1547,6 @@ Dt.propTypes = {
   addClass: o.exports.string
 };
 Dt.defaultProps = {
-  label: "Button",
   size: "normal",
   variant: "primary",
   type: "button",
