@@ -1532,7 +1532,7 @@ const Jt = {
 });
 Dt.propTypes = {
   children: o.exports.oneOfType([o.exports.arrayOf(o.exports.node), o.exports.arrayOf(o.exports.element), o.exports.element, o.exports.node]),
-  label: o.exports.string.isRequired,
+  label: o.exports.string,
   size: o.exports.oneOf(["small", "normal", "big"]),
   variant: o.exports.oneOf(["primary", "secondary", "no-line"]),
   type: o.exports.oneOf(["button", "submit", "reset"]),

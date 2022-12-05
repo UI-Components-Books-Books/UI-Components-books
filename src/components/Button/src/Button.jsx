@@ -41,7 +41,7 @@ export const Button = forwardRef((props, ref) => {
 
 Button.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.arrayOf(PropTypes.element), PropTypes.element, PropTypes.node]),
-  label: PropTypes.string.isRequired,
+  label: PropTypes.string,
   size: PropTypes.oneOf(['small', 'normal', 'big']),
   variant: PropTypes.oneOf(['primary', 'secondary', 'no-line']),
   type: PropTypes.oneOf(['button', 'submit', 'reset']),
