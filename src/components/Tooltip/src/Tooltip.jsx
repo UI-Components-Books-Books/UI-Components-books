@@ -7,6 +7,14 @@ import { Portal } from '../../Portal'
 
 import css from './Tooltip.module.scss'
 
+/**
+ * Se crea un objeto que no se puede cambiar para
+ * almacenar el keyCode de la tecla "ESC".
+ */
+const KEYCODE = Object.freeze({
+  ESC: 27
+})
+
 export const Tooltip = ({ children: childrenProps, id, label, placement, addClass, hasArrow, distance, isDisabled }) => {
   // Estado que contrala la apertura o cierra del tooltip
   const [isOpen, setIsOpen] = useState(false)
@@ -14,6 +22,8 @@ export const Tooltip = ({ children: childrenProps, id, label, placement, addClas
   const refElement = useRef(null)
   // Referencia del tooltip
   const refTooltip = useRef(null)
+  // Almacenamos el ID del setTimeout
+  const timeoutID = useRef()
 
   // Creamos el id relacionar el tooltip con su elemento padre
   const tooltipId = useMemo(() => id || _uniquedId('c-tooltip-'), [id])
@@ -36,22 +46,35 @@ export const Tooltip = ({ children: childrenProps, id, label, placement, addClas
     * Función para manejar el evento mouseover del elemento padre.
     * @param {Event} Event
     */
-  const onMouseOver = (_) => {
+  const onMouseEnter = (_) => {
     if (!isOpen || document.activeElement !== refElement.current) setIsOpen(!isOpen)
+  }
+
+  /**
+    * Función que permite que el texto dentro del tooltip
+    * se pueda interactuar
+    * @param {Event} Event
+    */
+  const onMouseEnterTooltip = () => {
+    window.clearTimeout(timeoutID.current)
   }
 
   /**
     * Función para manejar el evento mouseout del elemento padre.
     * @param {Event} Event
     */
-  const onMouseOut = (_) => setIsOpen(false)
+  const onMouseLeave = (_) => {
+    timeoutID.current = setTimeout(() => {
+      setIsOpen(false)
+    }, 150)
+  }
 
   /**
     * Función para manejar el evento keydown del elemento padre.
     * @param {Event} Event
     */
   const onKeyDown = (e) => {
-    if ((e.keyCode | e.which) === 27 && isOpen) {
+    if ((e.keyCode | e.which) === KEYCODE.ESC && isOpen) {
       setIsOpen(!isOpen)
     }
   }
@@ -65,8 +88,8 @@ export const Tooltip = ({ children: childrenProps, id, label, placement, addClas
       ref: refElement,
       onFocus,
       onBlur,
-      onMouseOver,
-      onMouseOut,
+      onMouseEnter,
+      onMouseLeave,
       onKeyDown
     })
   })
@@ -104,7 +127,9 @@ export const Tooltip = ({ children: childrenProps, id, label, placement, addClas
           id={tooltipId}
           ref={refTooltip}
           role='tooltip'
-          onMouseOver={onMouseOver}
+          data-open={isOpen}
+          onMouseEnter={onMouseEnterTooltip}
+          onMouseLeave={onMouseLeave}
           className={`${css['c-tooltip']} ${isOpen && css['c-tooltip--active']} ${addClass ?? ''}`}
           style={styles.popper}
           {...attributes.popper}
@@ -122,7 +147,7 @@ Tooltip.defaultProps = {
 }
 
 Tooltip.propTypes = {
-  children: PropTypes.any,
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.element, PropTypes.arrayOf(PropTypes.element), PropTypes.arrayOf(PropTypes.node)]),
   id: PropTypes.string,
   label: PropTypes.string.isRequired,
   addClass: PropTypes.string,

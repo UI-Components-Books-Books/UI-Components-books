@@ -1,50 +1,184 @@
-import { useRef, useState, useEffect, createContext } from 'react'
+import {
+  useRef,
+  Children,
+  cloneElement,
+  isValidElement,
+  useState,
+  useMemo
+} from 'react'
 import PropTypes from 'prop-types'
-import { getChildrenByType } from '../../../utils/validations/getChildrenType'
+import _uniquedId from 'lodash/uniqueId'
+import { usePopper } from 'react-popper'
 
-// Creación del contexto del componente padre Toggletip
-export const ToggletipContext = createContext()
+import { Portal } from '../../Portal'
 
-export const Toggletip = ({ children, isVisible }) => {
-  // Estado que contrala la apertura o cierra del tooltip
+import css from './Toggletip.module.scss'
+/**
+ * Se crea un objeto que no se puede cambiar para
+ * almacenar el keyCode de la tecla "ESC".
+ */
+const KEYCODE = Object.freeze({
+  ESC: 27
+})
+
+export const Toggletip = ({
+  children: childrenProps,
+  id,
+  label,
+  placement,
+  addClass,
+  hasArrow,
+  distance,
+  isDisabled,
+  onClick: onClickProp
+}) => {
+  // Estado que contrala la apertura o cierra del Toggletip
   const [isOpen, setIsOpen] = useState(false)
-  // Referencia del botón que abre el toggletip
-  const refButton = useRef()
+  // Referencia del elemento que va a tener el Toggletip
+  const refElement = useRef(null)
+  // Referencia del Toggletip
+  const refToggletip = useRef(null)
+
+  // Creamos el id relacionar el Toggletip con su refElement.
+  const toggletipId = useMemo(() => id || _uniquedId('c-Toggletip-'), [id])
 
   /**
-    * Función para abrir y cerrar el toggletip
-    */
-  const onOpen = () => setIsOpen(!isOpen)
+   * Función para manejar el evento leave focus del refElement.
+   * @param {Event} Event
+   */
+  const onBlur = (_) => setIsOpen(false)
 
   /**
-    * Función para agregara la referencia del botón
-    *
-    * @param {HTMLElement} ref - Referencia del botón padre.
-    */
-  const setRefButton = (ref) => {
-    if (!refButton.current) {
-      refButton.current = ref
+   * Función para manejar el evento mouseover del refElement.
+   * @param {Event} Event
+   */
+  const onClick = (e) => {
+    setIsOpen(!isOpen)
+
+    if (isOpen && document.activeElement === refElement.current) {
+      setTimeout(() => {
+        setIsOpen(prev => !prev)
+      }, 100)
+    }
+
+    if (onClickProp) {
+      onClickProp(e)
     }
   }
 
-  useEffect(() => {
-    // Si existe la propiedad isVisible actualiza el estado con ella.
-    if (isVisible !== undefined) setIsOpen(isVisible)
-  }, [isVisible])
+  /**
+    * Función para manejar el evento keydown del refElement.
+    * @param {Event} Event
+    */
+  const onKeyDown = (e) => {
+    if ((e.keyCode | e.which) === KEYCODE.ESC && isOpen) {
+      setIsOpen(!isOpen)
+    }
+  }
+
+  const children = Children.map(childrenProps, (child) => {
+    if (!isValidElement(child)) return null
+    // Agregamos todos los eventos al refElement.
+    return cloneElement(child, {
+      ...child.props,
+      'aria-describedby': id,
+      ref: refElement,
+      onClick,
+      onBlur,
+      onKeyDown
+    })
+  })
+
+  // Hook para controlar el posicionamiento del Toggletip con respecto a su refElement.
+  const { styles, attributes } = usePopper(
+    refElement.current,
+    refToggletip.current,
+    {
+      placement,
+      modifiers: [
+        {
+          name: 'offset',
+          options: {
+            offset: [0, distance || 8]
+          }
+        },
+        {
+          name: 'flip',
+          options: {
+            padding: 10
+          }
+        },
+        { name: 'eventListeners', enabled: isOpen }
+      ]
+    }
+  )
+
+  // Si no hay label, está deshabilitado o tiene más de 1 hijo no mostrar el Toggletip
+  if (!label || Children.count(childrenProps) > 1 || isDisabled) {
+    return <>{childrenProps}</>
+  }
 
   return (
-    <ToggletipContext.Provider value={{ isOpen, onOpen, setRefButton, refButton }}>
-      {/* Filtramos los children para aceptar solo ToggletipButton y ToggletipContent. */}
-      {getChildrenByType(children, ['ToggletipButton', 'ToggletipContent'])}
-    </ToggletipContext.Provider>
+    <>
+      {children}
+      <Portal id='js-toggletip-portal'>
+        <div
+          id={toggletipId}
+          ref={refToggletip}
+          role='status'
+          className={`${css['c-toggletip']} ${
+            isOpen && css['c-toggletip--active']
+          } ${addClass ?? ''}`}
+          style={styles.popper}
+          {...attributes.popper}
+        >
+          {label}
+          {hasArrow && (
+            <div
+              className={css['c-Toggletip__arrow']}
+              data-popper-arrow
+              style={styles.arrow}
+            />
+          )}
+        </div>
+      </Portal>
+    </>
   )
 }
 
 Toggletip.defaultProps = {
-  isVisible: false
+  placement: 'auto'
 }
 
 Toggletip.propTypes = {
-  children: PropTypes.arrayOf(PropTypes.element),
-  isVisible: PropTypes.bool
+  children: PropTypes.oneOfType([
+    PropTypes.node,
+    PropTypes.element,
+    PropTypes.arrayOf(PropTypes.element),
+    PropTypes.arrayOf(PropTypes.node)
+  ]),
+  id: PropTypes.string,
+  label: PropTypes.string.isRequired,
+  addClass: PropTypes.string,
+  hasArrow: PropTypes.bool,
+  isDisabled: PropTypes.bool,
+  distance: PropTypes.number,
+  onClick: PropTypes.func,
+  placement: PropTypes.oneOf([
+    'auto',
+    'auto-start',
+    'auto-end',
+    'top',
+    'top-start',
+    'top-end',
+    'bottom',
+    'bottom-start',
+    'bottom-end',
+    'right',
+    'right-start',
+    'right-end',
+    'left',
+    'left-start',
+    'left-end'
+  ])
 }

@@ -1,0 +1,54 @@
+.c-popover-modal {
+    --popover-modal-bg: var(--clr-neutral-800);
+    --popover-modal-arrow-bg: var(--popover-modal-bg);
+}
+
+:where(.c-popover-modal) {
+    padding: 1rem;
+    max-width: 18rem;
+    width: 100%;
+    display: none;
+    font-size: 0.875rem;
+    color: var(--clr-common-white-100);
+    background: var(--popover-modal-bg);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    z-index: 1800;
+}
+
+.c-popover-modal--active {
+    display: grid;
+}
+
+.c-popover-modal__arrow,
+.c-popover-modal__arrow::before {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: var(--popover-modal-arrow-bg);
+}
+
+:where(.c-popover-modal__arrow) {
+    visibility: hidden;
+}
+
+.c-popover-modal__arrow::before {
+    content: '';
+    transform: rotate(45deg);
+    visibility: visible;
+}
+
+:where(.c-popover-modal[data-popper-placement^='top']>.c-popover-modal__arrow) {
+    bottom: -4px;
+}
+
+:where(.c-popover-modal[data-popper-placement^='bottom']>.c-popover-modal__arrow) {
+    top: -4px;
+}
+
+:where(.c-popover-modal[data-popper-placement^='left'] > .c-popover-modal__arrow) {
+    right: -4px;
+}
+
+:where(.c-popover-modal[data-popper-placement^='right'] > .c-popover-modal__arrow) {
+    left: -4px;
+}

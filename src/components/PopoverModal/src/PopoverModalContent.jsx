@@ -2,10 +2,10 @@ import { useContext, useRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { usePopper } from 'react-popper'
 
-import { ToggletipContext, Portal } from '../../../components'
+import { PopoverModalContext, Portal } from '../../../components'
 import { typeValidation } from '../../../utils/validations/typeValidation'
 
-import css from './Toggletip.module.scss'
+import css from './PopoverModal.module.scss'
 
 /**
  * Se crea un objeto que no se puede cambiar para
@@ -15,19 +15,23 @@ const KEYCODE = Object.freeze({
   ESC: 27
 })
 
-export const ToggletipContent = ({ children, addClass, hasArrow, isDisabled, distance, placement }) => {
+export const PopoverModalContent = ({ children, addClass, hasArrow, isDisabled, distance, placement }) => {
   // Obtenemos la función isOpen y la referencia del botón del contexto
-  const { isOpen, refButton } = useContext(ToggletipContext)
-  // Referencia del toggletip
-  const refToggletip = useRef()
+  const { isOpen, refButton } = useContext(PopoverModalContext)
+  // Referencia del PopoverModal
+  const refPopoverModal = useRef()
 
   // Lista de elementos a los cuales se les puede hacer focus.
   const SELECTOR_ELEMENTS =
       'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed [tabindex="0"], [contenteditable], audio:not([tabindex="-1"])'
 
+  /**
+    * Función para manejar el evento keydown del elemento padre.
+    * @param {Event} Event
+    */
   const onKeyDown = (e) => {
     // Obtemos un array de elementos que se puede ::focus.
-    const focusableElements = refToggletip.current.querySelectorAll(SELECTOR_ELEMENTS)
+    const focusableElements = refPopoverModal.current.querySelectorAll(SELECTOR_ELEMENTS)
     // Obtemos la referencia del elemento padre.
     const buttonElement = refButton.current
 
@@ -54,8 +58,8 @@ export const ToggletipContent = ({ children, addClass, hasArrow, isDisabled, dis
     }
   }
 
-  // Hook para controlar el posicionamiento del toggletip con respecto a su elemento padre.
-  const { styles, attributes } = usePopper(refButton.current, refToggletip.current, {
+  // Hook para controlar el posicionamiento del PopoverModal con respecto a su elemento padre.
+  const { styles, attributes } = usePopper(refButton.current, refPopoverModal.current, {
     placement,
     modifiers: [
       {
@@ -76,8 +80,8 @@ export const ToggletipContent = ({ children, addClass, hasArrow, isDisabled, dis
 
   useEffect(() => {
     if (isOpen) {
-      // Agrega el focus al toggletip
-      refToggletip.current.focus()
+      // Agrega el focus al PopoverModal
+      refPopoverModal.current.focus()
     }
   }, [isOpen])
 
@@ -86,23 +90,24 @@ export const ToggletipContent = ({ children, addClass, hasArrow, isDisabled, dis
   }
 
   return (
-    <Portal id='js-toggletip'>
+    <Portal id='js-popover-modal-portal'>
       <div
+        ref={refPopoverModal}
+        role='status'
         tabIndex={-1}
-        onKeyDown={onKeyDown}
-        ref={refToggletip}
-        className={`${css['c-toggletip']} ${isOpen && css['c-toggletip--active']} ${addClass ?? ''}`}
+        className={`${css['c-popover-modal']} ${isOpen && css['c-popover-modal--active']} ${addClass ?? ''}`}
         style={styles.popper}
+        onKeyDown={onKeyDown}
         {...attributes.popper}
       >
         {children}
-        {hasArrow && <div className={css['c-toggletip__arrow']} data-popper-arrow style={styles.arrow} />}
+        {hasArrow && <div className={css['c-popover-modal__arrow']} data-popper-arrow style={styles.arrow} />}
       </div>
     </Portal>
   )
 }
 
-ToggletipContent.propTypes = {
+PopoverModalContent.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.element), PropTypes.arrayOf(PropTypes.node), PropTypes.element, PropTypes.node]),
   addClass: PropTypes.string,
   hasArrow: PropTypes.bool,
@@ -125,11 +130,11 @@ ToggletipContent.propTypes = {
     'left-start',
     'left-end'
   ]),
-  __TYPE: typeValidation('ToggletipContent')
+  __TYPE: typeValidation('PopoverModalContent')
 }
 
-ToggletipContent.defaultProps = {
+PopoverModalContent.defaultProps = {
   hasArrow: false,
   placement: 'auto',
-  __TYPE: 'ToggletipContent'
+  __TYPE: 'PopoverModalContent'
 }
