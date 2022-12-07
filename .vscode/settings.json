@@ -12,6 +12,7 @@
     "**jest.config.cjs": true,
     "**jest.setup.js": true,
     "package-lock.json": true,
-    "**setupTest.js": true
+    "**setupTest.js": true,
+    ".postcssrc.cjs": true
   },
 }

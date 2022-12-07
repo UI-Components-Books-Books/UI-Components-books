@@ -19,12 +19,20 @@ export default {
 }
 
 export const withArrow = () => (
-  <Toggletip label="That's life " placement='auto' hasArrow>
+  <Toggletip label='with arrow' placement='auto' hasArrow>
     <Button label='With arrow' size='small' variant='secondary' style={{ borderRadius: '0.375rem' }} />
   </Toggletip>
 )
 
 withArrow.storyName = 'with arrow'
+
+export const isVisible = () => (
+  <Toggletip label="It's always visible" placement='auto' hasArrow isVisible>
+    <Button label='With arrow' size='small' variant='secondary' style={{ borderRadius: '0.375rem' }} />
+  </Toggletip>
+)
+
+isVisible.storyName = 'always visible'
 
 export const placement = () => (
   <>

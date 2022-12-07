@@ -30,6 +30,7 @@ export const Toggletip = ({
   hasArrow,
   distance,
   isDisabled,
+  isVisible,
   onClick: onClickProp
 }) => {
   // Estado que contrala la apertura o cierra del Toggletip
@@ -55,7 +56,7 @@ export const Toggletip = ({
   const onClick = (e) => {
     setIsOpen(!isOpen)
 
-    if (isOpen && document.activeElement === refElement.current) {
+    if (isOpen && document.activeElement === refElement.current && !isVisible) {
       setTimeout(() => {
         setIsOpen(prev => !prev)
       }, 100)
@@ -84,8 +85,7 @@ export const Toggletip = ({
       'aria-describedby': id,
       ref: refElement,
       onClick,
-      onBlur,
-      onKeyDown
+      ...(!isVisible ? { onBlur, onKeyDown } : {})
     })
   })
 
@@ -135,7 +135,7 @@ export const Toggletip = ({
           {label}
           {hasArrow && (
             <div
-              className={css['c-Toggletip__arrow']}
+              className={css['c-toggletip__arrow']}
               data-popper-arrow
               style={styles.arrow}
             />
@@ -164,6 +164,7 @@ Toggletip.propTypes = {
   isDisabled: PropTypes.bool,
   distance: PropTypes.number,
   onClick: PropTypes.func,
+  isVisible: PropTypes.bool,
   placement: PropTypes.oneOf([
     'auto',
     'auto-start',
