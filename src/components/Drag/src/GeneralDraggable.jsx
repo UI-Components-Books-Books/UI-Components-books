@@ -29,7 +29,7 @@ export const GeneralDraggable = ({ children, addClass, id, label, element, ...pr
   })
 
   return (
-    <Element id={id} ref={setNodeRef} className={`${css['c-droppable']} ${addClass ?? ''}`}{...props}>
+    <Element id={id} ref={setNodeRef} className={`${css['c-droppable']} ${addClass ?? ''}`} {...props}>
       {children}
     </Element>
   )
