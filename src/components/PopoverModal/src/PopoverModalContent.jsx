@@ -12,7 +12,8 @@ import css from './PopoverModal.module.scss'
  * almacenar el keyCode de la tecla "ESC".
  */
 const KEYCODE = Object.freeze({
-  ESC: 27
+  ESC: 27,
+  TAB: 9
 })
 
 export const PopoverModalContent = ({ children, addClass, hasArrow, isDisabled, distance, placement }) => {
@@ -41,13 +42,13 @@ export const PopoverModalContent = ({ children, addClass, hasArrow, isDisabled, 
     const LAST_ELEMENT = focusableElements[focusableElements.length - 1]
 
     // Si va hacia adelante usando tab y el último elemento está activo, entonces agregar el focus al elemento padre.
-    if (!e.shiftKey && document.activeElement === LAST_ELEMENT) {
+    if ((e.keyCode || e.which) === KEYCODE.TAB && document.activeElement === LAST_ELEMENT) {
       buttonElement.focus()
       return e.preventDefault()
     }
 
-    // Si va hacia atrás usando shift + tab y el primer elemento está activo, entonces agregar el focus al elemento padre.
-    if (e.shiftKey && document.activeElement === FIRST_ELEMENT) {
+    // // Si va hacia atrás usando shift + tab y el primer elemento está activo, entonces agregar el focus al elemento padre.
+    if (e.shiftKey && (e.keyCode || e.which) === KEYCODE.TAB && document.activeElement === FIRST_ELEMENT) {
       buttonElement.focus()
       e.preventDefault()
     }
