@@ -7058,7 +7058,10 @@ const Ol = Wo(({
     a.insertRule(`:root{${c}}`);
   };
   return W(() => {
-    r(t);
+    if (Object.entries(t).length !== 0)
+      return r(t), () => {
+        t = {};
+      };
   }, [t]), e;
 });
 Ol.propTypes = {

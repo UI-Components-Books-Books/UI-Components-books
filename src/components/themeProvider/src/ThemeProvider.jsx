@@ -29,7 +29,13 @@ export const ThemeProvider = memo(({ children, theme = {} }) => {
   }
 
   useEffect(() => {
+    if (Object.entries(theme).length === 0) return
+
     updateCSSProperties(theme)
+
+    return () => {
+      theme = {}
+    }
   }, [theme])
 
   return children
