@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { usePopper } from 'react-popper'
 
 import { PopoverModalContext, Portal } from '../../../components'
-import { typeValidation } from '../../../utils/validations/typeValidation'
 
 import css from './PopoverModal.module.scss'
 
@@ -130,12 +129,10 @@ PopoverModalContent.propTypes = {
     'left',
     'left-start',
     'left-end'
-  ]),
-  __TYPE: typeValidation('PopoverModalContent')
+  ])
 }
 
 PopoverModalContent.defaultProps = {
   hasArrow: false,
-  placement: 'auto',
-  __TYPE: 'PopoverModalContent'
+  placement: 'auto'
 }

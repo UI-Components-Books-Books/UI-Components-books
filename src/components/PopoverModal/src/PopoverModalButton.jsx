@@ -2,7 +2,6 @@ import { useContext, cloneElement, Children, isValidElement } from 'react'
 import PropTypes from 'prop-types'
 
 import { PopoverModalContext } from '../../../components'
-import { typeValidation } from '../../../utils/validations/typeValidation'
 
 export const PopoverModalButton = ({ children }) => {
   // Obtenemos la función onOpen y setRefButton del contexto
@@ -32,10 +31,5 @@ PopoverModalButton.propTypes = {
     PropTypes.arrayOf(PropTypes.element),
     PropTypes.element,
     PropTypes.node
-  ]),
-  __TYPE: typeValidation('PopoverModalButton')
-}
-
-PopoverModalButton.defaultProps = {
-  __TYPE: 'PopoverModalButton'
+  ])
 }

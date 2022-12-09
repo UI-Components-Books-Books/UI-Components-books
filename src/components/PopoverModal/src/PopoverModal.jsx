@@ -1,6 +1,5 @@
 import { useRef, useState, useEffect, createContext } from 'react'
 import PropTypes from 'prop-types'
-import { getChildrenByType } from '../../../utils/validations/getChildrenType'
 
 // Creación del contexto del componente padre PopoverModal
 export const PopoverModalContext = createContext()
@@ -34,8 +33,7 @@ export const PopoverModal = ({ children, isVisible }) => {
 
   return (
     <PopoverModalContext.Provider value={{ isOpen, onOpen, setRefButton, refButton }}>
-      {/* Filtramos los children para aceptar solo PopoverModalButton y PopoverModalContent. */}
-      {getChildrenByType(children, ['PopoverModalButton', 'PopoverModalContent'])}
+      {children}
     </PopoverModalContext.Provider>
   )
 }
@@ -45,6 +43,6 @@ PopoverModal.defaultProps = {
 }
 
 PopoverModal.propTypes = {
-  children: PropTypes.arrayOf(PropTypes.element),
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.element), PropTypes.arrayOf(PropTypes.node), PropTypes.element, PropTypes.node]),
   isVisible: PropTypes.bool
 }
