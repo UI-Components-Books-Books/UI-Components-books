@@ -129,6 +129,7 @@ export const Toggletip = ({
           className={`${css['c-toggletip']} ${
             isOpen && css['c-toggletip--active']
           } ${addClass ?? ''}`}
+          data-open={isOpen}
           style={styles.popper}
           {...attributes.popper}
         >
