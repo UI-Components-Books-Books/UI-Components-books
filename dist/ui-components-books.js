@@ -8219,6 +8219,7 @@ const mn = {
     "aria-describedby": t,
     ref: v,
     onClick: _,
+    "data-open": u,
     ...l ? {} : {
       onBlur: b,
       onKeyDown: E
@@ -8253,7 +8254,6 @@ const mn = {
         ref: d,
         role: "status",
         className: `${mn["c-toggletip"]} ${u && mn["c-toggletip--active"]} ${i != null ? i : ""}`,
-        "data-open": u,
         style: $.popper,
         ...D.popper,
         children: [r, a && /* @__PURE__ */ m("div", {
