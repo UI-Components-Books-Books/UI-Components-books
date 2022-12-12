@@ -24,5 +24,10 @@ export const iconList = [
   'first_page',
   'navigate_before',
   'navigate_next',
-  'open_with'
+  'open_with',
+  'edit_note',
+  'settings',
+  'search',
+  'radar',
+  'accessibility_new'
 ]
