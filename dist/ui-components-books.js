@@ -8972,23 +8972,27 @@ pa.propTypes = {
   isVisible: o.exports.bool
 };
 const Uu = ({
-  children: e
+  children: e,
+  onClick: t
 }) => {
   const {
-    onOpen: t,
-    setRefButton: r
+    onOpen: r,
+    setRefButton: n
   } = _e(Xn);
   if (ye.count(e) > 1)
     return null;
-  const n = (i) => Ye(i) ? Ee(i, {
-    ...i.props,
-    ref: r,
-    onClick: t
+  const i = (c) => {
+    r(), t && t(c);
+  }, a = (c) => Ye(c) ? Ee(c, {
+    ...c.props,
+    ref: n,
+    onClick: i
   }) : null;
-  return ye.map(e, n);
+  return ye.map(e, a);
 };
 Uu.propTypes = {
-  children: o.exports.oneOfType([o.exports.arrayOf(o.exports.node), o.exports.arrayOf(o.exports.element), o.exports.element, o.exports.node])
+  children: o.exports.oneOfType([o.exports.arrayOf(o.exports.node), o.exports.arrayOf(o.exports.element), o.exports.element, o.exports.node]),
+  onClick: o.exports.func
 };
 const gn = {
   "c-popover-modal": "_c-popover-modal_1m8vp_1",

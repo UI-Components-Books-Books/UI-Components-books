@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import { PopoverModalContext } from '../../../components'
 
-export const PopoverModalButton = ({ children }) => {
+export const PopoverModalButton = ({ children, onClick }) => {
   // Obtenemos la función onOpen y setRefButton del contexto
   const { onOpen, setRefButton } = useContext(PopoverModalContext)
 
@@ -12,13 +12,27 @@ export const PopoverModalButton = ({ children }) => {
     return null
   }
 
+  /**
+    * Función utilizada para abrir el popover
+    * además de lanzar la función onClick que
+    * viene de los props.
+    *
+    * @param {event} e - evento
+    */
+  const handleClick = (e) => {
+    onOpen()
+    if (onClick) {
+      onClick(e)
+    }
+  }
+
   const returnElements = (child) => {
     if (!isValidElement(child)) return null
     // Agregamos las propiedades ref y onClick en el hijo
     return cloneElement(child, {
       ...child.props,
       ref: setRefButton,
-      onClick: onOpen
+      onClick: handleClick
     })
   }
 
@@ -31,5 +45,6 @@ PopoverModalButton.propTypes = {
     PropTypes.arrayOf(PropTypes.element),
     PropTypes.element,
     PropTypes.node
-  ])
+  ]),
+  onClick: PropTypes.func
 }
