@@ -1,4 +1,4 @@
-import { useState, forwardRef, useMemo } from 'react'
+import { useState, forwardRef, useMemo, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import _uniquedId from 'lodash/uniqueId'
 
@@ -8,7 +8,7 @@ import { typeValidation } from '../../../utils/validations/typeValidation'
 
 import css from './Select.module.scss'
 
-export const Select = forwardRef(({ children, id, placeholder, label, icon, addClass, isLabelVisible, isDisabled, isRequired, onChoise }, ref) => {
+export const Select = forwardRef(({ children, id, placeholder, label, icon, addClass, isLabelVisible, isDisabled, isRequired, isReset, onChoise }, ref) => {
   // Usado para controlar el valor la opción seleccionada en el select.
   const [choise, setChoise] = useState()
 
@@ -30,6 +30,18 @@ export const Select = forwardRef(({ children, id, placeholder, label, icon, addC
     if (onChoise) onChoise({ id: select, value: target.value })
     setChoise(target.value)
   }
+
+  /**
+   * Propiedad que reinicia el valor del estado
+   * y de esa manera al componente Select
+   */
+  useEffect(() => {
+    if (isReset) setChoise()
+
+    return () => {
+      isReset = false
+    }
+  }, [isReset])
 
   return (
     <label htmlFor={select} {...(addClass && { className: `${addClass}` })}>
@@ -64,6 +76,7 @@ Select.defaultProps = {
   placeholder: 'Select option',
   label: 'Select a option',
   isLabelVisible: false,
+  isReset: false,
   __TYPE: 'Select'
 }
 
@@ -77,6 +90,7 @@ Select.propTypes = {
   isLabelVisible: PropTypes.bool,
   isDisabled: PropTypes.bool,
   isRequired: PropTypes.bool,
+  isReset: PropTypes.bool,
   onChoise: PropTypes.func,
   __TYPE: typeValidation('Select')
 }
