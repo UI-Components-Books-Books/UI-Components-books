@@ -41,12 +41,13 @@ export const Select = forwardRef(({ children, id, placeholder, label, icon, addC
           ref={ref}
           name={select}
           value={choise}
+          defaultValue='default'
           className={css['c-select']}
           onChange={onChange}
           disabled={isDisabled}
           required={isRequired}
         >
-          <option value='' disabled>
+          <option value='default' disabled>
             {placeholder}
           </option>
           {/* Filtramos los children para solo aceptar de tipo option. */}

@@ -6646,12 +6646,13 @@ const dn = {
         ref: u,
         name: d,
         value: f,
+        defaultValue: "default",
         className: dn["c-select"],
         onChange: g,
         disabled: s,
         required: l,
         children: [/* @__PURE__ */ m("option", {
-          value: "",
+          value: "default",
           disabled: !0,
           children: r
         }), Le(e, ["option", "optgroup"])]
