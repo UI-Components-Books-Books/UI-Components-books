@@ -1432,6 +1432,7 @@ const Cn = [
   "check",
   "play",
   "pause",
+  "double_arrow",
   "volume_on",
   "volume_off",
   "done_all",
