@@ -73,9 +73,12 @@ export const Modal = ({ children, isOpen, onClose, finalFocusRef }) => {
       changeStyle('animate__fadeOut', 'animate__fadeIn')
       inertToggle(false)
       onClose(!isOpen)
-    }, 400)
 
-    if (finalFocusRef) finalFocusRef.current.focus()
+      // Enfoca el elemento cuando el modal se cierra
+      if (Object.keys(finalFocusRef).length !== 0) {
+        finalFocusRef.current.focus()
+      }
+    }, 400)
   }
 
   /**
@@ -110,5 +113,5 @@ Modal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   label: PropTypes.string.isRequired,
-  finalFocusRef: PropTypes.object
+  finalFocusRef: PropTypes.object.isRequired
 }

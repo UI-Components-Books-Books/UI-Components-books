@@ -5783,8 +5783,8 @@ const Bn = Ke(), sl = Object.freeze({
     i.current.classList.replace(p, u);
   }, l = () => {
     s("animate__fadeIn", "animate__fadeOut"), setTimeout(() => {
-      s("animate__fadeOut", "animate__fadeIn"), a(!1), r(!t);
-    }, 400), n && n.current.focus();
+      s("animate__fadeOut", "animate__fadeIn"), a(!1), r(!t), Object.keys(n).length !== 0 && n.current.focus();
+    }, 400);
   };
   return U(() => {
     t && (a(!0), i.current && i.current.focus());
@@ -5811,7 +5811,7 @@ Ii.propTypes = {
   isOpen: o.exports.bool.isRequired,
   onClose: o.exports.func.isRequired,
   label: o.exports.string.isRequired,
-  finalFocusRef: o.exports.object
+  finalFocusRef: o.exports.object.isRequired
 };
 const $r = {
   "c-layout": "_c-layout_1n02n_1",
