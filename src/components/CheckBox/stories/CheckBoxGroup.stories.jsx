@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { Col, Row, CheckBoxGroup, CheckBox } from '../../../components'
 
@@ -25,3 +25,22 @@ export const Default = () => (
 )
 
 Default.storyName = 'default'
+
+export const WithIssuingValue = () => {
+  const [state, setState] = useState([])
+
+  const onChange = (value) => setState(value)
+
+  return (
+    <>
+      <CheckBoxGroup onChecked={onChange} legend='Grupo de prueba'>
+        <CheckBox type='checkbox' label='Opción 1' state='normal' />
+        <CheckBox type='checkbox' label='Opción 2' state='normal' />
+        <CheckBox type='checkbox' label='Opción 3' state='normal' />
+      </CheckBoxGroup>
+      <p className='u-my-2'>{JSON.stringify(state, 2, null)}</p>
+    </>
+  )
+}
+
+WithIssuingValue.storyName = 'with issuing value'

@@ -1,14 +1,11 @@
-import { forwardRef, useMemo, useState } from 'react'
+import { forwardRef, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import _uniquedId from 'lodash/uniqueId'
 
 import { typeValidation } from '../../../utils/validations/typeValidation'
 import css from './Input.module.scss'
 
-export const Input = forwardRef(({ id, type, value: valueProps, placeholder, label, addClass, isLabelVisible, isDisabled, isRequired, isReadOnly, onValue }, ref) => {
-  // Utilizado para controlar el valor del input.
-  const [value, setValue] = useState(valueProps || '')
-
+export const Input = forwardRef(({ id, type, value, placeholder, label, addClass, isLabelVisible, isDisabled, isRequired, isReadOnly, onValue }, ref) => {
   /**
     * Se crea un ID para identificar el input y además
     * para pasarlo dentro la función onValue proveniente
@@ -25,7 +22,6 @@ export const Input = forwardRef(({ id, type, value: valueProps, placeholder, lab
     */
   const onChange = ({ target }) => {
     if (onValue) onValue({ id: input, value: target.value })
-    setValue(target.value)
   }
 
   /**

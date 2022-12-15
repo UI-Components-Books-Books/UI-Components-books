@@ -1,4 +1,4 @@
-import { Children, cloneElement, isValidElement, useEffect, useState } from 'react'
+import { Children, cloneElement, isValidElement, useState } from 'react'
 import PropTypes from 'prop-types'
 
 import { getChildrenByType } from '../../../utils/validations/getChildrenType'
@@ -17,20 +17,24 @@ export const CheckBoxGroup = ({ legend, children: childrenProps, onChecked, addC
     * @param {Object} value - Objeto { Id, value }
     */
   const onCheck = (value) => {
+    // Usada para almacenar el nuevo valor del estado. de esta manera no usamos un useEffect.
+    let checkedArray
+
     const validate = checked.filter((option) => option.id === value.id)
 
     if (validate.length) {
-      setChecked([...checked.filter((option) => option.id !== value.id)])
+      checkedArray = [...checked.filter((option) => option.id !== value.id)]
     } else {
-      setChecked([...checked, { ...value }])
+      checkedArray = [...checked, { ...value }]
     }
-  }
 
-  useEffect(() => {
+    // Si existe el método onChecked le pasamos el nuevo valor del estado.
     if (onChecked) {
-      onChecked(checked)
+      onChecked(checkedArray)
     }
-  }, [checked])
+
+    setChecked(checkedArray)
+  }
 
   /**
     * Necesitamos agregar las propiedades onClick al componente CheckBox.
