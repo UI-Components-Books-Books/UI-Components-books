@@ -1,4 +1,4 @@
-import { useState, forwardRef, useMemo } from 'react'
+import { forwardRef, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import _uniquedId from 'lodash/uniqueId'
 
@@ -9,9 +9,6 @@ import { typeValidation } from '../../../utils/validations/typeValidation'
 import css from './Select.module.scss'
 
 export const Select = forwardRef(({ children, id, placeholder, label, icon, addClass, isLabelVisible, isDisabled, isRequired, onChoise }, ref) => {
-  // Usado para controlar el valor la opción seleccionada en el select.
-  const [choise, setChoise] = useState()
-
   /**
     * Se crea un ID para identificar el select y además
     * para pasarlo dentro la función onChoise proveniente
@@ -28,7 +25,6 @@ export const Select = forwardRef(({ children, id, placeholder, label, icon, addC
     */
   const onChange = ({ target }) => {
     if (onChoise) onChoise({ id: select, value: target.value })
-    setChoise(target.value)
   }
 
   return (
@@ -40,7 +36,6 @@ export const Select = forwardRef(({ children, id, placeholder, label, icon, addC
           id={select}
           ref={ref}
           name={select}
-          value={choise}
           defaultValue='default'
           className={css['c-select']}
           onChange={onChange}
