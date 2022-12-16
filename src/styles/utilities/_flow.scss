@@ -6,3 +6,52 @@
 .u-flow > * + * {
   margin-block-start: var(--flow-space, 1em);
 }
+
+
+/** 
+  Utilities for controlling how an individual grid item is aligned along its inline axis.
+**/
+
+.u-justify-self-auto {
+  justify-self: auto;
+}
+
+.u-justify-self-start {
+  justify-self: start;
+}
+
+.u-justify-self-end {
+  justify-self: end;
+}
+
+.u-justify-self-center {
+  justify-self: center;
+}
+
+.u-justify-self-stretch {
+  justify-self: stretch;
+}
+
+/** 
+  Utilities for controlling how flex and grid items are positioned along a container's cross axis.
+**/
+
+.u-items-start {
+  align-items: flex-start;
+}
+
+.u-items-end {
+  align-items: flex-end;
+}
+
+.u-items-center {
+  align-items: center;
+}
+
+.u-items-baseline {
+  align-items: baseline;
+}
+
+.u-items-stretch {
+  align-items: stretch;
+}
