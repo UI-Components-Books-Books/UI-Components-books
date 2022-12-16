@@ -57,7 +57,7 @@ export const Panel = ({ children: ChildrenProps, defaultIndex, addClass }) => {
       IdToSection.counter++
       IdToSection.index.push(IdToSection.counter)
 
-      return cloneElement(child, { ...child.props, id: IdToSection.counter })
+      return cloneElement(child, { ...child.props, id: IdToSection.counter, "data-value": IdToSection.counter - 1 })
     }
 
     return child
@@ -65,7 +65,7 @@ export const Panel = ({ children: ChildrenProps, defaultIndex, addClass }) => {
 
   return (
     <PanelContext.Provider value={{ validation, onToggle, listId: IdToSection.index, currentSection: isOpen }}>
-      <div className={`${css['c-panel']} ${addClass ?? ''}`}>{children}</div>
+      <div className={`${css['c-panel']} ${addClass ?? ''} class-video-interpreter-ui-panel`}>{children}</div>
     </PanelContext.Provider>
   )
 }

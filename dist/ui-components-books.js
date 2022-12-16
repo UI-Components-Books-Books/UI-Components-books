@@ -1453,7 +1453,10 @@ const Cn = [
   "settings",
   "search",
   "radar",
-  "accessibility_new"
+  "accessibility_new",
+  "smart_display",
+  "repeat",
+  "repeat_on"
 ], lo = {
   "c-icon": "_c-icon_1f7k1_1",
   "c-small": "_c-small_1f7k1_9",
@@ -5846,7 +5849,7 @@ const $r = {
     onKeyDown: (v) => {
       i && typeof i == "function" && i(v), l(v);
     },
-    className: `${$r["c-modal"]} animate__animated animate__fadeIn animate__faster u-px-3 u-py-3 ${t != null ? t : ""}`,
+    className: `${$r["c-modal"]} animate__animated animate__fadeIn animate__faster u-px-3 u-py-3 class-video-interpreter-ui-modal ${t != null ? t : ""}`,
     ...c,
     children: [/* @__PURE__ */ m("div", {
       className: `${$r["c-modal-container"]}`,
@@ -6334,7 +6337,8 @@ const Ft = {
   }, [t]);
   const l = ye.map(e, (p) => Ye(p) ? p.props.__TYPE === "Section" ? (a.counter++, a.index.push(a.counter), Ee(p, {
     ...p.props,
-    id: a.counter
+    id: a.counter,
+    "data-value": a.counter - 1
   })) : p : null);
   return /* @__PURE__ */ m(qr.Provider, {
     value: {
@@ -6344,7 +6348,7 @@ const Ft = {
       currentSection: n
     },
     children: /* @__PURE__ */ m("div", {
-      className: `${Ft["c-panel"]} ${r != null ? r : ""}`,
+      className: `${Ft["c-panel"]} ${r != null ? r : ""} class-video-interpreter-ui-panel`,
       children: l
     })
   });
