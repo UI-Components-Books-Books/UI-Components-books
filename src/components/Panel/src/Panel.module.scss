@@ -2,15 +2,14 @@
     width: 100%;
     min-height: 100%;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    align-items: stretch;
     justify-content: center;
 }
 
 :where(.c-section) {
     width: 100%;
     min-height: 100%;
-    overflow: hidden;
+    overflow-y: auto;
 }
 
 .c-navigation {

@@ -6314,12 +6314,12 @@ Vn.defaultProps = {
   element: /* @__PURE__ */ m("button", {})
 };
 const Ft = {
-  "c-panel": "_c-panel_8phva_1",
-  "c-section": "_c-section_8phva_10",
-  "c-navigation": "_c-navigation_8phva_16",
-  "c-navigation__item": "_c-navigation__item_8phva_30",
-  "c-navigation__section": "_c-navigation__section_8phva_34",
-  "c-navigation__button": "_c-navigation__button_8phva_52"
+  "c-panel": "_c-panel_1v5hj_1",
+  "c-section": "_c-section_1v5hj_9",
+  "c-navigation": "_c-navigation_1v5hj_15",
+  "c-navigation__item": "_c-navigation__item_1v5hj_29",
+  "c-navigation__section": "_c-navigation__section_1v5hj_33",
+  "c-navigation__button": "_c-navigation__button_1v5hj_51"
 }, qr = Ke(), fl = ({
   children: e,
   defaultIndex: t,
