@@ -31,4 +31,7 @@ export const iconList = [
   "search",
   "radar",
   "accessibility_new",
+  "smart_display",
+  "repeat",
+  "repeat_on"
 ];
