@@ -3,7 +3,7 @@
   excepto el primero, para generar espaciado entre elementos.
 **/
 
-.u-flow > * + * {
+.u-flow>*+* {
   margin-block-start: var(--flow-space, 1em);
 }
 
@@ -36,22 +36,26 @@
   Utilities for controlling how flex and grid items are positioned along a container's cross axis.
 **/
 
-.u-items-start {
-  align-items: flex-start;
+.u-self-auto {
+  align-self: auto;
 }
 
-.u-items-end {
-  align-items: flex-end;
+.u-self-start {
+  align-self: flex-start;
 }
 
-.u-items-center {
-  align-items: center;
+.u-self-end {
+  align-self: flex-end;
 }
 
-.u-items-baseline {
-  align-items: baseline;
+.u-self-center {
+  align-self: center;
 }
 
-.u-items-stretch {
-  align-items: stretch;
+.u-self-stretch {
+  align-self: stretch;
+}
+
+.u-self-baseline {
+  align-self: baseline;
 }
