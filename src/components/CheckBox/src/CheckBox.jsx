@@ -8,7 +8,7 @@ import { typeValidation } from '../../../utils/validations/typeValidation'
 import css from './CheckBox.module.scss'
 
 export const CheckBox = forwardRef(
-  ({ id, name, type, label, state, value, addClass, isDisabled, defaultChecked, onChange, __TYPE, ...args }, ref) => {
+  ({ id, name, type, label, state, value, addClass, isDisabled, defaultChecked, onChange, __TYPE, inherit, ...args }, ref) => {
     /**
        * Se crea un ID para identificar el input y además
        * para pasarlo dentro la función onChange proveniente
@@ -49,7 +49,7 @@ export const CheckBox = forwardRef(
         data-state={state}
         data-type={type}
         data-element={__TYPE}
-        {...args}
+        {...(!inherit && { ...args })}
       >
         <div className={css['c-input__box']}>
           <input
@@ -62,6 +62,7 @@ export const CheckBox = forwardRef(
             className={css['c-input__check']}
             onChange={onChangeCheckbox}
             {...(isDisabled && { disabled: true })}
+            {...(inherit && { ...args })}
             {...(defaultChecked && { checked: defaultChecked })}
           />
           <div className={css['c-input__icon']}>{ICON_STATE[state] && <Icon name={ICON_STATE[state]} />}</div>
@@ -79,6 +80,7 @@ CheckBox.defaultProps = {
   state: 'normal',
   value: 'active',
   isDisabled: false,
+  inherit: false,
   __TYPE: 'CheckBox'
 }
 
@@ -92,6 +94,7 @@ CheckBox.propTypes = {
   addClass: PropTypes.string,
   isDisabled: PropTypes.bool,
   defaultChecked: PropTypes.bool,
+  inherit: PropTypes.bool,
   onChange: PropTypes.func,
   __TYPE: typeValidation('CheckBox')
 }
