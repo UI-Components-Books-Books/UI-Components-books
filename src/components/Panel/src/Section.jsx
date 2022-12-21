@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { forwardRef, useContext } from 'react'
 import PropTypes from 'prop-types'
 
 import { PanelContext } from '../../Panel'
@@ -6,7 +6,7 @@ import { typeValidation } from '../../../utils/validations/typeValidation'
 
 import css from './Panel.module.scss'
 
-export const Section = ({ children, id, addClass, __TYPE, ...props }) => {
+export const Section = forwardRef(({ children, id, addClass, __TYPE, ...props }, ref) => {
   // Obtenemos la función validation del contexto
   const { validation } = useContext(PanelContext)
 
@@ -21,6 +21,7 @@ export const Section = ({ children, id, addClass, __TYPE, ...props }) => {
   // TODO: Agregar transición con FrameMotion
   return (
     <section
+      ref={ref}
       role='tabpanel'
       hidden={!isSelected}
       data-type={__TYPE}
@@ -35,7 +36,7 @@ export const Section = ({ children, id, addClass, __TYPE, ...props }) => {
       {children}
     </section>
   )
-}
+})
 
 Section.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.arrayOf(PropTypes.element), PropTypes.element, PropTypes.node]),
