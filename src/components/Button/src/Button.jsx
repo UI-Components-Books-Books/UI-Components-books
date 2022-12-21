@@ -24,8 +24,8 @@ export const Button = forwardRef((props, ref) => {
   return (
     <button
       ref={ref}
-      className={`${css['c-button']} ${css[`c-${variant}`]} ${css[`c-${size}`]} ${icon && icon.name && hasAriaLabel ? css['c-round'] : ''} 
-        ${icon && icon.position === 'right' ? css['c-reverse'] : ''} ${addClass ?? ''}`}
+      className={`${addClass ?? ''} ${css['c-button']} ${css[`c-${variant}`]} ${css[`c-${size}`]} ${icon && icon.name && hasAriaLabel ? css['c-round'] : ''} 
+        ${icon && icon.position === 'right' ? css['c-reverse'] : ''}`}
       disabled={disabled}
       type={type}
       onClick={onClick}

@@ -1524,8 +1524,8 @@ const Zt = {
   } = e;
   return /* @__PURE__ */ C("button", {
     ref: t,
-    className: `${Zt["c-button"]} ${Zt[`c-${c}`]} ${Zt[`c-${n}`]} ${i && i.name && s ? Zt["c-round"] : ""} 
-        ${i && i.position === "right" ? Zt["c-reverse"] : ""} ${u != null ? u : ""}`,
+    className: `${u != null ? u : ""} ${Zt["c-button"]} ${Zt[`c-${c}`]} ${Zt[`c-${n}`]} ${i && i.name && s ? Zt["c-round"] : ""} 
+        ${i && i.position === "right" ? Zt["c-reverse"] : ""}`,
     disabled: l,
     type: a,
     onClick: p,
