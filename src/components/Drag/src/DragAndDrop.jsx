@@ -156,8 +156,6 @@ export const DragAndDrop = ({
     * @param {String} id - Id del "drag" seleccionado.
     */
   const validateDrags = (container, id) => {
-    console.log(container)
-
     // Obtenemos la llave que corresponde al elemento base de los drag.
     const baseContainer = Object.keys(items).pop()
 

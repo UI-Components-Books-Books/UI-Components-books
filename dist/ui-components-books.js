@@ -4393,7 +4393,6 @@ const Hc = ({
   }), E = Bs(an(hi), an(mi), an(jn, {
     coordinateGetter: Jc
   })), P = (w, x) => {
-    console.log(w);
     const R = Object.keys(v).pop();
     let N;
     R !== w.id && w.data.current.validate.includes(x) ? N = [...p.filter((j) => j !== x), x] : N = [...p.filter((j) => j !== x)], r && r([...N]), f(N);
