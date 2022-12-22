@@ -43,7 +43,7 @@ export const Draggable = ({ children, id, addClass, dragging, label, attribute, 
       id={id}
       ref={setNodeRef}
       data-type={__TYPE}
-      className={`${css['c-draggable']} ${isDragging === id ? dragging : ''} ${addClass ?? ''}`}
+      className={`${css['c-draggable']} ${isDragging === id ? `${dragging} ${css['is-draggable--active-animation']}` : ''} ${addClass ?? ''}`}
       style={{ transform: CSS.Translate.toString(transform) }}
       {...(validate && { [propValidate]: !!listId.includes(id) })}
       {...(!disabledDefaultAttributes && { ...attributes })}
