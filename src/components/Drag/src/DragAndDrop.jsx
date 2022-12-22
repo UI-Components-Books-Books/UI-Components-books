@@ -159,11 +159,17 @@ export const DragAndDrop = ({
     // Obtenemos la llave que corresponde al elemento base de los drag.
     const baseContainer = Object.keys(items).pop()
 
+    let newArrayValidate
+
     if (baseContainer !== container.id && container.data.current.validate.includes(id)) {
-      return setValidateId((prev) => [...prev.filter((item) => item !== id), id])
+      newArrayValidate = [...validateId.filter((item) => item !== id), id]
+    } else {
+      newArrayValidate = [...validateId.filter((item) => item !== id)]
     }
 
-    setValidateId((prev) => [...prev.filter((item) => item !== id)])
+    if (onValidate) onValidate([...newArrayValidate])
+
+    setValidateId(newArrayValidate)
   }
 
   /**
@@ -286,14 +292,6 @@ export const DragAndDrop = ({
   //     }
   //   })
   // }
-
-  /**
-    * Efecto que se encarga de mandar el valor el estado validateId
-    * a través de la propiedade onValidate.
-    */
-  useEffect(() => {
-    if (validateId.length > 0 && onValidate) onValidate(validateId)
-  }, [validateId, onValidate])
 
   /**
     * Efecto que se encarga de actualzar de reinicar el estado items
