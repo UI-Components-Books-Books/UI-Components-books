@@ -156,6 +156,8 @@ export const DragAndDrop = ({
     * @param {String} id - Id del "drag" seleccionado.
     */
   const validateDrags = (container, id) => {
+    console.log(container)
+
     // Obtenemos la llave que corresponde al elemento base de los drag.
     const baseContainer = Object.keys(items).pop()
 
@@ -199,7 +201,11 @@ export const DragAndDrop = ({
 
     setActiveId(null)
 
-    validateDrags(over, active.id)
+    // Obtenemos la llave que corresponde al elemento base de los drag.
+    const baseContainer = Object.keys(items).pop()
+
+    // Solo se realiza la validación cuando el elemento es diferente al elemento base de los drag.
+    if (baseContainer !== over.id) validateDrags(over, active.id)
 
     // Contendor en el cual el drag se soltó.
     const overContainer = findContainer(over.id)
@@ -215,9 +221,6 @@ export const DragAndDrop = ({
           [overContainer]: [...items[overContainer], active.id]
         }))
       }
-
-      // Obtenemos la llave que corresponde al elemento base de los drag.
-      const baseContainer = Object.keys(items).pop()
 
       setItems((items) => ({
         ...items,
