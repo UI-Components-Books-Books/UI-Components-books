@@ -57,7 +57,7 @@ export const Panel = ({ children: ChildrenProps, defaultIndex, addClass }) => {
       IdToSection.counter++
       IdToSection.index.push(IdToSection.counter)
 
-      return cloneElement(child, { ...child.props, id: IdToSection.counter, "data-value": IdToSection.counter - 1 })
+      return cloneElement(child, { ...child.props, id: IdToSection.counter, 'data-value': IdToSection.counter - 1 })
     }
 
     return child

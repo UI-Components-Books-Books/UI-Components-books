@@ -24,7 +24,7 @@ export const Icon = ({ name, size, addClass }) => {
   /**
    * Utilizado para mantener la cadena de texto de URL estática.
    */
-  const PATH = import.meta.env.DEV ? `/assets/icons/svg/${name}.svg#${name}` : `/ui-components-books/dist/assets/icons/svg/${name}.svg#${name}`
+  const PATH = `${import.meta.env.VITE_ICON_PATH}${name}.svg#${name}`
 
   /**
    *
