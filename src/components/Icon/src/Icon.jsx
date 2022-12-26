@@ -7,18 +7,10 @@ import css from './Icon.module.scss'
 
 export const Icon = ({ name, size, addClass }) => {
   /**
-    * Evaluamos la propiedad name para no retonar nada si está no existe.
+    * Evaluamos la propiedad name y la variable VITE_ICON_PATH para no retonar nada si estas no existen.
     */
-  if (!name) {
-    return null
-  }
-
-  /**
-    * Si el nombre del icono no está en el array iconList, entonces
-    * se muestra un mensaje informativo.
-    */
-  if (!iconList.includes(name)) {
-    return <span>Doesn&apos;t exist</span>
+  if (!name || !import.meta.env.VITE_ICON_PATH) {
+    return <span>Doesn&apos;t exist or VITE_ICON_PATH environment variable it's undefined</span>
   }
 
   /**
