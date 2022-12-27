@@ -21,7 +21,12 @@ export const NumberIncrementStepper = ({ children, addClass, label }) => {
       aria-label={`${label ?? 'Incrementar valor'}`}
       className={`${css['c-number-input__button']} ${addClass ?? ''}`}
     >
-      {children || <Icon name='arrow_drop_up' />}
+      {children ||
+        <Icon>
+          <svg xmlns='http://www.w3.org/2000/svg' height='48' width='48' viewBox='0 0 48 48'>
+            <path id='arrow_drop_up' d='m14 28 10-10.05L34 28Z' />
+          </svg>
+        </Icon>}
     </button>
   )
 }

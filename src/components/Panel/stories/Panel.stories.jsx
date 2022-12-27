@@ -68,11 +68,6 @@ export const WithButtonSection = () => (
           label='Go to the second section'
           addClass='u-my-4'
           size='small'
-          hasAriaLabel
-          icon={{
-            name: 'navigate_next',
-            size: 'big'
-          }}
           style={{ borderRadius: '0.375rem' }}
         />
       </ButtonSection>
@@ -87,12 +82,6 @@ export const WithButtonSection = () => (
           label='Go to the first section'
           addClass='u-my-4'
           size='small'
-          hasAriaLabel
-          icon={{
-            name: 'navigate_before',
-            position: 'left',
-            size: 'big'
-          }}
           style={{ borderRadius: '0.375rem' }}
         />
       </ButtonSection>

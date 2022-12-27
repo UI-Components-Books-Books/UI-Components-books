@@ -18,9 +18,9 @@ export const CheckBox = forwardRef(
 
     // Objeto con la lista de iconos que dependen del la propiedad state.
     const ICON_STATE = Object.freeze({
-      right: 'done_all',
-      wrong: 'close',
-      normal: type === 'checkbox' ? 'check' : null
+      right: <path id='done_all' d='M14.7 35.9 3.5 24.7l2.15-2.15 9.05 9.05 2.15 2.15Zm8.5 0L12 24.7l2.15-2.15 9.05 9.05 19.2-19.2 2.15 2.15Zm0-8.5-2.15-2.15L33.9 12.4l2.15 2.15Z' />,
+      wrong: <path id='close' d='m12.45 37.65-2.1-2.1L21.9 24 10.35 12.45l2.1-2.1L24 21.9l11.55-11.55 2.1 2.1L26.1 24l11.55 11.55-2.1 2.1L24 26.1Z' />,
+      normal: type === 'checkbox' ? <path id='check' d='M18.9 35.7 7.7 24.5l2.15-2.15 9.05 9.05 19.2-19.2 2.15 2.15Z' /> : null
     })
 
     /**
@@ -65,7 +65,21 @@ export const CheckBox = forwardRef(
             {...(inherit && { ...args })}
             {...(defaultChecked && { checked: defaultChecked })}
           />
-          <div className={css['c-input__icon']}>{ICON_STATE[state] && <Icon name={ICON_STATE[state]} />}</div>
+          <div className={css['c-input__icon']}>
+            {ICON_STATE[state] &&
+            (
+              <Icon>
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
+                  width='48'
+                  height='48'
+                  viewBox='0 0 48 48'
+                >
+                  {ICON_STATE[state]}
+                </svg>
+              </Icon>
+            )}
+          </div>
         </div>
         <span className={css['c-input__label']}>{label}</span>
       </label>

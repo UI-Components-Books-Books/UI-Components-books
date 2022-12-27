@@ -5,7 +5,7 @@ describe('Test in <Button/>', () => {
   test('should render correctly', () => {
     render(<Button />)
 
-    expect(screen.getByRole('button', { name: /Button/i })).toBeInTheDocument()
+    expect(screen.getByRole('button')).toBeInTheDocument()
   })
 
   test('should have aria-label attribute', () => {
@@ -17,18 +17,18 @@ describe('Test in <Button/>', () => {
   test('should be disabled', () => {
     render(<Button disabled />)
 
-    expect(screen.getByText(/Button/i)).toBeDisabled()
+    expect(screen.getByRole('button')).toBeDisabled()
   })
 
   test('should render with icon correctly', () => {
-    render(<Button label='play' icon={{ name: 'play' }} />)
+    render(<Button label='play' icon={{ path: '/assets/icons/svg/play.svg' }} />)
 
-    expect(screen.getByRole('button', { name: /play/i })).toContainElement(screen.getByTestId(/play/i))
+    expect(screen.getByRole('button', { path: /play/i })).toContainElement(screen.getByTestId(/play/i))
   })
 
   test('Should have the class "c-reverse" if the icon position is right', () => {
-    render(<Button icon={{ name: 'play', position: 'right' }} />)
+    render(<Button icon={{ path: '/assets/icons/svg/play.svg', position: 'right' }} />)
 
-    expect(screen.getByText(/Button/i)).toHaveClass('c-reverse')
+    expect(screen.getByRole('button')).toHaveClass('c-reverse')
   })
 })

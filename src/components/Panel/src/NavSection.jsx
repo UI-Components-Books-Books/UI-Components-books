@@ -70,8 +70,8 @@ export const NavSection = ({ renderItem, showPrevButton, showNextButton, icons, 
     * de la navegación.
     */
   const normalizedIcons = {
-    previous: icons.previous || 'navigate_before',
-    next: icons.next || 'navigate_next'
+    previous: icons?.previous || <path id='navigate_before' d='M28.05 36 16 23.95 28.05 11.9l2.15 2.15-9.9 9.9 9.9 9.9Z' />,
+    next: icons?.next || <path id='navigate_next' d='m18.75 36-2.15-2.15 9.9-9.9-9.9-9.9 2.15-2.15L30.8 23.95Z' />
   }
 
   /**
@@ -214,7 +214,18 @@ export const NavSection = ({ renderItem, showPrevButton, showNextButton, icons, 
                     aria-label={getItemAriaLabel(type, section, selected)}
                     {...others}
                   >
-                    {normalizedIcons[type] ? <Icon name={normalizedIcons[type]} key={type} /> : null}
+                    {/* {normalizedIcons[type] ? <Icon name={normalizedIcons[type]} key={type} /> : null} */}
+                    {normalizedIcons[type]
+                      ? icons
+                        ? <Icon path={normalizedIcons[type]} key={type} />
+                        : (
+                          <Icon key={type}>
+                            <svg xmlns='http://www.w3.org/2000/svg' height='48' width='48' viewBox='0 0 48 48'>
+                              {normalizedIcons[type]}
+                            </svg>
+                          </Icon>
+                          )
+                      : null}
                   </button>
                   )}
             </li>
@@ -240,10 +251,6 @@ NavSection.propTypes = {
 }
 
 NavSection.defaultProps = {
-  icons: {
-    previous: 'navigate_before',
-    next: 'navigate_next'
-  },
   label: 'Lista de secciones',
   orientation: 'horizontal',
   getItemAriaLabel: defaultAriaLabel

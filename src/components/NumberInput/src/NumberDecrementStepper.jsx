@@ -21,7 +21,12 @@ export const NumberDecrementStepper = ({ children, addClass, label }) => {
       aria-label={`${label ?? 'Decrementar valor'}`}
       className={`${css['c-number-input__button']} ${addClass ?? ''}`}
     >
-      {children || <Icon name='arrow_drop_down' />}
+      {children ||
+        <Icon>
+          <svg xmlns='http://www.w3.org/2000/svg' height='48' width='48' viewBox='0 0 48 48'>
+            <path id='arrow_drop_down' d='m24 30-10-9.95h20Z' />
+          </svg>
+        </Icon>}
     </button>
   )
 }

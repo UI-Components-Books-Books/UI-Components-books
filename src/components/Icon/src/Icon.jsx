@@ -1,46 +1,42 @@
-import { Children } from 'react'
+import { Children, cloneElement } from 'react'
 import PropTypes from 'prop-types'
 
 import { typeValidation } from '../../../utils/validations/typeValidation'
 
 import css from './Icon.module.scss'
 
-// Expresion regular usada para obtener el nombre del svg del path.
+// Expresion regular usada para obtener el nombre del svg que está path.
 const REGEX = /\w+\.svg/gi
 
 export const Icon = ({ children, path, size, addClass }) => {
   /**
    * Evaluamos la propiedad path para no retonar nada si esta no existen.
    */
-  if (!path) {
+  if (!path && !children) {
     return <span>Doesn&apos;t exist</span>
   }
 
-  // Si tiene más de 1 hijo no mostrar el Icon
+  // Si tiene más de 1 hijo no mostrar el Icon.
   if (Children.count(children) > 1) {
     return <span>Only have one children</span>
   }
 
-  /**
-   * Utilizado para mantener la cadena de texto del URL estática.
-   */
-  const PATH = `${path}#${path.match(REGEX)}`
+  // Obtenemos el nombre el SVG usado para el path y el data-testid.
+  const NAME_SVG = path && path.match(REGEX).toString().replace(/.svg/gi, '')
 
   /**
-   *
-   * Se encarga de generar la ruta para obtener
-   * el svg.
-   *
-   * @url https://es.vitejs.dev/guide/assets.html#new-url-url-import-meta-url
-   * @returns {String} New URL
+   * Utilizado construir la ruta del svg.
+   * compuesta por el path del svg seguido del nombre del mismo.
    */
-  const base = new URL(PATH, import.meta.url).href
+  const PATH = `${path}#${NAME_SVG}`
 
   return children
     ? (
-        Children.clone(children, {
+        cloneElement(children, {
           ...children.props,
-          className: `${css['c-icon']} ${css[`c-${size}`]} ${addClass ?? ''}`
+          className: `${css['c-icon']} ${css[`c-${size}`]} ${addClass ?? ''}`,
+          'aria-hidden': true,
+          'data-testid': NAME_SVG
         })
       )
     : (
@@ -51,14 +47,15 @@ export const Icon = ({ children, path, size, addClass }) => {
         viewBox='0 0 48 48'
         className={`${css['c-icon']} ${css[`c-${size}`]} ${addClass ?? ''}`}
         aria-hidden='true'
+        data-testid={NAME_SVG}
       >
-        <use xlinkHref={base} />
+        <use xlinkHref={PATH} />
       </svg>
       )
 }
 
 Icon.propTypes = {
-  children: PropTypes.oneOfType(PropTypes.element, PropTypes.node),
+  children: PropTypes.oneOfType([PropTypes.element, PropTypes.node]),
   path: PropTypes.string,
   size: PropTypes.oneOf(['small', 'normal', 'big']),
   addClass: PropTypes.string,

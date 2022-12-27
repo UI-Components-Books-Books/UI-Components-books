@@ -77,7 +77,7 @@ export const WithRenderIcon = TemplateAccordionButton.bind({})
 WithRenderIcon.storyName = 'using render prop with icon'
 WithRenderIcon.args = {
   icon: function (isExpanded) {
-    return isExpanded ? <Icon name='check' /> : <Icon name='close' />
+    return isExpanded ? <Icon path='/assets/icons/svg/check.svg' /> : <Icon path='/assets/icons/svg/close.svg' />
   }
 }
 

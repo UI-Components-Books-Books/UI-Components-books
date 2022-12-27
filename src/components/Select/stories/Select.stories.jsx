@@ -39,7 +39,7 @@ export const WithOtherIcon = Template.bind({})
 
 WithOtherIcon.storyName = 'with other icon'
 WithOtherIcon.args = {
-  icon: 'check'
+  icon: '/assets/icons/svg/close.svg'
 }
 
 export const WithVisibleLabel = Template.bind({})

@@ -56,7 +56,7 @@ icon.args = {
   size: 'normal',
   hasAriaLabel: true,
   icon: {
-    name: 'play',
+    path: '/assets/icons/svg/close.svg',
     size: 'big'
   }
 }
@@ -69,7 +69,7 @@ textAndIcon.args = {
   label: 'Button',
   size: 'normal',
   icon: {
-    name: 'volume_off'
+    path: '/assets/icons/svg/close.svg'
   }
 }
 
@@ -81,7 +81,7 @@ textAndIconReverted.args = {
   label: 'Button',
   size: 'normal',
   icon: {
-    name: 'close',
+    path: '/assets/icons/svg/close.svg',
     position: 'right'
   }
 }

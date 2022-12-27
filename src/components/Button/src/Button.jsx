@@ -2,7 +2,6 @@ import { forwardRef } from 'react'
 import PropTypes from 'prop-types'
 
 import { Icon } from '../../Icon'
-import { iconList } from '../../../utils/icons/iconsList'
 
 import css from './Button.module.scss'
 
@@ -33,7 +32,7 @@ export const Button = forwardRef((props, ref) => {
       {...others}
     >
       {children}
-      {icon && <Icon name={icon.name} size={icon.size} />}
+      {icon && <Icon path={icon.path} size={icon.size} />}
       {!hasAriaLabel ? label : null}
     </button>
   )
@@ -47,7 +46,7 @@ Button.propTypes = {
   type: PropTypes.oneOf(['button', 'submit', 'reset']),
   hasAriaLabel: PropTypes.bool,
   icon: PropTypes.shape({
-    name: PropTypes.oneOf(iconList),
+    path: PropTypes.string,
     size: PropTypes.oneOf(['small', 'normal', 'big']),
     position: PropTypes.oneOf(['left', 'right'])
   }),

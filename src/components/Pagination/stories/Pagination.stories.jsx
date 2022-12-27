@@ -30,7 +30,7 @@ export const WithIcon = () => (
     showLastButton
     showFirstButton
     renderItem={(item) => (
-      <PaginationItem {...item} icons={{ previous: 'arrow_drop_down', next: 'arrow_drop_up', last: 'volume_off', first: 'volume_on' }} />
+      <PaginationItem {...item} icons={{ previous: '/assets/icons/svg/arrow_drop_down.svg', next: '/assets/icons/svg/arrow_drop_down.svg', last: '/assets/icons/svg/volume_off.svg', first: '/assets/icons/svg/volume_on.svg' }} />
     )}
   />
 )

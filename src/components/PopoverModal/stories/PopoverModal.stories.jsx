@@ -23,13 +23,8 @@ export const Default = () => (
     <PopoverModal>
       <PopoverModalButton>
         <Button
-          label='open PopoverModal'
+          label='Open PopoverModal'
           size='small'
-          hasAriaLabel
-          icon={{
-            name: 'check',
-            size: 'big'
-          }}
         />
       </PopoverModalButton>
       <PopoverModalContent>
@@ -46,13 +41,8 @@ export const withArrow = () => (
   <PopoverModal>
     <PopoverModalButton>
       <Button
-        label='open PopoverModal'
+        label='Open PopoverModal'
         size='small'
-        hasAriaLabel
-        icon={{
-          name: 'check',
-          size: 'big'
-        }}
       />
     </PopoverModalButton>
     <PopoverModalContent hasArrow>

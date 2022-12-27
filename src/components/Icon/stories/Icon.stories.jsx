@@ -1,17 +1,10 @@
 import React from 'react'
 
 import { Col, Row, Icon } from '../../../components'
-import { iconList } from '../../../utils/icons/iconsList'
 
 export default {
   title: 'ui-components/Icon',
   component: Icon,
-  argTypes: {
-    name: {
-      options: iconList,
-      control: { type: 'select' }
-    }
-  },
   decorators: [
     (story) => (
       <Row justify-content='center' align-items='center'>
@@ -28,13 +21,13 @@ export default {
 const Template = (args) => <Icon {...args} />
 
 export const small = Template.bind({})
-small.args = { name: 'close', size: 'small' }
+small.args = { path: '/assets/icons/svg/close.svg', size: 'small' }
 small.storyName = 'small'
 
 export const normal = Template.bind({})
-normal.args = { name: 'close', size: 'normal' }
+normal.args = { path: '/assets/icons/svg/close.svg', size: 'normal' }
 normal.storyName = 'normal'
 
 export const big = Template.bind({})
-big.args = { name: 'close', size: 'big' }
+big.args = { path: '/assets/icons/svg/close.svg', size: 'big' }
 big.storyName = 'big'

@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import PropTypes from 'prop-types'
 
-import { Button } from '../../../components'
+import { Button, Icon } from '../../../components'
 import { ModalContext } from '../../Modal'
 import { typeValidation } from '../../../utils/validations/typeValidation'
 
@@ -52,7 +52,13 @@ export const ModalContent = ({ label, addClass, children, onClick, onKeyDown, __
       {...props}
     >
       <div className={`${css['c-modal-container']}`}>{children}</div>
-      <Button addClass={css['c-close-button']} label='Cerrar modal' hasAriaLabel icon={{ name: 'close' }} onClick={handleClick} />
+      <Button addClass={css['c-close-button']} label='Cerrar modal' hasAriaLabel onClick={handleClick}>
+        <Icon>
+          <svg xmlns='http://www.w3.org/2000/svg' height='48' width='48' viewBox='0 0 48 48'>
+            <path id='close' d='m12.45 37.65-2.1-2.1L21.9 24 10.35 12.45l2.1-2.1L24 21.9l11.55-11.55 2.1 2.1L26.1 24l11.55 11.55-2.1 2.1L24 26.1Z' />
+          </svg>
+        </Icon>
+      </Button>
     </div>
   )
 }
