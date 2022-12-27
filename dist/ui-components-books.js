@@ -9112,19 +9112,23 @@ ua.defaultProps = {
 };
 const Kn = Ze(), da = ({
   children: e,
-  isVisible: t
+  isVisible: t,
+  onOpen: r
 }) => {
-  const [r, n] = X(!1), i = H(), a = () => n(!r), c = (s) => {
-    i.current || (i.current = s);
+  const [n, i] = X(!1), a = H(), c = () => {
+    const l = !n;
+    r && r(l), i(l);
+  }, s = (l) => {
+    a.current || (a.current = l);
   };
   return G(() => {
-    t !== void 0 && n(t);
+    t !== void 0 && i(t);
   }, [t]), /* @__PURE__ */ p(Kn.Provider, {
     value: {
-      isOpen: r,
-      onOpen: a,
-      setRefButton: c,
-      refButton: i
+      isOpen: n,
+      onOpen: c,
+      setRefButton: s,
+      refButton: a
     },
     children: e
   });
@@ -9134,7 +9138,8 @@ da.defaultProps = {
 };
 da.propTypes = {
   children: o.exports.oneOfType([o.exports.arrayOf(o.exports.element), o.exports.arrayOf(o.exports.node), o.exports.element, o.exports.node]),
-  isVisible: o.exports.bool
+  isVisible: o.exports.bool,
+  onOpen: o.exports.func
 };
 const Uu = ({
   children: e,
