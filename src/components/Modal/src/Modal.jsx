@@ -78,7 +78,7 @@ export const Modal = ({ children, isOpen, onClose, finalFocusRef }) => {
       if (Object.keys(finalFocusRef).length !== 0) {
         finalFocusRef.current.focus()
       }
-    }, 400)
+    }, 500)
   }
 
   /**

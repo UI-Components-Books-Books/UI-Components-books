@@ -23,7 +23,7 @@ export const Button = forwardRef((props, ref) => {
   return (
     <button
       ref={ref}
-      className={`${addClass ?? ''} ${css['c-button']} ${css[`c-${variant}`]} ${css[`c-${size}`]} ${icon && icon.name && hasAriaLabel ? css['c-round'] : ''} 
+      className={`${addClass ?? ''} ${css['c-button']} ${css[`c-${variant}`]} ${css[`c-${size}`]} ${icon && icon.path && hasAriaLabel ? css['c-round'] : ''} 
         ${icon && icon.position === 'right' ? css['c-reverse'] : ''}`}
       disabled={disabled}
       type={type}
