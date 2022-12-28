@@ -17,7 +17,7 @@ const KEYCODE = Object.freeze({
 
 export const PopoverModalContent = ({ children, addClass, hasArrow, isDisabled, distance, placement }) => {
   // Obtenemos la función isOpen y la referencia del botón del contexto
-  const { isOpen, onOpen, refButton } = useContext(PopoverModalContext)
+  const { isOpen, refButton } = useContext(PopoverModalContext)
   // Referencia del PopoverModal
   const refPopoverModal = useRef()
 
@@ -55,20 +55,6 @@ export const PopoverModalContent = ({ children, addClass, hasArrow, isDisabled, 
     // Retorna el focus al buttonElement al presionar Esc
     if ((e.keyCode || e.which) === KEYCODE.ESC) {
       buttonElement.focus()
-    }
-  }
-
-  /**
-   * Función que se ejecuta con el evento onBlur
-   * @param {Event} Event
-   */
-  const onBlur = ({ relatedTarget }) => {
-    // Obtemos un array de elementos que se puede ::focus.
-    const focusableElements = [...refPopoverModal.current.querySelectorAll(SELECTOR_ELEMENTS), refPopoverModal.current, refButton.current]
-
-    // Si el elemento no está en la lista de focusableElements cerrar el PopoverModal.
-    if (!focusableElements.includes(relatedTarget)) {
-      onOpen()
     }
   }
 
@@ -112,7 +98,6 @@ export const PopoverModalContent = ({ children, addClass, hasArrow, isDisabled, 
         className={`${css['c-popover-modal']} ${isOpen && css['c-popover-modal--active']} ${addClass ?? ''}`}
         style={styles.popper}
         onKeyDown={onKeyDown}
-        onBlur={onBlur}
         {...attributes.popper}
       >
         {children}
