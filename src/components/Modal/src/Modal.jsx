@@ -91,6 +91,14 @@ export const Modal = ({ children, isOpen, onClose, finalFocusRef }) => {
 
       if (refModal.current) refModal.current.focus()
     }
+
+    return () => {
+      // Almacenamos el boolean que nos indica si existe o no la propiedad inert en el #root.
+      const hasAttribute = document.querySelector('#root').hasAttribute('inert')
+
+      // Eliminamos el inert si el hasAttribute es true.
+      if (hasAttribute) inertToggle(false)
+    }
   }, [isOpen])
 
   return (

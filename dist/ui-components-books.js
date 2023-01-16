@@ -5793,9 +5793,9 @@ const zr = Ze(), al = Object.freeze({
       s("animate__fadeOut", "animate__fadeIn"), a(!1), r(!t), Object.keys(n).length !== 0 && n.current.focus();
     }, 500);
   };
-  return G(() => {
-    t && (a(!0), i.current && i.current.focus());
-  }, [t]), /* @__PURE__ */ p(zr.Provider, {
+  return G(() => (t && (a(!0), i.current && i.current.focus()), () => {
+    document.querySelector("#root").hasAttribute("inert") && a(!1);
+  }), [t]), /* @__PURE__ */ p(zr.Provider, {
     value: {
       isOpen: t,
       onKeyDown: c,
