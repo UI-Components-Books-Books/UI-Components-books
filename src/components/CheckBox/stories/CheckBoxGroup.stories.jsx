@@ -34,9 +34,9 @@ export const WithIssuingValue = () => {
   return (
     <>
       <CheckBoxGroup onChecked={onChange} legend='Grupo de prueba'>
-        <CheckBox type='checkbox' label='Opción 1' state='normal' />
-        <CheckBox type='checkbox' label='Opción 2' state='normal' />
-        <CheckBox type='checkbox' label='Opción 3' state='normal' />
+        <CheckBox type='radio' label='Opción 1' state='normal' />
+        <CheckBox type='radio' label='Opción 2' state='normal' />
+        <CheckBox type='radio' label='Opción 3' state='normal' />
       </CheckBoxGroup>
       <p className='u-my-2'>{JSON.stringify(state, 2, null)}</p>
     </>

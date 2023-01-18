@@ -24,7 +24,7 @@ export const Image = ({ url, alt, title, width, addClass, noCaption, ...props })
   const imgToSee = !error ? `${url}` : base
 
   return (
-    <figure className={`${css['c-image']} ${addClass ?? ''}`} {...(width && { style: { maxWidth: `${width}px` } })}>
+    <figure className={`${css['c-image']} ${addClass ?? ''}`} {...(width && { style: { maxWidth: `${/%/gi.test(width) ? width : `${width}px`}` } })}>
       <img src={imgToSee} onError={onError} alt={alt} {...props} />
 
       {!noCaption && (

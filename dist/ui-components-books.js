@@ -5146,7 +5146,7 @@ const Ju = ({
     className: `${Ro["c-image"]} ${i != null ? i : ""}`,
     ...n && {
       style: {
-        maxWidth: `${n}px`
+        maxWidth: `${/%/gi.test(n) ? n : `${n}px`}`
       }
     },
     children: [/* @__PURE__ */ p("img", {
