@@ -8,7 +8,7 @@ import { typeValidation } from '../../../utils/validations/typeValidation'
 
 import css from './Select.module.scss'
 
-export const Select = forwardRef(({ children, id, placeholder, label, icon, addClass, isLabelVisible, isDisabled, isRequired, onChoise }, ref) => {
+export const Select = forwardRef(({ children, id, placeholder, label, icon, addClass, isLabelVisible, isDisabled, isRequired, onChoise, defaultValue }, ref) => {
   /**
     * Se crea un ID para identificar el select y además
     * para pasarlo dentro la función onChoise proveniente
@@ -36,7 +36,7 @@ export const Select = forwardRef(({ children, id, placeholder, label, icon, addC
           id={select}
           ref={ref}
           name={select}
-          defaultValue='default'
+          defaultValue={defaultValue}
           className={css['c-select']}
           onChange={onChange}
           disabled={isDisabled}
@@ -66,6 +66,7 @@ export const Select = forwardRef(({ children, id, placeholder, label, icon, addC
 Select.defaultProps = {
   placeholder: 'Select option',
   label: 'Select a option',
+  defaultValue: 'default',
   isLabelVisible: false,
   __TYPE: 'Select'
 }
@@ -81,5 +82,6 @@ Select.propTypes = {
   isDisabled: PropTypes.bool,
   isRequired: PropTypes.bool,
   onChoise: PropTypes.func,
+  defaultValue: PropTypes.string,
   __TYPE: typeValidation('Select')
 }
