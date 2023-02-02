@@ -167,7 +167,7 @@ export const DragAndDrop = ({
       newArrayValidate = [...validateId.filter((item) => item !== id)]
     }
 
-    if (onValidate) onValidate([...newArrayValidate])
+    if (onValidate) onValidate({ validate: [...newArrayValidate], active: true })
 
     setValidateId(newArrayValidate)
   }
@@ -299,7 +299,11 @@ export const DragAndDrop = ({
     * cada vez que la propiedad reboot esté en true.
     */
   useEffect(() => {
-    if (reboot) setItems(() => initialState())
+    if (reboot) {
+      setItems(() => initialState())
+
+      if (onValidate) onValidate({ validate: [], active: false })
+    }
   }, [reboot])
 
   return (

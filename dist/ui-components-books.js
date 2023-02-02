@@ -1875,10 +1875,8 @@ function Mn(e) {
   const t = H(e);
   return ft(() => {
     t.current = e;
-  }), Ce(function() {
-    for (var r = arguments.length, n = new Array(r), i = 0; i < r; i++)
-      n[i] = arguments[i];
-    return t.current == null ? void 0 : t.current(...n);
+  }), Ce(function(...r) {
+    return t.current == null ? void 0 : t.current(...r);
   }, []);
 }
 function Ss() {
@@ -1889,8 +1887,7 @@ function Ss() {
   }, []);
   return [t, r];
 }
-function ur(e, t) {
-  t === void 0 && (t = [e]);
+function ur(e, t = [e]) {
   const r = H(e);
   return ft(() => {
     r.current !== e && (r.current = e);
@@ -1927,24 +1924,20 @@ function Vr(e, t) {
     if (t)
       return t;
     const r = cn[e] == null ? 0 : cn[e] + 1;
-    return cn[e] = r, e + "-" + r;
+    return cn[e] = r, `${e}-${r}`;
   }, [e, t]);
 }
 function ti(e) {
-  return function(t) {
-    for (var r = arguments.length, n = new Array(r > 1 ? r - 1 : 0), i = 1; i < r; i++)
-      n[i - 1] = arguments[i];
-    return n.reduce((a, c) => {
-      const s = Object.entries(c);
-      for (const [l, f] of s) {
-        const u = a[l];
-        u != null && (a[l] = u + e * f);
-      }
-      return a;
-    }, {
-      ...t
-    });
-  };
+  return (t, ...r) => r.reduce((n, i) => {
+    const a = Object.entries(i);
+    for (const [c, s] of a) {
+      const l = n[c];
+      l != null && (n[c] = l + e * s);
+    }
+    return n;
+  }, {
+    ...t
+  });
 }
 const Ft = /* @__PURE__ */ ti(1), kr = /* @__PURE__ */ ti(-1);
 function Rs(e) {
@@ -2002,7 +1995,7 @@ const Tn = /* @__PURE__ */ Object.freeze({
         x: t,
         y: r
       } = e;
-      return "translate3d(" + (t ? Math.round(t) : 0) + "px, " + (r ? Math.round(r) : 0) + "px, 0)";
+      return `translate3d(${t ? Math.round(t) : 0}px, ${r ? Math.round(r) : 0}px, 0)`;
     }
   },
   Scale: {
@@ -2013,7 +2006,7 @@ const Tn = /* @__PURE__ */ Object.freeze({
         scaleX: t,
         scaleY: r
       } = e;
-      return "scaleX(" + t + ") scaleY(" + r + ")";
+      return `scaleX(${t}) scaleY(${r})`;
     }
   },
   Transform: {
@@ -2023,13 +2016,12 @@ const Tn = /* @__PURE__ */ Object.freeze({
     }
   },
   Transition: {
-    toString(e) {
-      let {
-        property: t,
-        duration: r,
-        easing: n
-      } = e;
-      return t + " " + r + "ms " + n;
+    toString({
+      property: e,
+      duration: t,
+      easing: r
+    }) {
+      return `${e} ${t}ms ${r}`;
     }
   }
 }), mo = "a,frame,iframe,input:not([type=hidden]):not(:disabled),select:not(:disabled),textarea:not(:disabled),button:not(:disabled),*[tabindex]";
@@ -4282,23 +4274,17 @@ function yi(e) {
     setNodeRef: w
   };
 }
-const Gc = (e) => {
-  let {
-    transform: t
-  } = e;
-  return {
-    ...t,
-    y: 0
-  };
-}, Zc = (e) => {
-  let {
-    transform: t
-  } = e;
-  return {
-    ...t,
-    x: 0
-  };
-}, Kc = [oe.Down, oe.Right, oe.Up, oe.Left], Xc = (e, { context: { active: t, droppableRects: r, droppableContainers: n, collisionRect: i } }) => {
+const Gc = ({
+  transform: e
+}) => ({
+  ...e,
+  y: 0
+}), Zc = ({
+  transform: e
+}) => ({
+  ...e,
+  x: 0
+}), Kc = [oe.Down, oe.Right, oe.Up, oe.Left], Xc = (e, { context: { active: t, droppableRects: r, droppableContainers: n, collisionRect: i } }) => {
   var a;
   if (Kc.includes(e.code)) {
     e.preventDefault();
@@ -4402,7 +4388,10 @@ const Gc = (e) => {
   })), P = (w, _) => {
     const R = Object.keys(h).pop();
     let N;
-    R !== w.id && w.data.current.validate.includes(_) ? N = [...f.filter((F) => F !== _), _] : N = [...f.filter((F) => F !== _)], r && r([...N]), u(N);
+    R !== w.id && w.data.current.validate.includes(_) ? N = [...f.filter((F) => F !== _), _] : N = [...f.filter((F) => F !== _)], r && r({
+      validate: [...N],
+      active: !0
+    }), u(N);
   }, $ = (w) => w in h ? w : Object.keys(h).find((_) => h[_].includes(w)), D = ({
     active: w,
     over: _
@@ -4438,7 +4427,10 @@ const Gc = (e) => {
       }) : _;
   });
   return G(() => {
-    i && y(() => g());
+    i && (y(() => g()), r && r({
+      validate: [],
+      active: !1
+    }));
   }, [i]), /* @__PURE__ */ p(xi.Provider, {
     value: {
       listId: f,
