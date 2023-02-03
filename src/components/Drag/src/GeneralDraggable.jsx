@@ -6,7 +6,7 @@ import { typeValidation } from '../../../utils/validations/typeValidation'
 
 import css from './Drag.module.scss'
 
-export const GeneralDraggable = ({ children, addClass, id, label, element, __TYPE, ...props }) => {
+export const GeneralDraggable = ({ children, addClass, over, id, label, element, __TYPE, ...props }) => {
   /**
     * Creamos una variable con el elemento a generar
     * por el componente, esto nos permite usar
@@ -20,7 +20,7 @@ export const GeneralDraggable = ({ children, addClass, id, label, element, __TYP
     * para poder agregar la funcionalidad
     * de "drop" al componente.
     */
-  const { setNodeRef } = useDroppable({
+  const { isOver, setNodeRef } = useDroppable({
     id,
     data: {
       label,
@@ -29,7 +29,7 @@ export const GeneralDraggable = ({ children, addClass, id, label, element, __TYP
   })
 
   return (
-    <Element id={id} ref={setNodeRef} data-type={__TYPE} className={`${css['c-droppable']} ${addClass ?? ''}`} {...props}>
+    <Element id={id} ref={setNodeRef} data-type={__TYPE} className={`${css['c-droppable']}  ${isOver && over && over} ${addClass ?? ''}`} {...props}>
       {children}
     </Element>
   )
@@ -38,6 +38,7 @@ export const GeneralDraggable = ({ children, addClass, id, label, element, __TYP
 GeneralDraggable.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.arrayOf(PropTypes.element), PropTypes.element, PropTypes.node]),
   addClass: PropTypes.string,
+  over: PropTypes.string,
   id: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   element: PropTypes.string,

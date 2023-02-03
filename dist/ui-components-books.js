@@ -4599,33 +4599,36 @@ Ei.propTypes = {
 const Ti = ({
   children: e,
   addClass: t,
-  id: r,
-  label: n,
-  element: i,
-  __TYPE: a,
-  ...c
+  over: r,
+  id: n,
+  label: i,
+  element: a,
+  __TYPE: c,
+  ...s
 }) => {
-  const s = i || "div", {
-    setNodeRef: l
+  const l = a || "div", {
+    isOver: f,
+    setNodeRef: u
   } = yi({
-    id: r,
+    id: n,
     data: {
-      label: n,
+      label: i,
       type: "container"
     }
   });
-  return /* @__PURE__ */ p(s, {
-    id: r,
-    ref: l,
-    "data-type": a,
-    className: `${jt["c-droppable"]} ${t != null ? t : ""}`,
-    ...c,
+  return /* @__PURE__ */ p(l, {
+    id: n,
+    ref: u,
+    "data-type": c,
+    className: `${jt["c-droppable"]}  ${f && r && r} ${t != null ? t : ""}`,
+    ...s,
     children: e
   });
 };
 Ti.propTypes = {
   children: o.exports.oneOfType([o.exports.arrayOf(o.exports.node), o.exports.arrayOf(o.exports.element), o.exports.element, o.exports.node]),
   addClass: o.exports.string,
+  over: o.exports.string,
   id: o.exports.string.isRequired,
   label: o.exports.string.isRequired,
   element: o.exports.string,
