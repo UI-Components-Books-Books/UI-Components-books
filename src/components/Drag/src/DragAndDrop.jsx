@@ -159,12 +159,18 @@ export const DragAndDrop = ({
     // Obtenemos la llave que corresponde al elemento base de los drag.
     const baseContainer = Object.keys(items).pop()
 
-    let newArrayValidate
+    if (baseContainer === container.id) return
 
-    if (baseContainer !== container.id && container.data.current.validate.includes(id)) {
-      newArrayValidate = [...validateId.filter((item) => item !== id), id]
-    } else {
-      newArrayValidate = [...validateId.filter((item) => item !== id)]
+    let newArrayValidate =
+      [...validateId.filter((item) => item !== id), (container.data.current.validate.includes(id) ? id : '')].filter(item => !!item)
+
+    if (!multipleDrags) {
+      const previousItem = items[container.id][0]
+
+      // Eliminamos el valor previo que estaba en el arreglo.
+      // De esta manera, si remplazamos el drag correcto con uno nuevo drag, el anterior ya no debe existir
+      // en el arreglo de validate porque significa que el nuevo drag es incorrecto.
+      newArrayValidate = previousItem ? newArrayValidate.filter(item => item !== previousItem) : newArrayValidate
     }
 
     if (onValidate) onValidate({ validate: [...newArrayValidate], active: true })
@@ -202,33 +208,42 @@ export const DragAndDrop = ({
     // Obtenemos la llave que corresponde al elemento base de los drag.
     const baseContainer = Object.keys(items).pop()
 
-    // Solo se realiza la validación cuando el elemento es diferente al elemento base de los drag.
-    if (baseContainer !== over.id) validateDrags(over, active.id)
-
     // Contendor en el cual el drag se soltó.
     const overContainer = findContainer(over.id)
     // Contenedor donde estaba el drag.
     const activeContainer = findContainer(active.id)
 
-    if (activeContainer !== overContainer) {
+    // Si el drag no se movio entonces no hacemos nada.
+    if (activeContainer === overContainer) return
+
+    // Solo se realiza la validación cuando el elemento es diferente al elemento base de los drag.
+    if (baseContainer !== over.id) validateDrags(over, active.id)
+
+    setItems((items) => {
+      const listOfItemsWithoutActiveItem = items[activeContainer].filter(item => item !== active.id)
+
+      const listOfPreviousItems = [...items[overContainer]]
+
       // Si la propiedad multipleDrags está en true.
       if (multipleDrags) {
-        return setItems((items) => ({
+        return {
           ...items,
-          [activeContainer]: items[activeContainer].filter((item) => item !== active.id),
-          [overContainer]: [...items[overContainer], active.id]
-        }))
+          [activeContainer]: listOfItemsWithoutActiveItem,
+          [overContainer]: [...listOfPreviousItems, active.id]
+        }
       }
 
-      setItems((items) => ({
+      const newObjectState = {
         ...items,
-        [overContainer]: overContainer === baseContainer ? [...items[overContainer], active.id] : [active.id],
-        [activeContainer]:
-               overContainer === baseContainer
-                 ? items[activeContainer].filter((item) => item !== active.id)
-                 : [...items[activeContainer].filter((item) => item !== active.id), ...items[overContainer]]
-      }))
-    }
+        [activeContainer]: listOfItemsWithoutActiveItem,
+        [overContainer]: overContainer === baseContainer ? [...listOfPreviousItems, active.id] : [active.id]
+      }
+
+      return {
+        ...newObjectState,
+        ...(overContainer !== baseContainer && items[overContainer].length > 0 && { [baseContainer]: [...items[baseContainer].filter(item => item !== items[activeContainer][0]), ...items[overContainer]] })
+      }
+    })
   }
 
   /**

@@ -31,6 +31,7 @@ export const TextArea = forwardRef(
         <textarea
           id={textAreaId}
           ref={ref}
+          defaultValue={value}
           disabled={isDisabled}
           required={isRequired}
           placeholder={placeholder}
@@ -38,9 +39,7 @@ export const TextArea = forwardRef(
           onChange={onChange}
           className={`${css['c-textarea']} ${css[`c-textarea--${resize}`]}`}
           {...props}
-        >
-          {value}
-        </textarea>
+        />
       </label>
     )
   }
