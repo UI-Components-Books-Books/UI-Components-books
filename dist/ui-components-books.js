@@ -1669,7 +1669,7 @@ const nn = {
                 onChange: _,
                 ...s && { disabled: !0 },
                 ...d && { ...v },
-                ...c && { checked: c }
+                ...c && { checked: !0 }
               }
             ),
             /* @__PURE__ */ p("div", { className: nn["c-input__icon"], children: g[a] && /* @__PURE__ */ p(xe, { children: /* @__PURE__ */ p(
