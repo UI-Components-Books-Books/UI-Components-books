@@ -63,7 +63,7 @@ export const CheckBox = forwardRef(
             onChange={onChangeCheckbox}
             {...(isDisabled && { disabled: true })}
             {...(inherit && { ...args })}
-            {...(defaultChecked && { checked: defaultChecked })}
+            {...(defaultChecked && { checked: true })}
           />
           <div className={css['c-input__icon']}>
             {ICON_STATE[state] &&
