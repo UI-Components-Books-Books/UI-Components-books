@@ -1,4 +1,4 @@
-import { useContext, useRef, useEffect } from 'react'
+import { useContext, useRef, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 
 import { Icon, PanelContext } from '../../../components'
@@ -37,7 +37,15 @@ export const NavSection = ({ renderItem, showPrevButton, showNextButton, icons, 
     * Obtenemos las propiedaes validation,
     * onToggle, listId y currentSection del contexto.
     */
-  const { validation, onToggle, listId, currentSection } = useContext(PanelContext)
+  const { validation, onToggle, listId: newListId, currentSection } = useContext(PanelContext)
+
+  const [listId, setListId] = useState([])
+
+  useEffect(() => {
+    if (newListId.length === 0) return
+
+    setListId(newListId)
+  }, [newListId])
 
   /**
     * Creamos está referencia para almacenar
@@ -214,7 +222,6 @@ export const NavSection = ({ renderItem, showPrevButton, showNextButton, icons, 
                     aria-label={getItemAriaLabel(type, section, selected)}
                     {...others}
                   >
-                    {/* {normalizedIcons[type] ? <Icon name={normalizedIcons[type]} key={type} /> : null} */}
                     {normalizedIcons[type]
                       ? icons
                         ? <Icon path={normalizedIcons[type]} key={type} />

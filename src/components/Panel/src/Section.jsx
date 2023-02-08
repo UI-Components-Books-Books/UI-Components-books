@@ -1,4 +1,4 @@
-import { forwardRef, useContext } from 'react'
+import { forwardRef, useContext, useMemo } from 'react'
 import PropTypes from 'prop-types'
 
 import { PanelContext } from '../../Panel'
@@ -6,9 +6,19 @@ import { typeValidation } from '../../../utils/validations/typeValidation'
 
 import css from './Panel.module.scss'
 
-export const Section = forwardRef(({ children, id, addClass, __TYPE, ...props }, ref) => {
+function newId ({ current }) {
+  const newId = current.counter += 1
+
+  current.index.push(newId)
+
+  return newId
+}
+
+export const Section = forwardRef(({ children, addClass, __TYPE, ...props }, ref) => {
   // Obtenemos la función validation del contexto
-  const { validation } = useContext(PanelContext)
+  const { validation, IdToSection } = useContext(PanelContext)
+
+  const id = useMemo(() => newId(IdToSection), [])
 
   /**
     * Devuelve "true" o "false" apartir de evaluar
@@ -26,6 +36,7 @@ export const Section = forwardRef(({ children, id, addClass, __TYPE, ...props },
       hidden={!isSelected}
       data-type={__TYPE}
       aria-hidden={!isSelected}
+      data-value={id - 1}
       aria-labelledby={`section-${id}`}
       className={`${css['c-section']} ${addClass ?? ''}`}
       {...props}
