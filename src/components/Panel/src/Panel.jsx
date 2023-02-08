@@ -1,4 +1,4 @@
-import { useState, useEffect, createContext, useRef } from 'react'
+import { useState, useEffect, createContext, Children, cloneElement, isValidElement } from 'react'
 import PropTypes from 'prop-types'
 
 import css from './Panel.module.scss'
@@ -10,7 +10,7 @@ import css from './Panel.module.scss'
  */
 export const PanelContext = createContext()
 
-export const Panel = ({ children, defaultIndex, addClass }) => {
+export const Panel = ({ children: ChildrenProps, defaultIndex, addClass }) => {
   // Controla el estado de abierto / cerrado de las secciones.
   const [isOpen, setIsOpen] = useState(1)
 
@@ -19,10 +19,10 @@ export const Panel = ({ children, defaultIndex, addClass }) => {
     * de cada sección y el contador que se utiliza
     * para agregar un ID a cada sección.
     */
-  const IdToSection = useRef({
+  const IdToSection = {
     index: [],
     counter: 0
-  })
+  }
 
   /**
     * Se crea la función onToggle para agregar el ID de
@@ -46,8 +46,25 @@ export const Panel = ({ children, defaultIndex, addClass }) => {
     if (defaultIndex !== undefined) setIsOpen(defaultIndex)
   }, [defaultIndex])
 
+  /**
+    * Utilizamos la Children API, para agregar
+    * a cada sección un ID.
+    */
+  const children = Children.map(ChildrenProps, (child) => {
+    if (!isValidElement(child)) return null
+
+    if (child.props.__TYPE === 'Section') {
+      IdToSection.counter++
+      IdToSection.index.push(IdToSection.counter)
+
+      return cloneElement(child, { ...child.props, id: IdToSection.counter, 'data-value': IdToSection.counter - 1 })
+    }
+
+    return child
+  })
+
   return (
-    <PanelContext.Provider value={{ validation, onToggle, listId: IdToSection.current.index, currentSection: isOpen, IdToSection }}>
+    <PanelContext.Provider value={{ validation, onToggle, listId: IdToSection.index, currentSection: isOpen }}>
       <div className={`${css['c-panel']} ${addClass ?? ''} class-video-interpreter-ui-panel`}>{children}</div>
     </PanelContext.Provider>
   )
