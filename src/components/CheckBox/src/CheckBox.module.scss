@@ -59,6 +59,10 @@
   display: none;
 }
 
+.c-input-defaultChecked svg {
+  display: block;
+}
+
 :where(.c-input__check:checked + .c-input__icon svg) {
   display: block;
 }
@@ -87,5 +91,9 @@
 }
 
 .c-input__check:checked+.c-input__icon::before {
+  transform: scale(1);
+}
+
+.c-input-defaultChecked::before {
   transform: scale(1);
 }

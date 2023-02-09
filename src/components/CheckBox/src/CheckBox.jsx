@@ -65,7 +65,7 @@ export const CheckBox = forwardRef(
             {...(inherit && { ...args })}
             {...(defaultChecked && { checked: true })}
           />
-          <div className={css['c-input__icon']}>
+          <div className={`${css['c-input__icon']} ${defaultChecked ? css['c-input-defaultChecked'] : ''} `}>
             {ICON_STATE[state] &&
             (
               <Icon>
