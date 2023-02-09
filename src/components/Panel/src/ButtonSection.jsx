@@ -13,7 +13,7 @@ export const ButtonSection = ({ children, section, onClick }) => {
     * @param {event} e - evento
     */
   const handleClick = (e) => {
-    onToggle(section)
+    onToggle(section - 1)
     if (onClick) {
       onClick(e)
     }

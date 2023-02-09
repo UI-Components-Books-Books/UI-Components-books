@@ -1,24 +1,35 @@
-import { forwardRef, useContext } from 'react'
+import { forwardRef, useContext, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
+import _uniquedId from 'lodash/uniqueId'
 
 import { PanelContext } from '../../Panel'
 import { typeValidation } from '../../../utils/validations/typeValidation'
 
 import css from './Panel.module.scss'
 
-export const Section = forwardRef(({ children, id, addClass, __TYPE, ...props }, ref) => {
+export const Section = forwardRef(({ children, addClass, __TYPE, ...props }, ref) => {
   // Obtenemos la función validation del contexto
-  const { validation } = useContext(PanelContext)
+  const { validation, addNewIdToSection } = useContext(PanelContext)
+
+  // Referencia para almacenar el valor del ID de la sección.
+  const storageId = useRef(null)
 
   /**
-    * Devuelve "true" o "false" apartir de evaluar
-    * el Id de la sección con el que está en el estado.
-    *
-    * @returns {(Boolean)}
-    */
-  const isSelected = validation(id)
+     * Devuelve "true" o "false" apartir de evaluar
+     * el Id de la sección con el que está en el estado.
+     *
+     * @returns {(Boolean)}
+     */
+  const isSelected = validation(storageId.current)
 
-  // TODO: Agregar transición con FrameMotion
+  useEffect(() => {
+    if (!storageId.current) {
+      storageId.current = parseInt(_uniquedId())
+      addNewIdToSection(storageId.current)
+    }
+  }, [storageId])
+
+  // TODO: Agregar transición con FrameMotio
   return (
     <section
       ref={ref}
@@ -26,12 +37,13 @@ export const Section = forwardRef(({ children, id, addClass, __TYPE, ...props },
       hidden={!isSelected}
       data-type={__TYPE}
       aria-hidden={!isSelected}
-      aria-labelledby={`section-${id}`}
+      data-value={storageId.current}
+      aria-labelledby={`section-${storageId.current}`}
       className={`${css['c-section']} ${addClass ?? ''}`}
       {...props}
     >
-      <span id={`section-${id}`} className='u-sr-only'>
-        Sección {id}
+      <span id={`section-${storageId.current}`} className='u-sr-only'>
+        Sección {storageId.current}
       </span>
       {children}
     </section>

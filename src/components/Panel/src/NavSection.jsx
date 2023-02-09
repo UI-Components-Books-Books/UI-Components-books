@@ -142,7 +142,7 @@ export const NavSection = ({ renderItem, showPrevButton, showNextButton, icons, 
     * @param {Number} section - sección
     */
   const onClick = (section) => {
-    onToggle(section)
+    onToggle(listId.findIndex((elem) => elem === section))
     if (onValue !== undefined) {
       onValue(section, listId.length)
     }
@@ -150,6 +150,9 @@ export const NavSection = ({ renderItem, showPrevButton, showNextButton, icons, 
 
   // Convierte la lista de elemento básicos en objetos.
   const items = itemList.map((item) => {
+    let storageLastId = [...listId]
+    storageLastId = storageLastId.pop()
+
     return typeof item === 'number'
       ? {
           onClick: (_) => {
@@ -168,7 +171,7 @@ export const NavSection = ({ renderItem, showPrevButton, showNextButton, icons, 
           type: item,
           section: BUTTON_TYPE[item],
           selected: false,
-          disabled: true && (item === 'next' ? currentSection >= listId.length : currentSection <= 1)
+          disabled: true && (item === 'next' ? currentSection >= storageLastId : currentSection <= listId[0])
         }
   })
 
@@ -214,7 +217,6 @@ export const NavSection = ({ renderItem, showPrevButton, showNextButton, icons, 
                     aria-label={getItemAriaLabel(type, section, selected)}
                     {...others}
                   >
-                    {/* {normalizedIcons[type] ? <Icon name={normalizedIcons[type]} key={type} /> : null} */}
                     {normalizedIcons[type]
                       ? icons
                         ? <Icon path={normalizedIcons[type]} key={type} />
