@@ -334,6 +334,16 @@ export const DragAndDrop = ({
     }
   }, [reboot])
 
+  /**
+   * Efecto que observa los cambios en el propiedad defaultState
+   * y si está cambia actualiza el estado items
+   */
+  useEffect(() => {
+    if (Object.keys(defaultState).length === 0) return
+
+    setItems(defaultState)
+  }, [defaultState])
+
   return (
     <DragAndDropContext.Provider value={{ listId: validateId, propValidate, validate, isDragging: activeId }}>
       <DndContext
