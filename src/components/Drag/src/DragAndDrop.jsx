@@ -86,7 +86,8 @@ export const DragAndDrop = ({
   propValidate,
   modifiers: modifiersProp,
   announcements,
-  onDragMove
+  onDragMove,
+  defaultState
 }) => {
   /**
     * Utilizamos este estado para almacenar la lista
@@ -106,7 +107,7 @@ export const DragAndDrop = ({
     * de almacenar la posición de los elementos "drag"
     * en los contenedores "drop".
     */
-  const [items, setItems] = useState(() => initialState())
+  const [items, setItems] = useState(() => defaultState || initialState())
 
   /**
     * Función utilizada para inicializar el estado items.
@@ -357,5 +358,6 @@ DragAndDrop.propTypes = {
   propValidate: PropTypes.string.isRequired,
   modifiers: PropTypes.oneOf(['restrictToVerticalAxis', 'restrictToHorizontalAxis']),
   announcements: PropTypes.object.isRequired,
-  onDragMove: PropTypes.func
+  onDragMove: PropTypes.func,
+  defaultState: PropTypes.object
 }

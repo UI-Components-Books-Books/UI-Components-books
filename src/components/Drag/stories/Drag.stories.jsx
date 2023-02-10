@@ -44,7 +44,7 @@ export const MultipleContainers = () => (
         <Row justify-content='center' align-items='center'>
           <Col xs='11' mm='10' md='9' lg='5' hd='4'>
             <Droppable id='A' validate={['A']} label='droppable'>
-              <p style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--clr-neutral-500)' }}>Droppable A</p>
+              <p style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--clr-neutral-500)' }}>Droppable aA</p>
             </Droppable>
           </Col>
 
