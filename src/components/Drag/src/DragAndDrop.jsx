@@ -87,7 +87,8 @@ export const DragAndDrop = ({
   modifiers: modifiersProp,
   announcements,
   onDragMove,
-  defaultState
+  defaultState,
+  id: idDragAndDrop
 }) => {
   /**
     * Utilizamos este estado para almacenar la lista
@@ -174,7 +175,7 @@ export const DragAndDrop = ({
       newArrayValidate = previousItem ? newArrayValidate.filter(item => item !== previousItem) : newArrayValidate
     }
 
-    if (onValidate) onValidate({ validate: [...newArrayValidate], active: true })
+    if (onValidate) onValidate({ validate: [...newArrayValidate], active: true, state: { key: idDragAndDrop, items } })
 
     setValidateId(newArrayValidate)
   }
@@ -359,5 +360,6 @@ DragAndDrop.propTypes = {
   modifiers: PropTypes.oneOf(['restrictToVerticalAxis', 'restrictToHorizontalAxis']),
   announcements: PropTypes.object.isRequired,
   onDragMove: PropTypes.func,
-  defaultState: PropTypes.object
+  defaultState: PropTypes.object,
+  id: PropTypes.string
 }
