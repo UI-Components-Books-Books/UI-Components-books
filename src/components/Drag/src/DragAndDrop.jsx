@@ -88,6 +88,7 @@ export const DragAndDrop = ({
   announcements,
   onDragMove,
   defaultState,
+  onState,
   id: idDragAndDrop
 }) => {
   /**
@@ -175,7 +176,7 @@ export const DragAndDrop = ({
       newArrayValidate = previousItem ? newArrayValidate.filter(item => item !== previousItem) : newArrayValidate
     }
 
-    if (onValidate) onValidate({ validate: [...newArrayValidate], active: true, state: { key: idDragAndDrop, items } })
+    if (onValidate) onValidate({ validate: [...newArrayValidate], active: true })
 
     setValidateId(newArrayValidate)
   }
@@ -222,29 +223,39 @@ export const DragAndDrop = ({
     if (baseContainer !== over.id) validateDrags(over, active.id)
 
     setItems((items) => {
+      let newObjectState
+
       const listOfItemsWithoutActiveItem = items[activeContainer].filter(item => item !== active.id)
 
       const listOfPreviousItems = [...items[overContainer]]
 
       // Si la propiedad multipleDrags está en true.
       if (multipleDrags) {
-        return {
+        newObjectState = {
           ...items,
           [activeContainer]: listOfItemsWithoutActiveItem,
           [overContainer]: [...listOfPreviousItems, active.id]
         }
+
+        if (onState) onState({ state: { key: idDragAndDrop, newObjectState } })
+
+        return newObjectState
       }
 
-      const newObjectState = {
+      newObjectState = {
         ...items,
         [activeContainer]: listOfItemsWithoutActiveItem,
         [overContainer]: overContainer === baseContainer ? [...listOfPreviousItems, active.id] : [active.id]
       }
 
-      return {
+      newObjectState = {
         ...newObjectState,
         ...(overContainer !== baseContainer && items[overContainer].length > 0 && { [baseContainer]: [...items[baseContainer].filter(item => item !== items[activeContainer][0]), ...items[overContainer]] })
       }
+
+      if (onState) onState({ state: { key: idDragAndDrop, newObjectState } })
+
+      return newObjectState
     })
   }
 
@@ -361,5 +372,6 @@ DragAndDrop.propTypes = {
   announcements: PropTypes.object.isRequired,
   onDragMove: PropTypes.func,
   defaultState: PropTypes.object,
+  onState: PropTypes.func,
   id: PropTypes.string
 }
