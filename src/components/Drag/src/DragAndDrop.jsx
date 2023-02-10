@@ -109,7 +109,7 @@ export const DragAndDrop = ({
     * de almacenar la posición de los elementos "drag"
     * en los contenedores "drop".
     */
-  const [items, setItems] = useState(() => defaultState || initialState())
+  const [items, setItems] = useState(() => Object.keys(defaultState).length > 0 ? defaultState : initialState())
 
   /**
     * Función utilizada para inicializar el estado items.
