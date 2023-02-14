@@ -5854,7 +5854,7 @@ const Ft = {
   const [r, a] = J(null), [i, l] = J([]), s = (u) => l((d) => [...d, u]), c = (u) => a(i[u]), f = (u) => r === u;
   return G(() => {
     i.length !== 0 && (t !== void 0 ? c(t - 1) : a(i[0]));
-  }, [t, i]), /* @__PURE__ */ p(Zn.Provider, { value: { validation: f, onToggle: c, listId: i, currentSection: r, addNewIdToSection: s }, children: /* @__PURE__ */ p("div", { className: `${Ft["c-panel"]} ${n ?? ""} class-video-interpreter-ui-panel`, children: e }) });
+  }, [t, i]), /* @__PURE__ */ p(Zn.Provider, { value: { validation: f, onToggle: c, listId: i, currentSection: r, addNewIdToSection: s }, children: /* @__PURE__ */ p("div", { className: `${Ft["c-panel"]} ${n ?? ""} class-video-interpreter-ui-panel`, "data-value": r, children: e }) });
 };
 vc.propTypes = {
   children: o.oneOfType([

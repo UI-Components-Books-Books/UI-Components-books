@@ -59,7 +59,7 @@ export const Panel = ({ children, defaultIndex, addClass }) => {
 
   return (
     <PanelContext.Provider value={{ validation, onToggle, listId: IdToSection, currentSection: isOpen, addNewIdToSection }}>
-      <div className={`${css['c-panel']} ${addClass ?? ''} class-video-interpreter-ui-panel`}>{children}</div>
+      <div className={`${css['c-panel']} ${addClass ?? ''} class-video-interpreter-ui-panel`} data-value={isOpen}>{children}</div>
     </PanelContext.Provider>
   )
 }
