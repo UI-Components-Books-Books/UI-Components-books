@@ -15,7 +15,7 @@ const KEYCODE = Object.freeze({
   TAB: 9
 })
 
-export const PopoverModalContent = ({ children, addClass, hasArrow, isDisabled, distance, placement }) => {
+export const PopoverModalContent = ({ id, children, addClass, hasArrow, isDisabled, distance, placement }) => {
   // Obtenemos la función isOpen y la referencia del botón del contexto
   const { isOpen, refButton } = useContext(PopoverModalContext)
   // Referencia del PopoverModal
@@ -92,12 +92,15 @@ export const PopoverModalContent = ({ children, addClass, hasArrow, isDisabled, 
   return (
     <Portal id='js-popover-modal-portal'>
       <div
+        id={id}
         ref={refPopoverModal}
         role='status'
         tabIndex={-1}
         className={`${css['c-popover-modal']} ${isOpen && css['c-popover-modal--active']} ${addClass ?? ''}`}
         style={styles.popper}
         onKeyDown={onKeyDown}
+        data-hidden={!isOpen}
+        {...!isOpen && {hidden: true}}
         {...attributes.popper}
       >
         {children}
@@ -109,6 +112,7 @@ export const PopoverModalContent = ({ children, addClass, hasArrow, isDisabled, 
 
 PopoverModalContent.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.element), PropTypes.arrayOf(PropTypes.node), PropTypes.element, PropTypes.node]),
+  id: PropTypes.string,
   addClass: PropTypes.string,
   hasArrow: PropTypes.bool,
   isDisabled: PropTypes.bool,
