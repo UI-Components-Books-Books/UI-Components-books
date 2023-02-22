@@ -368,7 +368,8 @@ DragAndDrop.defaultProps = {
   validate: false,
   reboot: false,
   propValidate: 'data-validation',
-  announcements: defaultAnnouncements
+  announcements: defaultAnnouncements,
+  defaultState: {}
 }
 
 DragAndDrop.propTypes = {

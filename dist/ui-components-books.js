@@ -4387,7 +4387,8 @@ xa.defaultProps = {
   validate: !1,
   reboot: !1,
   propValidate: "data-validation",
-  announcements: tc
+  announcements: tc,
+  defaultState: {}
 };
 xa.propTypes = {
   children: o.oneOfType([o.element, o.arrayOf(o.element), o.node, o.arrayOf(o.node)]),
