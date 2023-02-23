@@ -1,4 +1,4 @@
-import { cloneElement, useState, Children, isValidElement, useEffect, createContext } from 'react'
+import { cloneElement, useState, Children, isValidElement, useEffect, createContext, useRef } from 'react'
 import PropTypes from 'prop-types'
 import {
   DndContext,
@@ -112,6 +112,13 @@ export const DragAndDrop = ({
   const [items, setItems] = useState(() => Object.keys(defaultState).length > 0 ? defaultState : initialState())
 
   /**
+   * Referencia utilizada como "flag", para que cuando
+   * cambie el estado items, envie el nuevo estado la
+   * propiedad onState si está existe.
+   */
+  const flagUpdatedState = useRef(false)
+
+  /**
     * Función utilizada para inicializar el estado items.
     * esta extrae los id de los contendores "drag" y los
     * estructura en un objecto.
@@ -223,7 +230,9 @@ export const DragAndDrop = ({
     if (baseContainer !== over.id) validateDrags(over, active.id)
 
     setItems((items) => {
-      let newObjectState
+      // Actualizamos nuestro flag a true, con esto permite actualizar la propiedad onState.
+      // con los cambios de items.
+      flagUpdatedState.current = true
 
       const listOfItemsWithoutActiveItem = items[activeContainer].filter(item => item !== active.id)
 
@@ -231,31 +240,23 @@ export const DragAndDrop = ({
 
       // Si la propiedad multipleDrags está en true.
       if (multipleDrags) {
-        newObjectState = {
+        return {
           ...items,
           [activeContainer]: listOfItemsWithoutActiveItem,
           [overContainer]: [...listOfPreviousItems, active.id]
         }
-
-        if (onState) onState({ state: { key: idDragAndDrop, newObjectState } })
-
-        return newObjectState
       }
 
-      newObjectState = {
+      const newObjectState = {
         ...items,
         [activeContainer]: listOfItemsWithoutActiveItem,
         [overContainer]: overContainer === baseContainer ? [...listOfPreviousItems, active.id] : [active.id]
       }
 
-      newObjectState = {
+      return {
         ...newObjectState,
         ...(overContainer !== baseContainer && items[overContainer].length > 0 && { [baseContainer]: [...items[baseContainer].filter(item => item !== items[activeContainer][0]), ...items[overContainer]] })
       }
-
-      if (onState) onState({ state: { key: idDragAndDrop, newObjectState } })
-
-      return newObjectState
     })
   }
 
@@ -343,6 +344,19 @@ export const DragAndDrop = ({
 
     setItems(defaultState)
   }, [defaultState])
+
+  /**
+   * Efecto que observa los cambios en el estado items
+   * y si existe la propiedad onState llama a está con
+   * la información de items
+   */
+  useEffect(() => {
+    if (onState && flagUpdatedState.current) {
+      flagUpdatedState.current = false
+
+      onState({ state: { key: idDragAndDrop, newObjectState: structuredClone(items) } })
+    }
+  }, [onState, items])
 
   return (
     <DragAndDropContext.Provider value={{ listId: validateId, propValidate, validate, isDragging: activeId }}>
