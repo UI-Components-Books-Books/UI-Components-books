@@ -88,6 +88,7 @@ export const DragAndDrop = ({
   announcements,
   onDragMove,
   defaultState,
+  defaultValidate,
   onState,
   id: idDragAndDrop
 }) => {
@@ -345,6 +346,13 @@ export const DragAndDrop = ({
     setItems(defaultState)
   }, [defaultState])
 
+  useEffect(() => {
+    if (defaultValidate.length === 0) return
+  
+    setValidateId(defaultValidate)
+  }, [defaultValidate])
+  
+
   /**
    * Efecto que observa los cambios en el estado items
    * y si existe la propiedad onState llama a está con
@@ -354,7 +362,7 @@ export const DragAndDrop = ({
     if (onState && flagUpdatedState.current) {
       flagUpdatedState.current = false
 
-      onState({ state: { key: idDragAndDrop, newObjectState: structuredClone(items) } })
+      onState({ state: { key: idDragAndDrop, newObjectState: structuredClone(items),  validateId} })
     }
   }, [onState, items])
 
@@ -383,7 +391,8 @@ DragAndDrop.defaultProps = {
   reboot: false,
   propValidate: 'data-validation',
   announcements: defaultAnnouncements,
-  defaultState: {}
+  defaultState: {},
+  defaultValidate: []
 }
 
 DragAndDrop.propTypes = {
@@ -397,6 +406,7 @@ DragAndDrop.propTypes = {
   announcements: PropTypes.object.isRequired,
   onDragMove: PropTypes.func,
   defaultState: PropTypes.object,
+  defaultValidate: PropTypes.array,
   onState: PropTypes.func,
   id: PropTypes.string
 }
