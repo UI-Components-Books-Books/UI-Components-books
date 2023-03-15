@@ -348,10 +348,9 @@ export const DragAndDrop = ({
 
   useEffect(() => {
     if (defaultValidate.length === 0) return
-  
+
     setValidateId(defaultValidate)
   }, [defaultValidate])
-  
 
   /**
    * Efecto que observa los cambios en el estado items
@@ -362,7 +361,7 @@ export const DragAndDrop = ({
     if (onState && flagUpdatedState.current) {
       flagUpdatedState.current = false
 
-      onState({ state: { key: idDragAndDrop, newObjectState: structuredClone(items),  validateId} })
+      onState({ state: { key: idDragAndDrop, newObjectState: structuredClone(items), validateId } })
     }
   }, [onState, items])
 

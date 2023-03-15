@@ -6,7 +6,7 @@ import { typeValidation } from '../../../utils/validations/typeValidation'
 
 import css from './Tabs.module.scss'
 
-export const Tab = ({ children, id, selected, addClass, icon, addNewRef, onNavigation, __TYPE, ...props }) => {
+export const Tab = ({ children, id, selected, addClass, icon, addNewRef, onNavigation, onClick, __TYPE, ...props }) => {
   /**
     * Necesitamos obtener la referencia del botón
     * para luego pasarla en la función addNewRef proveniente
@@ -28,6 +28,20 @@ export const Tab = ({ children, id, selected, addClass, icon, addNewRef, onNavig
     */
   const isSelected = validation(id)
 
+  /**
+   * Usada para poder ejecutar la función onToggle y
+   * la propiedad onClick en el evento click del botón.
+   *
+   * @param {HTMLButtonElement} event - Evento click
+   */
+  const handleClick = (event) => {
+    if (onClick) {
+      onClick(event)
+    }
+
+    onToggle(id)
+  }
+
   useEffect(() => {
     // Agregamos al Referencia a la función addNewRef si está existe
     refButton.current && addNewRef(refButton.current)
@@ -48,7 +62,7 @@ export const Tab = ({ children, id, selected, addClass, icon, addNewRef, onNavig
       aria-controls={`panel-${id}`}
       aria-selected={isSelected}
       onKeyDown={onNavigation}
-      onClick={() => onToggle(id)}
+      onClick={handleClick}
       className={`${css['c-tab__button']} u-flex ${addClass ?? ''} ${isSelected && selected && selected}`}
       {...props}
     >
@@ -65,6 +79,7 @@ Tab.propTypes = {
   addClass: PropTypes.string,
   icon: PropTypes.func,
   addNewRef: PropTypes.func,
+  onClick: PropTypes.func,
   onNavigation: PropTypes.func,
   __TYPE: typeValidation('Tab')
 }

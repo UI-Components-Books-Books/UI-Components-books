@@ -4328,7 +4328,7 @@ const Xl = (e) => {
       coordinateGetter: ec
     })
   ), E = (N, M) => {
-    if (console.log(N, M), Object.keys(w).pop() === N.id)
+    if (Object.keys(w).pop() === N.id)
       return;
     let W = [...m.filter((ne) => ne !== M), N.data.current.validate.includes(M) ? M : ""].filter((ne) => !!ne);
     if (!t) {
@@ -6234,27 +6234,29 @@ const mn = {
   "c-tab__panels": "_c-tab__panels_h6ljq_44",
   "c-tab__panel": "_c-tab__panel_h6ljq_44",
   "c-tab__panel--active": "_c-tab__panel--active_h6ljq_53"
-}, Ha = ({ children: e, id: t, selected: n, addClass: r, icon: a, addNewRef: i, onNavigation: l, __TYPE: s, ...u }) => {
-  const f = K(), { validation: c, onToggle: d } = ye(Yr), v = c(t);
-  return G(() => (f.current && i(f.current), () => {
-    f.current = null;
-  }), [f]), /* @__PURE__ */ A(
+}, Ha = ({ children: e, id: t, selected: n, addClass: r, icon: a, addNewRef: i, onNavigation: l, onClick: s, __TYPE: u, ...f }) => {
+  const c = K(), { validation: d, onToggle: v } = ye(Yr), m = d(t), b = (g) => {
+    s && s(g), v(t);
+  };
+  return G(() => (c.current && i(c.current), () => {
+    c.current = null;
+  }), [c]), /* @__PURE__ */ A(
     "button",
     {
       id: `tab-${t}`,
       role: "tab",
-      ref: f,
-      "data-type": s,
-      tabIndex: `${v ? 0 : -1}`,
+      ref: c,
+      "data-type": u,
+      tabIndex: `${m ? 0 : -1}`,
       "aria-controls": `panel-${t}`,
-      "aria-selected": v,
+      "aria-selected": m,
       onKeyDown: l,
-      onClick: () => d(t),
-      className: `${mn["c-tab__button"]} u-flex ${r ?? ""} ${v && n && n}`,
-      ...u,
+      onClick: b,
+      className: `${mn["c-tab__button"]} u-flex ${r ?? ""} ${m && n && n}`,
+      ...f,
       children: [
         e,
-        a && a(v)
+        a && a(m)
       ]
     }
   );
@@ -6266,6 +6268,7 @@ Ha.propTypes = {
   addClass: o.string,
   icon: o.func,
   addNewRef: o.func,
+  onClick: o.func,
   onNavigation: o.func,
   __TYPE: pe("Tab")
 };
