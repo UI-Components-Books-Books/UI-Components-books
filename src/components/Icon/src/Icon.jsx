@@ -8,7 +8,7 @@ import css from './Icon.module.scss'
 // Expresion regular usada para obtener el nombre del svg que está path.
 const REGEX = /\w+\.svg/gi
 
-export const Icon = ({ children, path, size, addClass, ...props }) => {
+export const Icon = ({ children, path, size, addClass, viewBox, width, height }) => {
   /**
    * Evaluamos la propiedad path para no retonar nada si esta no existen.
    */
@@ -42,13 +42,12 @@ export const Icon = ({ children, path, size, addClass, ...props }) => {
     : (
       <svg
         xmlns='http://www.w3.org/2000/svg'
-        width='48'
-        height='48'
-        viewBox='0 0 48 48'
+        width={width}
+        height={height}
+        viewBox={viewBox}
         className={`${css['c-icon']} ${css[`c-${size}`]} ${addClass ?? ''}`}
         aria-hidden='true'
         data-testid={NAME_SVG}
-        {...props}
       >
         <use xlinkHref={PATH} />
       </svg>
@@ -60,10 +59,16 @@ Icon.propTypes = {
   path: PropTypes.string,
   size: PropTypes.oneOf(['small', 'normal', 'big']),
   addClass: PropTypes.string,
+  viewBox: PropTypes.string,
+  height: PropTypes.string,
+  width: PropTypes.string,
   __TYPE: typeValidation('Icon')
 }
 
 Icon.defaultProps = {
   size: 'normal',
+  viewBox: '0 0 48 48',
+  height: '48',
+  width: '48',
   __TYPE: 'Icon'
 }
