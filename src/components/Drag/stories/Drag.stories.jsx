@@ -1,6 +1,14 @@
 import React, { useState, useReducer } from 'react'
 
-import { Col, Row, Button, Draggable, Droppable, DragAndDrop, GeneralDraggable } from '../../../components'
+import {
+  Col,
+  Row,
+  Button,
+  Draggable,
+  Droppable,
+  DragAndDrop,
+  GeneralDraggable
+} from '../../../components'
 
 import css from './DragStories.module.scss'
 
@@ -15,13 +23,24 @@ export const BasicSetup = () => (
       <Col xs='11' mm='10' md='9' lg='5' hd='4'>
         <GeneralDraggable>
           <Draggable id='A' label='Draggable item' disabledDefaultAttributes>
-            <Button icon={{ path: '/assets/icons/svg/open_with.svg', size: 'big' }} label='draggable' />
+            <Button
+              icon={{ path: '/assets/icons/svg/open_with.svg', size: 'big' }}
+              label='draggable'
+            />
           </Draggable>
         </GeneralDraggable>
       </Col>
       <Col xs='11' mm='10' md='9' lg='5' hd='4'>
         <Droppable id='droppable' validate={['A']} label='droppable'>
-          <p style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--clr-neutral-500)' }}>Droppable</p>
+          <p
+            style={{
+              fontSize: '1.2rem',
+              fontWeight: 'bold',
+              color: 'var(--clr-neutral-500)'
+            }}
+          >
+            Droppable
+          </p>
         </Droppable>
       </Col>
     </Row>
@@ -36,7 +55,10 @@ export const MultipleContainers = () => (
       <Col xs='11' mm='10' md='9' lg='5' hd='4'>
         <GeneralDraggable addClass={css['c-general-container']}>
           <Draggable id='A1' label='Draggable item' disabledDefaultAttributes>
-            <Button icon={{ path: '/assets/icons/svg/open_with.svg', size: 'big' }} label='draggable' />
+            <Button
+              icon={{ path: '/assets/icons/svg/open_with.svg', size: 'big' }}
+              label='draggable'
+            />
           </Draggable>
         </GeneralDraggable>
       </Col>
@@ -44,13 +66,29 @@ export const MultipleContainers = () => (
         <Row justify-content='center' align-items='center'>
           <Col xs='11' mm='10' md='9' lg='5' hd='4'>
             <Droppable id='A' validate={['A']} label='droppable'>
-              <p style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--clr-neutral-500)' }}>Droppable aA</p>
+              <p
+                style={{
+                  fontSize: '1.2rem',
+                  fontWeight: 'bold',
+                  color: 'var(--clr-neutral-500)'
+                }}
+              >
+                Droppable A
+              </p>
             </Droppable>
           </Col>
 
           <Col xs='11' mm='10' md='9' lg='5' hd='4'>
             <Droppable id='B' validate={['A']} label='droppable'>
-              <p style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--clr-neutral-500)' }}>Droppable B</p>
+              <p
+                style={{
+                  fontSize: '1.2rem',
+                  fontWeight: 'bold',
+                  color: 'var(--clr-neutral-500)'
+                }}
+              >
+                Droppable B
+              </p>
             </Droppable>
           </Col>
         </Row>
@@ -67,11 +105,17 @@ export const MultipleDrags = () => (
       <Col xs='11' mm='10' md='9' lg='5' hd='5'>
         <GeneralDraggable addClass={css['c-general-container']}>
           <Draggable id='A1' label='Draggable item' disabledDefaultAttributes>
-            <Button icon={{ path: '/assets/icons/svg/open_with.svg', size: 'big' }} label='draggable A1' />
+            <Button
+              icon={{ path: '/assets/icons/svg/open_with.svg', size: 'big' }}
+              label='draggable A1'
+            />
           </Draggable>
 
           <Draggable id='B1' label='Draggable item' disabledDefaultAttributes>
-            <Button icon={{ path: '/assets/icons/svg/open_with.svg', size: 'big' }} label='draggable B1' />
+            <Button
+              icon={{ path: '/assets/icons/svg/open_with.svg', size: 'big' }}
+              label='draggable B1'
+            />
           </Draggable>
         </GeneralDraggable>
       </Col>
@@ -79,13 +123,29 @@ export const MultipleDrags = () => (
         <Row justify-content='center' align-items='center'>
           <Col xs='11' mm='10' md='9' lg='5' hd='4'>
             <Droppable id='A' validate={['A1', 'B1']} label='droppable'>
-              <p style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--clr-neutral-500)' }}>Droppable A</p>
+              <p
+                style={{
+                  fontSize: '1.2rem',
+                  fontWeight: 'bold',
+                  color: 'var(--clr-neutral-500)'
+                }}
+              >
+                Droppable A
+              </p>
             </Droppable>
           </Col>
 
           <Col xs='11' mm='10' md='9' lg='5' hd='4'>
             <Droppable id='B' validate={['A1', 'B1']} label='droppable'>
-              <p style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--clr-neutral-500)' }}>Droppable B</p>
+              <p
+                style={{
+                  fontSize: '1.2rem',
+                  fontWeight: 'bold',
+                  color: 'var(--clr-neutral-500)'
+                }}
+              >
+                Droppable B
+              </p>
             </Droppable>
           </Col>
         </Row>
@@ -129,23 +189,58 @@ export const WithValidationMultipleDrags = () => {
     }
   }
 
-  const handleReboot = () => updatedActivity({ checkButton: true, resetButton: true, isValidate: false, isReboot: false })
+  const handleReboot = () =>
+    updatedActivity({
+      checkButton: true,
+      resetButton: true,
+      isValidate: false,
+      isReboot: false
+    })
 
   return (
-    <DragAndDrop multipleDrags validate={activity.isValidate} onValidate={addNewDrag} reboot={activity.isReboot}>
+    <DragAndDrop
+      multipleDrags
+      validate={activity.isValidate}
+      onValidate={addNewDrag}
+      reboot={activity.isReboot}
+    >
       <Row justify-content='center' align-items='center'>
         <Col xs='11' mm='10' md='9' lg='6'>
           <GeneralDraggable addClass={css['c-general-container']}>
-            <Draggable id='A1' label='Draggable first item' addClass={css['c-draggable']} disabledDefaultAttributes>
-              <Button icon={{ path: '/assets/icons/svg/open_with.svg', size: 'big' }} label='draggable A1' />
+            <Draggable
+              id='A1'
+              label='Draggable first item'
+              addClass={css['c-draggable']}
+              disabledDefaultAttributes
+            >
+              <Button
+                icon={{ path: '/assets/icons/svg/open_with.svg', size: 'big' }}
+                label='draggable A1'
+              />
             </Draggable>
 
-            <Draggable id='B1' label='Draggable second item' addClass={css['c-draggable']} disabledDefaultAttributes>
-              <Button icon={{ path: '/assets/icons/svg/open_with.svg', size: 'big' }} label='draggable B1' />
+            <Draggable
+              id='B1'
+              label='Draggable second item'
+              addClass={css['c-draggable']}
+              disabledDefaultAttributes
+            >
+              <Button
+                icon={{ path: '/assets/icons/svg/open_with.svg', size: 'big' }}
+                label='draggable B1'
+              />
             </Draggable>
 
-            <Draggable id='C1' label='Draggable third' addClass={css['c-draggable']} disabledDefaultAttributes>
-              <Button icon={{ path: '/assets/icons/svg/open_with.svg', size: 'big' }} label='draggable C1' />
+            <Draggable
+              id='C1'
+              label='Draggable third'
+              addClass={css['c-draggable']}
+              disabledDefaultAttributes
+            >
+              <Button
+                icon={{ path: '/assets/icons/svg/open_with.svg', size: 'big' }}
+                label='draggable C1'
+              />
             </Draggable>
           </GeneralDraggable>
         </Col>
@@ -154,13 +249,29 @@ export const WithValidationMultipleDrags = () => {
           <Row justify-content='center' align-items='center'>
             <Col xs='11' mm='10' md='9' lg='5' hd='4'>
               <Droppable id='A' validate={['A1', 'C1']} label='droppable'>
-                <p style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--clr-neutral-500)' }}>Droppable A - only accepts [A1, C1]</p>
+                <p
+                  style={{
+                    fontSize: '1.2rem',
+                    fontWeight: 'bold',
+                    color: 'var(--clr-neutral-500)'
+                  }}
+                >
+                  Droppable A - only accepts [A1, C1]
+                </p>
               </Droppable>
             </Col>
 
             <Col xs='11' mm='10' md='9' lg='5' hd='4'>
               <Droppable id='B' validate={['B1']} label='droppable'>
-                <p style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--clr-neutral-500)' }}>Droppable B - only accepts [B1]</p>
+                <p
+                  style={{
+                    fontSize: '1.2rem',
+                    fontWeight: 'bold',
+                    color: 'var(--clr-neutral-500)'
+                  }}
+                >
+                  Droppable B - only accepts [B1]
+                </p>
               </Droppable>
             </Col>
           </Row>
@@ -169,11 +280,16 @@ export const WithValidationMultipleDrags = () => {
         <Col md='12'>
           <Row justify-content='center' align-items='center'>
             <Button
-              label='validate' addClass='u-mx-2'
+              label='validate'
+              addClass='u-mx-2'
               onClick={handleValidate}
               disabled={activity.checkButton}
             />
-            <Button label='reboot' onClick={handleReboot} disabled={activity.resetButton} />
+            <Button
+              label='reboot'
+              onClick={handleReboot}
+              disabled={activity.resetButton}
+            />
           </Row>
         </Col>
       </Row>
@@ -216,23 +332,57 @@ export const WithValidationAlone = () => {
     }
   }
 
-  const handleReboot = () => updatedActivity({ checkButton: true, resetButton: true, isValidate: false, isReboot: false })
+  const handleReboot = () =>
+    updatedActivity({
+      checkButton: true,
+      resetButton: true,
+      isValidate: false,
+      isReboot: false
+    })
 
   return (
-    <DragAndDrop validate={activity.isValidate} onValidate={addNewDrag} reboot={activity.isReboot}>
+    <DragAndDrop
+      validate={activity.isValidate}
+      onValidate={addNewDrag}
+      reboot={activity.isReboot}
+    >
       <Row justify-content='center' align-items='center'>
         <Col xs='11' mm='10' md='9' lg='6'>
           <GeneralDraggable addClass={css['c-general-container']}>
-            <Draggable id='A1' label='Draggable first item' addClass={css['c-draggable']} disabledDefaultAttributes>
-              <Button icon={{ path: '/assets/icons/svg/open_with.svg', size: 'big' }} label='draggable A1' />
+            <Draggable
+              id='A1'
+              label='Draggable first item'
+              addClass={css['c-draggable']}
+              disabledDefaultAttributes
+            >
+              <Button
+                icon={{ path: '/assets/icons/svg/open_with.svg', size: 'big' }}
+                label='draggable A1'
+              />
             </Draggable>
 
-            <Draggable id='B1' label='Draggable second item' addClass={css['c-draggable']} disabledDefaultAttributes>
-              <Button icon={{ path: '/assets/icons/svg/open_with.svg', size: 'big' }} label='draggable B1' />
+            <Draggable
+              id='B1'
+              label='Draggable second item'
+              addClass={css['c-draggable']}
+              disabledDefaultAttributes
+            >
+              <Button
+                icon={{ path: '/assets/icons/svg/open_with.svg', size: 'big' }}
+                label='draggable B1'
+              />
             </Draggable>
 
-            <Draggable id='C1' label='Draggable third' addClass={css['c-draggable']} disabledDefaultAttributes>
-              <Button icon={{ path: '/assets/icons/svg/open_with.svg', size: 'big' }} label='draggable C1' />
+            <Draggable
+              id='C1'
+              label='Draggable third'
+              addClass={css['c-draggable']}
+              disabledDefaultAttributes
+            >
+              <Button
+                icon={{ path: '/assets/icons/svg/open_with.svg', size: 'big' }}
+                label='draggable C1'
+              />
             </Draggable>
           </GeneralDraggable>
         </Col>
@@ -241,19 +391,43 @@ export const WithValidationAlone = () => {
           <Row justify-content='center' align-items='center'>
             <Col xs='11' mm='10' md='9' lg='5' hd='4'>
               <Droppable id='A' validate={['A1']} label='droppable'>
-                <p style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--clr-neutral-500)' }}>Droppable A - only accepts [A1]</p>
+                <p
+                  style={{
+                    fontSize: '1.2rem',
+                    fontWeight: 'bold',
+                    color: 'var(--clr-neutral-500)'
+                  }}
+                >
+                  Droppable A - only accepts [A1]
+                </p>
               </Droppable>
             </Col>
 
             <Col xs='11' mm='10' md='9' lg='5' hd='4'>
               <Droppable id='B' validate={['B1']} label='droppable'>
-                <p style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--clr-neutral-500)' }}>Droppable B - only accepts [B1]</p>
+                <p
+                  style={{
+                    fontSize: '1.2rem',
+                    fontWeight: 'bold',
+                    color: 'var(--clr-neutral-500)'
+                  }}
+                >
+                  Droppable B - only accepts [B1]
+                </p>
               </Droppable>
             </Col>
 
             <Col xs='11' mm='10' md='9' lg='5' hd='4'>
               <Droppable id='C' validate={['C1']} label='droppable'>
-                <p style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--clr-neutral-500)' }}>Droppable C - only accepts [C1]</p>
+                <p
+                  style={{
+                    fontSize: '1.2rem',
+                    fontWeight: 'bold',
+                    color: 'var(--clr-neutral-500)'
+                  }}
+                >
+                  Droppable C - only accepts [C1]
+                </p>
               </Droppable>
             </Col>
           </Row>
@@ -262,11 +436,16 @@ export const WithValidationAlone = () => {
         <Col md='12'>
           <Row justify-content='center' align-items='center'>
             <Button
-              label='validate' addClass='u-mx-2'
+              label='validate'
+              addClass='u-mx-2'
               onClick={handleValidate}
               disabled={activity.checkButton}
             />
-            <Button label='reboot' onClick={handleReboot} disabled={activity.resetButton} />
+            <Button
+              label='reboot'
+              onClick={handleReboot}
+              disabled={activity.resetButton}
+            />
           </Row>
         </Col>
       </Row>

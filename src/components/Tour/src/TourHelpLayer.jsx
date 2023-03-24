@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from 'react'
+import classnames from 'classnames'
 
 import { TourContext } from '../../Tour'
 
@@ -6,18 +7,23 @@ import css from './Tour.module.scss'
 
 export const TourHelpLayer = () => {
   // Propiedad obtenidas a través del contexto.
-  const { isOpen, id, target, helpLayerClass } = useContext(TourContext)
+  const { isOpen, id, target, helpLayerClass, defaultStyle } = useContext(TourContext)
 
   // Estado que almacena la posición del componente en el DOM.
   const [position, setPosition] = useState({})
 
   /**
-    * Función que obtiene la posición del elemento en el DOM,
-    * crea un objecto con eso valores y
-    * actualiza el estado position.
-    */
+   * Función que obtiene la posición del elemento en el DOM,
+   * crea un objecto con eso valores y
+   * actualiza el estado position.
+   */
   const getPosition = () => {
-    const { x: positionX, y: positionY, width: widthElement, height: heightElement } = document.querySelector(target).getBoundingClientRect()
+    const {
+      x: positionX,
+      y: positionY,
+      width: widthElement,
+      height: heightElement
+    } = document.querySelector(target).getBoundingClientRect()
 
     setPosition({
       width: `${widthElement}px`,
@@ -28,9 +34,9 @@ export const TourHelpLayer = () => {
   }
 
   /**
-    * Efecto que se lanza cuando existe un elemento
-    * al cual se le pueda obtener la posición en el DOM.
-    */
+   * Efecto que se lanza cuando existe un elemento
+   * al cual se le pueda obtener la posición en el DOM.
+   */
   useEffect(() => {
     if (target) getPosition()
 
@@ -40,9 +46,9 @@ export const TourHelpLayer = () => {
   }, [target])
 
   /**
-    * Efecto utilizado para agregar el evento
-    * resize en el objeto global window.
-    */
+   * Efecto utilizado para agregar el evento
+   * resize en el objeto global window.
+   */
   useEffect(() => {
     if (!isOpen || !target) return
 
@@ -61,11 +67,17 @@ export const TourHelpLayer = () => {
 
   return (
     <div
-      className={`${css['c-tour-help']} ${isOpen && 'animate__animated animate__fadeIn animate__faster animate__delay-2s'} ${helpLayerClass ?? ''
-        }`}
+      className={classnames({
+        [css['c-tour-help']]: !defaultStyle,
+        'animate__animated animate__fadeIn animate__faster animate__delay-2s':
+          isOpen,
+        [helpLayerClass]: helpLayerClass
+      })}
       style={position}
     >
-      <span className={css['c-tour-number']}>{id}</span>
+      <span className={css['c-tour-number']} data-class='c-tour-number'>
+        {id}
+      </span>
     </div>
   )
 }

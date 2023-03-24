@@ -7,61 +7,77 @@ import { Portal, TourElement, TourHelpLayer } from '../../..//components'
 // Creación del contexto del componente Tour.
 export const TourContext = createContext()
 
-export const Tour = ({ steps, isOpen, onClose, finalFocusRef, hideCloseButton, hideBackButton, ariaAttributes }) => {
+export const Tour = ({
+  steps,
+  isOpen,
+  onClose,
+  finalFocusRef,
+  hideCloseButton,
+  hideBackButton,
+  ariaAttributes,
+  defaultStyle
+}) => {
   // Estado utilizado para almacenar el id del elemento activado.
   const [activeId, setActiveId] = useState(null)
 
   /**
-    * Creamos un array con todos los objetos
-    * contenidos en la propiedad steps
-    * y además agregamos la prop id.
-    */
-  const items = [...steps.reduce((list, item, index) => [...list, { id: index + 1, ...item }], [])]
+   * Creamos un array con todos los objetos
+   * contenidos en la propiedad steps
+   * y además agregamos la prop id.
+   */
+  const items = [
+    ...steps.reduce(
+      (list, item, index) => [...list, { id: index + 1, ...item }],
+      []
+    )
+  ]
 
   /**
-    * Función utilizada para encontrar un objeto
-    * a partir de la propiedad id.
-    *
-    * @param {Number} id - Id del objeto a buscar.
-    * @returns {Array} - Array que contiene el objeto que concuerda con el id.
-    */
+   * Función utilizada para encontrar un objeto
+   * a partir de la propiedad id.
+   *
+   * @param {Number} id - Id del objeto a buscar.
+   * @returns {Array} - Array que contiene el objeto que concuerda con el id.
+   */
   const findElement = (id) => {
-    return items.filter((item) => item.id === id).reduce((object, item) => ({ ...object, ...item }), {})
+    return items
+      .filter((item) => item.id === id)
+      .reduce((object, item) => ({ ...object, ...item }), {})
   }
 
   /**
-    * Función usada para habilitar|deshabilitar
-    * la propiedad inert que sirve para quitar el focus de los
-    * elementos contenidos en el elemento #root.
-    *
-    * @param {bool} state - Estado.
-    */
+   * Función usada para habilitar|deshabilitar
+   * la propiedad inert que sirve para quitar el focus de los
+   * elementos contenidos en el elemento #root.
+   *
+   * @param {bool} state - Estado.
+   */
   const inertToggle = (state) => {
     const root = document.querySelector('#root')
     root.inert = state
   }
 
   /**
-    * Función utilizada para mover
-    * el tour al siguiente elemento.
-    */
+   * Función utilizada para mover
+   * el tour al siguiente elemento.
+   */
   const onNextElement = () => {
     setActiveId((prev) => (prev < items.length ? prev + 1 : prev))
   }
 
   /**
-    * Función utilizada para mover
-    * el tour al elemento anterior.
-    */
+   * Función utilizada para mover
+   * el tour al elemento anterior.
+   */
   const onPrevElement = () => {
     setActiveId((prev) => (prev > 0 + 1 ? prev - 1 : prev))
   }
 
   /**
-    * Función utilizada cerrar el tour, reiniciar los diferentes estados y
-    * mover el focus al elemento pasado a través
-    * de la propiedad finalFocusRef.
-    */
+   * Función utilizada cerrar el tour, reiniciar los diferentes estados y
+   * mover el focus al elemento pasado a través
+   * de la propiedad finalFocusRef.
+   */
   const onCloseTour = () => {
     setActiveId(null)
     onClose(!isOpen)
@@ -71,9 +87,9 @@ export const Tour = ({ steps, isOpen, onClose, finalFocusRef, hideCloseButton, h
   }
 
   /**
-    * Efecto encargado de mostrar el componente
-    * cuando la propiedad isOpen es true.
-    */
+   * Efecto encargado de mostrar el componente
+   * cuando la propiedad isOpen es true.
+   */
   useEffect(() => {
     if (isOpen) {
       setActiveId(items.shift().id)
@@ -91,14 +107,19 @@ export const Tour = ({ steps, isOpen, onClose, finalFocusRef, hideCloseButton, h
           onNext: onNextElement,
           onPrev: onPrevElement,
           onClose: onCloseTour
-        }
+        },
+        defaultStyle
       }}
     >
       <Portal id='js-tour'>
         {isOpen && (
           <>
             <TourHelpLayer />
-            <TourElement ariaAttributes={ariaAttributes} hideCloseButton={hideCloseButton} hideBackButton={hideBackButton} />
+            <TourElement
+              ariaAttributes={ariaAttributes}
+              hideCloseButton={hideCloseButton}
+              hideBackButton={hideBackButton}
+            />
           </>
         )}
       </Portal>
@@ -115,7 +136,8 @@ Tour.defaultProps = {
     tabIndex: -1,
     'aria-label': 'Tour por la plataforma',
     'aria-modal': true
-  }
+  },
+  defaultStyle: false
 }
 
 Tour.propTypes = {
@@ -150,6 +172,7 @@ Tour.propTypes = {
   finalFocusRef: PropTypes.any.isRequired,
   hideCloseButton: PropTypes.bool,
   hideBackButton: PropTypes.bool,
+  defaultStyle: PropTypes.bool,
   ariaAttributes: PropTypes.shape({
     role: PropTypes.string,
     tabIndex: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

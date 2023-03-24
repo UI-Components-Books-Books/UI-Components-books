@@ -1,5 +1,6 @@
 import { useState, useEffect, createContext } from 'react'
 import PropTypes from 'prop-types'
+import classnames from 'classnames'
 
 import css from './Panel.module.scss'
 
@@ -10,14 +11,14 @@ import css from './Panel.module.scss'
  */
 export const PanelContext = createContext()
 
-export const Panel = ({ children, defaultIndex, addClass }) => {
+export const Panel = ({ children, defaultIndex, addClass, defaultStyle }) => {
   // Controla el estado de abierto / cerrado de las secciones.
   const [isOpen, setIsOpen] = useState(null)
 
   /**
-    * Array para almacenar el valor de los ID
-    * de cada sección.
-    */
+   * Array para almacenar el valor de los ID
+   * de cada sección.
+   */
   const [IdToSection, setIdToSection] = useState([])
 
   /**
@@ -29,11 +30,11 @@ export const Panel = ({ children, defaultIndex, addClass }) => {
   const addNewIdToSection = (id) => setIdToSection((prev) => [...prev, id])
 
   /**
-    * Se crea la función onToggle para agregar el ID de
-    * la sección a mostrar.
-    *
-    * @param {Number} value - Id proveniente de la sección.
-    */
+   * Se crea la función onToggle para agregar el ID de
+   * la sección a mostrar.
+   *
+   * @param {Number} value - Id proveniente de la sección.
+   */
   const onToggle = (value) => setIsOpen(IdToSection[value])
 
   /**
@@ -58,8 +59,24 @@ export const Panel = ({ children, defaultIndex, addClass }) => {
   }, [defaultIndex, IdToSection])
 
   return (
-    <PanelContext.Provider value={{ validation, onToggle, listId: IdToSection, currentSection: isOpen, addNewIdToSection }}>
-      <div className={`${css['c-panel']} ${addClass ?? ''} class-video-interpreter-ui-panel`} data-value={isOpen}>{children}</div>
+    <PanelContext.Provider
+      value={{
+        validation,
+        onToggle,
+        listId: IdToSection,
+        currentSection: isOpen,
+        addNewIdToSection
+      }}
+    >
+      <div
+        className={classnames('class-video-interpreter-ui-panel', {
+          [css['c-panel']]: !defaultStyle,
+          [addClass]: addClass
+        })}
+        data-value={isOpen}
+      >
+        {children}
+      </div>
     </PanelContext.Provider>
   )
 }
@@ -73,5 +90,6 @@ Panel.propTypes = {
     PropTypes.string
   ]),
   defaultIndex: PropTypes.number,
-  addClass: PropTypes.string
+  addClass: PropTypes.string,
+  defaultStyle: PropTypes.bool
 }

@@ -1,5 +1,6 @@
 import { forwardRef } from 'react'
 import PropTypes from 'prop-types'
+import classnames from 'classnames'
 
 import { Icon } from '../../Icon'
 
@@ -17,14 +18,19 @@ export const Button = forwardRef((props, ref) => {
     onClick,
     children,
     addClass,
+    defaultStyle,
     ...others
   } = props
 
   return (
     <button
       ref={ref}
-      className={`${addClass ?? ''} ${css['c-button']} ${css[`c-${variant}`]} ${css[`c-${size}`]} ${icon && icon.path && hasAriaLabel ? css['c-round'] : ''} 
-        ${icon && icon.position === 'right' ? css['c-reverse'] : ''}`}
+      className={classnames({
+        [`${css['c-button']} ${css[`c-${variant}`]} ${css[`c-${size}`]}`]: !defaultStyle,
+        [css['c-round']]: icon && icon.path && hasAriaLabel,
+        [css['c-reverse']]: icon && icon.position === 'right',
+        [addClass]: addClass
+      })}
       disabled={disabled}
       type={type}
       onClick={onClick}
@@ -52,7 +58,8 @@ Button.propTypes = {
   }),
   disabled: PropTypes.bool,
   onClick: PropTypes.func,
-  addClass: PropTypes.string
+  addClass: PropTypes.string,
+  defaultStyle: PropTypes.bool
 }
 
 Button.defaultProps = {

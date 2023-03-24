@@ -1,11 +1,12 @@
 import { cloneElement } from 'react'
 import PropTypes from 'prop-types'
+import classnames from 'classnames'
 
 import { Icon } from '../../Icon'
 
 import css from './Pagination.module.scss'
 
-export const PaginationItem = ({ page, type, addClass, disabled, element, icons, selected, ...props }) => {
+export const PaginationItem = ({ page, type, addClass, disabled, element, icons, selected, defaultStyle, ...props }) => {
   /**
     * Se crea un objeto con el fin de almacenar los diferentes
     * tipos de iconos que se usaran para los botones previus,
@@ -32,7 +33,11 @@ export const PaginationItem = ({ page, type, addClass, disabled, element, icons,
           element,
           {
             disabled,
-            className: `${css['c-pagination-item']} ${addClass ?? ''} ${selected ? css['c-pagination-item--selected'] : ''}`,
+            className: classnames({
+              [css['c-pagination-item']]: !defaultStyle,
+              [css['c-pagination-item--selected']]: !defaultStyle && selected,
+              [addClass]: addClass
+            }),
             ...element.props,
             ...props
           },
@@ -64,6 +69,7 @@ PaginationItem.propTypes = {
   disabled: PropTypes.bool,
   selected: PropTypes.bool,
   element: PropTypes.oneOfType([PropTypes.element, PropTypes.node, PropTypes.string]),
+  defaultStyle: PropTypes.bool,
   icons: PropTypes.shape({
     first: PropTypes.string,
     last: PropTypes.string,

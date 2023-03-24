@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import PropTypes from 'prop-types'
+import classnames from 'classnames'
 
 import css from './Image.module.scss'
 
-export const Image = ({ url, alt, title, width, addClass, noCaption, ...props }) => {
+export const Image = ({ url, alt, title, width, addClass, noCaption, defaultStyle, ...props }) => {
   // Estado para determinar si se muestra la imagen por defecto.
   const [error, setError] = useState(false)
 
@@ -24,7 +25,13 @@ export const Image = ({ url, alt, title, width, addClass, noCaption, ...props })
   const imgToSee = !error ? `${url}` : base
 
   return (
-    <figure className={`${css['c-image']} ${addClass ?? ''}`} {...(width && { style: { maxWidth: `${/%/gi.test(width) ? width : `${width}px`}` } })}>
+    <figure
+      className={classnames({
+        [css['c-image']]: !defaultStyle,
+        [addClass]: addClass
+      })}
+      {...(width && { style: { maxWidth: `${/%/gi.test(width) ? width : `${width}px`}` } })}
+    >
       <img src={imgToSee} onError={onError} alt={alt} {...props} />
 
       {!noCaption && (
@@ -51,5 +58,6 @@ Image.propTypes = {
   title: PropTypes.string,
   width: PropTypes.string,
   addClass: PropTypes.string,
-  noCaption: PropTypes.bool
+  noCaption: PropTypes.bool,
+  defaultStyle: PropTypes.bool
 }

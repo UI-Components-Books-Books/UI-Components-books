@@ -9,7 +9,11 @@ export default {
     (story) => (
       <Row justify-content='center' align-items='center'>
         <Col xs='11' mm='10' md='9' lg='5' hd='4'>
-          <Row justify-content='center' align-items='center' flex-direction='column'>
+          <Row
+            justify-content='center'
+            align-items='center'
+            flex-direction='column'
+          >
             {story()}
           </Row>
         </Col>

@@ -22,27 +22,27 @@ const KEYCODE = Object.freeze({
 
 export const Modal = ({ children, isOpen, onClose, finalFocusRef }) => {
   /**
-    * Obtenemos la referencia del modal para
-    * agregarle el focus cuando este se abra.
-    */
+   * Obtenemos la referencia del modal para
+   * agregarle el focus cuando este se abra.
+   */
   const refModal = useRef()
 
   /**
-    * Función usada para habilitar|deshabilitar
-    * la propiedad inert que sirve para quitar el focus de los
-    * elementos contenidos en el elemento #root.
-    *
-    * @param {bool} state - Estado.
-    */
+   * Función usada para habilitar|deshabilitar
+   * la propiedad inert que sirve para quitar el focus de los
+   * elementos contenidos en el elemento #root.
+   *
+   * @param {bool} state - Estado.
+   */
   const inertToggle = (state) => {
     const root = document.querySelector('#root')
     root.inert = state
   }
 
   /**
-    * Cierra el modal al presionar la tecla "ESC".
-    * @param {event} e - Evento del teclado
-    */
+   * Cierra el modal al presionar la tecla "ESC".
+   * @param {event} e - Evento del teclado
+   */
   const onKeyDown = (e) => {
     if ((e.keyCode || e.which) === KEYCODE.ESC) {
       onCloseModal()
@@ -62,10 +62,10 @@ export const Modal = ({ children, isOpen, onClose, finalFocusRef }) => {
   }
 
   /**
-    * Función utilizada para cerrar el modal.
-    * además agrega el focus al elemento contenido
-    * en la propiedad finalFocusRef.
-    */
+   * Función utilizada para cerrar el modal.
+   * además agrega el focus al elemento contenido
+   * en la propiedad finalFocusRef.
+   */
   const onCloseModal = () => {
     changeStyle('animate__fadeIn', 'animate__fadeOut')
 
@@ -82,9 +82,9 @@ export const Modal = ({ children, isOpen, onClose, finalFocusRef }) => {
   }
 
   /**
-    * Efecto encargado de mostrar el componente
-    * cuando la propiedad isOpen es true.
-    */
+   * Efecto encargado de mostrar el componente
+   * cuando la propiedad isOpen es true.
+   */
   useEffect(() => {
     if (isOpen) {
       inertToggle(true)
@@ -94,7 +94,9 @@ export const Modal = ({ children, isOpen, onClose, finalFocusRef }) => {
 
     return () => {
       // Almacenamos el boolean que nos indica si existe o no la propiedad inert en el #root.
-      const hasAttribute = document.querySelector('#root').hasAttribute('inert')
+      const hasAttribute = document
+        .querySelector('#root')
+        .hasAttribute('inert')
 
       // Eliminamos el inert si el hasAttribute es true.
       if (hasAttribute) inertToggle(false)
@@ -102,7 +104,9 @@ export const Modal = ({ children, isOpen, onClose, finalFocusRef }) => {
   }, [isOpen])
 
   return (
-    <ModalContext.Provider value={{ isOpen, onKeyDown, onCloseModal, refModal }}>
+    <ModalContext.Provider
+      value={{ isOpen, onKeyDown, onCloseModal, refModal }}
+    >
       <Portal id='js-modal'>
         {getChildrenByType(children, ['ModalContent', 'ModalOverlay'])}
       </Portal>
@@ -116,7 +120,12 @@ Modal.defaultProps = {
 }
 
 Modal.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.arrayOf(PropTypes.element), PropTypes.element, PropTypes.node]),
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.arrayOf(PropTypes.element),
+    PropTypes.element,
+    PropTypes.node
+  ]),
   addClass: PropTypes.string,
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,

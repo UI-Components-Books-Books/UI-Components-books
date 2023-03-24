@@ -4,10 +4,9 @@ import {
   cloneElement,
   isValidElement,
   useState,
-  useMemo
+  useId
 } from 'react'
 import PropTypes from 'prop-types'
-import _uniquedId from 'lodash/uniqueId'
 import { usePopper } from 'react-popper'
 
 import { Portal } from '../../Portal'
@@ -41,7 +40,7 @@ export const Toggletip = ({
   const refToggletip = useRef(null)
 
   // Creamos el id relacionar el Toggletip con su refElement.
-  const toggletipId = useMemo(() => id || _uniquedId('c-Toggletip-'), [id])
+  const toggletipId = id || useId()
 
   /**
    * Función para manejar el evento leave focus del refElement.
@@ -58,7 +57,7 @@ export const Toggletip = ({
 
     if (isOpen && document.activeElement === refElement.current && !isVisible) {
       setTimeout(() => {
-        setIsOpen(prev => !prev)
+        setIsOpen((prev) => !prev)
       }, 100)
     }
 
@@ -68,9 +67,9 @@ export const Toggletip = ({
   }
 
   /**
-    * Función para manejar el evento keydown del refElement.
-    * @param {Event} Event
-    */
+   * Función para manejar el evento keydown del refElement.
+   * @param {Event} Event
+   */
   const onKeyDown = (e) => {
     if ((e.keyCode | e.which) === KEYCODE.ESC && isOpen) {
       setIsOpen(!isOpen)

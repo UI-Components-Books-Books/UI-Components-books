@@ -20,7 +20,9 @@ export const Default = () => <Pagination count={10} />
 
 Default.storyName = 'default'
 
-export const WithMoreButtons = () => <Pagination count={10} showLastButton showFirstButton />
+export const WithMoreButtons = () => (
+  <Pagination count={10} showLastButton showFirstButton />
+)
 
 WithMoreButtons.storyName = 'with more buttons'
 
@@ -30,7 +32,15 @@ export const WithIcon = () => (
     showLastButton
     showFirstButton
     renderItem={(item) => (
-      <PaginationItem {...item} icons={{ previous: '/assets/icons/svg/arrow_drop_down.svg', next: '/assets/icons/svg/arrow_drop_down.svg', last: '/assets/icons/svg/volume_off.svg', first: '/assets/icons/svg/volume_on.svg' }} />
+      <PaginationItem
+        {...item}
+        icons={{
+          previous: '/assets/icons/svg/arrow_drop_down.svg',
+          next: '/assets/icons/svg/arrow_drop_down.svg',
+          last: '/assets/icons/svg/volume_off.svg',
+          first: '/assets/icons/svg/volume_on.svg'
+        }}
+      />
     )}
   />
 )

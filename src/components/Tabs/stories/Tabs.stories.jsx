@@ -1,6 +1,14 @@
 import React from 'react'
 
-import { Col, Row, Tab, Tabs, TabList, TabPanels, TabPanel } from '../../../components'
+import {
+  Col,
+  Row,
+  Tab,
+  Tabs,
+  TabList,
+  TabPanels,
+  TabPanel
+} from '../../../components'
 
 export default {
   title: 'ui-components/Tabs',

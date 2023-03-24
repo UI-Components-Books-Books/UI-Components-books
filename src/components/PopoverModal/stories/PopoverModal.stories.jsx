@@ -1,6 +1,13 @@
 import React from 'react'
 
-import { Col, Row, Button, PopoverModal, PopoverModalButton, PopoverModalContent } from '../../../components'
+import {
+  Col,
+  Row,
+  Button,
+  PopoverModal,
+  PopoverModalButton,
+  PopoverModalContent
+} from '../../../components'
 
 export default {
   title: 'ui-components/PopoverModal',
@@ -19,20 +26,18 @@ export default {
 }
 
 export const Default = () => (
-  <>
-    <PopoverModal>
-      <PopoverModalButton>
-        <Button
-          label='Open PopoverModal'
-          size='small'
-        />
-      </PopoverModalButton>
-      <PopoverModalContent>
-        <p className='u-my-2'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Blanditiis, ipsam!</p>
-        <Button size='small' label='Learn more' />
-      </PopoverModalContent>
-    </PopoverModal>
-  </>
+  <PopoverModal>
+    <PopoverModalButton>
+      <Button label='Open PopoverModal' size='small' />
+    </PopoverModalButton>
+    <PopoverModalContent>
+      <p className='u-my-2'>
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Blanditiis,
+        ipsam!
+      </p>
+      <Button size='small' label='Learn more' />
+    </PopoverModalContent>
+  </PopoverModal>
 )
 
 Default.storyName = 'default'
@@ -40,13 +45,13 @@ Default.storyName = 'default'
 export const withArrow = () => (
   <PopoverModal>
     <PopoverModalButton>
-      <Button
-        label='Open PopoverModal'
-        size='small'
-      />
+      <Button label='Open PopoverModal' size='small' />
     </PopoverModalButton>
     <PopoverModalContent hasArrow>
-      <p className='u-my-2'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Blanditiis, ipsam!</p>
+      <p className='u-my-2'>
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Blanditiis,
+        ipsam!
+      </p>
       <Button size='small' label='Learn more' />
     </PopoverModalContent>
   </PopoverModal>

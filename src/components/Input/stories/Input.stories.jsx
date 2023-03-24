@@ -2,7 +2,15 @@ import React from 'react'
 import { userEvent, within } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
 
-import { Col, Row, Icon, Input, InputStyle, InputLeftAddon, InputRightAddon } from '../../../components'
+import {
+  Col,
+  Row,
+  Icon,
+  Input,
+  InputStyle,
+  InputLeftAddon,
+  InputRightAddon
+} from '../../../components'
 
 export default {
   title: 'ui-components/Input',
@@ -26,8 +34,16 @@ export const WithLeftAddon = () => (
   <InputStyle>
     <InputLeftAddon>
       <Icon>
-        <svg xmlns='http://www.w3.org/2000/svg' height='48' width='48' viewBox='0 0 48 48'>
-          <path id='check' d='M18.9 35.7 7.7 24.5l2.15-2.15 9.05 9.05 19.2-19.2 2.15 2.15Z' />
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          height='48'
+          width='48'
+          viewBox='0 0 48 48'
+        >
+          <path
+            id='check'
+            d='M18.9 35.7 7.7 24.5l2.15-2.15 9.05 9.05 19.2-19.2 2.15 2.15Z'
+          />
         </svg>
       </Icon>
     </InputLeftAddon>
@@ -42,8 +58,16 @@ export const WithRightAddon = () => (
     <Input placeholder='welcome' />
     <InputRightAddon>
       <Icon>
-        <svg xmlns='http://www.w3.org/2000/svg' height='48' width='48' viewBox='0 0 48 48'>
-          <path id='check' d='M18.9 35.7 7.7 24.5l2.15-2.15 9.05 9.05 19.2-19.2 2.15 2.15Z' />
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          height='48'
+          width='48'
+          viewBox='0 0 48 48'
+        >
+          <path
+            id='check'
+            d='M18.9 35.7 7.7 24.5l2.15-2.15 9.05 9.05 19.2-19.2 2.15 2.15Z'
+          />
         </svg>
       </Icon>
     </InputRightAddon>
@@ -56,16 +80,32 @@ export const AllAddon = () => (
   <InputStyle>
     <InputLeftAddon>
       <Icon>
-        <svg xmlns='http://www.w3.org/2000/svg' height='48' width='48' viewBox='0 0 48 48'>
-          <path id='check' d='M18.9 35.7 7.7 24.5l2.15-2.15 9.05 9.05 19.2-19.2 2.15 2.15Z' />
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          height='48'
+          width='48'
+          viewBox='0 0 48 48'
+        >
+          <path
+            id='check'
+            d='M18.9 35.7 7.7 24.5l2.15-2.15 9.05 9.05 19.2-19.2 2.15 2.15Z'
+          />
         </svg>
       </Icon>
     </InputLeftAddon>
     <Input placeholder='welcome' />
     <InputRightAddon>
       <Icon>
-        <svg xmlns='http://www.w3.org/2000/svg' height='48' width='48' viewBox='0 0 48 48'>
-          <path id='check' d='M18.9 35.7 7.7 24.5l2.15-2.15 9.05 9.05 19.2-19.2 2.15 2.15Z' />
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          height='48'
+          width='48'
+          viewBox='0 0 48 48'
+        >
+          <path
+            id='check'
+            d='M18.9 35.7 7.7 24.5l2.15-2.15 9.05 9.05 19.2-19.2 2.15 2.15Z'
+          />
         </svg>
       </Icon>
     </InputRightAddon>

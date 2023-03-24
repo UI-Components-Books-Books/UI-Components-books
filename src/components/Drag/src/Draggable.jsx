@@ -2,13 +2,14 @@ import { useContext } from 'react'
 import { useDraggable } from '@dnd-kit/core'
 import { CSS } from '@dnd-kit/utilities'
 import PropTypes from 'prop-types'
+import classnames from 'classnames'
 
 import { typeValidation } from '../../../utils/validations/typeValidation'
 import { DragAndDropContext } from '../../../components'
 
 import css from './Drag.module.scss'
 
-export const Draggable = ({ children, id, addClass, dragging, label, attribute, disabledDefaultAttributes, element, __TYPE, ...props }) => {
+export const Draggable = ({ children, id, addClass, dragging, label, attribute, disabledDefaultAttributes, element, defaultStyle, __TYPE, ...props }) => {
   /**
     * Creamos una variable con el elemento a generar
     * por el componente, esto nos permite usar
@@ -43,7 +44,11 @@ export const Draggable = ({ children, id, addClass, dragging, label, attribute, 
       id={id}
       ref={setNodeRef}
       data-type={__TYPE}
-      className={`${css['c-draggable']} ${isDragging === id ? `${dragging} ${css['is-draggable--active-animation']}` : ''} ${addClass ?? ''}`}
+      className={classnames({
+        [css['c-draggable']]: !defaultStyle,
+        [`${dragging} ${css['is-draggable--active-animation']}`]: isDragging === id && !defaultStyle,
+        [addClass]: addClass
+      })}
       style={{ transform: CSS.Translate.toString(transform) }}
       {...(validate && { [propValidate]: !!listId.includes(id) })}
       {...(!disabledDefaultAttributes && { ...attributes })}
@@ -74,5 +79,6 @@ Draggable.propTypes = {
   }),
   disabledDefaultAttributes: PropTypes.bool,
   element: PropTypes.string,
+  defaultStyle: PropTypes.bool,
   __TYPE: typeValidation('draggable')
 }

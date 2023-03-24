@@ -19,12 +19,16 @@ const Template = () => (
     <Col xs='11' mm='10' md='9' hd='8' lg='7'>
       <Paper>
         <p className='paragraph u-my-4'>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus soluta minima neque saepe architecto cupiditate impedit mollitia
-          nesciunt similique accusantium tempora id enim, placeat omnis in, facere sit quasi quisquam doloremque nisi officiis tempore porro
-          temporibus voluptatibus? Minus delectus pariatur porro officia deserunt, voluptatum totam impedit? Rem recusandae sed ad? Molestias,
-          distinctio explicabo. Tenetur quis facere recusandae excepturi reiciendis soluta, odio nobis itaque fugit adipisci ut officia corporis
-          eligendi harum. Minima in quasi doloribus reiciendis alias, beatae molestiae omnis dolores impedit expedita magnam cupiditate quas
-          velit.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus soluta
+          minima neque saepe architecto cupiditate impedit mollitia nesciunt
+          similique accusantium tempora id enim, placeat omnis in, facere sit
+          quasi quisquam doloremque nisi officiis tempore porro temporibus
+          voluptatibus? Minus delectus pariatur porro officia deserunt,
+          voluptatum totam impedit? Rem recusandae sed ad? Molestias, distinctio
+          explicabo. Tenetur quis facere recusandae excepturi reiciendis soluta,
+          odio nobis itaque fugit adipisci ut officia corporis eligendi harum.
+          Minima in quasi doloribus reiciendis alias, beatae molestiae omnis
+          dolores impedit expedita magnam cupiditate quas velit.
         </p>
       </Paper>
     </Col>
@@ -64,10 +68,20 @@ export const Default = () => {
 
   return (
     <>
-      <Tour steps={steps} isOpen={isOpen} onClose={onClose} finalFocusRef={buttonRef} />
+      <Tour
+        steps={steps}
+        isOpen={isOpen}
+        onClose={onClose}
+        finalFocusRef={buttonRef}
+      />
 
       <Col xs='11' mm='10' md='9' hd='8' lg='7'>
-        <Button ref={buttonRef} label='Start tour' addClass='u-my-6' onClick={() => setIsOpen(!isOpen)} />
+        <Button
+          ref={buttonRef}
+          label='Start tour'
+          addClass='u-my-6'
+          onClick={() => setIsOpen(!isOpen)}
+        />
       </Col>
 
       {Template()}
@@ -123,10 +137,20 @@ export const WithCustomContent = () => {
 
   return (
     <>
-      <Tour steps={steps} isOpen={isOpen} onClose={onClose} finalFocusRef={buttonRef} />
+      <Tour
+        steps={steps}
+        isOpen={isOpen}
+        onClose={onClose}
+        finalFocusRef={buttonRef}
+      />
 
       <Col xs='11' mm='10' md='9' hd='8' lg='7'>
-        <Button ref={buttonRef} label='Start tour' addClass='u-my-6' onClick={() => setIsOpen(!isOpen)} />
+        <Button
+          ref={buttonRef}
+          label='Start tour'
+          addClass='u-my-6'
+          onClick={() => setIsOpen(!isOpen)}
+        />
       </Col>
 
       {Template()}

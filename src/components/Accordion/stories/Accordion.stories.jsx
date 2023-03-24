@@ -2,7 +2,15 @@ import React from 'react'
 import { userEvent, within } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
 
-import { Col, Row, Icon, Accordion, AccordionItem, AccordionButton, AccordionPanel } from '../../../components'
+import {
+  Col,
+  Row,
+  Icon,
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel
+} from '../../../components'
 
 export default {
   title: 'ui-components/Accordion',
@@ -24,7 +32,9 @@ const lorem =
 const Template = (args) => (
   <Accordion {...args}>
     <AccordionItem>
-      <AccordionButton>Section 1 title</AccordionButton>
+      <AccordionButton addClass='u-text-complementary-300'>
+        Section 1 title
+      </AccordionButton>
       <AccordionPanel>
         <p>First text: {lorem}</p>
       </AccordionPanel>
@@ -77,7 +87,13 @@ export const WithRenderIcon = TemplateAccordionButton.bind({})
 WithRenderIcon.storyName = 'using render prop with icon'
 WithRenderIcon.args = {
   icon: function (isExpanded) {
-    return isExpanded ? <Icon path='/assets/icons/svg/check.svg' /> : <Icon path='/assets/icons/svg/close.svg' />
+    return isExpanded
+      ? (
+        <Icon path='/assets/icons/svg/check.svg' />
+        )
+      : (
+        <Icon path='/assets/icons/svg/close.svg' />
+        )
   }
 }
 

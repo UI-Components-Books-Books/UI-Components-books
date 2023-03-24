@@ -4,7 +4,9 @@
   "version": "1.0.0",
   "license": "MIT",
   "type": "module",
-  "files": ["/dist"],
+  "files": [
+    "/dist"
+  ],
   "main": "dist/ui-components-books.umd.csj",
   "module": "./dist/ui-components-books.js",
   "exports": {
@@ -59,12 +61,13 @@
     "react-dom": "18.2.0"
   },
   "dependencies": {
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
     "@dnd-kit/core": "^6.0.7",
     "@dnd-kit/modifiers": "^6.0.1",
     "@popperjs/core": "^2.11.6",
     "animate.css": "^4.1.1",
+    "classnames": "^2.3.2",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
     "react-popper": "^2.3.0",
     "sass": "^1.58.0",
     "uuid": "^9.0.0",

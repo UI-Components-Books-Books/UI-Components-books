@@ -1,31 +1,53 @@
-import { forwardRef, useMemo } from 'react'
+import { forwardRef, useId } from 'react'
 import PropTypes from 'prop-types'
-import _uniquedId from 'lodash/uniqueId'
+import classnames from 'classnames'
 
 import css from './TextArea.module.scss'
 
 export const TextArea = forwardRef(
-  ({ id, value, resize, placeholder, label, addClass, isLabelVisible, isDisabled, isRequired, onValue, ...props }, ref) => {
+  (
+    {
+      id,
+      value,
+      resize,
+      placeholder,
+      label,
+      addClass,
+      isLabelVisible,
+      isDisabled,
+      isRequired,
+      defaultStyle,
+      onValue,
+      ...props
+    },
+    ref
+  ) => {
     /**
-       * Se crea un ID para identificar el textarea y además
-       * para pasarlo dentro la función onValue proveniente
-       * de los props.
-       */
-    const textAreaId = useMemo(() => id || _uniquedId('c-input-'), [id])
+     * Se crea un ID para identificar el textarea y además
+     * para pasarlo dentro la función onValue proveniente
+     * de los props.
+     */
+    const textAreaId = id || useId()
 
     /**
-       * Detecta cuando el input tiene un cambio y si existe
-       * la propiedad onValue le pasamos los parámetros
-       *  id y value del input.
-       *
-       * @param {target} target - HTMLInputElement.
-       */
+     * Detecta cuando el input tiene un cambio y si existe
+     * la propiedad onValue le pasamos los parámetros
+     *  id y value del input.
+     *
+     * @param {target} target - HTMLInputElement.
+     */
     const onChange = ({ target }) => {
       if (onValue) onValue({ id: textAreaId, value: target.value })
     }
 
     return (
-      <label htmlFor={textAreaId} className={`${css['c-label']} ${addClass ?? ''}`}>
+      <label
+        htmlFor={textAreaId}
+        className={classnames({
+          [css['c-label']]: !defaultStyle,
+          [addClass]: addClass
+        })}
+      >
         <span className={`${!isLabelVisible && 'u-sr-only'}`}> {label} </span>
 
         <textarea
@@ -37,7 +59,11 @@ export const TextArea = forwardRef(
           placeholder={placeholder}
           autoComplete='off'
           onChange={onChange}
-          className={`${css['c-textarea']} ${css[`c-textarea--${resize}`]}`}
+          data-class='c-textarea'
+          className={classnames({
+            [`${css['c-textarea']} ${css[`c-textarea--${resize}`]}`]:
+              !defaultStyle
+          })}
           {...props}
         />
       </label>
@@ -47,7 +73,7 @@ export const TextArea = forwardRef(
 
 TextArea.defaultProps = {
   resize: 'vertical',
-  placeholder: 'Here is a sample placeholder'
+  placeholder: 'This is an example of a placeholder'
 }
 
 TextArea.propTypes = {
@@ -60,5 +86,6 @@ TextArea.propTypes = {
   isLabelVisible: PropTypes.bool,
   isDisabled: PropTypes.bool,
   isRequired: PropTypes.bool,
+  defaultStyle: PropTypes.bool,
   onValue: PropTypes.func
 }

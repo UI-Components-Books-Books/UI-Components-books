@@ -1,43 +1,52 @@
 import { cloneElement, Children, isValidElement, useRef } from 'react'
 import PropTypes from 'prop-types'
+import classnames from 'classnames'
 
 import { typeValidation } from '../../../utils/validations/typeValidation'
 import { getChildrenByType } from '../../../utils/validations/getChildrenType'
 
 import css from './Tabs.module.scss'
 
-export const TabList = ({ children: ChildrenProps, addClass, label, orientation, __TYPE, ...props }) => {
+/**
+ * Se crea un objeto que no se puede cambiar para
+ * almacenar el keyCode de las teclas up, down, end y home.
+ */
+const KEYCODE = Object.freeze({
+  LEFT: 37,
+  RIGHT: 39
+})
+
+export const TabList = ({
+  children: ChildrenProps,
+  addClass,
+  label,
+  orientation,
+  defaultStyle,
+  __TYPE,
+  ...props
+}) => {
   /**
-    * Usado para almacenar las referencias
-    * de todos los botones usados como Tab.
-    */
+   * Usado para almacenar las referencias
+   * de todos los botones usados como Tab.
+   */
   const refTabs = useRef([])
 
   /**
-    * Función para utilizada para agregar una nueva referencia
-    * al arreglo de referencias refTabs.
-    *
-    * @param {ReactNode[]} ref - Referencia del botón usado en el Tab.
-    * @returns {ReactNode[]} refTabs - Arreglo de referencias.
-    */
+   * Función para utilizada para agregar una nueva referencia
+   * al arreglo de referencias refTabs.
+   *
+   * @param {ReactNode[]} ref - Referencia del botón usado en el Tab.
+   * @returns {ReactNode[]} refTabs - Arreglo de referencias.
+   */
   const addNewRef = (ref) => (refTabs.current = [...refTabs.current, ref])
 
   /**
-    * Se crea un objeto que no se puede cambiar para
-    * almacenar el keyCode de las teclas up, down, end y home.
-    */
-  const KEYCODE = Object.freeze({
-    LEFT: 37,
-    RIGHT: 39
-  })
-
-  /**
-    * Función utilizada en el evento KeyDown del botón,
-    * permite decidir el focus del siguiente elemento
-    * utilizando las teclas ArrowLeft o ArrowRight.
-    *
-    * @param {Event} event - Evento disparado por KeyDown
-    */
+   * Función utilizada en el evento KeyDown del botón,
+   * permite decidir el focus del siguiente elemento
+   * utilizando las teclas ArrowLeft o ArrowRight.
+   *
+   * @param {Event} event - Evento disparado por KeyDown
+   */
   const onNavigation = (e) => {
     // Obtenemos la primera Tab
     const FIRST_TAB = refTabs.current[0]
@@ -67,7 +76,12 @@ export const TabList = ({ children: ChildrenProps, addClass, label, orientation,
 
   const children = Children.map(ChildrenProps, (child, index) => {
     if (!isValidElement(child)) return null
-    return cloneElement(child, { ...child.props, id: index, addNewRef, onNavigation })
+    return cloneElement(child, {
+      ...child.props,
+      id: index,
+      addNewRef,
+      onNavigation
+    })
   })
 
   return (
@@ -76,7 +90,10 @@ export const TabList = ({ children: ChildrenProps, addClass, label, orientation,
       data-type={__TYPE}
       aria-label={label}
       aria-orientation={orientation}
-      className={`${css['c-tab__list']} ${addClass ?? ''}`}
+      className={classnames({
+        [css['c-tab__list']]: !defaultStyle,
+        [addClass]: addClass
+      })}
       {...props}
     >
       {/* Filtramos los children para solo aceptar de tipo Tab. */}
@@ -86,10 +103,14 @@ export const TabList = ({ children: ChildrenProps, addClass, label, orientation,
 }
 
 TabList.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.element), PropTypes.element]),
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.element),
+    PropTypes.element
+  ]),
   addClass: PropTypes.string,
   label: PropTypes.string,
   orientation: PropTypes.string,
+  defaultStyle: PropTypes.bool,
   __TYPE: typeValidation('TabList')
 }
 

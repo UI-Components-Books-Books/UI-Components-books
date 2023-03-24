@@ -1,31 +1,44 @@
 import { useRef, useEffect, useContext } from 'react'
 import PropTypes from 'prop-types'
+import classnames from 'classnames'
 
 import { TabsContext } from '../../Tabs'
 import { typeValidation } from '../../../utils/validations/typeValidation'
 
 import css from './Tabs.module.scss'
 
-export const Tab = ({ children, id, selected, addClass, icon, addNewRef, onNavigation, onClick, __TYPE, ...props }) => {
+export const Tab = ({
+  children,
+  id,
+  selected,
+  addClass,
+  icon,
+  addNewRef,
+  onNavigation,
+  onClick,
+  defaultStyle,
+  __TYPE,
+  ...props
+}) => {
   /**
-    * Necesitamos obtener la referencia del botón
-    * para luego pasarla en la función addNewRef proveniente
-    * de las propiedades.
-    */
+   * Necesitamos obtener la referencia del botón
+   * para luego pasarla en la función addNewRef proveniente
+   * de las propiedades.
+   */
   const refButton = useRef()
 
   /**
-    * Obtenemos las funciones validation y onToggle del contexto creado en Tabs.
-    */
+   * Obtenemos las funciones validation y onToggle del contexto creado en Tabs.
+   */
   const { validation, onToggle } = useContext(TabsContext)
 
   /**
-    * variable que almacena el resultado de validation.
-    * Devuelve "true" o "false" apartir de evaluar
-    * el id con el estado.
-    *
-    * @returns {(Boolean)}
-    */
+   * variable que almacena el resultado de validation.
+   * Devuelve "true" o "false" apartir de evaluar
+   * el id con el estado.
+   *
+   * @returns {(Boolean)}
+   */
   const isSelected = validation(id)
 
   /**
@@ -38,7 +51,6 @@ export const Tab = ({ children, id, selected, addClass, icon, addNewRef, onNavig
     if (onClick) {
       onClick(event)
     }
-
     onToggle(id)
   }
 
@@ -63,7 +75,11 @@ export const Tab = ({ children, id, selected, addClass, icon, addNewRef, onNavig
       aria-selected={isSelected}
       onKeyDown={onNavigation}
       onClick={handleClick}
-      className={`${css['c-tab__button']} u-flex ${addClass ?? ''} ${isSelected && selected && selected}`}
+      className={classnames({
+        [`${css['c-tab__button']} u-flex`]: !defaultStyle,
+        [addClass]: addClass,
+        [isSelected]: selected
+      })}
       {...props}
     >
       {children}
@@ -73,7 +89,12 @@ export const Tab = ({ children, id, selected, addClass, icon, addNewRef, onNavig
 }
 
 Tab.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.arrayOf(PropTypes.element), PropTypes.element, PropTypes.node]),
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.arrayOf(PropTypes.element),
+    PropTypes.element,
+    PropTypes.node
+  ]),
   id: PropTypes.number,
   selected: PropTypes.string,
   addClass: PropTypes.string,
@@ -81,6 +102,7 @@ Tab.propTypes = {
   addNewRef: PropTypes.func,
   onClick: PropTypes.func,
   onNavigation: PropTypes.func,
+  defaultStyle: PropTypes.bool,
   __TYPE: typeValidation('Tab')
 }
 

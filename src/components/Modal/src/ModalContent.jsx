@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 import PropTypes from 'prop-types'
+import classnames from 'classnames'
 
 import { Button, Icon } from '../../../components'
 import { ModalContext } from '../../Modal'
@@ -7,12 +8,26 @@ import { typeValidation } from '../../../utils/validations/typeValidation'
 
 import css from './Modal.module.scss'
 
-export const ModalContent = ({ label, addClass, children, onClick, onKeyDown, __TYPE, ...props }) => {
+export const ModalContent = ({
+  label,
+  addClass,
+  children,
+  onClick,
+  onKeyDown,
+  defaultStyle,
+  __TYPE,
+  ...props
+}) => {
   /**
-    * Se obtienen las propiedades isOpen, onKeyDown, onCloseModal
-    * y refModal del contexto generado por el componente Modal.
-    */
-  const { isOpen, onKeyDown: onKeyDownCloseModal, onCloseModal, refModal } = useContext(ModalContext)
+   * Se obtienen las propiedades isOpen, onKeyDown, onCloseModal
+   * y refModal del contexto generado por el componente Modal.
+   */
+  const {
+    isOpen,
+    onKeyDown: onKeyDownCloseModal,
+    onCloseModal,
+    refModal
+  } = useContext(ModalContext)
 
   /**
    * Función creada para permitir que el
@@ -48,14 +63,40 @@ export const ModalContent = ({ label, addClass, children, onClick, onKeyDown, __
       aria-modal='true'
       data-type={__TYPE}
       onKeyDown={handleKeyDown}
-      className={`${css['c-modal']} animate__animated animate__fadeIn animate__faster u-px-3 u-py-3 class-video-interpreter-ui-modal ${addClass ?? ''}`}
+      className={classnames(
+        'animate__animated animate__fadeIn animate__faster class-video-interpreter-ui-modal',
+        {
+          [`${css['c-modal']} u-px-3 u-py-3`]: !defaultStyle,
+          [addClass]: addClass
+        }
+      )}
       {...props}
     >
-      <div className={`${css['c-modal-container']}`}>{children}</div>
-      <Button addClass={css['c-close-button']} label='Cerrar modal' hasAriaLabel onClick={handleClick}>
+      <div
+        className={classnames({ [css['c-modal-container']]: !defaultStyle })}
+        data-class='c-modal__container'
+      >
+        {children}
+      </div>
+      <Button
+        addClass={classnames({ [css['c-close-button']]: !defaultStyle })}
+        data-class='c-modal__close-button'
+        label='Cerrar modal'
+        hasAriaLabel
+        onClick={handleClick}
+        {...(defaultStyle && { defaultStyle })}
+      >
         <Icon>
-          <svg xmlns='http://www.w3.org/2000/svg' height='48' width='48' viewBox='0 0 48 48'>
-            <path id='close' d='m12.45 37.65-2.1-2.1L21.9 24 10.35 12.45l2.1-2.1L24 21.9l11.55-11.55 2.1 2.1L26.1 24l11.55 11.55-2.1 2.1L24 26.1Z' />
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            height='48'
+            width='48'
+            viewBox='0 0 48 48'
+          >
+            <path
+              id='close'
+              d='m12.45 37.65-2.1-2.1L21.9 24 10.35 12.45l2.1-2.1L24 21.9l11.55-11.55 2.1 2.1L26.1 24l11.55 11.55-2.1 2.1L24 26.1Z'
+            />
           </svg>
         </Icon>
       </Button>
@@ -64,11 +105,17 @@ export const ModalContent = ({ label, addClass, children, onClick, onKeyDown, __
 }
 
 ModalContent.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.arrayOf(PropTypes.element), PropTypes.element, PropTypes.node]),
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.arrayOf(PropTypes.element),
+    PropTypes.element,
+    PropTypes.node
+  ]),
   addClass: PropTypes.string,
   label: PropTypes.string.isRequired,
   onClick: PropTypes.func,
   onKeyDown: PropTypes.func,
+  defaultStyle: PropTypes.bool,
   __TYPE: typeValidation('ModalContent')
 }
 

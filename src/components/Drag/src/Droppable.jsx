@@ -1,24 +1,36 @@
 import { useDroppable } from '@dnd-kit/core'
 import PropTypes from 'prop-types'
+import classnames from 'classnames'
 
 import { typeValidation } from '../../../utils/validations/typeValidation'
 
 import css from './Drag.module.scss'
 
-export const Droppable = ({ children, id, validate, addClass, over, label, element, __TYPE, ...props }) => {
+export const Droppable = ({
+  children,
+  id,
+  validate,
+  addClass,
+  over,
+  label,
+  element,
+  defaultStyle,
+  __TYPE,
+  ...props
+}) => {
   /**
-    * Creamos una variable con el elemento a generar
-    * por el componente, esto nos permite usar
-    * la sintaxis de JSX que es más
-    * fácil de leer y manipular.
-    */
+   * Creamos una variable con el elemento a generar
+   * por el componente, esto nos permite usar
+   * la sintaxis de JSX que es más
+   * fácil de leer y manipular.
+   */
   const Element = element || 'div'
 
   /**
-    * Utilizamos el hook useDroppable
-    * para poder agregar la funcionalidad
-    * de "drop" al componente.
-    */
+   * Utilizamos el hook useDroppable
+   * para poder agregar la funcionalidad
+   * de "drop" al componente.
+   */
   const { isOver, setNodeRef } = useDroppable({
     id,
     data: {
@@ -29,7 +41,16 @@ export const Droppable = ({ children, id, validate, addClass, over, label, eleme
   })
 
   return (
-    <Element ref={setNodeRef} data-type={__TYPE} className={`${css['c-droppable']} ${isOver && over && over} ${addClass ?? ''}`} {...props}>
+    <Element
+      ref={setNodeRef}
+      data-type={__TYPE}
+      className={classnames({
+        [css['c-droppable']]: !defaultStyle,
+        [over]: isOver && !defaultStyle,
+        [addClass]: addClass
+      })}
+      {...props}
+    >
       {children}
     </Element>
   )
@@ -48,5 +69,6 @@ Droppable.propTypes = {
   over: PropTypes.string,
   label: PropTypes.string.isRequired,
   element: PropTypes.string,
+  defaultStyle: PropTypes.bool,
   __TYPE: typeValidation('droppable')
 }

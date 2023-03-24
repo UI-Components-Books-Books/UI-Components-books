@@ -1,11 +1,18 @@
 import PropTypes from 'prop-types'
-import { getChildrenByType } from '../../../utils/validations/getChildrenType'
+import classnames from 'classnames'
 
+import { getChildrenByType } from '../../../utils/validations/getChildrenType'
 import css from './List.module.scss'
 
-export const List = ({ children, addClass, ...props }) => {
+export const List = ({ children, addClass, defaultStyle, ...props }) => {
   return (
-    <ul className={`${css['c-List']} ${addClass ?? ''}`} {...props}>
+    <ul
+      className={classnames({
+        [css['c-List']]: !defaultStyle,
+        [addClass]: addClass
+      })}
+      {...props}
+    >
       {getChildrenByType(children, ['ListItem'])}
     </ul>
   )
@@ -13,5 +20,6 @@ export const List = ({ children, addClass, ...props }) => {
 
 List.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.element), PropTypes.element]),
-  addClass: PropTypes.string
+  addClass: PropTypes.string,
+  defaultStyle: PropTypes.bool
 }

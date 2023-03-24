@@ -1,21 +1,29 @@
 import { useContext } from 'react'
 import PropTypes from 'prop-types'
+import classnames from 'classnames'
 
 import { TabsContext } from '../../Tabs'
 import { typeValidation } from '../../../utils/validations/typeValidation'
 
 import css from './Tabs.module.scss'
 
-export const TabPanel = ({ children, id, addClass, __TYPE, ...props }) => {
+export const TabPanel = ({
+  children,
+  id,
+  addClass,
+  defaultStyle,
+  __TYPE,
+  ...props
+}) => {
   // Obtenemos la función validation del contexto
   const { validation } = useContext(TabsContext)
 
   /**
-    * Devuelve "true" o "false" apartir de evaluar
-    * el id con el estado.
-    *
-    * @returns {(Boolean)}
-    */
+   * Devuelve "true" o "false" apartir de evaluar
+   * el id con el estado.
+   *
+   * @returns {(Boolean)}
+   */
   const isSelected = validation(id)
 
   return (
@@ -27,7 +35,11 @@ export const TabPanel = ({ children, id, addClass, __TYPE, ...props }) => {
       aria-hidden={!isSelected}
       hidden={!isSelected}
       aria-labelledby={`tab-${id}`}
-      className={`${isSelected ? css['c-tab__panel--active'] : css['c-tab__panel']} ${addClass ?? ''}`}
+      className={classnames({
+        [css['c-tab__panel--active']]: !defaultStyle && isSelected,
+        [css['c-tab__panel']]: !defaultStyle && !isSelected,
+        [addClass]: addClass
+      })}
       {...props}
     >
       {children}
@@ -36,9 +48,15 @@ export const TabPanel = ({ children, id, addClass, __TYPE, ...props }) => {
 }
 
 TabPanel.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.arrayOf(PropTypes.element), PropTypes.element, PropTypes.node]),
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.arrayOf(PropTypes.element),
+    PropTypes.element,
+    PropTypes.node
+  ]),
   id: PropTypes.number,
   addClass: PropTypes.string,
+  defaultStyle: PropTypes.bool,
   __TYPE: typeValidation('TabPanel')
 }
 

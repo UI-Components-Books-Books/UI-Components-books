@@ -1,5 +1,6 @@
 import { useContext, useRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
+import classnames from 'classnames'
 
 import { Icon, PanelContext } from '../../../components'
 
@@ -13,6 +14,15 @@ import css from './Panel.module.scss'
 const getSpanishType = Object.freeze({
   previous: 'anterior',
   next: 'siguiente'
+})
+
+/**
+ * Se crea un objeto que no se puede cambiar para
+ * almacenar el keyCode de las teclas left y right.
+ */
+const KEYCODE = Object.freeze({
+  LEFT: 37,
+  RIGHT: 39
 })
 
 /**
@@ -32,52 +42,65 @@ const defaultAriaLabel = (type, section, selected) => {
   return `Ir a la ${getSpanishType[type]} sección`
 }
 
-export const NavSection = ({ renderItem, showPrevButton, showNextButton, icons, label, orientation, onValue, addClass, getItemAriaLabel }) => {
+export const NavSection = ({
+  renderItem,
+  showPrevButton,
+  showNextButton,
+  icons,
+  label,
+  orientation,
+  onValue,
+  addClass,
+  getItemAriaLabel,
+  defaultStyle
+}) => {
   /**
-    * Obtenemos las propiedaes validation,
-    * onToggle, listId y currentSection del contexto.
-    */
-  const { validation, onToggle, listId, currentSection } = useContext(PanelContext)
+   * Obtenemos las propiedaes validation,
+   * onToggle, listId y currentSection del contexto.
+   */
+  const { validation, onToggle, listId, currentSection } =
+    useContext(PanelContext)
 
   /**
-    * Creamos está referencia para almacenar
-    * las referencias de los botones usados
-    * para navegar entre secciones.
-    */
+   * Creamos está referencia para almacenar
+   * las referencias de los botones usados
+   * para navegar entre secciones.
+   */
   const refSections = useRef([])
 
   /**
-    * Se crea un objeto que no se puede cambiar para
-    * almacenar el keyCode de las teclas left y right.
-    */
-  const KEYCODE = Object.freeze({
-    LEFT: 37,
-    RIGHT: 39
-  })
-
-  /**
-    * Objeto que almacena el valor de la sección a la cual el botón
-    * tiene que redirigir dependiendo el tipo de este.
-    */
+   * Objeto que almacena el valor de la sección a la cual el botón
+   * tiene que redirigir dependiendo el tipo de este.
+   */
   const BUTTON_TYPE = Object.freeze({
     previous: currentSection - 1,
     next: currentSection + 1
   })
 
   /**
-    * Objeto que tiene como fin almacenar los diferentes
-    * tipos de iconos que se usaran para los botones previous y next
-    * de la navegación.
-    */
+   * Objeto que tiene como fin almacenar los diferentes
+   * tipos de iconos que se usaran para los botones previous y next
+   * de la navegación.
+   */
   const normalizedIcons = {
-    previous: icons?.previous || <path id='navigate_before' d='M28.05 36 16 23.95 28.05 11.9l2.15 2.15-9.9 9.9 9.9 9.9Z' />,
-    next: icons?.next || <path id='navigate_next' d='m18.75 36-2.15-2.15 9.9-9.9-9.9-9.9 2.15-2.15L30.8 23.95Z' />
+    previous: icons?.previous || (
+      <path
+        id='navigate_before'
+        d='M28.05 36 16 23.95 28.05 11.9l2.15 2.15-9.9 9.9 9.9 9.9Z'
+      />
+    ),
+    next: icons?.next || (
+      <path
+        id='navigate_next'
+        d='m18.75 36-2.15-2.15 9.9-9.9-9.9-9.9 2.15-2.15L30.8 23.95Z'
+      />
+    )
   }
 
   /**
-    *  Lista básica de items a renderizar.
-    *  e.g. itemList = ['previous', 1, 2, 3, 4, 'next']
-    */
+   *  Lista básica de items a renderizar.
+   *  e.g. itemList = ['previous', 1, 2, 3, 4, 'next']
+   */
   const itemList = [
     // Botón para navegar a la sección anterior.
     ...(showPrevButton ? ['previous'] : []),
@@ -90,11 +113,11 @@ export const NavSection = ({ renderItem, showPrevButton, showNextButton, icons, 
   ]
 
   /**
-    * Función utilizada para obtener y almacenar
-    * las referencias de los botones.
-    *
-    * @param {HTMLElement} ref - Referencia del botón.
-    */
+   * Función utilizada para obtener y almacenar
+   * las referencias de los botones.
+   *
+   * @param {HTMLElement} ref - Referencia del botón.
+   */
   const addNewRef = (ref) => {
     if (!refSections.current.includes(ref) && ref) {
       return (refSections.current = [...refSections.current, ref])
@@ -103,12 +126,12 @@ export const NavSection = ({ renderItem, showPrevButton, showNextButton, icons, 
   }
 
   /**
-    * Función utilizada en el evento KeyDown del botón,
-    * permite decidir el focus del siguiente elemento
-    * utilizando las teclas ArrowLeft o ArrowRight.
-    *
-    * @param {Event} event - Evento disparado por KeyDown
-    */
+   * Función utilizada en el evento KeyDown del botón,
+   * permite decidir el focus del siguiente elemento
+   * utilizando las teclas ArrowLeft o ArrowRight.
+   *
+   * @param {Event} event - Evento disparado por KeyDown
+   */
   const onNavigation = (e) => {
     // Obtenemos la primera sección.
     const FIRST_SECTION = refSections.current[0]
@@ -137,10 +160,10 @@ export const NavSection = ({ renderItem, showPrevButton, showNextButton, icons, 
   }
 
   /**
-    * Función del evento onClick utilizado
-    * para mostrar la sección.
-    * @param {Number} section - sección
-    */
+   * Función del evento onClick utilizado
+   * para mostrar la sección.
+   * @param {Number} section - sección
+   */
   const onClick = (section) => {
     onToggle(listId.findIndex((elem) => elem === section))
     if (onValue !== undefined) {
@@ -171,14 +194,18 @@ export const NavSection = ({ renderItem, showPrevButton, showNextButton, icons, 
           type: item,
           section: BUTTON_TYPE[item],
           selected: false,
-          disabled: true && (item === 'next' ? currentSection >= storageLastId : currentSection <= listId[0])
+          disabled:
+            true &&
+            (item === 'next'
+              ? currentSection >= storageLastId
+              : currentSection <= listId[0])
         }
   })
 
   /**
-    * Efecto que comprueba si existe la propiedad onValue,
-    * si es asi la ejecuta.
-    */
+   * Efecto que comprueba si existe la propiedad onValue,
+   * si es asi la ejecuta.
+   */
   useEffect(() => {
     if (onValue !== undefined) onValue(currentSection, listId.length)
   }, [])
@@ -192,12 +219,22 @@ export const NavSection = ({ renderItem, showPrevButton, showNextButton, icons, 
         role='tablist'
         aria-labelledby='section-list-navigation'
         aria-orientation={orientation}
-        className={`${css['c-navigation']} ${addClass ?? ''}`}
+        className={classnames({
+          [css['c-navigation']]: !defaultStyle,
+          [addClass]: addClass
+        })}
       >
         {renderItem
           ? renderItem(items)
           : items.map(({ section, type, selected, ...others }, index) => (
-            <li key={`navigation-section-item-${index}`} role='presentation' className={css['c-navigation__item']}>
+            <li
+              key={`navigation-section-item-${index}`}
+              role='presentation'
+              data-class='c-navigation__item'
+              className={classnames({
+                [css['c-navigation__item']]: !defaultStyle
+              })}
+            >
               {type === 'section'
                 ? (
                   <button
@@ -205,7 +242,10 @@ export const NavSection = ({ renderItem, showPrevButton, showNextButton, icons, 
                     role='tab'
                     tabIndex={`${selected ? 0 : -1}`}
                     aria-selected={selected}
-                    className={css['c-navigation__section']}
+                    data-class='c-navigation__section'
+                    className={classnames({
+                      [css['c-navigation__section']]: !defaultStyle
+                    })}
                     aria-label={getItemAriaLabel(type, section, selected)}
                     {...others}
                   />
@@ -213,20 +253,32 @@ export const NavSection = ({ renderItem, showPrevButton, showNextButton, icons, 
                 : (
                   <button
                     type='button'
-                    className={`${css['c-navigation__button']}`}
+                    data-class='c-navigation__button'
+                    className={classnames({
+                      [css['c-navigation__button']]: !defaultStyle
+                    })}
                     aria-label={getItemAriaLabel(type, section, selected)}
                     {...others}
                   >
                     {normalizedIcons[type]
-                      ? icons
-                        ? <Icon path={normalizedIcons[type]} key={type} />
-                        : (
-                          <Icon key={type}>
-                            <svg xmlns='http://www.w3.org/2000/svg' height='48' width='48' viewBox='0 0 48 48'>
-                              {normalizedIcons[type]}
-                            </svg>
-                          </Icon>
-                          )
+                      ? (
+                          icons
+                            ? (
+                              <Icon path={normalizedIcons[type]} key={type} />
+                              )
+                            : (
+                              <Icon key={type}>
+                                <svg
+                                  xmlns='http://www.w3.org/2000/svg'
+                                  height='48'
+                                  width='48'
+                                  viewBox='0 0 48 48'
+                                >
+                                  {normalizedIcons[type]}
+                                </svg>
+                              </Icon>
+                              )
+                        )
                       : null}
                   </button>
                   )}
@@ -249,7 +301,8 @@ NavSection.propTypes = {
   orientation: PropTypes.string,
   onValue: PropTypes.func,
   addClass: PropTypes.string,
-  getItemAriaLabel: PropTypes.func
+  getItemAriaLabel: PropTypes.func,
+  defaultStyle: PropTypes.bool
 }
 
 NavSection.defaultProps = {

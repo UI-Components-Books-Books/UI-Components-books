@@ -1,4 +1,10 @@
-import { useState, Children, cloneElement, isValidElement, useEffect } from 'react'
+import {
+  useState,
+  Children,
+  cloneElement,
+  isValidElement,
+  useEffect
+} from 'react'
 import PropTypes from 'prop-types'
 
 export const SelectGroup = ({ children: childrenProps, onAllSelect }) => {
@@ -6,19 +12,23 @@ export const SelectGroup = ({ children: childrenProps, onAllSelect }) => {
   const [allSelect, setAllSelect] = useState([])
 
   /**
-    * Función encargada de actualzar el estado con los valores
-    * provenientes del select component.
-    * @param {object} choise
-    */
+   * Función encargada de actualzar el estado con los valores
+   * provenientes del select component.
+   * @param {object} choise
+   */
   /**
-    * Función callback que se pasa como parámetro del componente select,
-    * encargada de actualzar el estado con los valores
-    * provenientes del select component.
-    *
-    * @pretorna un objeto con los valores ID y value.
-    * aram {Object} value - Objeto { Id, value }
-    */
-  const onAddSelect = (choise) => setAllSelect([...allSelect.filter((option) => option.id !== choise.id), { ...choise }])
+   * Función callback que se pasa como parámetro del componente select,
+   * encargada de actualzar el estado con los valores
+   * provenientes del select component.
+   *
+   * @return un objeto con los valores ID y value.
+   * param {Object} value - Objeto { Id, value }
+   */
+  const onAddSelect = (choise) =>
+    setAllSelect([
+      ...allSelect.filter((option) => option.id !== choise.id),
+      { ...choise }
+    ])
 
   useEffect(() => {
     // Si existe la propiedad onAllSelect emita el valor del estado
@@ -26,8 +36,8 @@ export const SelectGroup = ({ children: childrenProps, onAllSelect }) => {
   }, [allSelect, onAllSelect])
 
   /**
-    * Necesitamos agregar las propiedades onChoise al componente select.
-    */
+   * Necesitamos agregar las propiedades onChoise al componente select.
+   */
   const children = Children.map(childrenProps, (child) => {
     if (!isValidElement(child)) return null
 
@@ -42,6 +52,11 @@ export const SelectGroup = ({ children: childrenProps, onAllSelect }) => {
 }
 
 SelectGroup.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.arrayOf(PropTypes.element), PropTypes.element, PropTypes.node]),
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.arrayOf(PropTypes.element),
+    PropTypes.element,
+    PropTypes.node
+  ]),
   onAllSelect: PropTypes.func
 }

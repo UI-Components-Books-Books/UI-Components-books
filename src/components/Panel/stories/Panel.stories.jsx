@@ -1,6 +1,14 @@
 import React from 'react'
 
-import { Col, Row, Button, Panel, Section, NavSection, ButtonSection } from '../../../components'
+import {
+  Col,
+  Row,
+  Button,
+  Panel,
+  Section,
+  NavSection,
+  ButtonSection
+} from '../../../components'
 
 export default {
   title: 'ui-components/Panel',
@@ -9,7 +17,13 @@ export default {
     (story) => (
       <Row display='flex' justify-content='center' align-items='center'>
         <Col xs='11' mm='10' md='9' lg='7' hd='6'>
-          <Row display='flex' justify-content='center' align-items='center' addClass='u-my-5' style={{ gap: '1rem' }}>
+          <Row
+            display='flex'
+            justify-content='center'
+            align-items='center'
+            addClass='u-my-5'
+            style={{ gap: '1rem' }}
+          >
             {story()}
           </Row>
         </Col>

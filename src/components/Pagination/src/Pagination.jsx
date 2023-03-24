@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types'
+import classnames from 'classnames'
 
 import { PaginationItem } from '../../Pagination'
 import { usePagination } from '../../../hooks/usePagination'
@@ -34,22 +35,43 @@ const defaultAriaLabel = (type, page, selected) => {
   return `Ir a la ${getSpanishType[type]} página`
 }
 
-export const Pagination = ({ renderItem, getItemAriaLabel, addClass, ...props }) => {
+export const Pagination = ({
+  renderItem,
+  getItemAriaLabel,
+  addClass,
+  defaultStyle,
+  ...props
+}) => {
   /**
-    * Se utiliza el custom hook usePagination para
-    * obtener la paginación.
-    */
+   * Se utiliza el custom hook usePagination para
+   * obtener la paginación.
+   */
   const { items } = usePagination({ ...props })
 
   return (
-    <nav className={`${addClass ?? ''} ${css['c-pagination']}`}>
-      <ul className={css['c-pagination__ul']}>
+    <nav
+      className={classnames({
+        [css['c-pagination']]: !defaultStyle,
+        [addClass]: addClass
+      })}
+    >
+      <ul
+        className={classnames({
+          [css['c-pagination__ul']]: !defaultStyle
+        })}
+        data-class='c-pagination__ul'
+      >
         {items.map((item, index) => (
-          <li key={`pagination-item-${index}`}>
+          <li key={`pagination-item-${index}`} data-class='c-pagination__ul-li'>
             {/* Utilizamos la render-prop para agregar el elemento que va a estar dentro del tag li */}
             {renderItem({
               ...item,
-              'aria-label': getItemAriaLabel(item.type, item.page, item.selected)
+              'aria-label': getItemAriaLabel(
+                item.type,
+                item.page,
+                item.selected
+              ),
+              ...(defaultStyle && { defaultStyle })
             })}
           </li>
         ))}
@@ -85,5 +107,6 @@ Pagination.propTypes = {
   showLastButton: PropTypes.bool,
   siblingCount: PropTypes.number,
   renderItem: PropTypes.func,
-  getItemAriaLabel: PropTypes.func
+  getItemAriaLabel: PropTypes.func,
+  defaultStyle: PropTypes.bool
 }

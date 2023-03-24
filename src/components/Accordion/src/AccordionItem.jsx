@@ -1,12 +1,13 @@
 import { Children, cloneElement, isValidElement } from 'react'
 import PropTypes from 'prop-types'
+import classnames from 'classnames'
 
 import { typeValidation } from '../../../utils/validations/typeValidation'
 import { getChildrenByType } from '../../../utils/validations/getChildrenType'
 
 import css from './Accordion.module.scss'
 
-export const AccordionItem = ({ children: childrenProp, id, isOpen, onToggle, addClass }) => {
+export const AccordionItem = ({ children: childrenProp, id, isOpen, onToggle, addClass, defaultStyle }) => {
   /**
     * Se crea la función onExpanded para lanzar la función
     * onToggle proveniente de las props desde acá,
@@ -50,7 +51,11 @@ export const AccordionItem = ({ children: childrenProp, id, isOpen, onToggle, ad
   })
 
   return (
-    <div className={`${css['c-accordion__item']} ${addClass ?? ''}`}>
+    <div className={classnames({
+      [css['c-accordion__item']]: !defaultStyle,
+      [addClass]: addClass
+    })}
+    >
       {/* Filtramos los children para solo aceptar de tipo AccordionButton y AccordionPanel. */}
       {getChildrenByType(children, ['AccordionButton', 'AccordionPanel'])}
     </div>
@@ -63,6 +68,7 @@ AccordionItem.propTypes = {
   isOpen: PropTypes.oneOfType([PropTypes.array, PropTypes.number]),
   onToggle: PropTypes.func,
   addClass: PropTypes.string,
+  defaultStyle: PropTypes.bool,
   __TYPE: typeValidation('AccordionItem')
 }
 

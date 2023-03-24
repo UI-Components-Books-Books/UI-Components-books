@@ -1,6 +1,12 @@
-import { useRef, Children, cloneElement, isValidElement, useState, useMemo } from 'react'
+import {
+  useRef,
+  Children,
+  cloneElement,
+  isValidElement,
+  useState,
+  useId
+} from 'react'
 import PropTypes from 'prop-types'
-import _uniquedId from 'lodash/uniqueId'
 import { usePopper } from 'react-popper'
 
 import { Portal } from '../../Portal'
@@ -15,7 +21,16 @@ const KEYCODE = Object.freeze({
   ESC: 27
 })
 
-export const Tooltip = ({ children: childrenProps, id, label, placement, addClass, hasArrow, distance, isDisabled }) => {
+export const Tooltip = ({
+  children: childrenProps,
+  id,
+  label,
+  placement,
+  addClass,
+  hasArrow,
+  distance,
+  isDisabled
+}) => {
   // Estado que contrala la apertura o cierra del tooltip
   const [isOpen, setIsOpen] = useState(false)
   // Referencia del elemento que va a tener el tooltip
@@ -26,43 +41,43 @@ export const Tooltip = ({ children: childrenProps, id, label, placement, addClas
   const timeoutID = useRef()
 
   // Creamos el id relacionar el tooltip con su elemento padre
-  const tooltipId = useMemo(() => id || _uniquedId('c-tooltip-'), [id])
+  const tooltipId = id || useId()
 
   /**
-    * Función para manejar el evento focus del elemento padre.
-    * @param {Event} Event
-    */
+   * Función para manejar el evento focus del elemento padre.
+   * @param {Event} Event
+   */
   const onFocus = (_) => {
     if (!isOpen) setIsOpen(!isOpen)
   }
 
   /**
-    * Función para manejar el evento leave focus del elemento padre.
-    * @param {Event} Event
-    */
+   * Función para manejar el evento leave focus del elemento padre.
+   * @param {Event} Event
+   */
   const onBlur = (_) => setIsOpen(false)
 
   /**
-    * Función para manejar el evento mouseover del elemento padre.
-    * @param {Event} Event
-    */
+   * Función para manejar el evento mouseover del elemento padre.
+   * @param {Event} Event
+   */
   const onMouseEnter = (_) => {
-    if (!isOpen || document.activeElement !== refElement.current) setIsOpen(!isOpen)
+    if (!isOpen || document.activeElement !== refElement.current) { setIsOpen(!isOpen) }
   }
 
   /**
-    * Función que permite que el texto dentro del tooltip
-    * se pueda interactuar
-    * @param {Event} Event
-    */
+   * Función que permite que el texto dentro del tooltip
+   * se pueda interactuar
+   * @param {Event} Event
+   */
   const onMouseEnterTooltip = () => {
     window.clearTimeout(timeoutID.current)
   }
 
   /**
-    * Función para manejar el evento mouseout del elemento padre.
-    * @param {Event} Event
-    */
+   * Función para manejar el evento mouseout del elemento padre.
+   * @param {Event} Event
+   */
   const onMouseLeave = (_) => {
     timeoutID.current = setTimeout(() => {
       setIsOpen(false)
@@ -70,9 +85,9 @@ export const Tooltip = ({ children: childrenProps, id, label, placement, addClas
   }
 
   /**
-    * Función para manejar el evento keydown del elemento padre.
-    * @param {Event} Event
-    */
+   * Función para manejar el evento keydown del elemento padre.
+   * @param {Event} Event
+   */
   const onKeyDown = (e) => {
     if ((e.keyCode | e.which) === KEYCODE.ESC && isOpen) {
       setIsOpen(!isOpen)
@@ -95,24 +110,28 @@ export const Tooltip = ({ children: childrenProps, id, label, placement, addClas
   })
 
   // Hook para controlar el posicionamiento del tooltip con respecto a su elemento padre.
-  const { styles, attributes } = usePopper(refElement.current, refTooltip.current, {
-    placement,
-    modifiers: [
-      {
-        name: 'offset',
-        options: {
-          offset: [0, distance || 8]
-        }
-      },
-      {
-        name: 'flip',
-        options: {
-          padding: 10
-        }
-      },
-      { name: 'eventListeners', enabled: isOpen }
-    ]
-  })
+  const { styles, attributes } = usePopper(
+    refElement.current,
+    refTooltip.current,
+    {
+      placement,
+      modifiers: [
+        {
+          name: 'offset',
+          options: {
+            offset: [0, distance || 8]
+          }
+        },
+        {
+          name: 'flip',
+          options: {
+            padding: 10
+          }
+        },
+        { name: 'eventListeners', enabled: isOpen }
+      ]
+    }
+  )
 
   // Si no hay label, está deshabilitado o tiene más de 1 hijo no mostrar el tooltip
   if (!label || Children.count(childrenProps) > 1 || isDisabled) {
@@ -130,12 +149,20 @@ export const Tooltip = ({ children: childrenProps, id, label, placement, addClas
           data-open={isOpen}
           onMouseEnter={onMouseEnterTooltip}
           onMouseLeave={onMouseLeave}
-          className={`${css['c-tooltip']} ${isOpen && css['c-tooltip--active']} ${addClass ?? ''}`}
+          className={`${css['c-tooltip']} ${
+            isOpen && css['c-tooltip--active']
+          } ${addClass ?? ''}`}
           style={styles.popper}
           {...attributes.popper}
         >
           {label}
-          {hasArrow && <div className={css['c-tooltip__arrow']} data-popper-arrow style={styles.arrow} />}
+          {hasArrow && (
+            <div
+              className={css['c-tooltip__arrow']}
+              data-popper-arrow
+              style={styles.arrow}
+            />
+          )}
         </div>
       </Portal>
     </>
@@ -147,7 +174,12 @@ Tooltip.defaultProps = {
 }
 
 Tooltip.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.node, PropTypes.element, PropTypes.arrayOf(PropTypes.element), PropTypes.arrayOf(PropTypes.node)]),
+  children: PropTypes.oneOfType([
+    PropTypes.node,
+    PropTypes.element,
+    PropTypes.arrayOf(PropTypes.element),
+    PropTypes.arrayOf(PropTypes.node)
+  ]),
   id: PropTypes.string,
   label: PropTypes.string.isRequired,
   addClass: PropTypes.string,

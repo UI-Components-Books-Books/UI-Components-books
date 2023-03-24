@@ -45,7 +45,11 @@ export const WithIssuingValue = () => {
 
   return (
     <>
-      <CheckBox onChange={onChange} value='my value' label='CheckBox with value "my value".' />
+      <CheckBox
+        onChange={onChange}
+        value='my value'
+        label='CheckBox with value "my value".'
+      />
       <p className='u-my-2'>{JSON.stringify(state, 2, null)}</p>
     </>
   )

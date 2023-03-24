@@ -1,17 +1,17 @@
-import { forwardRef, useMemo } from 'react'
+import { forwardRef, useId } from 'react'
 import PropTypes from 'prop-types'
-import _uniquedId from 'lodash/uniqueId'
+import classnames from 'classnames'
 
 import { typeValidation } from '../../../utils/validations/typeValidation'
 import css from './Input.module.scss'
 
-export const Input = forwardRef(({ id, type, value, placeholder, label, addClass, isLabelVisible, isDisabled, isRequired, isReadOnly, onValue }, ref) => {
+export const Input = forwardRef(({ id, type, value, placeholder, label, addClass, isLabelVisible, isDisabled, isRequired, isReadOnly, defaultStyle, onValue }, ref) => {
   /**
     * Se crea un ID para identificar el input y además
     * para pasarlo dentro la función onValue proveniente
     * de los props.
     */
-  const input = useMemo(() => id || _uniquedId('c-input-'), [id])
+  const input = id || useId()
 
   /**
     * Detecta cuando el input tiene un cambio así actualizamos
@@ -33,7 +33,13 @@ export const Input = forwardRef(({ id, type, value, placeholder, label, addClass
   }
 
   return (
-    <label htmlFor={input} className={`${css['c-label']} ${addClass ?? ''}`}>
+    <label
+      htmlFor={input}
+      className={classnames({
+        [css['c-label']]: !defaultStyle,
+        [addClass]: addClass
+      })}
+    >
       <span className={`${!isLabelVisible && 'u-sr-only'}`}> {label} </span>
 
       <input
@@ -47,7 +53,9 @@ export const Input = forwardRef(({ id, type, value, placeholder, label, addClass
         placeholder={placeholder}
         autoComplete='off'
         onChange={onChange}
-        className={css['c-input']}
+        className={classnames({
+          [css['c-input']]: !defaultStyle
+        })}
         {
           ...(isReadOnly && { readOnly: isReadOnly, 'aria-readonly': isReadOnly })
         }
@@ -75,6 +83,7 @@ Input.propTypes = {
   isDisabled: PropTypes.bool,
   isRequired: PropTypes.bool,
   isReadOnly: PropTypes.bool,
+  defaultStyle: PropTypes.bool,
   onValue: PropTypes.func,
   __TYPE: typeValidation('Input')
 }
