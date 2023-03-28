@@ -69,7 +69,7 @@ export const Panel = ({ children, defaultIndex, addClass, defaultStyle }) => {
       }}
     >
       <div
-        className={classnames('class-video-interpreter-ui-panel', {
+        className={classnames('video-interpreter-ui-panel', {
           [css['c-panel']]: !defaultStyle,
           [addClass]: addClass
         })}

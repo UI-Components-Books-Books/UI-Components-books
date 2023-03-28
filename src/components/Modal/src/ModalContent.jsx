@@ -64,7 +64,7 @@ export const ModalContent = ({
       data-type={__TYPE}
       onKeyDown={handleKeyDown}
       className={classnames(
-        'animate__animated animate__fadeIn animate__faster class-video-interpreter-ui-modal',
+        'animate__animated animate__fadeIn animate__faster video-interpreter-ui-modal',
         {
           [`${css['c-modal']} u-px-3 u-py-3`]: !defaultStyle,
           [addClass]: addClass

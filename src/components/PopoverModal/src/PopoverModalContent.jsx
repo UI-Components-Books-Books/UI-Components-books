@@ -121,6 +121,7 @@ export const PopoverModalContent = ({
         className={classnames({
           [css['c-popover-modal']]: !defaultStyle,
           [css['c-popover-modal--active']]: !defaultStyle && isOpen,
+          ["video-interpreter-ui-popover"]: "video-interpreter-ui-popover",
           [addClass]: addClass
         })}
         style={styles.popper}

@@ -1,0 +1,285 @@
+.c-vid-container figcaption {
+  margin-top: 1.5em;
+  text-align: center;
+}
+.c-vid-container {
+  background-color: white;
+  min-height: 165px;
+}
+
+.c-vid {
+  position: relative;
+  display: grid;
+  color: #fff;
+  box-sizing: border-box;
+  padding: 0.625rem;
+  border: 0.0625rem solid var(--clr-complementary-900);
+  margin: 0 auto;
+  min-height: 165px;
+}
+
+.c-vid svg {
+  color: currentColor;
+  forced-color-adjust: auto;
+}
+
+.c-vid video {
+  outline: none;
+  height: 100%;
+  width: 100%;
+}
+
+.c-vid-controls {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 2.75rem auto;
+  max-height: 2.5rem;
+  max-width: 100%;
+  grid-gap: 0.5rem;
+  padding: 0 0.2rem;
+  background-color: var(--clr-primary-700);
+}
+
+.c-vid-controls button {
+  display: grid;
+  place-items: center;
+  padding: 0.2em;
+  height: 100%;
+  width: auto;
+  color: #fff;
+  border: 0.125rem solid transparent;
+  background-color: transparent;
+  border-radius: 3.2px;
+  cursor: pointer;
+  border-radius: 0.5em;
+}
+
+.c-vid-controls button:hover,
+.c-vid-controls button:focus {
+  background-color: var(--clr-complementary-900);
+}
+
+.c-vid-controls button:focus {
+  outline: 0.0625rem solid whitesmoke;
+  outline-offset: -4px;
+}
+
+.c-vid-controls svg {
+  height: 1.5625rem;
+  width: auto;
+  fill: currentColor;
+}
+
+.c-vid-controls-text {
+  margin: 0;
+}
+
+.c-vid-controls-text {
+  width: 100%;
+  font-variant-numeric: tabular-nums;
+  display: none;
+}
+
+.progress {
+  display: flex;
+  flex-basis: 100%;
+  height: 6px;
+  transition: height 0.3s;
+  background: rgba(255, 255, 255, 0.9);
+  cursor: pointer;
+  position: relative;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+  display: none;
+}
+
+.progress-bar {
+  width: 50%;
+  background-color: var(--secondaryColor);
+  flex: 0;
+  flex-basis: 0%;
+}
+
+.c-vid-controls-volume {
+  display: grid;
+  grid-template-columns: auto 1fr;
+}
+
+.c-vid-controls-volume label {
+  display: grid;
+}
+
+.c-vid-controls-volume label:focus-within {
+  background-color: var(--clr-complementary-900);
+}
+
+.c-vid-controls-volume input {
+  background-color: #fff;
+}
+
+.c-vid-controls-volume input:focus {
+  outline: 2px solid transparent;
+}
+
+.c-vid-controls-volume-item[type='range'] {
+  width: 100%;
+  accent-color: var(--secondaryColor);
+}
+
+.c-vid video::cue {
+  visibility: visible;
+  color: white;
+  background-color: var(--tertiaryColor);
+}
+
+.c-vid video.no-captions::cue {
+  visibility: hidden;
+}
+
+[display='true'] {
+  display: block;
+}
+
+[display='false'] {
+  display: none;
+}
+.gap {
+  gap: 0;
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
+/********************************/
+
+.menu-float {
+  padding: 5px;
+  z-index: 102;
+  position: fixed;
+  right: -2em;
+  top: 20%;
+}
+
+.menu-float:focus-within,
+.menu-float:hover {
+  right: 0px !important;
+}
+
+.menu-float-active {
+  right: 0px !important;
+}
+
+.menu-float-active .menu-float-btn:hover {
+  color: var(--clr-neutral-100);
+  background-color: var(--clr-primary-600);
+}
+
+.menu-float-active .menu-float-btn {
+  color: var(--clr-neutral-100);
+  background-color: var(--clr-primary-700);
+}
+
+.menu-float-btn {
+  cursor: pointer;
+  border-radius: 5px;
+  border: 2px solid transparent;
+  color: var(--clr-neutral-100);
+  background-color: var(--clr-primary-700);
+  float: right;
+  height: 32px;
+  display: flex;
+}
+
+.menu-float-btn svg {
+  width: 1.7rem;
+  height: 1.7rem;
+  fill: currentColor;
+  forced-color-adjust: auto;
+}
+
+.menu-float-btn-disable {
+  align-items: center;
+  padding: 4px 6px;
+}
+
+.menu-float-active .menu-float-btn span {
+  font-size: 25px;
+}
+.menu-float-btndrop {
+  float: left;
+  height: initial;
+  border: none;
+}
+
+.menu-float-active .menu-float-btndrop {
+  border: 1px solid var(--clr-complementary-900);
+}
+
+.menu-float-active .menu-float-btndrop {
+  height: 32px;
+}
+.menu-float-btndrop span {
+  font-size: 28px;
+}
+
+.menu-float-dropdown {
+  width: 100%;
+  position: relative;
+  display: block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.menu-float-dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: transparent;
+  width: 60px;
+  border-radius: 5px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.5);
+  top: 100px;
+  left: 30px;
+}
+.menu-float-dropdown-content span,
+.menu-float-active .menu-float-dropdown-content span {
+  font-size: 30px;
+}
+
+.menu-float-active .menu-float-dropdown-content {
+  left: 0px !important;
+  top: 30px;
+}
+
+/* Links inside the dropdown */
+.menu-float-dropdown-content button {
+  color: var(--clr-complementary-900);
+  text-decoration: none;
+  display: flex;
+  cursor: pointer;
+  width: 100%;
+  background-color: var(--clr-primary-800);
+  border-radius: 5px;
+  border: 1px groove var(--clr-complementary-900);
+}
+
+/* Show the dropdown menu on hover */
+.menu-float-btndrop:focus + .menu-float-dropdown-content,
+.menu-float-btndrop:not(.close):hover + .menu-float-dropdown-content,
+.menu-float-dropdown-content:hover,
+.menu-float-dropdown:focus-within .menu-float-btndrop + .menu-float-dropdown-content {
+  display: block;
+}
+
+.hide {
+  display: none !important;
+}
+
+.image-Video {
+  width: 4rem;
+}
+
+.ico_smart {
+  font-size: 2.2rem;
+}
