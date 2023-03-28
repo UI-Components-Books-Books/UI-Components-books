@@ -6277,7 +6277,7 @@ const bc = (e) => {
       page: w,
       selected: w === v,
       disabled: a,
-      "aria-current": w === v ? !0 : void 0
+      "aria-current-page": w === v ? !0 : void 0
     } : {
       onClick: (R) => {
         g(R, _(w));
