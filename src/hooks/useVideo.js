@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 export const useVideo = (ref, pathVideo, pathname ) => {
   const [videos, setVideos] = useState({ video1: '', video2: '' });
+  const defaulVideo = {video1: '/', video2: '/'}
   const options = {
     attributes: true,
     characterData: true,
@@ -17,12 +18,12 @@ export const useVideo = (ref, pathVideo, pathname ) => {
       if (result.length > 0) {
         const { slides } = result[0];
         const videos = slides[slide < 0 ? 0 : slide];
-        setVideos(videos || {});
+        setVideos(videos || defaulVideo);
       } else {
-        setVideos({});
+        setVideos(defaulVideo);
       }
     } else {
-      setVideos({});
+      setVideos(defaulVideo);
     }
   };
 
@@ -36,12 +37,12 @@ export const useVideo = (ref, pathVideo, pathname ) => {
         const { modals } = slides[slide < 0 ? 0 : slide];
         const modal = (modals || []).filter((e) => e.id === id_modal);
         const videos = modal[0];
-        setVideos(videos || {});
+        setVideos(videos || defaulVideo);
       } else {
-        setVideos({});
+        setVideos(defaulVideo);
       }
     } else {
-      setVideos({});
+        setVideos(defaulVideo);
     }
   };
 
