@@ -6247,7 +6247,10 @@ const _u = (e) => {
   }, b = (T, $) => {
     const B = $ - T + 1;
     return Array.from({ length: B }, (W, Y) => T + Y);
-  }, y = b(1, Math.min(t, n)), x = b(Math.max(n - t + 1, t + 1), n), A = Math.max(
+  }, y = b(1, Math.min(t, n)), x = b(
+    Math.max(n - t + 1, t + 1),
+    n
+  ), A = Math.max(
     Math.min(
       // Inicio natural
       v - u,
@@ -6301,7 +6304,7 @@ const _u = (e) => {
       page: T,
       selected: T === v,
       disabled: a,
-      "aria-current-page": T === v ? !0 : void 0
+      "aria-current": T === v ? "page" : void 0
     } : {
       onClick: ($) => {
         m($, w(T));
@@ -8349,9 +8352,9 @@ function nr(e, t) {
     }
     if (e.constructor === RegExp)
       return e.source === t.source && e.flags === t.flags;
-    if (e.valueOf !== Object.prototype.valueOf && typeof e.valueOf == "function" && typeof t.valueOf == "function")
+    if (e.valueOf !== Object.prototype.valueOf)
       return e.valueOf() === t.valueOf();
-    if (e.toString !== Object.prototype.toString && typeof e.toString == "function" && typeof t.toString == "function")
+    if (e.toString !== Object.prototype.toString)
       return e.toString() === t.toString();
     if (a = Object.keys(e), n = a.length, n !== Object.keys(t).length)
       return !1;

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState } from "react";
 
 /**
  * Hook para crear una Paginación.
@@ -36,43 +36,46 @@ const usePagination = (props) => {
     showLastButton = false,
     siblingCount = 1,
     ...other
-  } = props
+  } = props;
 
   // Estado para controlar las páginas
-  const [page, setPage] = useState(defaultPage)
+  const [page, setPage] = useState(defaultPage);
 
   /**
-    * Función que se ejecuta al momento
-    * de dar click en los botones.
-    * @param {Event} event
-    * @param {Number} value
-    */
+   * Función que se ejecuta al momento
+   * de dar click en los botones.
+   * @param {Event} event
+   * @param {Number} value
+   */
   const handleClick = (event, value) => {
-    setPage(value)
+    setPage(value);
 
     if (handleChange) {
-      handleChange(event, value)
+      handleChange(event, value);
     }
-  }
+  };
 
   /**
-    * Función que genera un array a partir de un rango
-    * de valores.
-    *
-    * @param {Number} start
-    * @param {Number} end
-    * @returns {Number[]} Array con el rango de números
-    */
+   * Función que genera un array a partir de un rango
+   * de valores.
+   *
+   * @param {Number} start
+   * @param {Number} end
+   * @returns {Number[]} Array con el rango de números
+   */
   const range = (start, end) => {
-    const length = end - start + 1
+    const length = end - start + 1;
     // Genera un array utilizando un Array-like
-    return Array.from({ length }, (_, i) => start + i)
-  }
+    return Array.from({ length }, (_, i) => start + i);
+  };
 
   // Array de las páginas del inicio. e.g. [1,2]
-  const startPages = range(1, Math.min(boundaryCount, count))
+  const startPages = range(1, Math.min(boundaryCount, count));
   // Array de las páginas del final. e.g. [9,10]
-  const endPages = range(Math.max(count - boundaryCount + 1, boundaryCount + 1), count)
+  const endPages = range(
+    Math.max(count - boundaryCount + 1, boundaryCount + 1),
+    count
+  );
 
   const siblingsStart = Math.max(
     Math.min(
@@ -83,7 +86,7 @@ const usePagination = (props) => {
     ),
     // Mayor que el startPages
     boundaryCount + 2
-  )
+  );
 
   const siblingsEnd = Math.min(
     Math.max(
@@ -94,73 +97,84 @@ const usePagination = (props) => {
     ),
     // Menor que el endPages
     endPages.length > 0 ? endPages[0] - 2 : count - 1
-  )
+  );
 
   // Lista basica de items a renderizar
   // e.g. itemList = ['first', 'previous', 1, 'ellipsis', 4, 5, 6, 'ellipsis', 10, 'next', 'last']
   const itemList = [
-    ...(showFirstButton ? ['first'] : []),
-    ...(hidePrevButton ? [] : ['previous']),
+    ...(showFirstButton ? ["first"] : []),
+    ...(hidePrevButton ? [] : ["previous"]),
     ...startPages,
 
     // Comienza el ellipsis
-    ...(siblingsStart > boundaryCount + 2 ? ['start-ellipsis'] : boundaryCount + 1 < count - boundaryCount ? [boundaryCount + 1] : []),
+    ...(siblingsStart > boundaryCount + 2
+      ? ["start-ellipsis"]
+      : boundaryCount + 1 < count - boundaryCount
+      ? [boundaryCount + 1]
+      : []),
 
     // Sibling pages
     ...range(siblingsStart, siblingsEnd),
 
     // Finaliza el ellipsis
-    ...(siblingsEnd < count - boundaryCount - 1 ? ['end-ellipsis'] : count - boundaryCount > boundaryCount ? [count - boundaryCount] : []),
+    ...(siblingsEnd < count - boundaryCount - 1
+      ? ["end-ellipsis"]
+      : count - boundaryCount > boundaryCount
+      ? [count - boundaryCount]
+      : []),
 
     ...endPages,
-    ...(hideNextButton ? [] : ['next']),
-    ...(showLastButton ? ['last'] : [])
-  ]
+    ...(hideNextButton ? [] : ["next"]),
+    ...(showLastButton ? ["last"] : []),
+  ];
 
   // Asigna el número del botón apartir del tipo de este
   const buttonPage = (type) => {
     switch (type) {
-      case 'first':
-        return 1
-      case 'previous':
-        return page - 1
-      case 'next':
-        return page + 1
-      case 'last':
-        return count
+      case "first":
+        return 1;
+      case "previous":
+        return page - 1;
+      case "next":
+        return page + 1;
+      case "last":
+        return count;
       default:
-        return null
+        return null;
     }
-  }
+  };
 
   // Convierte la lista de elemento básicos en objetos
   const items = itemList.map((item) => {
-    return typeof item === 'number'
+    return typeof item === "number"
       ? {
           onClick: (event) => {
-            handleClick(event, item)
+            handleClick(event, item);
           },
-          type: 'page',
+          type: "page",
           page: item,
           selected: item === page,
           disabled,
-          'aria-current-page': item === page ? true : undefined
+          "aria-current": item === page ? "page" : undefined,
         }
       : {
           onClick: (event) => {
-            handleClick(event, buttonPage(item))
+            handleClick(event, buttonPage(item));
           },
           type: item,
           page: buttonPage(item),
           selected: false,
-          disabled: disabled || (item.indexOf('ellipsis') === -1 && (item === 'next' || item === 'last' ? page >= count : page <= 1))
-        }
-  })
+          disabled:
+            disabled ||
+            (item.indexOf("ellipsis") === -1 &&
+              (item === "next" || item === "last" ? page >= count : page <= 1)),
+        };
+  });
 
   return {
     items,
-    ...other
-  }
-}
+    ...other,
+  };
+};
 
-export { usePagination }
+export { usePagination };
