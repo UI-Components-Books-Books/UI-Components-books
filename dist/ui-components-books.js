@@ -6441,12 +6441,12 @@ xo.defaultProps = {
   element: /* @__PURE__ */ p("button", {})
 };
 const en = {
-  "c-panel": "_c-panel_4adu5_1",
-  "c-section": "_c-section_4adu5_7",
-  "c-navigation": "_c-navigation_4adu5_13",
-  "c-navigation__item": "_c-navigation__item_4adu5_27",
-  "c-navigation__section": "_c-navigation__section_4adu5_31",
-  "c-navigation__button": "_c-navigation__button_4adu5_49"
+  "c-panel": "_c-panel_1mhez_1",
+  "c-section": "_c-section_1mhez_8",
+  "c-navigation": "_c-navigation_1mhez_14",
+  "c-navigation__item": "_c-navigation__item_1mhez_29",
+  "c-navigation__section": "_c-navigation__section_1mhez_33",
+  "c-navigation__button": "_c-navigation__button_1mhez_51"
 }, mr = ct(), Tu = ({ children: e, defaultIndex: t, addClass: n, defaultStyle: r }) => {
   const [a, i] = Z(null), [l, s] = Z([]), c = (d) => s((v) => [...v, d]), f = (d) => i(l[d]), u = (d) => a === d;
   return X(() => {
