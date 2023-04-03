@@ -9,7 +9,6 @@
 
 :where(.c-vid) {
   margin-inline: auto;
-  color: var(--video-input-color);
 
   @media screen and (forced-colors: active) {
     border: 2px solid transparent;
@@ -25,6 +24,7 @@
   position: relative;
   display: grid;
   grid-template-rows: auto 6px 2.8125rem;
+  color: var(--video-input-color);
 
   @media screen and (display-mode: fullscreen) {
     display: grid;

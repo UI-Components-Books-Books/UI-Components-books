@@ -8985,26 +8985,26 @@ const tf = () => {
       children: /* @__PURE__ */ p("span", { className: At["c-tour-number"], "data-class": "c-tour-number", children: t })
     }
   );
-}, nf = "_active_r3225_90", rf = "_iconPulse_r3225_1", ge = {
-  "c-vid": "_c-vid_r3225_1",
-  "c-vid__caption": "_c-vid__caption_r3225_20",
-  "c-vid__container": "_c-vid__container_r3225_25",
-  "c-vid__video": "_c-vid__video_r3225_44",
-  "no-captions": "_no-captions_r3225_56",
-  "c-vid__wrapper": "_c-vid__wrapper_r3225_60",
-  "c-vid__icon-container": "_c-vid__icon-container_r3225_70",
-  "c-vid__icon": "_c-vid__icon_r3225_70",
+}, nf = "_active_i7dnv_90", rf = "_iconPulse_i7dnv_1", ge = {
+  "c-vid": "_c-vid_i7dnv_1",
+  "c-vid__caption": "_c-vid__caption_i7dnv_19",
+  "c-vid__container": "_c-vid__container_i7dnv_24",
+  "c-vid__video": "_c-vid__video_i7dnv_44",
+  "no-captions": "_no-captions_i7dnv_56",
+  "c-vid__wrapper": "_c-vid__wrapper_i7dnv_60",
+  "c-vid__icon-container": "_c-vid__icon-container_i7dnv_70",
+  "c-vid__icon": "_c-vid__icon_i7dnv_70",
   active: nf,
   iconPulse: rf,
-  "c-vid__progress-bg": "_c-vid__progress-bg_r3225_112",
-  "c-vid__progress-bar": "_c-vid__progress-bar_r3225_134",
-  "c-vid__progress-sphere": "_c-vid__progress-sphere_r3225_140",
-  "c-vid__controls": "_c-vid__controls_r3225_150",
-  "c-vid__button": "_c-vid__button_r3225_165",
-  "c-vid__volume": "_c-vid__volume_r3225_180",
-  "c-vid__volume-item": "_c-vid__volume-item_r3225_191",
-  "c-vid__time": "_c-vid__time_r3225_202",
-  "c-vid__subtitles": "_c-vid__subtitles_r3225_208"
+  "c-vid__progress-bg": "_c-vid__progress-bg_i7dnv_112",
+  "c-vid__progress-bar": "_c-vid__progress-bar_i7dnv_134",
+  "c-vid__progress-sphere": "_c-vid__progress-sphere_i7dnv_140",
+  "c-vid__controls": "_c-vid__controls_i7dnv_150",
+  "c-vid__button": "_c-vid__button_i7dnv_165",
+  "c-vid__volume": "_c-vid__volume_i7dnv_180",
+  "c-vid__volume-item": "_c-vid__volume-item_i7dnv_191",
+  "c-vid__time": "_c-vid__time_i7dnv_202",
+  "c-vid__subtitles": "_c-vid__subtitles_i7dnv_208"
 }, rs = ({ src: e, width: t = "1000", hasDescription: n, description: r, addClass: a, poster: i, ...l }) => {
   const [s, c] = Z({
     totalSeconds: 0,
