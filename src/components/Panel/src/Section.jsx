@@ -47,7 +47,7 @@ export const Section = forwardRef(
           [addClass]: addClass,
         })}
         {...(type === "carrousel" && {
-          "aria-roledescription": "Slide",
+          "aria-roledescription": "Sección",
         })}
         {...props}
       >
