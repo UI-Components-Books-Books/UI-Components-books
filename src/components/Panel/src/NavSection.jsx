@@ -1,4 +1,4 @@
-import { useContext, useRef, useEffect } from 'react'
+import { useContext, useRef, useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
@@ -96,21 +96,26 @@ export const NavSection = ({
       />
     )
   }
-
   /**
    *  Lista básica de items a renderizar.
    *  e.g. itemList = ['previous', 1, 2, 3, 4, 'next']
    */
-  const itemList = [
-    // Botón para navegar a la sección anterior.
-    ...(showPrevButton ? ['previous'] : []),
+  const [itemList, setItemList] = useState([])
 
-    // Lista de todas la secciones.
-    ...(listId || []),
+  useEffect(() => {
+    if (listId.length === 0) return
 
-    // Botón para navegar a la siguiente sección.
-    ...(showNextButton ? ['next'] : [])
-  ]
+    setItemList([
+      // Botón para navegar a la sección anterior.
+      ...(showPrevButton ? ['previous'] : []),
+
+      // Lista de todas la secciones.
+      ...(listId || []),
+
+      // Botón para navegar a la siguiente sección.
+      ...(showNextButton ? ['next'] : [])
+    ])
+  }, [listId])
 
   /**
    * Función utilizada para obtener y almacenar
