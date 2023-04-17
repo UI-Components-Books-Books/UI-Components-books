@@ -1,25 +1,31 @@
-import { useState, useEffect, createContext } from 'react'
-import PropTypes from 'prop-types'
-import classnames from 'classnames'
+import { useState, useEffect, createContext } from "react";
+import PropTypes from "prop-types";
+import classnames from "classnames";
 
-import css from './Panel.module.scss'
+import css from "./Panel.module.scss";
 
 /**
  * Creamos un contexto para proveer a ciertos
  * componentes hijos las funcionalidades creadas
  * acá en el componente padre.
  */
-export const PanelContext = createContext()
+export const PanelContext = createContext();
 
-export const Panel = ({ children, defaultIndex, addClass, defaultStyle }) => {
+export const Panel = ({
+  children,
+  defaultIndex,
+  addClass,
+  type,
+  defaultStyle,
+}) => {
   // Controla el estado de abierto / cerrado de las secciones.
-  const [isOpen, setIsOpen] = useState(null)
+  const [isOpen, setIsOpen] = useState(null);
 
   /**
    * Array para almacenar el valor de los ID
    * de cada sección.
    */
-  const [IdToSection, setIdToSection] = useState([])
+  const [IdToSection, setIdToSection] = useState([]);
 
   /**
    * Utilizada para actualizar el estado con el ID de cada sección
@@ -27,7 +33,7 @@ export const Panel = ({ children, defaultIndex, addClass, defaultStyle }) => {
    * @param {Number} id - ID sección
    * @returns void
    */
-  const addNewIdToSection = (id) => setIdToSection((prev) => [...prev, id])
+  const addNewIdToSection = (id) => setIdToSection((prev) => [...prev, id]);
 
   /**
    * Se crea la función onToggle para agregar el ID de
@@ -35,7 +41,7 @@ export const Panel = ({ children, defaultIndex, addClass, defaultStyle }) => {
    *
    * @param {Number} value - Id proveniente de la sección.
    */
-  const onToggle = (value) => setIsOpen(IdToSection[value])
+  const onToggle = (value) => setIsOpen(IdToSection[value]);
 
   /**
    * Devuelve "true" o "false" apartir de comparar
@@ -44,19 +50,19 @@ export const Panel = ({ children, defaultIndex, addClass, defaultStyle }) => {
    *
    * @returns {(Boolean)}
    */
-  const validation = (id) => isOpen === id
+  const validation = (id) => isOpen === id;
 
   useEffect(() => {
-    if (IdToSection.length === 0) return
+    if (IdToSection.length === 0) return;
 
     // Si existe la propiedad defaultIndex actualiza el estado con ella.
     // de otra manera utiliza el valor en la posición '0' del IdToSection
     if (defaultIndex !== undefined) {
-      onToggle(defaultIndex - 1)
+      onToggle(defaultIndex - 1);
     } else {
-      setIsOpen(IdToSection[0])
+      setIsOpen(IdToSection[0]);
     }
-  }, [defaultIndex, IdToSection])
+  }, [defaultIndex, IdToSection]);
 
   return (
     <PanelContext.Provider
@@ -65,21 +71,26 @@ export const Panel = ({ children, defaultIndex, addClass, defaultStyle }) => {
         onToggle,
         listId: IdToSection,
         currentSection: isOpen,
-        addNewIdToSection
+        addNewIdToSection,
+        type,
       }}
     >
       <div
-        className={classnames('video-interpreter-ui-panel', {
-          [css['c-panel']]: !defaultStyle,
-          [addClass]: addClass
+        className={classnames("video-interpreter-ui-panel", {
+          [css["c-panel"]]: !defaultStyle,
+          [addClass]: addClass,
         })}
         data-value={isOpen}
+        {...(type === "carrousel" && {
+          role: "group",
+          "aria-roledescription": "Slider",
+        })}
       >
         {children}
       </div>
     </PanelContext.Provider>
-  )
-}
+  );
+};
 
 Panel.propTypes = {
   children: PropTypes.oneOfType([
@@ -87,9 +98,9 @@ Panel.propTypes = {
     PropTypes.element,
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
-    PropTypes.string
+    PropTypes.string,
   ]),
   defaultIndex: PropTypes.number,
   addClass: PropTypes.string,
-  defaultStyle: PropTypes.bool
-}
+  defaultStyle: PropTypes.bool,
+};
