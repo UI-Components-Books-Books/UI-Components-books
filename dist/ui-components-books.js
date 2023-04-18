@@ -8919,7 +8919,7 @@ const At = {
                     label: "Salir",
                     "data-class": "c-button__close",
                     onClick: m,
-                    icon: { path: "/assets/icons/svg/close.svg", size: "big" },
+                    icon: { path: new URL("/ui-components-books/dist/assets/icons/svg/close.svg", self.location).href, size: "big" },
                     ...h && { defaultStyle: h }
                   }
                 ),
@@ -8931,7 +8931,7 @@ const At = {
                     label: "Anterior",
                     "data-class": "c-button__before",
                     onClick: b,
-                    icon: { path: "/assets/icons/svg/navigate_before.svg", size: "big" },
+                    icon: { path: new URL("/ui-components-books/dist/assets/icons/svg/navigate_before.svg", self.location).href, size: "big" },
                     ...h && { defaultStyle: h }
                   }
                 ),
@@ -8943,7 +8943,7 @@ const At = {
                     label: "Siguiente",
                     "data-class": "c-button__after",
                     onClick: $,
-                    icon: { path: "/assets/icons/svg/navigate_next.svg", size: "big" },
+                    icon: { path: new URL("/ui-components-books/dist/assets/icons/svg/navigate_next.svg", self.location).href, size: "big" },
                     ...h && { defaultStyle: h }
                   }
                 )
