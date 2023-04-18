@@ -8865,7 +8865,7 @@ const At = {
     /* @__PURE__ */ p(
       "div",
       {
-        className: ee({ [At["c-layout"]]: !h, [r]: r }),
+        className: ee({ [At["c-layout"]]: !h }),
         "data-class": "c-layout"
       }
     ),
@@ -8877,7 +8877,8 @@ const At = {
         style: T.popper,
         className: ee({
           [At["c-tour-content"]]: !h,
-          "animate__animated animate__fadeIn animate__faster": a
+          "animate__animated animate__fadeIn animate__faster": a,
+          [r]: r
         }),
         ...e,
         ...N.popper,

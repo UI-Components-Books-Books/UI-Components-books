@@ -89,7 +89,7 @@ export const TourElement = ({
   return (
     <>
       <div
-        className={classnames({ [css['c-layout']]: !defaultStyle, [addClass]: addClass })}
+        className={classnames({ [css['c-layout']]: !defaultStyle })}
         data-class='c-layout'
       />
       <div
@@ -98,7 +98,8 @@ export const TourElement = ({
         style={styles.popper}
         className={classnames({
           [css['c-tour-content']]: !defaultStyle,
-          'animate__animated animate__fadeIn animate__faster': isOpen
+          'animate__animated animate__fadeIn animate__faster': isOpen,
+          [addClass]: addClass
         })}
         {...ariaAttributes}
         {...attributes.popper}
