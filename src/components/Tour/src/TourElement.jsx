@@ -134,7 +134,7 @@ export const TourElement = ({
               label='Salir'
               data-class='c-button__close'
               onClick={onClose}
-              icon={{ name: 'close', size: 'big' }}
+              icon={{ path: '/assets/icons/svg/close.svg', size: 'big' }}
               {...(defaultStyle && { defaultStyle })}
             />
           )}
@@ -146,7 +146,7 @@ export const TourElement = ({
               label='Anterior'
               data-class='c-button__before'
               onClick={onPrev}
-              icon={{ name: 'navigate_before', size: 'big' }}
+              icon={{ path: '/assets/icons/svg/navigate_before.svg', size: 'big' }}
               {...(defaultStyle && { defaultStyle })}
             />
           )}
@@ -157,7 +157,7 @@ export const TourElement = ({
             label='Siguiente'
             data-class='c-button__after'
             onClick={handleNextElement}
-            icon={{ name: 'navigate_next', size: 'big' }}
+            icon={{ path: '/assets/icons/svg/navigate_next.svg', size: 'big' }}
             {...(defaultStyle && { defaultStyle })}
           />
         </div>
