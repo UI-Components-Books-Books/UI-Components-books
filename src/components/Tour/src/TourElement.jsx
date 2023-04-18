@@ -10,7 +10,8 @@ import css from './Tour.module.scss'
 export const TourElement = ({
   ariaAttributes,
   hideCloseButton,
-  hideBackButton
+  hideBackButton,
+  addClass
 }) => {
   // Propiedad obtenidas a través del contexto.
   const {
@@ -22,7 +23,6 @@ export const TourElement = ({
     content,
     placement,
     distance,
-    elementClass,
     defaultStyle
   } = useContext(TourContext)
 
@@ -89,7 +89,7 @@ export const TourElement = ({
   return (
     <>
       <div
-        className={classnames({ [css['c-layout']]: !defaultStyle })}
+        className={classnames({ [css['c-layout']]: !defaultStyle, [addClass]: addClass })}
         data-class='c-layout'
       />
       <div
@@ -98,8 +98,7 @@ export const TourElement = ({
         style={styles.popper}
         className={classnames({
           [css['c-tour-content']]: !defaultStyle,
-          'animate__animated animate__fadeIn animate__faster': isOpen,
-          [elementClass]: elementClass
+          'animate__animated animate__fadeIn animate__faster': isOpen
         })}
         {...ariaAttributes}
         {...attributes.popper}
@@ -174,5 +173,6 @@ TourElement.propTypes = {
     'aria-modal': PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
   }),
   hideCloseButton: PropTypes.bool,
-  hideBackButton: PropTypes.bool
+  hideBackButton: PropTypes.bool,
+  addClass: PropTypes.string
 }

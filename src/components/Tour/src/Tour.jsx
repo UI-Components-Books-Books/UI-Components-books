@@ -15,7 +15,8 @@ export const Tour = ({
   hideCloseButton,
   hideBackButton,
   ariaAttributes,
-  defaultStyle
+  defaultStyle,
+  addClass
 }) => {
   // Estado utilizado para almacenar el id del elemento activado.
   const [activeId, setActiveId] = useState(null)
@@ -119,6 +120,7 @@ export const Tour = ({
               ariaAttributes={ariaAttributes}
               hideCloseButton={hideCloseButton}
               hideBackButton={hideBackButton}
+              addClass={addClass}
             />
           </>
         )}
@@ -173,6 +175,7 @@ Tour.propTypes = {
   hideCloseButton: PropTypes.bool,
   hideBackButton: PropTypes.bool,
   defaultStyle: PropTypes.bool,
+  addClass: PropTypes.string,
   ariaAttributes: PropTypes.shape({
     role: PropTypes.string,
     tabIndex: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
