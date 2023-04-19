@@ -83,7 +83,6 @@ export const Pagination = ({
 Pagination.defaultProps = {
   boundaryCount: 1,
   count: 1,
-  defaultPage: 1,
   disabled: false,
   hideNextButton: false,
   hidePrevButton: false,

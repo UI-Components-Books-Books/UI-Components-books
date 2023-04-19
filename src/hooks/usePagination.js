@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 /**
  * Hook para crear una Paginación.
@@ -27,7 +27,7 @@ const usePagination = (props) => {
   const {
     boundaryCount = 1,
     count = 1,
-    defaultPage = 1,
+    defaultPage,
     disabled = false,
     hideNextButton = false,
     hidePrevButton = false,
@@ -39,7 +39,15 @@ const usePagination = (props) => {
   } = props
 
   // Estado para controlar las páginas
-  const [page, setPage] = useState(defaultPage)
+  const [page, setPage] = useState(defaultPage || 1)
+
+  // Efecto que actualiza el estado cuando,
+  // cambia la propiedad defaultPage.
+  useEffect(() => {
+    if (defaultPage) {
+      setPage(defaultPage)
+    }
+  }, [defaultPage])
 
   /**
    * Función que se ejecuta al momento
