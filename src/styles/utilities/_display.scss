@@ -5,6 +5,10 @@
     gap: var(--gap, 1em);
 }
 
+[class*="u-flex-inline"] {
+    display: inline-flex;
+}
+
 .u-self-auto {
     align-self: auto;
 }

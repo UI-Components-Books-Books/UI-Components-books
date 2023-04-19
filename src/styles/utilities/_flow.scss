@@ -52,10 +52,30 @@
   align-self: center;
 }
 
-.u-self-stretch {
-  align-self: stretch;
+/** 
+  -----------------------
+**/
+.u-justify-c-stretch {
+  justify-content: stretch;
 }
 
-.u-self-baseline {
-  align-self: baseline;
+.u-justify-c-baseline {
+  justify-content: baseline;
 }
+
+.u-justify-c-auto {
+  justify-content: auto;
+}
+
+.u-justify-c-start {
+  justify-content: flex-start;
+}
+
+.u-justify-c-end {
+  justify-content: flex-end;
+}
+
+.u-justify-c-center {
+  justify-content: center;
+}
+
