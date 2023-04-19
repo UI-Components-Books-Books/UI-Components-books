@@ -1547,17 +1547,26 @@ const Zn = {
   "c-small": "_c-small_1f7k1_9",
   "c-normal": "_c-normal_1f7k1_13",
   "c-big": "_c-big_1f7k1_17"
-}, Fs = /\w+\.svg/gi, Ce = ({ children: e, path: t, size: n, addClass: r, viewBox: a, width: i, height: c }) => {
+}, Fs = /\w+\.svg/gi, Ce = ({
+  children: e,
+  path: t,
+  size: n,
+  addClass: r,
+  viewBox: a,
+  width: i,
+  height: c,
+  ...s
+}) => {
   if (!t && !e)
     return /* @__PURE__ */ p("span", { children: "Doesn't exist" });
   if (Re.count(e) > 1)
     return /* @__PURE__ */ p("span", { children: "Only have one children" });
-  const s = t && t.match(Fs).toString().replace(/.svg/gi, ""), d = `${t}#${s}`;
+  const d = t && t.match(Fs).toString().replace(/.svg/gi, ""), f = `${t}#${d}`;
   return e ? Pe(e, {
     ...e.props,
     className: `${Zn["c-icon"]} ${Zn[`c-${n}`]} ${r ?? ""}`,
     "aria-hidden": !0,
-    "data-testid": s
+    "data-testid": d
   }) : /* @__PURE__ */ p(
     "svg",
     {
@@ -1567,8 +1576,9 @@ const Zn = {
       viewBox: a,
       className: `${Zn["c-icon"]} ${Zn[`c-${n}`]} ${r ?? ""}`,
       "aria-hidden": "true",
-      "data-testid": s,
-      children: /* @__PURE__ */ p("use", { xlinkHref: d })
+      "data-testid": d,
+      ...s,
+      children: /* @__PURE__ */ p("use", { xlinkHref: f })
     }
   );
 };

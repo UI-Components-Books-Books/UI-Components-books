@@ -8,7 +8,16 @@ import css from './Icon.module.scss'
 // Expresion regular usada para obtener el nombre del svg que está path.
 const REGEX = /\w+\.svg/gi
 
-export const Icon = ({ children, path, size, addClass, viewBox, width, height }) => {
+export const Icon = ({
+  children,
+  path,
+  size,
+  addClass,
+  viewBox,
+  width,
+  height,
+  ...props
+}) => {
   /**
    * Evaluamos la propiedad path para no retonar nada si esta no existen.
    */
@@ -48,6 +57,7 @@ export const Icon = ({ children, path, size, addClass, viewBox, width, height })
         className={`${css['c-icon']} ${css[`c-${size}`]} ${addClass ?? ''}`}
         aria-hidden='true'
         data-testid={NAME_SVG}
+        {...props}
       >
         <use xlinkHref={PATH} />
       </svg>
