@@ -27,10 +27,17 @@ export const Tour = ({
    * y además agregamos la prop id.
    */
   const items = [
-    ...steps.reduce(
-      (list, item, index) => [...list, { id: index + 1, ...item }],
-      []
-    )
+    ...steps
+      .reduce(
+        (list, item, index) => [
+          ...list,
+          document.querySelector(item.target)
+            ? { id: index + 1, ...item }
+            : null
+        ],
+        []
+      )
+      .filter((item) => item !== null)
   ]
 
   /**

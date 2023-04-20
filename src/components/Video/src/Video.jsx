@@ -454,7 +454,7 @@ export const Video = ({ src, width = '1000', hasDescription, description, addCla
 
         <div className={css['c-vid__controls']}>
           <button
-            className={`${css['c-vid__button']} tour`}
+            className={`${css['c-vid__button']} js-button-video-play`}
             aria-label={getstateVideoPlay.label}
             onClick={handlePlay}
             data-description='Este botón reproduce el video'
@@ -467,7 +467,7 @@ export const Video = ({ src, width = '1000', hasDescription, description, addCla
           </button>
 
           <button
-            className={`${css['c-vid__button']} tour`}
+            className={`${css['c-vid__button']} js-button-video-volumen`}
             aria-label={getStateMuted.label}
             data-description='Este botón controla el volumen'
             onClick={handleMuted}

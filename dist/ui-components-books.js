@@ -8727,9 +8727,12 @@ const Ro = ut(), ts = ({
 }) => {
   const [f, l] = X(null), u = [
     ...e.reduce(
-      (T, N, D) => [...T, { id: D + 1, ...N }],
+      (T, N, D) => [
+        ...T,
+        document.querySelector(N.target) ? { id: D + 1, ...N } : null
+      ],
       []
-    )
+    ).filter((T) => T !== null)
   ], h = (T) => u.filter((N) => N.id === T).reduce((N, D) => ({ ...N, ...D }), {}), v = (T) => {
     const N = document.querySelector("#root");
     N.inert = T;
@@ -9237,7 +9240,7 @@ const tf = () => {
         /* @__PURE__ */ p(
           "button",
           {
-            className: `${ge["c-vid__button"]} tour`,
+            className: `${ge["c-vid__button"]} js-button-video-play`,
             "aria-label": u.label,
             onClick: pe,
             "data-description": "Este botón reproduce el video",
@@ -9247,7 +9250,7 @@ const tf = () => {
         /* @__PURE__ */ p(
           "button",
           {
-            className: `${ge["c-vid__button"]} tour`,
+            className: `${ge["c-vid__button"]} js-button-video-volumen`,
             "aria-label": v.label,
             "data-description": "Este botón controla el volumen",
             onClick: M,
