@@ -16,6 +16,7 @@ export const Icon = ({
   viewBox,
   width,
   height,
+  __TYPE,
   ...props
 }) => {
   /**
@@ -45,7 +46,8 @@ export const Icon = ({
           ...children.props,
           className: `${css['c-icon']} ${css[`c-${size}`]} ${addClass ?? ''}`,
           'aria-hidden': true,
-          'data-testid': NAME_SVG
+          'data-testid': NAME_SVG,
+          'data-component': __TYPE
         })
       )
     : (
@@ -57,6 +59,7 @@ export const Icon = ({
         className={`${css['c-icon']} ${css[`c-${size}`]} ${addClass ?? ''}`}
         aria-hidden='true'
         data-testid={NAME_SVG}
+        data-component={__TYPE}
         {...props}
       >
         <use xlinkHref={PATH} />
