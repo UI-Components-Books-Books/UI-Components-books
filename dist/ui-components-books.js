@@ -1347,19 +1347,20 @@ if (process.env.NODE_ENV !== "production") {
 const Ms = (e) => {
   var t, n;
   return ((t = e == null ? void 0 : e.props) == null ? void 0 : t.__TYPE) || ((n = e == null ? void 0 : e.type) == null ? void 0 : n.toString().replace("Symbol(react.fragment)", "react.fragment")) || void 0;
-}, He = (e, t) => Re.toArray(e).filter((n) => t.indexOf(Ms(n)) !== -1), ks = ({ children: e, allowMultiple: t, defaultIndex: n }) => {
-  const [r, a] = ee(), i = (s) => {
-    t ? r.includes(s) ? a(r.filter((u) => u !== s)) : a([...r, s]) : a(s);
+}, He = (e, t) => Re.toArray(e).filter((n) => t.indexOf(Ms(n)) !== -1), ks = ({ children: e, allowMultiple: t, defaultIndex: n, allowDifferentChildren: r }) => {
+  const [a, i] = ee(), c = (u) => {
+    t ? a.includes(u) ? i(a.filter((f) => f !== u)) : i([...a, u]) : i(u);
   };
-  X(() => (a(t ? n || [] : n ?? null), () => {
-    a(null);
+  X(() => (i(t ? n || [] : n ?? null), () => {
+    i(null);
   }), [t, n]);
-  const c = Re.map(e, (s, u) => ct(s) ? Pe(s, { ...s.props, id: u, isOpen: r, onToggle: i }) : null);
-  return /* @__PURE__ */ p("div", { children: He(c, ["AccordionItem"]) });
+  const s = Re.map(e, (u, f) => ct(u) ? Pe(u, { ...u.props, id: f, isOpen: a, onToggle: c }) : null);
+  return /* @__PURE__ */ p("div", { children: r ? s : He(s, ["AccordionItem"]) });
 };
 ks.propTypes = {
   children: o.oneOfType([o.arrayOf(o.element), o.element]),
   allowMultiple: o.bool,
+  allowDifferentChildren: o.bool,
   defaultIndex: o.oneOfType([o.array, o.number])
 };
 var Kr = {}, Ls = {
@@ -1469,8 +1470,8 @@ Fa.propTypes = {
 Fa.defaultProps = {
   __TYPE: "AccordionButton"
 };
-const Ba = ({ children: e, id: t, isOpen: n, onToggle: r, addClass: a, defaultStyle: i }) => {
-  const c = () => r(t), s = () => typeof n == "number" ? n === t : Array.isArray(n) ? !!n.includes(t) : !1, u = Re.map(e, (f) => ct(f) ? f.props.__TYPE === "AccordionButton" ? Pe(f, { ...f.props, id: t, onExpanded: c, isExpanded: s() }) : Pe(f, { ...f.props, id: t, isExpanded: s() }) : null);
+const Ba = ({ children: e, id: t, isOpen: n, onToggle: r, addClass: a, defaultStyle: i, allowDifferentChildren: c }) => {
+  const s = () => r(t), u = () => typeof n == "number" ? n === t : Array.isArray(n) ? !!n.includes(t) : !1, f = Re.map(e, (l) => ct(l) ? l.props.__TYPE === "AccordionButton" ? Pe(l, { ...l.props, id: t, onExpanded: s, isExpanded: u() }) : Pe(l, { ...l.props, id: t, isExpanded: u() }) : null);
   return /* @__PURE__ */ p(
     "div",
     {
@@ -1478,7 +1479,7 @@ const Ba = ({ children: e, id: t, isOpen: n, onToggle: r, addClass: a, defaultSt
         [Jt["c-accordion__item"]]: !i,
         [a]: a
       }),
-      children: He(u, ["AccordionButton", "AccordionPanel"])
+      children: c ? f : He(f, ["AccordionButton", "AccordionPanel"])
     }
   );
 };
@@ -1489,6 +1490,7 @@ Ba.propTypes = {
   onToggle: o.func,
   addClass: o.string,
   defaultStyle: o.bool,
+  allowDifferentChildren: o.bool,
   __TYPE: me("AccordionItem")
 };
 Ba.defaultProps = {

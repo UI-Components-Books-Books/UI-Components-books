@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import { getChildrenByType } from '../../../utils/validations/getChildrenType'
 
-export const Accordion = ({ children: childrenProp, allowMultiple, defaultIndex }) => {
+export const Accordion = ({ children: childrenProp, allowMultiple, defaultIndex, allowDifferentChildren }) => {
   // Controla el estado de abierto / cerrado del AccordionItem.
   const [isOpen, setIsOpen] = useState()
 
@@ -48,7 +48,7 @@ export const Accordion = ({ children: childrenProp, allowMultiple, defaultIndex 
   return (
     <div>
       {/* Filtramos los children para solo aceptar de tipo AccordionItem. */}
-      {getChildrenByType(children, ['AccordionItem'])}
+      {!allowDifferentChildren ? getChildrenByType(children, ['AccordionItem']) : children}
     </div>
   )
 }
@@ -56,5 +56,6 @@ export const Accordion = ({ children: childrenProp, allowMultiple, defaultIndex 
 Accordion.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.element), PropTypes.element]),
   allowMultiple: PropTypes.bool,
+  allowDifferentChildren: PropTypes.bool,
   defaultIndex: PropTypes.oneOfType([PropTypes.array, PropTypes.number])
 }

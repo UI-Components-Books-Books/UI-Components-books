@@ -7,7 +7,7 @@ import { getChildrenByType } from '../../../utils/validations/getChildrenType'
 
 import css from './Accordion.module.scss'
 
-export const AccordionItem = ({ children: childrenProp, id, isOpen, onToggle, addClass, defaultStyle }) => {
+export const AccordionItem = ({ children: childrenProp, id, isOpen, onToggle, addClass, defaultStyle, allowDifferentChildren }) => {
   /**
     * Se crea la función onExpanded para lanzar la función
     * onToggle proveniente de las props desde acá,
@@ -57,7 +57,7 @@ export const AccordionItem = ({ children: childrenProp, id, isOpen, onToggle, ad
     })}
     >
       {/* Filtramos los children para solo aceptar de tipo AccordionButton y AccordionPanel. */}
-      {getChildrenByType(children, ['AccordionButton', 'AccordionPanel'])}
+      {!allowDifferentChildren ? getChildrenByType(children, ['AccordionButton', 'AccordionPanel']) : children}
     </div>
   )
 }
@@ -69,6 +69,7 @@ AccordionItem.propTypes = {
   onToggle: PropTypes.func,
   addClass: PropTypes.string,
   defaultStyle: PropTypes.bool,
+  allowDifferentChildren: PropTypes.bool,
   __TYPE: typeValidation('AccordionItem')
 }
 
