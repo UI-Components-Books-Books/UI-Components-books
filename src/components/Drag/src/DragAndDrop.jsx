@@ -1,4 +1,4 @@
-import { cloneElement, useState, Children, isValidElement, useEffect, createContext } from 'react'
+import { cloneElement, useState, Children, isValidElement, useEffect, createContext, useRef } from 'react'
 import PropTypes from 'prop-types'
 import {
   DndContext,
@@ -86,7 +86,10 @@ export const DragAndDrop = ({
   propValidate,
   modifiers: modifiersProp,
   announcements,
-  onDragMove
+  defaultState,
+  defaultValidate,
+  onState,
+  id: idDragAndDrop
 }) => {
   /**
     * Utilizamos este estado para almacenar la lista
@@ -106,7 +109,14 @@ export const DragAndDrop = ({
     * de almacenar la posición de los elementos "drag"
     * en los contenedores "drop".
     */
-  const [items, setItems] = useState(() => initialState())
+  const [items, setItems] = useState(() => Object.keys(defaultState).length > 0 ? defaultState : initialState())
+
+  /**
+   * Referencia utilizada como "flag", para que cuando
+   * cambie el estado items, envie el nuevo estado la
+   * propiedad onState si está existe.
+   */
+  const flagUpdatedState = useRef(false)
 
   /**
     * Función utilizada para inicializar el estado items.
@@ -220,6 +230,10 @@ export const DragAndDrop = ({
     if (baseContainer !== over.id) validateDrags(over, active.id)
 
     setItems((items) => {
+      // Actualizamos nuestro flag a true, con esto permite actualizar la propiedad onState.
+      // con los cambios de items.
+      flagUpdatedState.current = true
+
       const listOfItemsWithoutActiveItem = items[activeContainer].filter(item => item !== active.id)
 
       const listOfPreviousItems = [...items[overContainer]]
@@ -321,6 +335,35 @@ export const DragAndDrop = ({
     }
   }, [reboot])
 
+  /**
+   * Efecto que observa los cambios en el propiedad defaultState
+   * y si está cambia actualiza el estado items
+   */
+  useEffect(() => {
+    if (Object.keys(defaultState).length === 0) return
+
+    setItems(defaultState)
+  }, [defaultState])
+
+  useEffect(() => {
+    if (defaultValidate.length === 0) return
+
+    setValidateId(defaultValidate)
+  }, [defaultValidate])
+
+  /**
+   * Efecto que observa los cambios en el estado items
+   * y si existe la propiedad onState llama a está con
+   * la información de items
+   */
+  useEffect(() => {
+    if (onState && flagUpdatedState.current) {
+      flagUpdatedState.current = false
+
+      onState({ state: { key: idDragAndDrop, newObjectState: { ...items }, validateId } })
+    }
+  }, [onState, items])
+
   return (
     <DragAndDropContext.Provider value={{ listId: validateId, propValidate, validate, isDragging: activeId }}>
       <DndContext
@@ -328,7 +371,6 @@ export const DragAndDrop = ({
         accessibility={{ announcements }}
         onDragStart={({ active }) => setActiveId(active.id)}
         onDragEnd={onDragEnd}
-        {...(!!onDragMove && { onDragMove })}
         onDragCancel={() => setActiveId(null)}
         {...(modifiersProp && { modifiers: [modifiers[modifiersProp]] })}
       >
@@ -345,7 +387,9 @@ DragAndDrop.defaultProps = {
   validate: false,
   reboot: false,
   propValidate: 'data-validation',
-  announcements: defaultAnnouncements
+  announcements: defaultAnnouncements,
+  defaultState: {},
+  defaultValidate: []
 }
 
 DragAndDrop.propTypes = {
@@ -357,5 +401,8 @@ DragAndDrop.propTypes = {
   propValidate: PropTypes.string.isRequired,
   modifiers: PropTypes.oneOf(['restrictToVerticalAxis', 'restrictToHorizontalAxis']),
   announcements: PropTypes.object.isRequired,
-  onDragMove: PropTypes.func
+  defaultState: PropTypes.object,
+  defaultValidate: PropTypes.array,
+  onState: PropTypes.func,
+  id: PropTypes.string
 }
