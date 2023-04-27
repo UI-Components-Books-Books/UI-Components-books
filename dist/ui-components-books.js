@@ -9212,6 +9212,7 @@ const ef = () => {
         /* @__PURE__ */ L(
           "video",
           {
+            preload: "none",
             ref: A,
             onTimeUpdate: (F) => j(F.target),
             onLoadedData: (F) => j(F.target),

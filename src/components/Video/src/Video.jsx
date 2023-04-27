@@ -382,6 +382,7 @@ export const Video = ({ src, width = '1000', hasDescription, description, addCla
       <div className={`${css['c-vid__container']} ${addClass}`} ref={refCont}>
         <div className={css['c-vid__wrapper']}>
           <video
+            preload='none'
             ref={refVideo}
             onTimeUpdate={(event) => initialValues(event.target)}
             onLoadedData={(event) => initialValues(event.target)}
