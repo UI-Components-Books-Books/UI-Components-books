@@ -1,7 +1,10 @@
-label {
+.c-select-label {
     --select-border: var(--clr-neutral-400);
     --select-focus: var(--clr-primary-400);
     --select-arrow: var(--select-border);
+}
+
+:where(.c-select-label) {
     display: block;
 }
 
