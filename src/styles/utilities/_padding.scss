@@ -3,9 +3,9 @@
 @each $key, $item in $paddings {
   // Padding con el sistema de diseño
 
-  .u-p-#{$key} {
-    padding: var(--padding-#{$key});
-  }
+  // .u-p-#{$key} {
+  //   padding: var(--padding-#{$key});
+  // }
 
   // Padding top con el sistema de diseño
 
