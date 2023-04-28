@@ -4,9 +4,9 @@
   // Padding con el sistema de diseño
 
   .u-p-#{$key} {
-    padding: var(--padding-#{$key})
+    padding: var(--padding-#{$key});
   }
-  
+
   // Padding top con el sistema de diseño
 
   .u-pt-#{$key} {
