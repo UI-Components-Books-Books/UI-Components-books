@@ -31,6 +31,7 @@ export const PopoverModalContent = ({
   const { isOpen, onOpen, refButton } = useContext(PopoverModalContext)
   // Referencia del PopoverModal
   const refPopoverModal = useRef()
+  const refPopoverModalSwitch = useRef()
 
   // Lista de elementos a los cuales se les puede hacer focus.
   const SELECTOR_ELEMENTS =
@@ -61,7 +62,7 @@ export const PopoverModalContent = ({
    * Custom hooks que ejecuta un método
    * cuando se interactua fuera del popover.
    */
-  useInteractOutside({ ref: refPopoverModal, onInteractionOutside })
+  useInteractOutside({ ref: refPopoverModalSwitch, onInteractionOutside })
 
   /**
    * Función para manejar el evento keydown del elemento padre.
@@ -129,11 +130,16 @@ export const PopoverModalContent = ({
   )
 
   useEffect(() => {
+    const popoverModalRef = refPopoverModal.current
+
     if (isOpen) {
       // Agrega el focus al PopoverModal
-      refPopoverModal.current.focus()
+      popoverModalRef.focus()
+      refPopoverModalSwitch.current = popoverModalRef
+    } else {
+      refPopoverModalSwitch.current = null
     }
-  }, [isOpen])
+  }, [isOpen, refPopoverModal])
 
   if (isDisabled) {
     return <>{children}</>
