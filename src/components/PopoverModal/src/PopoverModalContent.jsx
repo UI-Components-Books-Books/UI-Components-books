@@ -4,6 +4,7 @@ import { usePopper } from 'react-popper'
 import classnames from 'classnames'
 
 import { PopoverModalContext, Portal } from '../../../components'
+import { useInteractOutside } from '../../../hooks/useInteractionOutside'
 
 import css from './PopoverModal.module.scss'
 
@@ -27,13 +28,40 @@ export const PopoverModalContent = ({
   defaultStyle
 }) => {
   // Obtenemos la función isOpen y la referencia del botón del contexto
-  const { isOpen, refButton } = useContext(PopoverModalContext)
+  const { isOpen, onOpen, refButton } = useContext(PopoverModalContext)
   // Referencia del PopoverModal
   const refPopoverModal = useRef()
 
   // Lista de elementos a los cuales se les puede hacer focus.
   const SELECTOR_ELEMENTS =
     'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed [tabindex="0"], [contenteditable], audio:not([tabindex="-1"])'
+
+  /**
+   * Comprueba si el elemento del DOM es el botón que abrio el popover.
+   * @param {React.ReactHTMLElement} element - Elemento del DOM
+   * @returns {Boolean}
+   */
+  const shouldCloseOnInteractOutside = (element, refButton) => {
+    return element === refButton.current
+  }
+
+  /**
+   * Maneja el evento al presionar o tocar fuera del popover.
+   * @param {React.EventHandler} event - Evento mousedown | touchstart
+   */
+  const onInteractionOutside = (event) => {
+    if (!shouldCloseOnInteractOutside(event.target, refButton)) {
+      onOpen()
+      event.stopPropagation()
+      event.preventDefault()
+    }
+  }
+
+  /**
+   * Custom hooks que ejecuta un método
+   * cuando se interactua fuera del popover.
+   */
+  useInteractOutside({ ref: refPopoverModal, onInteractionOutside })
 
   /**
    * Función para manejar el evento keydown del elemento padre.
@@ -121,7 +149,7 @@ export const PopoverModalContent = ({
         className={classnames({
           [css['c-popover-modal']]: !defaultStyle,
           [css['c-popover-modal--active']]: !defaultStyle && isOpen,
-          ["video-interpreter-ui-popover"]: "video-interpreter-ui-popover",
+          'video-interpreter-ui-popover': 'video-interpreter-ui-popover',
           [addClass]: addClass
         })}
         style={styles.popper}
