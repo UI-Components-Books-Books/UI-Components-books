@@ -17,6 +17,10 @@ const KEYCODE = Object.freeze({
   TAB: 9
 })
 
+// Lista de elementos a los cuales se les puede hacer focus.
+const SELECTOR_ELEMENTS =
+    'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed [tabindex="0"], [contenteditable], audio:not([tabindex="-1"])'
+
 export const PopoverModalContent = ({
   id,
   children,
@@ -32,10 +36,6 @@ export const PopoverModalContent = ({
   // Referencia del PopoverModal
   const refPopoverModal = useRef()
   const refPopoverModalSwitch = useRef()
-
-  // Lista de elementos a los cuales se les puede hacer focus.
-  const SELECTOR_ELEMENTS =
-    'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed [tabindex="0"], [contenteditable], audio:not([tabindex="-1"])'
 
   /**
    * Comprueba si el elemento del DOM es el botón que abrio el popover.
@@ -161,6 +161,7 @@ export const PopoverModalContent = ({
         style={styles.popper}
         onKeyDown={onKeyDown}
         data-hidden={!isOpen}
+        data-popper
         {...(!isOpen && { hidden: true })}
         {...attributes.popper}
       >
