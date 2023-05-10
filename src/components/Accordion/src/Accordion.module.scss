@@ -26,20 +26,24 @@
     background-color: rgb(0, 0, 0, 0.04);
 }
 
-
-:where(.c-accordion) {
-    transition: height 0.2s ease 0s, opacity 0.2s ease-in-out 0s, transform 0.2s ease-in-out 0s; 
+.c-accordion__panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 500ms;
 }
 
-:where(.c-accordion__panel) {
-    height: 0px;
+.c-accordion__panel[aria-hidden="false"] {
+    grid-template-rows: 1fr;
+}
+
+.c-accordion__panel[aria-hidden="true"]>div {
+    padding: 0
+}
+
+.c-accordion__panel>div {
     overflow: hidden;
+    transition: padding 500ms;
 }
-
-:where(.c-accordion__panel--active) {
-    height: auto; // se necesita un tamaño para que funcione la transición
-}
-
 
 :where(.c-accordion__panel-content) {
     padding: 0.5rem 1rem 1rem;

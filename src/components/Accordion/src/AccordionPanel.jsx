@@ -13,27 +13,21 @@ export const AccordionPanel = ({
   __TYPE,
   ...props
 }) => {
-  // TODO: Agrega animacion utilizando frame motion
   return (
     <div
-      className={`${css['c-accordion']} ${
-        isExpanded
-          ? css['c-accordion__panel--active']
-          : css['c-accordion__panel']
-      }`}
+      id={`accordion-panel-${id}`}
+      role='region'
       aria-hidden={!isExpanded}
+      aria-labelledby={`accordion-button-${id}`}
       data-type={__TYPE}
-      {...(!isExpanded && { hidden: !isExpanded })}
+      className={classnames(css['c-accordion__panel'], {
+        [addClass]: addClass
+      })}
       {...props}
     >
       <div
-        id={`accordion-panel-${id}`}
-        role='region'
-        aria-hidden={!isExpanded}
-        aria-labelledby={`accordion-button-${id}`}
         className={classnames({
-          [css['c-accordion__panel-content']]: !defaultStyle,
-          [addClass]: addClass
+          [css['c-accordion__panel-content']]: !defaultStyle
         })}
       >
         {children}
