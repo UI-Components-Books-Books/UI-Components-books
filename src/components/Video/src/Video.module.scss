@@ -59,7 +59,7 @@
 
 :where(.c-vid__wrapper) {
   display: grid;
-  grid-template-areas: "stack";
+  grid-template-areas: 'stack';
   place-items: center;
 }
 
@@ -205,7 +205,7 @@
   font-variant-numeric: tabular-nums;
 }
 
-:where(.c-vid__subtitles[aria-pressed="true"]) {
+:where(.c-vid__subtitles[aria-pressed='true']) {
   color: var(--video-bg);
   background-color: var(--video-input-color);
   border: 2px solid transparent;
@@ -216,7 +216,7 @@
   cursor: not-allowed;
 }
 
-:where(.c-vid__subtitles[aria-pressed="true"]:hover) {
+:where(.c-vid__subtitles[aria-pressed='true']:hover) {
   background-color: rgb(255 255 255 / 30%);
   color: var(--video-input-color);
 }
