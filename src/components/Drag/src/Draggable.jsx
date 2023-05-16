@@ -1,35 +1,47 @@
-import { useContext } from 'react'
-import { useDraggable } from '@dnd-kit/core'
-import { CSS } from '@dnd-kit/utilities'
-import PropTypes from 'prop-types'
-import classnames from 'classnames'
+import { useContext } from 'react';
+import { useDraggable } from '@dnd-kit/core';
+import { CSS } from '@dnd-kit/utilities';
+import PropTypes from 'prop-types';
+import classnames from 'classnames';
 
-import { typeValidation } from '../../../utils/validations/typeValidation'
-import { DragAndDropContext } from '../../../components'
+import { typeValidation } from '../../../utils/validations/typeValidation';
+import { DragAndDropContext } from '../../../components';
 
-import css from './Drag.module.scss'
+import css from './Drag.module.scss';
 
-export const Draggable = ({ children, id, addClass, dragging, label, attribute, disabledDefaultAttributes, element, defaultStyle, __TYPE, ...props }) => {
+export const Draggable = ({
+  children,
+  id,
+  addClass,
+  dragging,
+  label,
+  attribute,
+  disabledDefaultAttributes,
+  element,
+  defaultStyle,
+  __TYPE,
+  ...props
+}) => {
   /**
-    * Creamos una variable con el elemento a generar
-    * por el componente, esto nos permite usar
-    * la sintaxis de JSX que es más
-    * fácil de leer y manipular.
-    */
-  const Element = element || 'div'
+   * Creamos una variable con el elemento a generar
+   * por el componente, esto nos permite usar
+   * la sintaxis de JSX que es más
+   * fácil de leer y manipular.
+   */
+  const Element = element || 'div';
 
   /**
-    * Obtenemos las diferentes propiedades
-    * pasadas a través del contexto generado
-    * en el componente DragAndDrop.
-    */
-  const { listId, propValidate, validate, isDragging } = useContext(DragAndDropContext)
+   * Obtenemos las diferentes propiedades
+   * pasadas a través del contexto generado
+   * en el componente DragAndDrop.
+   */
+  const { listId, propValidate, validate, isDragging } = useContext(DragAndDropContext);
 
   /**
-    * Utilizamos el hook useDraggable
-    * para poder agregar la funcionalidad
-    * de "drag" al componente.
-    */
+   * Utilizamos el hook useDraggable
+   * para poder agregar la funcionalidad
+   * de "drag" al componente.
+   */
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id,
     disabled: validate,
@@ -37,7 +49,7 @@ export const Draggable = ({ children, id, addClass, dragging, label, attribute, 
       label
     },
     ...({ attributes: attribute } || {})
-  })
+  });
 
   return (
     <Element
@@ -50,21 +62,20 @@ export const Draggable = ({ children, id, addClass, dragging, label, attribute, 
         [addClass]: addClass
       })}
       style={{ transform: CSS.Translate.toString(transform) }}
-      {...(validate && { [propValidate]: !!listId.includes(id) })}
+      {...{ [propValidate]: validate ? listId.includes(id) : '' }}
       {...(!disabledDefaultAttributes && { ...attributes })}
       {...listeners}
-      {...props}
-    >
+      {...props}>
       {children}
     </Element>
-  )
-}
+  );
+};
 
 Draggable.defaultProps = {
   __TYPE: 'draggable',
   dragging: css['c-draggable--active'],
   disabledDefaultAttributes: false
-}
+};
 
 Draggable.propTypes = {
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.element]),
@@ -81,4 +92,4 @@ Draggable.propTypes = {
   element: PropTypes.string,
   defaultStyle: PropTypes.bool,
   __TYPE: typeValidation('draggable')
-}
+};

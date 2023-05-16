@@ -4578,7 +4578,19 @@ const pu = "_pop_1elvh_1", nn = {
   "c-draggable--active": "_c-draggable--active_1elvh_56",
   "is-draggable--active-animation": "_is-draggable--active-animation_1elvh_73",
   pop: pu
-}, bi = ({ children: e, id: t, addClass: n, dragging: r, label: a, attribute: i, disabledDefaultAttributes: c, element: s, defaultStyle: u, __TYPE: f, ...l }) => {
+}, bi = ({
+  children: e,
+  id: t,
+  addClass: n,
+  dragging: r,
+  label: a,
+  attribute: i,
+  disabledDefaultAttributes: c,
+  element: s,
+  defaultStyle: u,
+  __TYPE: f,
+  ...l
+}) => {
   const d = s || "div", { listId: v, propValidate: h, validate: m, isDragging: b } = Te(gi), { attributes: y, listeners: x, setNodeRef: E, transform: D } = au({
     id: t,
     disabled: m,
@@ -4599,7 +4611,7 @@ const pu = "_pop_1elvh_1", nn = {
         [n]: n
       }),
       style: { transform: to.Translate.toString(D) },
-      ...m && { [h]: !!v.includes(t) },
+      [h]: m ? !!v.includes(t) : "",
       ...!c && { ...y },
       ...x,
       ...l,
