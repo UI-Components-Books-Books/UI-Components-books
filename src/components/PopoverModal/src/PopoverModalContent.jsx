@@ -29,6 +29,7 @@ export const PopoverModalContent = ({
   isDisabled,
   distance,
   placement,
+  disabledInteractOutside,
   defaultStyle
 }) => {
   // Obtenemos la función isOpen y la referencia del botón del contexto
@@ -51,7 +52,7 @@ export const PopoverModalContent = ({
    * @param {React.EventHandler} event - Evento mousedown | touchstart
    */
   const onInteractionOutside = (event) => {
-    if (!shouldCloseOnInteractOutside(event.target, refButton)) {
+    if (!disabledInteractOutside && !shouldCloseOnInteractOutside(event.target, refButton)) {
       onOpen()
       event.stopPropagation()
       event.preventDefault()
@@ -194,6 +195,7 @@ PopoverModalContent.propTypes = {
   isDisabled: PropTypes.bool,
   distance: PropTypes.number,
   defaultStyle: PropTypes.bool,
+  disabledInteractOutside: PropTypes.bool,
   placement: PropTypes.oneOf([
     'auto',
     'auto-start',
@@ -215,5 +217,6 @@ PopoverModalContent.propTypes = {
 
 PopoverModalContent.defaultProps = {
   hasArrow: false,
-  placement: 'auto'
+  placement: 'auto',
+  disabledInteractOutside: false
 }
