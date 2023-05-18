@@ -1,8 +1,10 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useLayoutEffect, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import { Button } from '../../Button'
+import { useOnScreen } from '../../../hooks/useOnScreen'
+
 import css from './Audio.module.scss'
 
 /**
@@ -35,6 +37,18 @@ export const Audio = ({
   const refAudio = useRef()
 
   /**
+   * Se obtiene la referencia del HTMLButtonElement.
+   */
+  const refButtonAudio = useRef()
+
+  /**
+   * Custom hook utilizado para dectectar
+   * si el componente esta visible en el
+   * viewport.
+   */
+  const [setRef, isVisible] = useOnScreen()
+
+  /**
    * Función utilizada para alternar entre
    * activar o pausar el audio, dependiendo
    * del estado del mismo.
@@ -51,9 +65,33 @@ export const Audio = ({
     setPlay(!play)
   }
 
+  useEffect(() => {
+    // Verificar si el audio está reproduciéndose (play es verdadero)
+    // o si el audio no está en pausa y no es visible
+    if ((play || !refAudio.current.paused) && !isVisible) {
+      // Si se cumple la condición, detener la reproducción,
+      // establecer play a falso y reiniciar el tiempo de reproducción a cero
+      setPlay(!play)
+      refAudio.current.pause()
+      refAudio.current.currentTime = 0
+    }
+  }, [isVisible])
+
+  useLayoutEffect(() => {
+    // Verificar si existe la referencia del botón de audio o la referencia del audio
+    const ref = refButtonAudio.current || refAudio.current
+
+    // Si al menos uno de ellos existe
+    if (ref) {
+      // Establecer la referencia en la variable de estado "ref"
+      setRef(ref)
+    }
+  }, [refAudio, refButtonAudio])
+
   return type === TYPES.BAR
     ? (
       <audio
+        ref={refAudio}
         preload='metadata'
         controls
         className={classnames({
@@ -77,6 +115,7 @@ export const Audio = ({
           className={css['c-audio--hidden']}
         />
         <Button
+          ref={refButtonAudio}
           label={play ? 'Pausar' : 'Reproduccir'}
           data-a11y={a11y}
           addClass={classnames({
