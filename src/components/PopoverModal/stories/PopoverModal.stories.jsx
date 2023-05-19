@@ -42,6 +42,23 @@ export const Default = () => (
 
 Default.storyName = 'default'
 
+export const disabledInteractOutside = () => (
+  <PopoverModal>
+    <PopoverModalButton>
+      <Button label='Open PopoverModal' size='small' />
+    </PopoverModalButton>
+    <PopoverModalContent disabledInteractOutside>
+      <p className='u-my-2'>
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Blanditiis,
+        ipsam!
+      </p>
+      <Button size='small' label='Learn more' />
+    </PopoverModalContent>
+  </PopoverModal>
+)
+
+disabledInteractOutside.storyName = 'without interact outside'
+
 export const withArrow = () => (
   <PopoverModal>
     <PopoverModalButton>

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 
 import {
   Col,
@@ -7,30 +7,30 @@ import {
   Panel,
   Section,
   NavSection,
-  ButtonSection,
-} from "../../../components";
+  ButtonSection
+} from '../../../components'
 
 export default {
-  title: "ui-components/Panel",
+  title: 'ui-components/Panel',
   component: Panel,
   decorators: [
     (story) => (
-      <Row display="flex" justify-content="center" align-items="center">
-        <Col xs="11" mm="10" md="9" lg="7" hd="6">
+      <Row display='flex' justify-content='center' align-items='center'>
+        <Col xs='11' mm='10' md='9' lg='7' hd='6'>
           <Row
-            display="flex"
-            justify-content="center"
-            align-items="center"
-            addClass="u-my-5"
-            style={{ gap: "1rem" }}
+            display='flex'
+            justify-content='center'
+            align-items='center'
+            addClass='u-my-5'
+            style={{ gap: '1rem' }}
           >
             {story()}
           </Row>
         </Col>
       </Row>
-    ),
-  ],
-};
+    )
+  ]
+}
 
 export const Default = () => (
   <Panel>
@@ -41,9 +41,9 @@ export const Default = () => (
     <Section>Third section</Section>
     <Section>Fourth section</Section>
   </Panel>
-);
+)
 
-Default.storyName = "default";
+Default.storyName = 'default'
 
 export const WithButton = () => (
   <Panel>
@@ -54,9 +54,9 @@ export const WithButton = () => (
     <Section>Third section </Section>
     <Section>Fourth section </Section>
   </Panel>
-);
+)
 
-WithButton.storyName = "with buttons";
+WithButton.storyName = 'with buttons'
 
 export const WithDefautlIndex = () => (
   <Panel defaultIndex={3}>
@@ -67,9 +67,9 @@ export const WithDefautlIndex = () => (
     <Section>Third section</Section>
     <Section>Fourth section </Section>
   </Panel>
-);
+)
 
-WithDefautlIndex.storyName = "with default index";
+WithDefautlIndex.storyName = 'with default index'
 
 export const WithButtonSection = () => (
   <Panel>
@@ -79,10 +79,10 @@ export const WithButtonSection = () => (
       First section
       <ButtonSection section={2}>
         <Button
-          label="Go to the second section"
-          addClass="u-my-4"
-          size="small"
-          style={{ borderRadius: "0.375rem" }}
+          label='Go to the second section'
+          addClass='u-my-4'
+          size='small'
+          style={{ borderRadius: '0.375rem' }}
         />
       </ButtonSection>
     </Section>
@@ -93,16 +93,16 @@ export const WithButtonSection = () => (
       Third section
       <ButtonSection section={1}>
         <Button
-          label="Go to the first section"
-          addClass="u-my-4"
-          size="small"
-          style={{ borderRadius: "0.375rem" }}
+          label='Go to the first section'
+          addClass='u-my-4'
+          size='small'
+          style={{ borderRadius: '0.375rem' }}
         />
       </ButtonSection>
     </Section>
 
     <Section>Fourth section </Section>
   </Panel>
-);
+)
 
-WithButtonSection.storyName = "with button section";
+WithButtonSection.storyName = 'with button section'
