@@ -1,13 +1,13 @@
-import { useContext } from 'react';
-import { useDraggable } from '@dnd-kit/core';
-import { CSS } from '@dnd-kit/utilities';
-import PropTypes from 'prop-types';
-import classnames from 'classnames';
+import { useContext } from 'react'
+import { useDraggable } from '@dnd-kit/core'
+import { CSS } from '@dnd-kit/utilities'
+import PropTypes from 'prop-types'
+import classnames from 'classnames'
 
-import { typeValidation } from '../../../utils/validations/typeValidation';
-import { DragAndDropContext } from '../../../components';
+import { typeValidation } from '../../../utils/validations/typeValidation'
+import { DragAndDropContext } from '../../../components'
 
-import css from './Drag.module.scss';
+import css from './Drag.module.scss'
 
 export const Draggable = ({
   children,
@@ -28,14 +28,14 @@ export const Draggable = ({
    * la sintaxis de JSX que es más
    * fácil de leer y manipular.
    */
-  const Element = element || 'div';
+  const Element = element || 'div'
 
   /**
    * Obtenemos las diferentes propiedades
    * pasadas a través del contexto generado
    * en el componente DragAndDrop.
    */
-  const { listId, propValidate, validate, isDragging } = useContext(DragAndDropContext);
+  const { listId, propValidate, validate, isDragging } = useContext(DragAndDropContext)
 
   /**
    * Utilizamos el hook useDraggable
@@ -49,7 +49,7 @@ export const Draggable = ({
       label
     },
     ...({ attributes: attribute } || {})
-  });
+  })
 
   return (
     <Element
@@ -65,17 +65,18 @@ export const Draggable = ({
       {...{ [propValidate]: validate ? listId.includes(id) : '' }}
       {...(!disabledDefaultAttributes && { ...attributes })}
       {...listeners}
-      {...props}>
+      {...props}
+    >
       {children}
     </Element>
-  );
-};
+  )
+}
 
 Draggable.defaultProps = {
   __TYPE: 'draggable',
   dragging: css['c-draggable--active'],
   disabledDefaultAttributes: false
-};
+}
 
 Draggable.propTypes = {
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.element]),
@@ -92,4 +93,4 @@ Draggable.propTypes = {
   element: PropTypes.string,
   defaultStyle: PropTypes.bool,
   __TYPE: typeValidation('draggable')
-};
+}
