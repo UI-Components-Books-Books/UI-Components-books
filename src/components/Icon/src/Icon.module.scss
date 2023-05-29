@@ -4,6 +4,7 @@
   height: var(--icon-size);
   fill: currentColor;
   forced-color-adjust: auto;
+  pointer-events: none;
 }
 
 :where(.c-icon.c-small) {
