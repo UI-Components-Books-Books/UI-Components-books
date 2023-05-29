@@ -6169,7 +6169,6 @@ Pi.propTypes = {
     o.node
   ]),
   addClass: o.string,
-  label: o.string.isRequired,
   onClick: o.func,
   onKeyDown: o.func,
   defaultStyle: o.bool,

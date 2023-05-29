@@ -110,7 +110,6 @@ ModalContent.propTypes = {
     PropTypes.node
   ]),
   addClass: PropTypes.string,
-  label: PropTypes.string.isRequired,
   onClick: PropTypes.func,
   onKeyDown: PropTypes.func,
   defaultStyle: PropTypes.bool,
