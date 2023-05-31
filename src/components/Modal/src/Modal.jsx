@@ -98,12 +98,10 @@ export const Modal = ({ children, isOpen, onClose, finalFocusRef }) => {
       inertToggle(false)
       onClose(!isOpen)
 
-      if (typeof finalFocusRef === 'object') {
-        if (Array.isArray(finalFocusRef) || typeof finalFocusRef === 'string') {
-          setElementFocusOnModalClose(finalFocusRef)
-        } else {
-          finalFocusRef.current.focus()
-        }
+      if (typeof finalFocusRef === 'string' || Array.isArray(finalFocusRef)) {
+        setElementFocusOnModalClose(finalFocusRef)
+      } else if (typeof finalFocusRef === 'object') {
+        finalFocusRef.current.focus()
       }
     }, 500)
   }

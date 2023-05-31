@@ -6047,7 +6047,7 @@ const hr = ut(), wu = Object.freeze({
     });
   }, f = () => {
     s("animate__fadeIn", "animate__fadeOut"), setTimeout(() => {
-      s("animate__fadeOut", "animate__fadeIn"), i(!1), n(!t), typeof r == "object" && (Array.isArray(r) || typeof r == "string" ? d(r) : r.current.focus());
+      s("animate__fadeOut", "animate__fadeIn"), i(!1), n(!t), typeof r == "string" || Array.isArray(r) ? d(r) : typeof r == "object" && r.current.focus();
     }, 500);
   };
   return Q(() => (t && (i(!0), a.current && a.current.focus()), () => {
