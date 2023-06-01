@@ -84,10 +84,15 @@ html[data-audio="true"] .c-audio[data-a11y="true"] {
   grid-auto-flow: column;
   align-items: center;
   gap: 0.5em;
+  width: fit-content;
+  margin-inline: auto;
   padding: 0.5rem;
   background-color: var(--audio-background-color);
   color: var(--audio-icon-color);
-  resize: both;
+}
+
+:where(.audio-bar small) {
+  font-size: 0.75rem;
 }
 
 :where(.audio-bar[data-a11y="true"]) {
@@ -95,6 +100,7 @@ html[data-audio="true"] .c-audio[data-a11y="true"] {
 }
 
 :where(.audio-bar input) {
+  --outline-color: var(--audio-icon-color);
   accent-color: var(--audio-slider-color);
 }
 
@@ -116,10 +122,17 @@ html[data-audio="true"] .c-audio[data-a11y="true"] {
 }
 
 :where(.volume-control input) {
+  --outline-offset: -2px;
   -webkit-appearance: slider-vertical;
   width: 30px;
 }
 
 :where(.scrubber) {
-  width: min(100%, 100px);
+  width: min(100%, 8.0625rem);
+}
+
+@media screen and (any-hover: none) and (any-pointer: coarse) {
+  :where(.volume-btn) {
+    display: none;
+  }
 }

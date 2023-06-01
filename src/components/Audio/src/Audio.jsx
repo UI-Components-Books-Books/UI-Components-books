@@ -94,6 +94,12 @@ export const Audio = ({
         d="M552-94v-75q108-28 176-115t68-198q0-110-68-196.5T552-793v-75q139 28 228 136.5T869-482q0 143-88.5 252T552-94ZM91-350v-260h167l214-215v690L258-350H91Zm441 44v-348q57 18 91.5 66T658-480q0 60-34.5 108T532-306Z"
       />
     ),
+    volume_down: (
+      <path
+        id="volume_down"
+        d="M173-337v-287h173l233-231v750L346-337H173Zm466 33v-353q55 18 92 67.5T768-480q0 60-37 108t-92 68Z"
+      />
+    ),
     volume_off: (
       <path
         id="volume_off"
@@ -133,7 +139,7 @@ export const Audio = ({
   };
 
   const isTouchScreen = window.matchMedia(
-    "(any-hover: hover) and (any-pointer: none)"
+    "(any-hover: none) and (any-pointer: coarse)"
   ).matches;
 
   const onLoadedMetadata = () => {
@@ -186,6 +192,7 @@ export const Audio = ({
         role="group"
         aria-labelledby={`description${Id}`}
         data-a11y={a11y}
+        data-class="c-audio-bar"
       >
         <span id={`description${Id}`} hidden>
           {a11y ? "Audio description" : "Barra de audio"}
@@ -232,6 +239,7 @@ export const Audio = ({
         <button
           ref={refVolumeButton}
           aria-expanded={openMenu}
+          className={css["volume-btn"]}
           onClick={() => setOpenMenu(!openMenu)}
         >
           <span className="u-sr-only">Controlar volumen</span>
@@ -242,7 +250,11 @@ export const Audio = ({
               height="48"
               viewBox="0 -960 960 960"
             >
-              {PLAYER_ICONS.volume_on}
+              {volume === 0
+                ? PLAYER_ICONS.volume_off
+                : volume <= 0.25
+                ? PLAYER_ICONS.volume_down
+                : PLAYER_ICONS.volume_on}
             </svg>
           </Icon>
         </button>
