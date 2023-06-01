@@ -72,9 +72,10 @@
 }
 
 :where(.audio-bar) {
-  --audio-background-color: var(--clr-primary-700);
-  --audio-icon-color: var(--clr-neutral-100);
-  --audio-slider-color: var(--clr-complementary-300);
+  --audio-background-color: #f5f5f5;
+  --audio-icon-color: var(--clr-primary-700);
+  --audio-slider-color: var(--clr-complementary-400);
+  --audio-border-radius: 100vmax;
   position: relative;
   display: grid;
   grid-auto-flow: column;
@@ -85,6 +86,7 @@
   padding: 0.5rem;
   background-color: var(--audio-background-color);
   color: var(--audio-icon-color);
+  border-radius: var(--audio-border-radius);
 }
 
 :where(.audio-bar small) {
@@ -96,7 +98,7 @@
 }
 
 html[data-audio="true"] .audio-bar[data-a11y="true"] {
-  display: block;
+  display: grid;
 }
 
 :where(.audio-bar input) {
