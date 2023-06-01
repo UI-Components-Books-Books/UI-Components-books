@@ -26,10 +26,6 @@
   display: none;
 }
 
-html[data-audio="true"] .c-audio[data-a11y="true"] {
-  display: block;
-}
-
 .c-audio--hidden {
   display: none;
 }
@@ -97,6 +93,10 @@ html[data-audio="true"] .c-audio[data-a11y="true"] {
 
 :where(.audio-bar[data-a11y="true"]) {
   display: none;
+}
+
+html[data-audio="true"] .audio-bar[data-a11y="true"] {
+  display: block;
 }
 
 :where(.audio-bar input) {

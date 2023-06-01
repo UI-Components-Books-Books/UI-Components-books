@@ -58,13 +58,11 @@ export const Audio = ({
   const refVolumeSlider = useRef(null);
 
   const shouldCloseOnInteractOutside = (element, refVolumeButton) => {
-    console.log(element);
     return element === refVolumeButton.current;
   };
 
   const onInteractionOutside = (event) => {
     if (!shouldCloseOnInteractOutside(event.target, refVolumeButton)) {
-      console.log("here");
       setOpenMenu(false);
       event.stopPropagation();
       event.preventDefault();

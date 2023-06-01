@@ -1730,17 +1730,17 @@ function Ho(e, t) {
   }
   return t.current && !t.current.contains(e.target);
 }
-const Ys = "_scrubber_109dv_130", yt = {
-  "c-audio": "_c-audio_109dv_1",
-  "c-audio--small": "_c-audio--small_109dv_15",
-  "c-audio--hidden": "_c-audio--hidden_109dv_33",
-  "c-button": "_c-button_109dv_37",
-  "is-button-paused": "_is-button-paused_109dv_62",
-  "is-button-playing": "_is-button-playing_109dv_70",
-  "audio-bar": "_audio-bar_109dv_78",
-  "volume-control": "_volume-control_109dv_117",
+const Ys = "_scrubber_zn5lt_130", yt = {
+  "c-audio": "_c-audio_zn5lt_1",
+  "c-audio--small": "_c-audio--small_zn5lt_15",
+  "c-audio--hidden": "_c-audio--hidden_zn5lt_29",
+  "c-button": "_c-button_zn5lt_33",
+  "is-button-paused": "_is-button-paused_zn5lt_58",
+  "is-button-playing": "_is-button-playing_zn5lt_66",
+  "audio-bar": "_audio-bar_zn5lt_74",
+  "volume-control": "_volume-control_zn5lt_117",
   scrubber: Ys,
-  "volume-btn": "_volume-btn_109dv_135"
+  "volume-btn": "_volume-btn_zn5lt_135"
 }, zs = Object.freeze({
   BUTTON: "Button",
   BAR: "Bar"
@@ -1754,9 +1754,9 @@ const Ys = "_scrubber_109dv_130", yt = {
   defaultStyle: c,
   ...s
 }) => {
-  const [d, f] = ee(!1), [l, u] = ee(!1), [v, h] = ee(!1), m = Ct(), [b, x] = ee(0), [w, D] = ee(0), [O, N] = ee(0), y = Q(), L = Q(), E = Q(null), I = Q(null), W = (T, M) => (console.log(T), T === M.current);
+  const [d, f] = ee(!1), [l, u] = ee(!1), [v, h] = ee(!1), m = Ct(), [b, x] = ee(0), [w, D] = ee(0), [O, N] = ee(0), y = Q(), L = Q(), E = Q(null), I = Q(null), W = (T, M) => T === M.current;
   za({ ref: I, onInteractionOutside: (T) => {
-    W(T.target, E) || (console.log("here"), h(!1), T.stopPropagation(), T.preventDefault());
+    W(T.target, E) || (h(!1), T.stopPropagation(), T.preventDefault());
   } });
   const [j, Y] = Ya(), U = Object.freeze({
     play: /* @__PURE__ */ p("path", { id: "play", d: "M306-184v-598l471 299-471 299Z" }),
