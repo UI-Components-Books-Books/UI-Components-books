@@ -48,6 +48,7 @@ export const Audio = ({
    * Se obtiene la referencia del HTMLAudioElement.
    */
   const refAudio = useRef();
+  const refAudioBar = useRef(null);
 
   /**
    * Se obtiene la referencia del HTMLButtonElement.
@@ -174,14 +175,14 @@ export const Audio = ({
 
   useLayoutEffect(() => {
     // Verificar si existe la referencia del botón de audio o la referencia del audio
-    const ref = refButtonAudio.current || refAudio.current;
+    const ref = refButtonAudio.current || refAudioBar.current;
 
     // Si al menos uno de ellos existe
     if (ref) {
       // Establecer la referencia en la variable de estado "ref"
       setRef(ref);
     }
-  }, [refAudio, refButtonAudio]);
+  }, [refAudioBar, refButtonAudio]);
 
   return type === TYPES.BAR ? (
     <>
@@ -191,6 +192,7 @@ export const Audio = ({
         aria-labelledby={`description${Id}`}
         data-a11y={a11y}
         data-class="c-audio-bar"
+        ref={refAudioBar}
       >
         <span id={`description${Id}`} hidden>
           {a11y ? "Audio description" : "Barra de audio"}
@@ -295,7 +297,6 @@ export const Audio = ({
         onVolumeChange={(event) => handleVolume(event)}
         data-a11y={a11y}
         hidden
-        {...props}
       >
         <source src={src} type={format} />
       </audio>
