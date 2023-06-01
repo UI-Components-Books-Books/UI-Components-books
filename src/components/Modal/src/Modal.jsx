@@ -20,6 +20,13 @@ const KEYCODE = Object.freeze({
   ESC: 27
 })
 
+/**
+ * Selectores que se utiliza
+ * para comprobar si el finalFocusRef se
+ * encuentra entre ellos.
+ */
+const PARENT_ELEMENTS = "section[data-type='Section']:not([hidden]), div:not([hidden])"
+
 export const Modal = ({ children, isOpen, onClose, finalFocusRef }) => {
   /**
    * Obtenemos la referencia del modal para
@@ -62,6 +69,23 @@ export const Modal = ({ children, isOpen, onClose, finalFocusRef }) => {
   }
 
   /**
+   * Función utiliada para enfocar el elemento
+   * disponible cuando se cierra el modal.
+   * @param {string | string[]} elements
+   */
+  const setElementFocusOnModalClose = (elements) => {
+    // Obtenemos todos los elementos.
+    const listElements = document.querySelectorAll(elements)
+
+    listElements.forEach((element) => {
+      // Si el elemento encuentra la lista de sectores y además no está deshabilitado
+      if (element.closest(PARENT_ELEMENTS) && !element.disabled) {
+        element.focus()
+      }
+    })
+  }
+
+  /**
    * Función utilizada para cerrar el modal.
    * además agrega el focus al elemento contenido
    * en la propiedad finalFocusRef.
@@ -74,8 +98,9 @@ export const Modal = ({ children, isOpen, onClose, finalFocusRef }) => {
       inertToggle(false)
       onClose(!isOpen)
 
-      // Enfoca el elemento cuando el modal se cierra
-      if (Object.keys(finalFocusRef).length !== 0) {
+      if (typeof finalFocusRef === 'string' || Array.isArray(finalFocusRef)) {
+        setElementFocusOnModalClose(finalFocusRef)
+      } else if (typeof finalFocusRef === 'object') {
         finalFocusRef.current.focus()
       }
     }, 500)
@@ -115,7 +140,6 @@ export const Modal = ({ children, isOpen, onClose, finalFocusRef }) => {
 }
 
 Modal.defaultProps = {
-  label: 'Default modal label',
   isOpen: false
 }
 
@@ -129,6 +153,9 @@ Modal.propTypes = {
   addClass: PropTypes.string,
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
-  label: PropTypes.string.isRequired,
-  finalFocusRef: PropTypes.object.isRequired
+  finalFocusRef: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.string,
+    PropTypes.arrayOf(PropTypes.string)
+  ]).isRequired
 }

@@ -9,7 +9,6 @@ import { typeValidation } from '../../../utils/validations/typeValidation'
 import css from './Modal.module.scss'
 
 export const ModalContent = ({
-  label,
   addClass,
   children,
   onClick,
@@ -59,7 +58,6 @@ export const ModalContent = ({
       role='dialog'
       tabIndex='-1'
       hidden={!isOpen}
-      aria-label={label}
       aria-modal='true'
       data-type={__TYPE}
       onKeyDown={handleKeyDown}
@@ -112,7 +110,6 @@ ModalContent.propTypes = {
     PropTypes.node
   ]),
   addClass: PropTypes.string,
-  label: PropTypes.string.isRequired,
   onClick: PropTypes.func,
   onKeyDown: PropTypes.func,
   defaultStyle: PropTypes.bool,
@@ -120,6 +117,5 @@ ModalContent.propTypes = {
 }
 
 ModalContent.defaultProps = {
-  label: 'Default modal label',
   __TYPE: 'ModalContent'
 }
