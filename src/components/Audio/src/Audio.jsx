@@ -186,7 +186,7 @@ export const Audio = ({
   return type === TYPES.BAR ? (
     <>
       <div
-        className={css["audio-bar"]}
+        className={`${css["audio-bar"]} ${addClass ?? ""}`}
         role="group"
         aria-labelledby={`description${Id}`}
         data-a11y={a11y}

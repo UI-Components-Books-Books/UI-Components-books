@@ -1828,7 +1828,7 @@ const Ys = "_scrubber_cmnp5_132", yt = {
     /* @__PURE__ */ A(
       "div",
       {
-        className: yt["audio-bar"],
+        className: `${yt["audio-bar"]} ${i ?? ""}`,
         role: "group",
         "aria-labelledby": `description${g}`,
         "data-a11y": n,
