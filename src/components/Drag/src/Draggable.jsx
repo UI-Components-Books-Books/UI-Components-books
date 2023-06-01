@@ -62,7 +62,7 @@ export const Draggable = ({
         [addClass]: addClass
       })}
       style={{ transform: CSS.Translate.toString(transform) }}
-      {...{ [propValidate]: validate ? listId.includes(id) : '' }}
+      {...(validate && { [propValidate]: !!listId.includes(id) })}
       {...(!disabledDefaultAttributes && { ...attributes })}
       {...listeners}
       {...props}
