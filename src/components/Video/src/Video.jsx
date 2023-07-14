@@ -71,7 +71,10 @@ export const Video = ({
    * si el componente esta visible en el
    * viewport.
    */
-  const [setRef, isVisible] = useOnScreen()
+  const [setRef, isVisible] = useOnScreen({
+    rootMargin: '20px 10px',
+    threshold: [0, 0.25, 0.5, 0.75, 1]
+  })
 
   /**
    * Cambia la clase del elemento para generar la animación de pulse

@@ -9447,7 +9447,10 @@ const lf = () => {
   }), [b, x] = ee(100), [w, D] = ee({
     state: !1,
     label: "Ver en pantalla completa"
-  }), [O, I] = ee(!1), [_, L] = ee(100), T = Q(null), A = Q(null), z = Q(null), G = Q(null), j = Q(null), Y = Q(null), H = Q(null), U = Q(null), [ne, X] = ee(!1), [K, le] = Ya(), ie = (B) => {
+  }), [O, I] = ee(!1), [_, L] = ee(100), T = Q(null), A = Q(null), z = Q(null), G = Q(null), j = Q(null), Y = Q(null), H = Q(null), U = Q(null), [ne, X] = ee(!1), [K, le] = Ya({
+    rootMargin: "20px 10px",
+    threshold: [0, 0.25, 0.5, 0.75, 1]
+  }), ie = (B) => {
     B.classList.add(`${be.active}`), setTimeout(() => {
       B.classList.remove(`${be.active}`);
     }, 650);
