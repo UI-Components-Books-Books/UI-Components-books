@@ -9421,15 +9421,7 @@ const lf = () => {
   "c-vid__volume-item": "_c-vid__volume-item_i7dnv_191",
   "c-vid__time": "_c-vid__time_i7dnv_202",
   "c-vid__subtitles": "_c-vid__subtitles_i7dnv_208"
-}, as = ({
-  src: e,
-  width: t = "1000",
-  hasDescription: n,
-  description: r,
-  addClass: a,
-  poster: i,
-  ...c
-}) => {
+}, as = ({ src: e, width: t = "1000", hasDescription: n, description: r, addClass: a, poster: i, ...c }) => {
   const [s, d] = ee({
     totalSeconds: 0,
     hours: 0,
@@ -9542,9 +9534,7 @@ const lf = () => {
   }, V = function(B) {
     (B.keyCode || B.which) === 32 && P();
   }, de = function(B) {
-    const te = Math.floor(
-      G.current.getAttribute("aria-valuenow")
-    );
+    const te = Math.floor(G.current.getAttribute("aria-valuenow"));
     if (document.activeElement === j.current)
       return null;
     if ((B.keyCode || B.which) === 37) {
@@ -9560,10 +9550,7 @@ const lf = () => {
     const B = JSON.parse(localStorage.getItem("ui-video")) || {};
     Object.prototype.hasOwnProperty.call(B, "caption") && X(JSON.parse(localStorage.getItem("ui-video")).caption), Object.prototype.hasOwnProperty.call(B, "volume") && L(JSON.parse(localStorage.getItem("ui-video")).volume);
   }, []), J(() => {
-    localStorage.setItem(
-      "ui-video",
-      JSON.stringify({ caption: ne, volume: _ })
-    );
+    localStorage.setItem("ui-video", JSON.stringify({ caption: ne, volume: _ }));
   }, [ne, _]), J(() => (z.current ? z.current.addEventListener("error", () => {
     I(!0);
   }) : I(!0), e.caption && I(!1), () => {
@@ -9611,54 +9598,9 @@ const lf = () => {
               }
             ),
             /* @__PURE__ */ M("div", { className: be["c-vid__icon-container"], children: [
-              /* @__PURE__ */ p("div", { ref: U, className: be["c-vid__icon"], children: /* @__PURE__ */ p(xe, { children: /* @__PURE__ */ p(
-                "svg",
-                {
-                  xmlns: "http://www.w3.org/2000/svg",
-                  height: "48",
-                  width: "48",
-                  viewBox: "0 0 48 48",
-                  children: /* @__PURE__ */ p(
-                    "path",
-                    {
-                      id: "fast_rewind",
-                      d: "M42.7 36 25.4 24l17.3-12Zm-20.1 0L5.3 24l17.3-12Z"
-                    }
-                  )
-                }
-              ) }) }),
-              /* @__PURE__ */ p("div", { ref: Y, className: be["c-vid__icon"], children: /* @__PURE__ */ p(xe, { children: /* @__PURE__ */ p(
-                "svg",
-                {
-                  xmlns: "http://www.w3.org/2000/svg",
-                  height: "48",
-                  width: "48",
-                  viewBox: "0 0 48 48",
-                  children: u.state ? /* @__PURE__ */ p("path", { id: "play", d: "M16 37.85v-28l22 14Z" }) : /* @__PURE__ */ p(
-                    "path",
-                    {
-                      id: "pause",
-                      d: "M28.25 38V10H36v28ZM12 38V10h7.75v28Z"
-                    }
-                  )
-                }
-              ) }) }),
-              /* @__PURE__ */ p("div", { ref: H, className: be["c-vid__icon"], children: /* @__PURE__ */ p(xe, { children: /* @__PURE__ */ p(
-                "svg",
-                {
-                  xmlns: "http://www.w3.org/2000/svg",
-                  height: "48",
-                  width: "48",
-                  viewBox: "0 0 48 48",
-                  children: /* @__PURE__ */ p(
-                    "path",
-                    {
-                      id: "fast_forward",
-                      d: "M5.2 36V12l17.3 12Zm20.35 0V12l17.3 12Z"
-                    }
-                  )
-                }
-              ) }) })
+              /* @__PURE__ */ p("div", { ref: U, className: be["c-vid__icon"], children: /* @__PURE__ */ p(xe, { children: /* @__PURE__ */ p("svg", { xmlns: "http://www.w3.org/2000/svg", height: "48", width: "48", viewBox: "0 0 48 48", children: /* @__PURE__ */ p("path", { id: "fast_rewind", d: "M42.7 36 25.4 24l17.3-12Zm-20.1 0L5.3 24l17.3-12Z" }) }) }) }),
+              /* @__PURE__ */ p("div", { ref: Y, className: be["c-vid__icon"], children: /* @__PURE__ */ p(xe, { children: /* @__PURE__ */ p("svg", { xmlns: "http://www.w3.org/2000/svg", height: "48", width: "48", viewBox: "0 0 48 48", children: u.state ? /* @__PURE__ */ p("path", { id: "play", d: "M16 37.85v-28l22 14Z" }) : /* @__PURE__ */ p("path", { id: "pause", d: "M28.25 38V10H36v28ZM12 38V10h7.75v28Z" }) }) }) }),
+              /* @__PURE__ */ p("div", { ref: H, className: be["c-vid__icon"], children: /* @__PURE__ */ p(xe, { children: /* @__PURE__ */ p("svg", { xmlns: "http://www.w3.org/2000/svg", height: "48", width: "48", viewBox: "0 0 48 48", children: /* @__PURE__ */ p("path", { id: "fast_forward", d: "M5.2 36V12l17.3 12Zm20.35 0V12l17.3 12Z" }) }) }) })
             ] })
           ] }),
           /* @__PURE__ */ p("div", { className: be["progress-container"], children: /* @__PURE__ */ M(
@@ -9681,9 +9623,7 @@ const lf = () => {
                   {
                     className: be["c-vid__progress-bar"],
                     style: {
-                      transform: `scaleX(${isNaN(
-                        f.totalSeconds / s.totalSeconds
-                      ) ? 0 : f.totalSeconds / s.totalSeconds})`
+                      transform: `scaleX(${isNaN(f.totalSeconds / s.totalSeconds) ? 0 : f.totalSeconds / s.totalSeconds})`
                     }
                   }
                 ),
@@ -9699,7 +9639,7 @@ const lf = () => {
               ]
             }
           ) }),
-          /* @__PURE__ */ M("div", { className: be["c-vid__controls"], children: [
+          /* @__PURE__ */ M("div", { className: `controls ${be["c-vid__controls"]}`, children: [
             /* @__PURE__ */ p(
               "button",
               {
@@ -9707,16 +9647,7 @@ const lf = () => {
                 "aria-label": u.label,
                 onClick: P,
                 "data-description": "Este botón reproduce el video",
-                children: /* @__PURE__ */ p(xe, { children: /* @__PURE__ */ p(
-                  "svg",
-                  {
-                    xmlns: "http://www.w3.org/2000/svg",
-                    height: "48",
-                    width: "48",
-                    viewBox: "0 0 48 48",
-                    children: u.state ? /* @__PURE__ */ p("path", { id: "pause", d: "M28.25 38V10H36v28ZM12 38V10h7.75v28Z" }) : /* @__PURE__ */ p("path", { id: "play", d: "M16 37.85v-28l22 14Z" })
-                  }
-                ) })
+                children: /* @__PURE__ */ p(xe, { children: /* @__PURE__ */ p("svg", { xmlns: "http://www.w3.org/2000/svg", height: "48", width: "48", viewBox: "0 0 48 48", children: u.state ? /* @__PURE__ */ p("path", { id: "pause", d: "M28.25 38V10H36v28ZM12 38V10h7.75v28Z" }) : /* @__PURE__ */ p("path", { id: "play", d: "M16 37.85v-28l22 14Z" }) }) })
               }
             ),
             /* @__PURE__ */ p(
@@ -9726,28 +9657,19 @@ const lf = () => {
                 "aria-label": h.label,
                 "data-description": "Este botón controla el volumen",
                 onClick: Z,
-                children: /* @__PURE__ */ p(xe, { children: /* @__PURE__ */ p(
-                  "svg",
+                children: /* @__PURE__ */ p(xe, { children: /* @__PURE__ */ p("svg", { xmlns: "http://www.w3.org/2000/svg", height: "48", width: "48", viewBox: "0 0 48 48", children: h.state ? /* @__PURE__ */ p(
+                  "path",
                   {
-                    xmlns: "http://www.w3.org/2000/svg",
-                    height: "48",
-                    width: "48",
-                    viewBox: "0 0 48 48",
-                    children: h.state ? /* @__PURE__ */ p(
-                      "path",
-                      {
-                        id: "volume_on",
-                        d: "M28 41.45v-3.1q4.85-1.4 7.925-5.375T39 23.95q0-5.05-3.05-9.05-3.05-4-7.95-5.35v-3.1q6.2 1.4 10.1 6.275Q42 17.6 42 23.95t-3.9 11.225Q34.2 40.05 28 41.45ZM6 30V18h8L24 8v32L14 30Zm21 2.4V15.55q2.75.85 4.375 3.2T33 24q0 2.85-1.65 5.2T27 32.4Zm-6-16.8L15.35 21H9v6h6.35L21 32.45ZM16.3 24Z"
-                      }
-                    ) : /* @__PURE__ */ p(
-                      "path",
-                      {
-                        id: "volume_off",
-                        d: "m40.65 45.2-6.6-6.6q-1.4 1-3.025 1.725-1.625.725-3.375 1.125v-3.1q1.15-.35 2.225-.775 1.075-.425 2.025-1.125l-8.25-8.3V40l-10-10h-8V18h7.8l-11-11L4.6 4.85 42.8 43Zm-1.8-11.6-2.15-2.15q1-1.7 1.475-3.6.475-1.9.475-3.9 0-5.15-3-9.225-3-4.075-8-5.175v-3.1q6.2 1.4 10.1 6.275 3.9 4.875 3.9 11.225 0 2.55-.7 5t-2.1 4.65Zm-6.7-6.7-4.5-4.5v-6.5Q30 17 31.325 19.2q1.325 2.2 1.325 4.8 0 .75-.125 1.475-.125.725-.375 1.425Zm-8.5-8.5-5.2-5.2 5.2-5.2Zm-3 14.3v-7.5l-4.2-4.2h-7.8v6h6.3Zm-2.1-9.6Z"
-                      }
-                    )
+                    id: "volume_on",
+                    d: "M28 41.45v-3.1q4.85-1.4 7.925-5.375T39 23.95q0-5.05-3.05-9.05-3.05-4-7.95-5.35v-3.1q6.2 1.4 10.1 6.275Q42 17.6 42 23.95t-3.9 11.225Q34.2 40.05 28 41.45ZM6 30V18h8L24 8v32L14 30Zm21 2.4V15.55q2.75.85 4.375 3.2T33 24q0 2.85-1.65 5.2T27 32.4Zm-6-16.8L15.35 21H9v6h6.35L21 32.45ZM16.3 24Z"
                   }
-                ) })
+                ) : /* @__PURE__ */ p(
+                  "path",
+                  {
+                    id: "volume_off",
+                    d: "m40.65 45.2-6.6-6.6q-1.4 1-3.025 1.725-1.625.725-3.375 1.125v-3.1q1.15-.35 2.225-.775 1.075-.425 2.025-1.125l-8.25-8.3V40l-10-10h-8V18h7.8l-11-11L4.6 4.85 42.8 43Zm-1.8-11.6-2.15-2.15q1-1.7 1.475-3.6.475-1.9.475-3.9 0-5.15-3-9.225-3-4.075-8-5.175v-3.1q6.2 1.4 10.1 6.275 3.9 4.875 3.9 11.225 0 2.55-.7 5t-2.1 4.65Zm-6.7-6.7-4.5-4.5v-6.5Q30 17 31.325 19.2q1.325 2.2 1.325 4.8 0 .75-.125 1.475-.125.725-.375 1.425Zm-8.5-8.5-5.2-5.2 5.2-5.2Zm-3 14.3v-7.5l-4.2-4.2h-7.8v6h6.3Zm-2.1-9.6Z"
+                  }
+                ) }) })
               }
             ),
             /* @__PURE__ */ M("label", { className: be["c-vid__volume"], htmlFor: "volumeControl", children: [
@@ -9781,60 +9703,34 @@ const lf = () => {
                 onClick: () => X(!ne),
                 "aria-label": "Subtítulos",
                 className: `${be["c-vid__button"]} ${be["c-vid__subtitles"]}`,
-                children: /* @__PURE__ */ p(xe, { children: /* @__PURE__ */ p(
-                  "svg",
+                children: /* @__PURE__ */ p(xe, { children: /* @__PURE__ */ p("svg", { xmlns: "http://www.w3.org/2000/svg", height: "48", width: "48", viewBox: "0 0 48 48", children: O ? /* @__PURE__ */ p(
+                  "path",
                   {
-                    xmlns: "http://www.w3.org/2000/svg",
-                    height: "48",
-                    width: "48",
-                    viewBox: "0 0 48 48",
-                    children: O ? /* @__PURE__ */ p(
-                      "path",
-                      {
-                        id: "closed_caption_disabled",
-                        d: "m18.05 18.05 2.5 2.5H14.5v6.9h5.1v-1.1h2.5v2.1q0 .65-.425 1.075-.425.425-1.075.425h-7.1q-.65 0-1.075-.425Q12 29.1 12 28.45v-8.9q0-.65.425-1.075.425-.425 1.075-.425ZM12.3 8H39q1.15 0 2.075.925Q42 9.85 42 11v26.7l-3-3V11H15.3Zm23.75 18.35v1.95q0 .65-.425 1.075-.425.425-1.075.425h-.45l-2.35-2.35h1.8v-1.1Zm-2.5-4.7v-1.1h-5.1v3.6l-2.5-2.5v-2.1q0-.65.425-1.075.425-.425 1.075-.425h7.1q.65 0 1.075.425.425.425.425 1.075v2.1Zm-6.4 1.2Zm-6.3 2.3Zm-12.7-17L11 11H9v26h23.7L1.3 5.6l2.15-2.15L43.8 43.8l-2.15 2.15L35.7 40H9q-1.2 0-2.1-.9Q6 38.2 6 37V11q0-1 .625-1.775Q7.25 8.45 8.15 8.15Z"
-                      }
-                    ) : /* @__PURE__ */ p(
-                      "path",
-                      {
-                        id: "closed_caption",
-                        d: "M9 40q-1.2 0-2.1-.9Q6 38.2 6 37V11q0-1.2.9-2.1Q7.8 8 9 8h30q1.2 0 2.1.9.9.9.9 2.1v26q0 1.2-.9 2.1-.9.9-2.1.9Zm0-3h30V11H9v26Zm4.5-7.05h7.1q.65 0 1.075-.425.425-.425.425-1.075v-2.1h-2.5v1.1h-5.1v-6.9h5.1v1.1h2.5v-2.1q0-.65-.425-1.075-.425-.425-1.075-.425h-7.1q-.65 0-1.075.425Q12 18.9 12 19.55v8.9q0 .65.425 1.075.425.425 1.075.425Zm13.95 0h7.1q.6 0 1.05-.45.45-.45.45-1.05v-2.1h-2.5v1.1h-5.1v-6.9h5.1v1.1h2.5v-2.1q0-.6-.45-1.05-.45-.45-1.05-.45h-7.1q-.6 0-1.05.45-.45.45-.45 1.05v8.9q0 .6.45 1.05.45.45 1.05.45ZM9 37V11v26Z"
-                      }
-                    )
+                    id: "closed_caption_disabled",
+                    d: "m18.05 18.05 2.5 2.5H14.5v6.9h5.1v-1.1h2.5v2.1q0 .65-.425 1.075-.425.425-1.075.425h-7.1q-.65 0-1.075-.425Q12 29.1 12 28.45v-8.9q0-.65.425-1.075.425-.425 1.075-.425ZM12.3 8H39q1.15 0 2.075.925Q42 9.85 42 11v26.7l-3-3V11H15.3Zm23.75 18.35v1.95q0 .65-.425 1.075-.425.425-1.075.425h-.45l-2.35-2.35h1.8v-1.1Zm-2.5-4.7v-1.1h-5.1v3.6l-2.5-2.5v-2.1q0-.65.425-1.075.425-.425 1.075-.425h7.1q.65 0 1.075.425.425.425.425 1.075v2.1Zm-6.4 1.2Zm-6.3 2.3Zm-12.7-17L11 11H9v26h23.7L1.3 5.6l2.15-2.15L43.8 43.8l-2.15 2.15L35.7 40H9q-1.2 0-2.1-.9Q6 38.2 6 37V11q0-1 .625-1.775Q7.25 8.45 8.15 8.15Z"
                   }
-                ) })
+                ) : /* @__PURE__ */ p(
+                  "path",
+                  {
+                    id: "closed_caption",
+                    d: "M9 40q-1.2 0-2.1-.9Q6 38.2 6 37V11q0-1.2.9-2.1Q7.8 8 9 8h30q1.2 0 2.1.9.9.9.9 2.1v26q0 1.2-.9 2.1-.9.9-2.1.9Zm0-3h30V11H9v26Zm4.5-7.05h7.1q.65 0 1.075-.425.425-.425.425-1.075v-2.1h-2.5v1.1h-5.1v-6.9h5.1v1.1h2.5v-2.1q0-.65-.425-1.075-.425-.425-1.075-.425h-7.1q-.65 0-1.075.425Q12 18.9 12 19.55v8.9q0 .65.425 1.075.425.425 1.075.425Zm13.95 0h7.1q.6 0 1.05-.45.45-.45.45-1.05v-2.1h-2.5v1.1h-5.1v-6.9h5.1v1.1h2.5v-2.1q0-.6-.45-1.05-.45-.45-1.05-.45h-7.1q-.6 0-1.05.45-.45.45-.45 1.05v8.9q0 .6.45 1.05.45.45 1.05.45ZM9 37V11v26Z"
+                  }
+                ) }) })
               }
             ),
-            /* @__PURE__ */ p(
-              "button",
+            /* @__PURE__ */ p("button", { className: be["c-vid__button"], "aria-label": w.label, onClick: N, children: /* @__PURE__ */ p(xe, { children: /* @__PURE__ */ p("svg", { xmlns: "http://www.w3.org/2000/svg", height: "48", width: "48", viewBox: "0 0 48 48", children: w.state ? /* @__PURE__ */ p(
+              "path",
               {
-                className: be["c-vid__button"],
-                "aria-label": w.label,
-                onClick: N,
-                children: /* @__PURE__ */ p(xe, { children: /* @__PURE__ */ p(
-                  "svg",
-                  {
-                    xmlns: "http://www.w3.org/2000/svg",
-                    height: "48",
-                    width: "48",
-                    viewBox: "0 0 48 48",
-                    children: w.state ? /* @__PURE__ */ p(
-                      "path",
-                      {
-                        id: "fullscreen_exit",
-                        d: "M16.65 38v-6.65H10v-3h9.65V38Zm11.7 0v-9.65H38v3h-6.65V38ZM10 19.65v-3h6.65V10h3v9.65Zm18.35 0V10h3v6.65H38v3Z"
-                      }
-                    ) : /* @__PURE__ */ p(
-                      "path",
-                      {
-                        id: "fullscreen",
-                        d: "M10 38v-9.65h3V35h6.65v3Zm0-18.35V10h9.65v3H13v6.65ZM28.35 38v-3H35v-6.65h3V38ZM35 19.65V13h-6.65v-3H38v9.65Z"
-                      }
-                    )
-                  }
-                ) })
+                id: "fullscreen_exit",
+                d: "M16.65 38v-6.65H10v-3h9.65V38Zm11.7 0v-9.65H38v3h-6.65V38ZM10 19.65v-3h6.65V10h3v9.65Zm18.35 0V10h3v6.65H38v3Z"
               }
-            )
+            ) : /* @__PURE__ */ p(
+              "path",
+              {
+                id: "fullscreen",
+                d: "M10 38v-9.65h3V35h6.65v3Zm0-18.35V10h9.65v3H13v6.65ZM28.35 38v-3H35v-6.65h3V38ZM35 19.65V13h-6.65v-3H38v9.65Z"
+              }
+            ) }) }) })
           ] })
         ] }),
         n && /* @__PURE__ */ M("figcaption", { className: be["c-vid__caption"], children: [
