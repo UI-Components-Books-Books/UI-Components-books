@@ -4,7 +4,7 @@ import classnames from 'classnames'
 
 import css from './Image.module.scss'
 
-export const Image = ({ url, alt, title, width, addClass, noCaption, defaultStyle, ...props }) => {
+export const Image = ({ url, alt, title, width, addClass, noCaption, defaultStyle, lazySize, ...props }) => {
   // Estado para determinar si se muestra la imagen por defecto.
   const [error, setError] = useState(false)
 
@@ -32,7 +32,7 @@ export const Image = ({ url, alt, title, width, addClass, noCaption, defaultStyl
       })}
       {...(width && { style: { maxWidth: `${/%/gi.test(width) ? width : `${width}px`}` } })}
     >
-      <img src={imgToSee} onError={onError} alt={alt} {...props} />
+      <img src={imgToSee} onError={onError} alt={alt} {...(lazySize && { ...lazySize })} {...props} />
 
       {!noCaption && (
         <figcaption className={css['c-image__figcaption']}>
@@ -59,5 +59,9 @@ Image.propTypes = {
   width: PropTypes.string,
   addClass: PropTypes.string,
   noCaption: PropTypes.bool,
-  defaultStyle: PropTypes.bool
+  defaultStyle: PropTypes.bool,
+  lazySize: PropTypes.shape({
+    width: PropTypes.string,
+    height: PropTypes.string
+  })
 }

@@ -5508,8 +5508,8 @@ const Op = ({ ...e }) => /* @__PURE__ */ p("span", { id: "hc_extension_svg_filte
 ] }) }) }), da = {
   "c-image": "_c-image_1lngo_1",
   "c-image__figcaption": "_c-image__figcaption_1lngo_16"
-}, _i = ({ url: e, alt: t, title: n, width: r, addClass: a, noCaption: i, defaultStyle: c, ...s }) => {
-  const [d, f] = ee(!1), l = new URL("/ui-components-books/dist/assets/images/base-image.png", self.location).href, u = (h) => f(h), v = d ? l : `${e}`;
+}, _i = ({ url: e, alt: t, title: n, width: r, addClass: a, noCaption: i, defaultStyle: c, lazySize: s, ...d }) => {
+  const [f, l] = ee(!1), u = new URL("/ui-components-books/dist/assets/images/base-image.png", self.location).href, v = (m) => l(m), h = f ? u : `${e}`;
   return /* @__PURE__ */ M(
     "figure",
     {
@@ -5519,7 +5519,7 @@ const Op = ({ ...e }) => /* @__PURE__ */ p("span", { id: "hc_extension_svg_filte
       }),
       ...r && { style: { maxWidth: `${/%/gi.test(r) ? r : `${r}px`}` } },
       children: [
-        /* @__PURE__ */ p("img", { src: v, onError: u, alt: t, ...s }),
+        /* @__PURE__ */ p("img", { src: h, onError: v, alt: t, ...s && { ...s }, ...d }),
         !i && /* @__PURE__ */ p("figcaption", { className: da["c-image__figcaption"], children: /* @__PURE__ */ M("p", { children: [
           /* @__PURE__ */ M("strong", { children: [
             n,
@@ -5543,7 +5543,11 @@ _i.propTypes = {
   width: o.string,
   addClass: o.string,
   noCaption: o.bool,
-  defaultStyle: o.bool
+  defaultStyle: o.bool,
+  lazySize: o.shape({
+    width: o.string,
+    height: o.string
+  })
 };
 const In = {
   "c-label": "_c-label_1pfl8_1",
