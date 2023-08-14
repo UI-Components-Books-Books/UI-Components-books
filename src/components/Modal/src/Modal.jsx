@@ -35,6 +35,12 @@ export const Modal = ({ children, isOpen, onClose, finalFocusRef }) => {
   const refModal = useRef()
 
   /**
+   * Referencia utilizada como "flag", para que cuando
+   * cambie el estado isOpen.
+   */
+  const flagUpdatedState = useRef(false)
+
+  /**
    * Función usada para habilitar|deshabilitar
    * la propiedad inert que sirve para quitar el focus de los
    * elementos contenidos en el elemento #root.
@@ -87,24 +93,38 @@ export const Modal = ({ children, isOpen, onClose, finalFocusRef }) => {
 
   /**
    * Función que cambia las animaciones
-   * del modal dependiendo de su Estado
-   * de cierre o apertura.
+   * el enfoque después de cerrar el modal.
    * @param {function} callback
    */
-  const changeStylesOnModalClose = (callback) => {
-    changeStyle('animate__fadeIn', 'animate__fadeOut')
+  const changeStylesOnModalClose = async (callback) => {
+    try {
+      // Cambiamos el estilo de entrada por el estilo de salida.
+      changeStyle('animate__fadeIn', 'animate__fadeOut')
 
-    setTimeout(() => {
+      // Esperamos 500 milisegundos.
+      await new Promise(resolve => setTimeout(resolve, 500))
+
+      // Cambiamos el estilo de salida por el estilo de entrada y restauramos la interacción.
       changeStyle('animate__fadeOut', 'animate__fadeIn')
       inertToggle(false)
-      if (typeof callback === 'function') callback()
 
+      // Si se proporciona una función de devolución de llamada, la ejecutamos.
+      if (typeof callback === 'function') {
+        callback()
+      }
+
+      // Manejo del enfoque en el cierre del modal.
       if (typeof finalFocusRef === 'string' || Array.isArray(finalFocusRef)) {
+        // Si finalFocusRef es una cadena o un arreglo, establecemos el enfoque en el elemento deseado.
         setElementFocusOnModalClose(finalFocusRef)
       } else if (typeof finalFocusRef === 'object') {
+        // Si finalFocusRef es un objeto (como un ref), establecemos el enfoque en su elemento actual.
         finalFocusRef.current.focus()
       }
-    }, 500)
+    } catch (error) {
+      // En caso de que ocurra un error, lo registramos en la consola.
+      console.error('An error occurred:', error)
+    }
   }
 
   /**
@@ -121,11 +141,29 @@ export const Modal = ({ children, isOpen, onClose, finalFocusRef }) => {
    * cuando la propiedad isOpen es true.
    */
   useEffect(() => {
+    const handleClose = async () => {
+      if (isOpen || !flagUpdatedState.current) return
+
+      flagUpdatedState.current = false
+      inertToggle(false)
+
+      // Agregamos el focus al finalFocusRef y cambiamos las animaciones del modal.
+      await changeStylesOnModalClose()
+    }
+
     if (isOpen) {
       inertToggle(true)
 
-      if (refModal.current) refModal.current.focus()
+      // Marcamos el estado de actualización como verdadero para rastrear si se ha actualizado.
+      flagUpdatedState.current = true
+
+      if (refModal.current) {
+        // Establecemos el enfoque en el elemento del modal para que el usuario pueda interactuar con él.
+        refModal.current.focus()
+      }
     }
+
+    handleClose()
 
     return () => {
       // Almacenamos el boolean que nos indica si existe o no la propiedad inert en el #root.
@@ -135,9 +173,6 @@ export const Modal = ({ children, isOpen, onClose, finalFocusRef }) => {
 
       // Eliminamos el inert si el hasAttribute es true.
       if (hasAttribute) inertToggle(false)
-
-      // Agregamos el focus el finalFocusRef y cambiamos las animaciones del modal.
-      changeStylesOnModalClose()
     }
   }, [isOpen])
 
