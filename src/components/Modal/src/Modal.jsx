@@ -86,17 +86,18 @@ export const Modal = ({ children, isOpen, onClose, finalFocusRef }) => {
   }
 
   /**
-   * Función utilizada para cerrar el modal.
-   * además agrega el focus al elemento contenido
-   * en la propiedad finalFocusRef.
+   * Función que cambia las animaciones
+   * del modal dependiendo de su Estado
+   * de cierre o apertura.
+   * @param {function} callback
    */
-  const onCloseModal = () => {
+  const changeStylesOnModalClose = (callback) => {
     changeStyle('animate__fadeIn', 'animate__fadeOut')
 
     setTimeout(() => {
       changeStyle('animate__fadeOut', 'animate__fadeIn')
       inertToggle(false)
-      onClose(!isOpen)
+      if (typeof callback === 'function') callback()
 
       if (typeof finalFocusRef === 'string' || Array.isArray(finalFocusRef)) {
         setElementFocusOnModalClose(finalFocusRef)
@@ -104,6 +105,15 @@ export const Modal = ({ children, isOpen, onClose, finalFocusRef }) => {
         finalFocusRef.current.focus()
       }
     }, 500)
+  }
+
+  /**
+   * Función utilizada para cerrar el modal.
+   * además agrega el focus al elemento contenido
+   * en la propiedad finalFocusRef.
+   */
+  const onCloseModal = () => {
+    changeStylesOnModalClose(onClose(!isOpen))
   }
 
   /**
@@ -125,6 +135,9 @@ export const Modal = ({ children, isOpen, onClose, finalFocusRef }) => {
 
       // Eliminamos el inert si el hasAttribute es true.
       if (hasAttribute) inertToggle(false)
+
+      // Agregamos el focus el finalFocusRef y cambiamos las animaciones del modal.
+      changeStylesOnModalClose()
     }
   }, [isOpen])
 
