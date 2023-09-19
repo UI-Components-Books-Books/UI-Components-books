@@ -9704,10 +9704,7 @@ const lf = () => {
           ] })
         ] }),
         n && /* @__PURE__ */ M("figcaption", { className: be["c-vid__caption"], children: [
-          /* @__PURE__ */ M("strong", { children: [
-            r.title,
-            ":"
-          ] }),
+          /* @__PURE__ */ p("strong", { children: r.title }),
           " ",
           r.content
         ] })
