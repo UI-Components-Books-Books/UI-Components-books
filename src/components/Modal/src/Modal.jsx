@@ -181,7 +181,7 @@ export const Modal = ({ children, isOpen, onClose, finalFocusRef }) => {
       value={{ isOpen, onKeyDown, onCloseModal, refModal }}
     >
       <Portal id='js-modal'>
-        {getChildrenByType(children, ['ModalContent', 'ModalOverlay'])}
+        {isOpen ? getChildrenByType(children, ['ModalContent', 'ModalOverlay']) : null}
       </Portal>
     </ModalContext.Provider>
   )
