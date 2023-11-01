@@ -1,9 +1,7 @@
-.c-toggletip {
+:where(.c-toggletip) {
     --toggletip-bg: var(--clr-neutral-800);
     --toggletip-arrow-bg: var(--toggletip-bg);
-}
 
-:where(.c-toggletip) {
     padding: .25rem .5rem;
     max-width: 320px;
     min-width: max-content;
