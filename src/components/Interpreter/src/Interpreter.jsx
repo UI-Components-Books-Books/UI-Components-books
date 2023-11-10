@@ -6,7 +6,13 @@ import { useVideo } from '../../../hooks/useVideo'
 
 import css from './Interpreter.module.scss'
 
-export const Interpreter = ({ width, addClass, image, pathVideo, pathname }) => {
+export const Interpreter = ({
+  width,
+  addClass,
+  image,
+  pathVideo,
+  pathname
+}) => {
   const [getCurrentTiem, setCurrentTime] = useState('00:00') // estado del tiempo de ver el video
   const [showVideo1, setShowVideo1] = useState(false)
   const [showVideo2, setShowVideo2] = useState(false)
@@ -152,14 +158,19 @@ export const Interpreter = ({ width, addClass, image, pathVideo, pathname }) => 
   const refProgressBar = useRef()
 
   return (
-    <Draggable nodeRef={nodeRef} handle='strong' position={deltaPosition} onDrag={handleDrag}>
+    <Draggable
+      nodeRef={nodeRef}
+      handle='strong'
+      position={deltaPosition}
+      onDrag={handleDrag}
+    >
       <div
         ref={nodeRef}
-        className={`${css['menu-float']} ${(showVideo1 || showVideo2) && css['menu-float-active']} ${
-          css['menu-float-box']
-        } ${css.box} ${css['no-cursor']}`}
+        className={`${css.interpreter} ${addClass ?? ''} ${
+          (showVideo1 || showVideo2) && css['interpreter-active']
+        }`}
       >
-        <div className={css['menu-float-dropdown']}>
+        <div className={css['interpreter-dropdown']}>
           {((!showVideo1 && !showVideo2) ||
             (!!video1 && !showVideo1 && !showVideo2) ||
             (!!video2 && (showVideo1 || showVideo2)) ||
@@ -171,8 +182,10 @@ export const Interpreter = ({ width, addClass, image, pathVideo, pathname }) => 
                     setHidden(true)
                   }
                 }}
-                className={`${css['menu-float-btn']} ${css['menu-float-btndrop']} ${
-                !showVideo1 && !showVideo2 && css['menu-float-btn-disable']
+                className={`${css['interpreter-btn']} ${
+                css['interpreter-btn-switch']
+              } ${
+                !showVideo1 && !showVideo2 && css['interpreter-btn-disable']
               }`}
                 aria-label='Intérprete de lenguaje de señas'
               >
@@ -180,7 +193,7 @@ export const Interpreter = ({ width, addClass, image, pathVideo, pathname }) => 
                 !showVideo2 &&
                 (image
                   ? (
-                    <img className={css['image-Video']} src={image} />
+                    <img className={css['image-Video']} src={image} alt='' />
                     )
                   : (
                     <svg
@@ -217,7 +230,7 @@ export const Interpreter = ({ width, addClass, image, pathVideo, pathname }) => 
             <>
               <button
                 tabIndex={-1}
-                className={`${css['menu-float-btn']} ${css.secondary}`}
+                className={`${css['interpreter-btn']} ${css['interpreter-btn--video']}`}
                 onClick={() => {
                   showVideo2 && handlerClick(true, setShowVideo1)
                 }}
@@ -229,7 +242,7 @@ export const Interpreter = ({ width, addClass, image, pathVideo, pathname }) => 
               </button>
               <button
                 tabIndex={-1}
-                className={`${css['menu-float-btn']} ${css.secondary}`}
+                className={`${css['interpreter-btn']} ${css['interpreter-btn--video']}`}
                 onClick={() => {
                   showVideo1 && handlerClick(true, setShowVideo2)
                 }}
@@ -241,7 +254,7 @@ export const Interpreter = ({ width, addClass, image, pathVideo, pathname }) => 
               </button>
               <button
                 tabIndex={-1}
-                className={`${css['menu-float-btn']}`}
+                className={`${css['interpreter-btn']}`}
                 onClick={() => {
                   return false
                 }}
@@ -254,7 +267,7 @@ export const Interpreter = ({ width, addClass, image, pathVideo, pathname }) => 
                 </strong>
               </button>
               <button
-                className={`${css['menu-float-btn']} ${css.close}`}
+                className={`${css['interpreter-btn']} ${css['interpreter-btn--close']}`}
                 onClick={() => {
                   setShowVideo1(false)
                   setShowVideo2(false)
@@ -277,8 +290,11 @@ export const Interpreter = ({ width, addClass, image, pathVideo, pathname }) => 
         </div>
 
         {/* Contendor video */}
-        <div className={`${css['c-vid-container']} ${addClass}`} display={showVideo1 || showVideo2 ? 'true' : 'false'}>
-          <div className={`${css['c-vid']} ${addClass}`} style={{ maxWidth: `${width}px` }}>
+        <div
+          className={css['c-vid-container']}
+          display={showVideo1 || showVideo2 ? 'true' : 'false'}
+        >
+          <div className={css['c-vid']} style={{ maxWidth: `${width}px` }}>
             {showVideo1 && (
               <video
                 src={video1}
@@ -322,8 +338,16 @@ export const Interpreter = ({ width, addClass, image, pathVideo, pathname }) => 
                 <span>{getCurrentTiem}</span>
               </p>
               <div className={css['progress-content']}>
-                <div ref={refProgress} className={css.progress} onClick={handleProcessControl}>
-                  <div ref={refProgressBar} className={css['progress-bar']} onChange={handleBarProgress} />
+                <div
+                  ref={refProgress}
+                  className={css.progress}
+                  onClick={handleProcessControl}
+                >
+                  <div
+                    ref={refProgressBar}
+                    className={css['progress-bar']}
+                    onChange={handleBarProgress}
+                  />
                 </div>
               </div>
             </div>
@@ -347,13 +371,24 @@ Interpreter.defaultProps = {
 }
 
 const SvgMoreVert = () => (
-  <svg xmlns='http://www.w3.org/2000/svg' height='48' viewBox='0 96 960 960' width='48'>
+  <svg
+    xmlns='http://www.w3.org/2000/svg'
+    height='48'
+    viewBox='0 96 960 960'
+    width='48'
+  >
     <path d='M479.858 896Q460 896 446 881.858q-14-14.141-14-34Q432 828 446.142 814q14.141-14 34-14Q500 800 514 814.142q14 14.141 14 34Q528 868 513.858 882q-14.141 14-34 14Zm0-272Q460 624 446 609.858q-14-14.141-14-34Q432 556 446.142 542q14.141-14 34-14Q500 528 514 542.142q14 14.141 14 34Q528 596 513.858 610q-14.141 14-34 14Zm0-272Q460 352 446 337.858q-14-14.141-14-34Q432 284 446.142 270q14.141-14 34-14Q500 256 514 270.142q14 14.141 14 34Q528 324 513.858 338q-14.141 14-34 14Z' />
   </svg>
 )
 
 const SvgCloset = () => (
-  <svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48' aria-hidden='true'>
+  <svg
+    xmlns='http://www.w3.org/2000/svg'
+    width='48'
+    height='48'
+    viewBox='0 0 48 48'
+    aria-hidden='true'
+  >
     <path
       id='close'
       d='m12.45 37.65-2.1-2.1L21.9 24 10.35 12.45l2.1-2.1L24 21.9l11.55-11.55 2.1 2.1L26.1 24l11.55 11.55-2.1 2.1L24 26.1Z'
@@ -361,7 +396,13 @@ const SvgCloset = () => (
   </svg>
 )
 const SvgOpenWith = () => (
-  <svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48' aria-hidden='true'>
+  <svg
+    xmlns='http://www.w3.org/2000/svg'
+    width='48'
+    height='48'
+    viewBox='0 0 48 48'
+    aria-hidden='true'
+  >
     <path
       id='open_with'
       d='m24 44-8.15-8.15 2.2-2.2 4.45 4.45v-9.45h3v9.45l4.45-4.45 2.2 2.2ZM11.9 31.9 4 24l7.95-7.95 2.2 2.2L9.9 22.5h9.45v3H9.9l4.2 4.2Zm24.2 0-2.2-2.2 4.2-4.2h-9.4v-3h9.4l-4.2-4.2 2.2-2.2L44 24ZM22.5 19.3V9.9l-4.2 4.2-2.2-2.2L24 4l7.9 7.9-2.2 2.2-4.2-4.2v9.4Z'
@@ -370,7 +411,13 @@ const SvgOpenWith = () => (
 )
 
 const SvgLaptopMac = () => (
-  <svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 96 960 960' aria-hidden='true'>
+  <svg
+    xmlns='http://www.w3.org/2000/svg'
+    width='48'
+    height='48'
+    viewBox='0 96 960 960'
+    aria-hidden='true'
+  >
     <path d='M57 896q-23.513 0-40.256-17.625Q0 860.75 0 836h141q-24 0-42-18t-18-42V276q0-24 18-42t42-18h678q24 0 42 18t18 42v500q0 24-18 42t-42 18h141q0 25-17.625 42.5T900 896H57Zm423-22q14.45 0 24.225-9.775Q514 854.45 514 840q0-14.45-9.775-24.225Q494.45 806 480 806q-14.45 0-24.225 9.775Q446 825.55 446 840q0 14.45 9.775 24.225Q465.55 874 480 874Zm-339-98h678V276H141v500Zm0 0V276v500Z' />
   </svg>
 )
