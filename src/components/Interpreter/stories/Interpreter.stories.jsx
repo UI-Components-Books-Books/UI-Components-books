@@ -21,10 +21,11 @@ export default {
 export const VideoInterpreter = () => (
   <Interpreter url1='video.mp4' />
 )
-VideoInterpreter.storyName = 'Video Interprete'
 
+VideoInterpreter.storyName = 'Video Interprete'
 
 export const MultiVideoInterpreter = () => (
   <Interpreter url1='video1.mp4' url2='video2.mp4' />
 )
+
 MultiVideoInterpreter.storyName = 'Multiple video Interprete'
