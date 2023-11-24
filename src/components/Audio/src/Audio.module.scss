@@ -31,14 +31,23 @@
 }
 
 :where(.c-button) {
+  --audio-btn-background: var(--clr-primary-800);
+  --audio-btn-icon-color: var(--clr-common-white-100);
+  --audio-btn-background-hover: var(--clr-primary-400);
+
   position: relative;
   width: 3rem;
   height: 3rem;
   transition: background-color 0.25s ease, transform 0.25s ease;
 }
 
+.c-button {
+  --button-border-color: transparent;
+  --button-bg-color: var(--audio-btn-background);
+}
+
 :where(.c-button:hover) {
-  background-color: var(--clr-primary-400);
+  background-color: var(--audio-btn-background-hover);
 }
 
 .c-button::before,
@@ -50,7 +59,7 @@
   transform: translate(-50%, -50%);
   width: 1.0625rem;
   height: 1.1875rem;
-  background-color: var(--clr-common-white-100);
+  background-color: var(--audio-btn-icon-color);
   transform-origin: 50% 100%;
   transition: clip-path 0.5s ease;
 }
@@ -139,4 +148,12 @@ html[data-audio="true"] .audio-bar[data-a11y="true"] {
   :where(.volume-btn) {
     display: none;
   }
+}
+
+.hidden-box {
+  position: fixed;
+  bottom: 0;
+  width: 1ex;
+  height: 1ex;
+  background-color: transparent;
 }

@@ -74,7 +74,7 @@ export const ModalContent = ({
         className={classnames({ [css['c-modal-container']]: !defaultStyle })}
         data-class='c-modal__container'
       >
-        {children}
+        {isOpen ? children : null}
       </div>
       <Button
         addClass={classnames({ [css['c-close-button']]: !defaultStyle })}

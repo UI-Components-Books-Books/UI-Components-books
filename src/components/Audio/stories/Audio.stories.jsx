@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Col, Row, Audio } from '../../../components'
+import { Audio } from '../../../components'
 
 export default {
   title: 'ui-components/Audio',
