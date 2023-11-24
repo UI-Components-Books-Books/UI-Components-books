@@ -67,7 +67,7 @@ const useOnScreen = (options) => {
     /**
        * Creamos una nueva instacia de nuestra IntersectionObserver API.
        */
-    const observer = new IntersectionObserver(
+    const observer = new window.IntersectionObserver(
       ([entry]) => {
         /**
              * actualizamos nuestro estado cuando el
