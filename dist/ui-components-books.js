@@ -1808,14 +1808,6 @@ const As = "_scrubber_6xazl_142", Ze = {
             }
           ),
           s ? /* @__PURE__ */ p("span", { id: `description${b}`, className: Ze["hidden-description"], children: n ? "Audio description" : `Barra de audio ${d}` }) : /* @__PURE__ */ p("span", { id: `description${b}`, hidden: !0, children: n ? "Audio description" : "Barra de audio" }),
-          "//",
-          " ",
-          /* @__PURE__ */ D("span", { id: `description${b}`, hidden: !0, children: [
-            "// ",
-            n ? "Audio description" : "Barra de audio",
-            "//",
-            " "
-          ] }),
           n ? /* @__PURE__ */ p(_e, { children: /* @__PURE__ */ p("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 32 32", children: Kt.a11y }) }) : null,
           /* @__PURE__ */ D("button", { onClick: B, children: [
             /* @__PURE__ */ p("div", { className: "u-sr-only", children: l ? "Pausar" : "Reproducir" }),

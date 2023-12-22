@@ -199,11 +199,6 @@ export const Audio = ({
             {a11y ? 'Audio description' : 'Barra de audio'}
           </span>
         )}
-        //{' '}
-        <span id={`description${Id}`} hidden>
-          // {a11y ? 'Audio description' : 'Barra de audio'}
-          //{' '}
-        </span>
         {a11y ? (
           <Icon>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
