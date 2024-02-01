@@ -240,6 +240,7 @@ export const Audio = ({
             type='range'
           />
           <button
+            type='button'
             ref={refVolumeButton}
             aria-expanded={openMenu}
             className={css['volume-btn']}
