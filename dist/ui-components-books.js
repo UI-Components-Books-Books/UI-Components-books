@@ -1872,6 +1872,7 @@ const zs = "_scrubber_s6vlj_142", Ke = {
           /* @__PURE__ */ A(
             "button",
             {
+              type: "button",
               ref: T,
               "aria-expanded": v,
               className: Ke["volume-btn"],
