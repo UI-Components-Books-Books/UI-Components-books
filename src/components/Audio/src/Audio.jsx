@@ -1,10 +1,9 @@
-import { useState, useRef, useLayoutEffect, useEffect, useId } from 'react'
+import { useState, useRef, useId } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import { Button } from '../../Button'
 import { Icon } from '../../Icon'
-import { useOnScreen } from '../../../hooks/useOnScreen'
 import { useInteractOutside } from '../../../hooks/useInteractionOutside'
 
 import css from './Audio.module.scss'
@@ -20,7 +19,9 @@ const TYPES = Object.freeze({
 
 const PLAYER_ICONS = Object.freeze({
   play: <path id='play' d='M306-184v-598l471 299-471 299Z' />,
-  pause: <path id='pause' d='M550-186v-590h201v590H550Zm-340 0v-590h201v590H210Z' />,
+  pause: (
+    <path id='pause' d='M550-186v-590h201v590H550Zm-340 0v-590h201v590H210Z' />
+  ),
   volume_on: (
     <path
       id='volume_on'
@@ -86,11 +87,6 @@ export const Audio = ({
    */
   const refAudio = useRef()
 
-  /**
-   * Se obtiene la referencia del HTMLDivElement.
-   */
-  const refHiddenElement = useRef()
-
   const refVolumeButton = useRef(null)
   const refVolumeSlider = useRef(null)
 
@@ -109,11 +105,18 @@ export const Audio = ({
   useInteractOutside({ ref: refVolumeSlider, onInteractionOutside })
 
   /**
-   * Custom hook utilizado para dectectar
-   * si el componente esta visible en el
-   * viewport.
+   * Obtiene todos los HTMLAudioElement,
+   * y los pausa si se están reproduciéndose,
+   * con el fin de que no se escuchen un audio encima de otro.
    */
-  const [setRef, isVisible] = useOnScreen()
+  const pauseAllAudios = () => {
+    const audios = document.querySelectorAll('audio')
+    audios.forEach((audio) => {
+      if (!audio.paused && audio !== refAudio.current) {
+        audio.pause()
+      }
+    })
+  }
 
   /**
    * Función utilizada para alternar entre
@@ -121,18 +124,23 @@ export const Audio = ({
    * del estado del mismo.
    *
    */
-  const togglePlay = (_) => {
+  const togglePlay = () => {
     if (!refAudio.current) return
+
+    pauseAllAudios()
 
     if (refAudio.current.paused) {
       refAudio.current.play()
     } else {
       refAudio.current.pause()
     }
+
     setPlay(!play)
   }
 
-  const isTouchScreen = window.matchMedia('(any-hover: none) and (any-pointer: coarse)').matches
+  const isTouchScreen = window.matchMedia(
+    '(any-hover: none) and (any-pointer: coarse)'
+  ).matches
 
   const onLoadedMetadata = () => {
     setDuration(Math.round(refAudio.current.duration))
@@ -153,29 +161,6 @@ export const Audio = ({
     refAudio.current.currentTime = playhead
   }
 
-  useEffect(() => {
-    // Verificar si el audio está reproduciéndose (play es verdadero)
-    // o si el audio no está en pausa y no es visible
-    if ((play || !refAudio.current.paused) && !isVisible) {
-      // Si se cumple la condición, detener la reproducción,
-      // establecer play a falso y reiniciar el tiempo de reproducción a cero
-      setPlay(!play)
-      refAudio.current.pause()
-      refAudio.current.currentTime = 0
-    }
-  }, [isVisible])
-
-  useLayoutEffect(() => {
-    // Verificar si existe la referencia del elemento oculto.
-    const ref = refHiddenElement.current
-
-    // Si el elemento existe
-    if (ref) {
-      // Establecer la referencia en la variable de estado "ref"
-      setRef(ref)
-    }
-  }, [refHiddenElement])
-
   return type === TYPES.BAR
     ? (
       <>
@@ -186,12 +171,6 @@ export const Audio = ({
           data-a11y={a11y}
           data-class='c-audio-bar'
         >
-          <div
-            ref={refHiddenElement}
-            className={css['hidden-box']}
-            tabIndex='-1'
-            aria-hidden='true'
-          />
           {hasDescription
             ? (
               <span id={`description${Id}`} className={css['hidden-description']}>
@@ -215,15 +194,20 @@ export const Audio = ({
           <button type='button' onClick={togglePlay}>
             <div className='u-sr-only'>{play ? 'Pausar' : 'Reproducir'}</div>
             <Icon size='big'>
-              <svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 -960 960 960'>
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                width='48'
+                height='48'
+                viewBox='0 -960 960 960'
+              >
                 {play ? PLAYER_ICONS.pause : PLAYER_ICONS.play}
               </svg>
             </Icon>
           </button>
           <small aria-hidden='true'>
             {String(Math.floor(mediaTime / 60)).padStart(2, '0')}:
-            {String(mediaTime - 60 * Math.floor(mediaTime / 60)).padStart(2, '0')} /{' '}
-            {String(Math.floor(duration / 60)).padStart(2, '0')}:
+            {String(mediaTime - 60 * Math.floor(mediaTime / 60)).padStart(2, '0')}{' '}
+            / {String(Math.floor(duration / 60)).padStart(2, '0')}:
             {String(duration - 60 * Math.floor(duration / 60)).padStart(2, '0')}
           </small>
           <label className='u-sr-only' htmlFor={`time${Id}`}>
@@ -248,7 +232,12 @@ export const Audio = ({
           >
             <span className='u-sr-only'>Controlar volumen</span>
             <Icon>
-              <svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 -960 960 960'>
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                width='48'
+                height='48'
+                viewBox='0 -960 960 960'
+              >
                 {volume === 0
                   ? PLAYER_ICONS.volume_off
                   : volume <= 0.25
@@ -309,10 +298,11 @@ export const Audio = ({
           ref={refAudio}
           src={src}
           type={format}
-          onEnded={() => setPlay(!play)}
+          onPlay={() => setPlay(true)}
+          onPause={() => setPlay(false)}
+          onEnded={() => setPlay(false)}
           className={css['c-audio--hidden']}
         />
-        <div ref={refHiddenElement} className={css['hidden-box']} tabIndex='-1' aria-hidden='true' />
         <Button
           type='button'
           label={play ? 'Pausar' : 'Reproduccir'}
