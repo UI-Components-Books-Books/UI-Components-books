@@ -1,4 +1,4 @@
-import { forwardRef, useContext, useEffect, useId } from 'react'
+import { forwardRef, useContext, useEffect, useId, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
@@ -10,18 +10,41 @@ import css from './Panel.module.scss'
 export const Section = forwardRef(
   ({ children, addClass, defaultStyle, __TYPE, ...props }, ref) => {
     // Obtenemos la función validation del contexto
-    const { validation, addNewIdToSection, getIndexById, type } = useContext(PanelContext)
+    const { validation, addNewIdToSection, getIndexById, type } =
+      useContext(PanelContext)
 
     // Referencia para almacenar el valor del ID de la sección.
     const id = useId()
 
     /**
-     * Devuelve "true" o "false" apartir de evaluar
+     * Obtiene todos los HTMLAudioElement,
+     * y los pausa si se están reproduciéndose,
+     * con el fin de que no se escuchen un audio encima de otro.
+     */
+    const pauseAllAudios = () => {
+      const audios = document.querySelectorAll('audio')
+      audios.forEach((audio) => {
+        if (!audio.paused) {
+          audio.pause()
+        }
+      })
+    }
+
+    /**
+     * Devuelve "true" o "false" después de evaluar
      * el Id de la sección con el que está en el estado.
      *
-     * @returns {(Boolean)}
+     * @returns {Boolean}
      */
-    const isSelected = validation(id)
+    const isSelected = useMemo(() => {
+      const isSelected = validation(id)
+
+      if (isSelected) {
+        pauseAllAudios()
+      }
+
+      return isSelected
+    }, [id, validation])
 
     useEffect(() => {
       if (!id) return
@@ -29,7 +52,6 @@ export const Section = forwardRef(
       addNewIdToSection(id)
     }, [id])
 
-    // TODO: Agregar transición con FrameMotio
     return (
       <section
         ref={ref}
