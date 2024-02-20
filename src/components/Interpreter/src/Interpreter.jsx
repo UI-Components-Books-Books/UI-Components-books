@@ -176,6 +176,9 @@ export const Interpreter = ({
             (!!video2 && (showVideo1 || showVideo2)) ||
             (!!video2 && (showVideo1 || showVideo2) && !showVideo1)) && (
               <button
+                {...(!hidden &&
+                !showVideo1 &&
+                !showVideo2 && { 'data-interpreter-primary-button': true })}
                 onClick={() => {
                   if (!hidden) {
                     handlerClick(true, setShowVideo1)
@@ -202,6 +205,7 @@ export const Interpreter = ({
                       x={0}
                       y={0}
                       viewBox='0 0 157.39 157.39'
+                      className={css['interpreter-btn-switch-svg']}
                       style={{
                         enableBackground: 'new 0 0 157.39 157.39'
                       }}
