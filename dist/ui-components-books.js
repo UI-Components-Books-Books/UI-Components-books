@@ -9400,26 +9400,26 @@ const sf = () => {
       d.unobserve(c);
     };
   }, [r, n, t, c]), [s, a];
-}, uf = "_active_i7dnv_90", df = "_iconPulse_i7dnv_1", me = {
-  "c-vid": "_c-vid_i7dnv_1",
-  "c-vid__caption": "_c-vid__caption_i7dnv_19",
-  "c-vid__container": "_c-vid__container_i7dnv_24",
-  "c-vid__video": "_c-vid__video_i7dnv_44",
-  "no-captions": "_no-captions_i7dnv_56",
-  "c-vid__wrapper": "_c-vid__wrapper_i7dnv_60",
-  "c-vid__icon-container": "_c-vid__icon-container_i7dnv_70",
-  "c-vid__icon": "_c-vid__icon_i7dnv_70",
+}, uf = "_active_yhx5o_91", df = "_iconPulse_yhx5o_1", me = {
+  "c-vid": "_c-vid_yhx5o_1",
+  "c-vid__caption": "_c-vid__caption_yhx5o_19",
+  "c-vid__container": "_c-vid__container_yhx5o_24",
+  "c-vid__video": "_c-vid__video_yhx5o_45",
+  "no-captions": "_no-captions_yhx5o_57",
+  "c-vid__wrapper": "_c-vid__wrapper_yhx5o_61",
+  "c-vid__icon-container": "_c-vid__icon-container_yhx5o_71",
+  "c-vid__icon": "_c-vid__icon_yhx5o_71",
   active: uf,
   iconPulse: df,
-  "c-vid__progress-bg": "_c-vid__progress-bg_i7dnv_112",
-  "c-vid__progress-bar": "_c-vid__progress-bar_i7dnv_134",
-  "c-vid__progress-sphere": "_c-vid__progress-sphere_i7dnv_140",
-  "c-vid__controls": "_c-vid__controls_i7dnv_150",
-  "c-vid__button": "_c-vid__button_i7dnv_165",
-  "c-vid__volume": "_c-vid__volume_i7dnv_180",
-  "c-vid__volume-item": "_c-vid__volume-item_i7dnv_191",
-  "c-vid__time": "_c-vid__time_i7dnv_202",
-  "c-vid__subtitles": "_c-vid__subtitles_i7dnv_208"
+  "c-vid__progress-bg": "_c-vid__progress-bg_yhx5o_113",
+  "c-vid__progress-bar": "_c-vid__progress-bar_yhx5o_135",
+  "c-vid__progress-sphere": "_c-vid__progress-sphere_yhx5o_141",
+  "c-vid__controls": "_c-vid__controls_yhx5o_151",
+  "c-vid__button": "_c-vid__button_yhx5o_166",
+  "c-vid__volume": "_c-vid__volume_yhx5o_181",
+  "c-vid__volume-item": "_c-vid__volume-item_yhx5o_192",
+  "c-vid__time": "_c-vid__time_yhx5o_203",
+  "c-vid__subtitles": "_c-vid__subtitles_yhx5o_209"
 }, as = ({ src: e, width: t = "1000", hasDescription: n, description: r, addClass: a, poster: i, ...c }) => {
   const [s, d] = te({
     totalSeconds: 0,
@@ -9568,7 +9568,7 @@ const sf = () => {
       onKeyDown: (q) => de(q),
       ...c,
       children: [
-        /* @__PURE__ */ I("div", { className: `${me["c-vid__container"]} ${a}`, ref: T, children: [
+        /* @__PURE__ */ I("div", { className: `${me["c-vid__container"]} ${a}`, "data-video-full-screen": w.state, ref: T, children: [
           /* @__PURE__ */ I("div", { className: me["c-vid__wrapper"], children: [
             /* @__PURE__ */ I(
               "video",
