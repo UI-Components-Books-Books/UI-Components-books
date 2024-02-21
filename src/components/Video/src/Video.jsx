@@ -412,7 +412,7 @@ export const Video = ({ src, width = '1000', hasDescription, description, addCla
       onKeyDown={(e) => handleArrowKeys(e)}
       {...props}
     >
-      <div className={`${css['c-vid__container']} ${addClass}`} ref={refCont}>
+      <div className={`${css['c-vid__container']} ${addClass}`} data-video-full-screen={getStateScreen.state} ref={refCont}>
         <div className={css['c-vid__wrapper']}>
           <video
             preload='none'
