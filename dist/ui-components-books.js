@@ -11815,5 +11815,6 @@ export {
   _p as useMedia,
   cf as useOnScreen,
   Eu as usePagination,
-  ku as usePortal
+  ku as usePortal,
+  ip as useVideo
 };
