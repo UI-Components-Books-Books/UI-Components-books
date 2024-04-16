@@ -141,7 +141,7 @@ html[data-audio="true"] .audio-bar[data-a11y="true"] {
 }
 
 :where(.scrubber) {
-  width: min(100%, 8.0625rem);
+  width: 8.0625rem;
 }
 
 @media screen and (any-hover: none) and (any-pointer: coarse) {
