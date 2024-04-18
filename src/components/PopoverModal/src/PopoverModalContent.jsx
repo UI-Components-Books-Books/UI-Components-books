@@ -30,6 +30,7 @@ export const PopoverModalContent = ({
   distance,
   placement,
   disabledInteractOutside,
+  noA11y,
   defaultStyle
 }) => {
   // Obtenemos la función isOpen y la referencia del botón del contexto
@@ -156,7 +157,7 @@ export const PopoverModalContent = ({
         className={classnames({
           [css['c-popover-modal']]: !defaultStyle,
           [css['c-popover-modal--active']]: !defaultStyle && isOpen,
-          'video-interpreter-ui-popover': 'video-interpreter-ui-popover',
+          'video-interpreter-ui-popover': !noA11y,
           [addClass]: addClass
         })}
         style={styles.popper}
@@ -191,6 +192,7 @@ PopoverModalContent.propTypes = {
   ]),
   id: PropTypes.string,
   addClass: PropTypes.string,
+  noA11y: PropTypes.bool,
   hasArrow: PropTypes.bool,
   isDisabled: PropTypes.bool,
   distance: PropTypes.number,
@@ -218,5 +220,6 @@ PopoverModalContent.propTypes = {
 PopoverModalContent.defaultProps = {
   hasArrow: false,
   placement: 'auto',
-  disabledInteractOutside: false
+  disabledInteractOutside: false,
+  noA11y: false
 }
