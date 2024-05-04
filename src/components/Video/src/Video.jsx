@@ -495,7 +495,7 @@ export const Video = ({ src, width = '1000', hasDescription, description, addCla
               }}
             />
             <div
-              className={css['progress-sphere']}
+              className={css['c-vid__progress-sphere']}
               style={{
                 left: `min(calc((${getCurrentTime.totalSeconds} / ${getDurationVideo.totalSeconds}) * 100 * 1%), 99%)`
               }}
