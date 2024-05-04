@@ -9629,7 +9629,7 @@ const sf = () => {
                 /* @__PURE__ */ p(
                   "div",
                   {
-                    className: me["progress-sphere"],
+                    className: me["c-vid__progress-sphere"],
                     style: {
                       left: `min(calc((${f.totalSeconds} / ${s.totalSeconds}) * 100 * 1%), 99%)`
                     }
