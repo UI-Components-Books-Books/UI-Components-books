@@ -505,7 +505,7 @@ function Ps() {
       }
     }
     var vn = w.ReactCurrentOwner, Un = w.ReactDebugCurrentFrame;
-    function _e(g) {
+    function ye(g) {
       if (g) {
         var $ = g._owner, W = ie(g.type, g._source, $ ? $.type : null);
         Un.setExtraStackFrame(W);
@@ -563,7 +563,7 @@ Check the top-level render call using <` + W + ">.");
           return;
         ze[W] = !0;
         var oe = "";
-        g && g._owner && g._owner !== vn.current && (oe = " It was passed a child from " + H(g._owner.type) + "."), _e(g), N('Each child in a list should have a unique "key" prop.%s%s See https://reactjs.org/link/warning-keys for more information.', W, oe), _e(null);
+        g && g._owner && g._owner !== vn.current && (oe = " It was passed a child from " + H(g._owner.type) + "."), ye(g), N('Each child in a list should have a unique "key" prop.%s%s See https://reactjs.org/link/warning-keys for more information.', W, oe), ye(null);
       }
     }
     function We(g, $) {
@@ -615,11 +615,11 @@ Check the top-level render call using <` + W + ">.");
         for (var $ = Object.keys(g.props), W = 0; W < $.length; W++) {
           var oe = $[W];
           if (oe !== "children" && oe !== "key") {
-            _e(g), N("Invalid prop `%s` supplied to `React.Fragment`. React.Fragment can only have `key` and `children` props.", oe), _e(null);
+            ye(g), N("Invalid prop `%s` supplied to `React.Fragment`. React.Fragment can only have `key` and `children` props.", oe), ye(null);
             break;
           }
         }
-        g.ref !== null && (_e(g), N("Invalid attribute `ref` supplied to `React.Fragment`."), _e(null));
+        g.ref !== null && (ye(g), N("Invalid attribute `ref` supplied to `React.Fragment`."), ye(null));
       }
     }
     function qt(g, $, W, oe, fe, he) {
@@ -1406,7 +1406,7 @@ var Qr = {}, Bs = {
     e.exports ? (n.default = n, e.exports = n) : window.classNames = n;
   })();
 })(Bs);
-const ne = Qr, ye = (e) => (t, n, r) => {
+const ne = Qr, be = (e) => (t, n, r) => {
   if (t[n] !== e)
     return new Error(
       `'${n}' in '${r}' 
@@ -1463,7 +1463,7 @@ Va.propTypes = {
   addClass: o.string,
   icon: o.func,
   defaultStyle: o.bool,
-  __TYPE: ye("AccordionButton")
+  __TYPE: be("AccordionButton")
 };
 Va.defaultProps = {
   __TYPE: "AccordionButton"
@@ -1489,7 +1489,7 @@ Ya.propTypes = {
   addClass: o.string,
   defaultStyle: o.bool,
   allowDifferentChildren: o.bool,
-  __TYPE: ye("AccordionItem")
+  __TYPE: be("AccordionItem")
 };
 Ya.defaultProps = {
   __TYPE: "AccordionItem"
@@ -1536,7 +1536,7 @@ za.propTypes = {
   isExpanded: o.bool,
   addClass: o.string,
   defaultStyle: o.bool,
-  __TYPE: ye("AccordionPanel")
+  __TYPE: be("AccordionPanel")
 };
 za.defaultProps = {
   __TYPE: "AccordionPanel"
@@ -1592,7 +1592,7 @@ xe.propTypes = {
   viewBox: o.string,
   height: o.string,
   width: o.string,
-  __TYPE: ye("Icon")
+  __TYPE: be("Icon")
 };
 xe.defaultProps = {
   size: "normal",
@@ -2109,7 +2109,7 @@ Xa.propTypes = {
   defaultChecked: o.bool,
   inherit: o.bool,
   onChange: o.func,
-  __TYPE: ye("CheckBox")
+  __TYPE: be("CheckBox")
 };
 const $l = ({ legend: e, children: t, onChecked: n, addClass: r }) => {
   const [a, i] = te([]), c = Q(), s = (u) => {
@@ -4153,11 +4153,11 @@ const ou = /* @__PURE__ */ La(function(t) {
     initial: null,
     translated: null
   }), H = Oe(() => {
-    var _e;
+    var ye;
     return O != null ? {
       id: O,
       // It's possible for the active node to unmount while dragging
-      data: (_e = L == null ? void 0 : L.data) != null ? _e : Zc,
+      data: (ye = L == null ? void 0 : L.data) != null ? ye : Zc,
       rect: Y
     } : null;
   }, [O, L]), X = Q(null), [re, K] = te(null), [z, ae] = te(null), se = Nn(m, Object.values(m)), P = fr("DndDescribedBy", c), j = Oe(() => G.getEnabled(), [G]), y = nu(h), {
@@ -4215,7 +4215,7 @@ const ou = /* @__PURE__ */ La(function(t) {
     droppableContainers: j,
     pointerCoordinates: kt
   }) : null, pn = ei(Rt, "id"), [nt, Yn] = te(null), Tr = Ae ? Xe : nn(Xe, jt), Er = cc(Tr, (i = nt == null ? void 0 : nt.rect) != null ? i : null, V), zn = je(
-    (_e, Ie) => {
+    (ye, Ie) => {
       let {
         sensor: Me,
         options: vt
@@ -4225,7 +4225,7 @@ const ou = /* @__PURE__ */ La(function(t) {
       const Ye = A.get(X.current);
       if (!Ye)
         return;
-      const ze = _e.nativeEvent, rt = new Me({
+      const ze = ye.nativeEvent, rt = new Me({
         active: X.current,
         activeNode: Ye,
         event: ze,
@@ -4270,7 +4270,7 @@ const ou = /* @__PURE__ */ La(function(t) {
         onCancel: Tt(De.DragCancel)
       });
       hn(() => {
-        K(rt), ae(_e.nativeEvent);
+        K(rt), ae(ye.nativeEvent);
       });
       function Tt(We) {
         return async function() {
@@ -4311,7 +4311,7 @@ const ou = /* @__PURE__ */ La(function(t) {
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [A]
-  ), Sr = je((_e, Ie) => (Me, vt) => {
+  ), Sr = je((ye, Ie) => (Me, vt) => {
     const Ye = Me.nativeEvent, ze = A.get(vt);
     if (
       // Another sensor is already instantiating
@@ -4323,7 +4323,7 @@ const ou = /* @__PURE__ */ La(function(t) {
     const rt = {
       active: ze
     };
-    _e(Me, Ie.options, rt) === !0 && (Ye.dndKit = {
+    ye(Me, Ie.options, rt) === !0 && (Ye.dndKit = {
       capturedBy: Ie.sensor
     }, X.current = vt, zn(Me, Ie));
   }, [A, zn]), Wn = Mc(l, Sr);
@@ -4332,7 +4332,7 @@ const ou = /* @__PURE__ */ La(function(t) {
   }, [V, C]), J(
     () => {
       const {
-        onDragMove: _e
+        onDragMove: ye
       } = se.current, {
         active: Ie,
         activatorEvent: Me,
@@ -4352,7 +4352,7 @@ const ou = /* @__PURE__ */ La(function(t) {
         over: Ye
       };
       hn(() => {
-        _e == null || _e(ze), N({
+        ye == null || ye(ze), N({
           type: "onDragMove",
           event: ze
         });
@@ -4363,13 +4363,13 @@ const ou = /* @__PURE__ */ La(function(t) {
   ), J(
     () => {
       const {
-        active: _e,
+        active: ye,
         activatorEvent: Ie,
         collisions: Me,
         droppableContainers: vt,
         scrollAdjustedTranslate: Ye
       } = F.current;
-      if (!_e || X.current == null || !Ie || !Ye)
+      if (!ye || X.current == null || !Ie || !Ye)
         return;
       const {
         onDragOver: ze
@@ -4379,7 +4379,7 @@ const ou = /* @__PURE__ */ La(function(t) {
         data: rt.data,
         disabled: rt.disabled
       } : null, We = {
-        active: _e,
+        active: ye,
         activatorEvent: Ie,
         collisions: Me,
         delta: {
@@ -4470,7 +4470,7 @@ const ou = /* @__PURE__ */ La(function(t) {
     hiddenTextDescribedById: P
   }));
   function Un() {
-    const _e = (re == null ? void 0 : re.autoScrollEnabled) === !1, Ie = typeof d == "object" ? d.enabled === !1 : d === !1, Me = k && !_e && !Ie;
+    const ye = (re == null ? void 0 : re.autoScrollEnabled) === !1, Ie = typeof d == "object" ? d.enabled === !1 : d === !1, Me = k && !ye && !Ie;
     return typeof d == "object" ? {
       ...d,
       enabled: Me
@@ -4931,7 +4931,7 @@ bi.propTypes = {
   disabledDefaultAttributes: o.bool,
   element: o.string,
   defaultStyle: o.bool,
-  __TYPE: ye("draggable")
+  __TYPE: be("draggable")
 };
 const yi = ({
   children: e,
@@ -4981,7 +4981,7 @@ yi.propTypes = {
   label: o.string.isRequired,
   element: o.string,
   defaultStyle: o.bool,
-  __TYPE: ye("droppable")
+  __TYPE: be("droppable")
 };
 const _i = ({
   children: e,
@@ -5030,7 +5030,7 @@ _i.propTypes = {
   label: o.string.isRequired,
   element: o.string,
   defaultStyle: o.bool,
-  __TYPE: ye("general-draggable")
+  __TYPE: be("general-draggable")
 };
 _i.defaultProps = {
   __TYPE: "general-draggable",
@@ -5571,7 +5571,7 @@ wi.propTypes = {
   isReadOnly: o.bool,
   defaultStyle: o.bool,
   onValue: o.func,
-  __TYPE: ye("Input")
+  __TYPE: be("Input")
 };
 const gu = ({ children: e, onAllValue: t }) => {
   const [n, r] = te([]), a = (s) => r([...n.filter((d) => d.id !== s.id), { ...s }]);
@@ -5602,7 +5602,7 @@ xi.propTypes = {
   children: o.oneOfType([o.arrayOf(o.element), o.element]),
   addClass: o.string,
   defaultStyle: o.bool,
-  __TYPE: ye("InputStyle")
+  __TYPE: be("InputStyle")
 };
 xi.defaultProps = {
   __TYPE: "InputStyle"
@@ -5621,7 +5621,7 @@ Oi.propTypes = {
   children: o.oneOfType([o.arrayOf(o.element), o.element, o.arrayOf(o.node), o.node]),
   addClass: o.string,
   defaultStyle: o.bool,
-  __TYPE: ye("InputLeftAddon")
+  __TYPE: be("InputLeftAddon")
 };
 Oi.defaultProps = {
   __TYPE: "InputLeftAddon"
@@ -5640,7 +5640,7 @@ Ti.propTypes = {
   children: o.oneOfType([o.arrayOf(o.element), o.element, o.arrayOf(o.node), o.node]),
   addClass: o.string,
   defaultStyle: o.bool,
-  __TYPE: ye("InputRightAddon")
+  __TYPE: be("InputRightAddon")
 };
 Ti.defaultProps = {
   __TYPE: "InputRightAddon"
@@ -5721,7 +5721,7 @@ const Ci = ({ children: e, addClass: t, __TYPE: n, ...r }) => {
 Ci.propTypes = {
   children: o.oneOfType([o.arrayOf(o.node), o.arrayOf(o.element), o.element, o.node]),
   addClass: o.string,
-  __TYPE: ye("ListItem")
+  __TYPE: be("ListItem")
 };
 Ci.defaultProps = {
   __TYPE: "ListItem"
@@ -6337,7 +6337,7 @@ Ri.propTypes = {
   onClick: o.func,
   onKeyDown: o.func,
   defaultStyle: o.bool,
-  __TYPE: ye("ModalContent")
+  __TYPE: be("ModalContent")
 };
 Ri.defaultProps = {
   __TYPE: "ModalContent"
@@ -6362,7 +6362,7 @@ Di.propTypes = {
   addClass: o.string,
   onClick: o.func,
   defaultStyle: o.bool,
-  __TYPE: ye("ModalOverlay")
+  __TYPE: be("ModalOverlay")
 };
 Di.defaultProps = {
   __TYPE: "ModalOverlay"
@@ -6513,13 +6513,13 @@ Ai.propTypes = {
   pattern: o.string,
   addClass: o.string,
   isLabelVisible: o.bool,
-  __TYPE: ye("NumberInputField")
+  __TYPE: be("NumberInputField")
 };
 const Ii = ({ children: e, addClass: t }) => /* @__PURE__ */ p("div", { className: `${on["c-number-input__stepper"]} ${t ?? ""}`, children: Ze(e, ["NumberIncrementStepper", "NumberDecrementStepper"]) });
 Ii.propTypes = {
   children: o.oneOfType([o.element, o.arrayOf(o.element)]),
   addClass: o.string,
-  __TYPE: ye("NumberInputStepper")
+  __TYPE: be("NumberInputStepper")
 };
 Ii.defaultProps = {
   __TYPE: "NumberInputStepper"
@@ -6541,7 +6541,7 @@ const Mi = ({ children: e, addClass: t, label: n }) => {
 Mi.propTypes = {
   children: o.oneOfType([o.node, o.element, o.arrayOf(o.element), o.arrayOf(o.element)]),
   addClass: o.string,
-  __TYPE: ye("NumberDecrementStepper"),
+  __TYPE: be("NumberDecrementStepper"),
   label: o.string
 };
 Mi.defaultProps = {
@@ -6564,7 +6564,7 @@ const $i = ({ children: e, addClass: t, label: n }) => {
 $i.propTypes = {
   children: o.oneOfType([o.node, o.element, o.arrayOf(o.element), o.arrayOf(o.element)]),
   addClass: o.string,
-  __TYPE: ye("NumberIncrementStepper"),
+  __TYPE: be("NumberIncrementStepper"),
   label: o.string
 };
 $i.defaultProps = {
@@ -6892,7 +6892,7 @@ Li.propTypes = {
   id: o.number,
   addClass: o.string,
   defaultStyle: o.bool,
-  __TYPE: ye("Section")
+  __TYPE: be("Section")
 };
 Li.defaultProps = {
   __TYPE: "Section"
@@ -7247,7 +7247,7 @@ Fi.propTypes = {
   onChoise: o.func,
   defaultValue: o.string,
   defaultStyle: o.bool,
-  __TYPE: ye("Select")
+  __TYPE: be("Select")
 };
 const Bu = ({ children: e, onAllSelect: t }) => {
   const [n, r] = te([]), a = (c) => r([
@@ -7437,7 +7437,7 @@ qi.propTypes = {
   onClick: o.func,
   onNavigation: o.func,
   defaultStyle: o.bool,
-  __TYPE: ye("Tab")
+  __TYPE: be("Tab")
 };
 qi.defaultProps = {
   __TYPE: "Tab"
@@ -7501,7 +7501,7 @@ Vi.propTypes = {
   label: o.string,
   orientation: o.string,
   defaultStyle: o.bool,
-  __TYPE: ye("TabList")
+  __TYPE: be("TabList")
 };
 Vi.defaultProps = {
   __TYPE: "TabList",
@@ -7541,7 +7541,7 @@ Yi.propTypes = {
   id: o.number,
   addClass: o.string,
   defaultStyle: o.bool,
-  __TYPE: ye("TabPanel")
+  __TYPE: be("TabPanel")
 };
 Yi.defaultProps = {
   __TYPE: "TabPanel"
@@ -7574,7 +7574,7 @@ zi.propTypes = {
   ]),
   addClass: o.string,
   defaultStyle: o.bool,
-  __TYPE: ye("TabPanels")
+  __TYPE: be("TabPanels")
 };
 zi.defaultProps = {
   __TYPE: "TabPanels"
@@ -9400,7 +9400,7 @@ const sf = () => {
       d.unobserve(c);
     };
   }, [r, n, t, c]), [s, a];
-}, uf = "_active_yhx5o_91", df = "_iconPulse_yhx5o_1", me = {
+}, uf = "_active_yhx5o_91", df = "_iconPulse_yhx5o_1", _e = {
   "c-vid": "_c-vid_yhx5o_1",
   "c-vid__caption": "_c-vid__caption_yhx5o_19",
   "c-vid__container": "_c-vid__container_yhx5o_24",
@@ -9446,8 +9446,8 @@ const sf = () => {
     rootMargin: "20px 10px",
     threshold: [0, 0.25, 0.5, 0.75, 1]
   }), se = (B) => {
-    B.classList.add(`${me.active}`), setTimeout(() => {
-      B.classList.remove(`${me.active}`);
+    B.classList.add(`${_e.active}`), setTimeout(() => {
+      B.classList.remove(`${_e.active}`);
     }, 650);
   };
   function P() {
@@ -9563,13 +9563,13 @@ const sf = () => {
   }, [A]), /* @__PURE__ */ I(
     "figure",
     {
-      className: `${me["c-vid"]} ${a}`,
+      className: `${_e["c-vid"]} ${a}`,
       style: { maxWidth: `${t}px` },
       onKeyDown: (B) => de(B),
       ...c,
       children: [
-        /* @__PURE__ */ I("div", { className: `${me["c-vid__container"]} ${a}`, "data-video-full-screen": w.state, ref: O, children: [
-          /* @__PURE__ */ I("div", { className: me["c-vid__wrapper"], children: [
+        /* @__PURE__ */ I("div", { className: `${_e["c-vid__container"]} ${a}`, "data-video-full-screen": w.state, ref: O, children: [
+          /* @__PURE__ */ I("div", { className: _e["c-vid__wrapper"], children: [
             /* @__PURE__ */ I(
               "video",
               {
@@ -9578,7 +9578,7 @@ const sf = () => {
                 onTimeUpdate: (B) => T(B.target),
                 onLoadedData: (B) => T(B.target),
                 onClick: P,
-                className: `${me["c-vid__video"]} ${re ? "" : me["no-captions"]}`,
+                className: `${_e["c-vid__video"]} ${re ? "" : _e["no-captions"]}`,
                 ...i && { poster: i },
                 children: [
                   /* @__PURE__ */ p("source", { src: e.video }),
@@ -9596,13 +9596,13 @@ const sf = () => {
                 ]
               }
             ),
-            /* @__PURE__ */ I("div", { className: me["c-vid__icon-container"], children: [
-              /* @__PURE__ */ p("div", { ref: X, className: me["c-vid__icon"], children: /* @__PURE__ */ p(xe, { children: /* @__PURE__ */ p("svg", { xmlns: "http://www.w3.org/2000/svg", height: "48", width: "48", viewBox: "0 0 48 48", children: /* @__PURE__ */ p("path", { id: "fast_rewind", d: "M42.7 36 25.4 24l17.3-12Zm-20.1 0L5.3 24l17.3-12Z" }) }) }) }),
-              /* @__PURE__ */ p("div", { ref: Y, className: me["c-vid__icon"], children: /* @__PURE__ */ p(xe, { children: /* @__PURE__ */ p("svg", { xmlns: "http://www.w3.org/2000/svg", height: "48", width: "48", viewBox: "0 0 48 48", children: u.state ? /* @__PURE__ */ p("path", { id: "play", d: "M16 37.85v-28l22 14Z" }) : /* @__PURE__ */ p("path", { id: "pause", d: "M28.25 38V10H36v28ZM12 38V10h7.75v28Z" }) }) }) }),
-              /* @__PURE__ */ p("div", { ref: H, className: me["c-vid__icon"], children: /* @__PURE__ */ p(xe, { children: /* @__PURE__ */ p("svg", { xmlns: "http://www.w3.org/2000/svg", height: "48", width: "48", viewBox: "0 0 48 48", children: /* @__PURE__ */ p("path", { id: "fast_forward", d: "M5.2 36V12l17.3 12Zm20.35 0V12l17.3 12Z" }) }) }) })
+            /* @__PURE__ */ I("div", { className: _e["c-vid__icon-container"], children: [
+              /* @__PURE__ */ p("div", { ref: X, className: _e["c-vid__icon"], children: /* @__PURE__ */ p(xe, { children: /* @__PURE__ */ p("svg", { xmlns: "http://www.w3.org/2000/svg", height: "48", width: "48", viewBox: "0 0 48 48", children: /* @__PURE__ */ p("path", { id: "fast_rewind", d: "M42.7 36 25.4 24l17.3-12Zm-20.1 0L5.3 24l17.3-12Z" }) }) }) }),
+              /* @__PURE__ */ p("div", { ref: Y, className: _e["c-vid__icon"], children: /* @__PURE__ */ p(xe, { children: /* @__PURE__ */ p("svg", { xmlns: "http://www.w3.org/2000/svg", height: "48", width: "48", viewBox: "0 0 48 48", children: u.state ? /* @__PURE__ */ p("path", { id: "play", d: "M16 37.85v-28l22 14Z" }) : /* @__PURE__ */ p("path", { id: "pause", d: "M28.25 38V10H36v28ZM12 38V10h7.75v28Z" }) }) }) }),
+              /* @__PURE__ */ p("div", { ref: H, className: _e["c-vid__icon"], children: /* @__PURE__ */ p(xe, { children: /* @__PURE__ */ p("svg", { xmlns: "http://www.w3.org/2000/svg", height: "48", width: "48", viewBox: "0 0 48 48", children: /* @__PURE__ */ p("path", { id: "fast_forward", d: "M5.2 36V12l17.3 12Zm20.35 0V12l17.3 12Z" }) }) }) })
             ] })
           ] }),
-          /* @__PURE__ */ p("div", { className: me["progress-container"], children: /* @__PURE__ */ I(
+          /* @__PURE__ */ p("div", { className: _e["progress-container"], children: /* @__PURE__ */ I(
             "div",
             {
               role: "slider",
@@ -9613,14 +9613,14 @@ const sf = () => {
               "aria-valuetext": F(),
               tabIndex: "0",
               onKeyDown: V,
-              className: me["c-vid__progress-bg"],
+              className: _e["c-vid__progress-bg"],
               onClick: M,
               ref: G,
               children: [
                 /* @__PURE__ */ p(
                   "div",
                   {
-                    className: me["c-vid__progress-bar"],
+                    className: _e["c-vid__progress-bar"],
                     style: {
                       transform: `scaleX(${isNaN(f.totalSeconds / s.totalSeconds) ? 0 : f.totalSeconds / s.totalSeconds})`
                     }
@@ -9629,7 +9629,6 @@ const sf = () => {
                 /* @__PURE__ */ p(
                   "div",
                   {
-                    className: me["c-vid__progress-sphere"],
                     style: {
                       left: `min(calc((${f.totalSeconds} / ${s.totalSeconds}) * 100 * 1%), 99%)`
                     }
@@ -9638,11 +9637,11 @@ const sf = () => {
               ]
             }
           ) }),
-          /* @__PURE__ */ I("div", { className: `controls ${me["c-vid__controls"]}`, children: [
+          /* @__PURE__ */ I("div", { className: `controls ${_e["c-vid__controls"]}`, children: [
             /* @__PURE__ */ p(
               "button",
               {
-                className: `${me["c-vid__button"]} js-button-video-play`,
+                className: `${_e["c-vid__button"]} js-button-video-play`,
                 "aria-label": u.label,
                 onClick: P,
                 "data-description": "Este botón reproduce el video",
@@ -9652,7 +9651,7 @@ const sf = () => {
             /* @__PURE__ */ p(
               "button",
               {
-                className: `${me["c-vid__button"]} js-button-video-volumen`,
+                className: `${_e["c-vid__button"]} js-button-video-volumen`,
                 "aria-label": v.label,
                 "data-description": "Este botón controla el volumen",
                 onClick: Z,
@@ -9671,12 +9670,12 @@ const sf = () => {
                 ) }) })
               }
             ),
-            /* @__PURE__ */ I("label", { className: me["c-vid__volume"], htmlFor: "volumeControl", children: [
+            /* @__PURE__ */ I("label", { className: _e["c-vid__volume"], htmlFor: "volumeControl", children: [
               /* @__PURE__ */ p("span", { className: "u-sr-only", children: "Controlar volumen" }),
               /* @__PURE__ */ p(
                 "input",
                 {
-                  className: me["c-vid__volume-item"],
+                  className: _e["c-vid__volume-item"],
                   ref: L,
                   id: "volumeControl",
                   type: "range",
@@ -9689,7 +9688,7 @@ const sf = () => {
                 }
               )
             ] }),
-            /* @__PURE__ */ I("p", { className: me["c-vid__time"], "aria-hidden": "true", children: [
+            /* @__PURE__ */ I("p", { className: _e["c-vid__time"], "aria-hidden": "true", children: [
               /* @__PURE__ */ p("span", { children: f.string }),
               "/",
               /* @__PURE__ */ p("span", { children: s.string })
@@ -9701,7 +9700,7 @@ const sf = () => {
                 "aria-pressed": R ? void 0 : re,
                 onClick: () => K(!re),
                 "aria-label": "Subtítulos",
-                className: `${me["c-vid__button"]} ${me["c-vid__subtitles"]}`,
+                className: `${_e["c-vid__button"]} ${_e["c-vid__subtitles"]}`,
                 children: /* @__PURE__ */ p(xe, { children: /* @__PURE__ */ p("svg", { xmlns: "http://www.w3.org/2000/svg", height: "48", width: "48", viewBox: "0 0 48 48", children: R ? /* @__PURE__ */ p(
                   "path",
                   {
@@ -9717,7 +9716,7 @@ const sf = () => {
                 ) }) })
               }
             ),
-            /* @__PURE__ */ p("button", { className: me["c-vid__button"], "aria-label": w.label, onClick: j, children: /* @__PURE__ */ p(xe, { children: /* @__PURE__ */ p("svg", { xmlns: "http://www.w3.org/2000/svg", height: "48", width: "48", viewBox: "0 0 48 48", children: w.state ? /* @__PURE__ */ p(
+            /* @__PURE__ */ p("button", { className: _e["c-vid__button"], "aria-label": w.label, onClick: j, children: /* @__PURE__ */ p(xe, { children: /* @__PURE__ */ p("svg", { xmlns: "http://www.w3.org/2000/svg", height: "48", width: "48", viewBox: "0 0 48 48", children: w.state ? /* @__PURE__ */ p(
               "path",
               {
                 id: "fullscreen_exit",
@@ -9732,7 +9731,7 @@ const sf = () => {
             ) }) }) })
           ] })
         ] }),
-        n && /* @__PURE__ */ I("figcaption", { className: me["c-vid__caption"], children: [
+        n && /* @__PURE__ */ I("figcaption", { className: _e["c-vid__caption"], children: [
           /* @__PURE__ */ p("strong", { children: r.title }),
           " ",
           r.content
@@ -11104,7 +11103,7 @@ const ip = (e, t, n) => {
       return l.observe(document.querySelector(e || "body"), c), () => l.disconnect();
     }
   }, [f, c]), r;
-}, sp = "_interpreter_gxnug_1", lp = "_close_gxnug_122", cp = "_hide_gxnug_128", up = "_progress_gxnug_219", dp = "_flex_gxnug_229", fp = "_gap_gxnug_286", be = {
+}, sp = "_interpreter_gxnug_1", lp = "_close_gxnug_122", cp = "_hide_gxnug_128", up = "_progress_gxnug_219", dp = "_flex_gxnug_229", fp = "_gap_gxnug_286", me = {
   interpreter: sp,
   "interpreter-active": "_interpreter-active_gxnug_23",
   "interpreter-btn": "_interpreter-btn_gxnug_29",
@@ -11224,9 +11223,9 @@ const ip = (e, t, n) => {
         "div",
         {
           ref: L,
-          className: `${be.interpreter} ${t ?? ""} ${(s || f) && be["interpreter-active"]}`,
+          className: `${me.interpreter} ${t ?? ""} ${(s || f) && me["interpreter-active"]}`,
           children: [
-            /* @__PURE__ */ I("div", { className: be["interpreter-dropdown"], children: [
+            /* @__PURE__ */ I("div", { className: me["interpreter-dropdown"], children: [
               (!s && !f || !!v && !s && !f || !!m && (s || f) || !!m && (s || f) && !s) && /* @__PURE__ */ I(
                 "button",
                 {
@@ -11234,10 +11233,10 @@ const ip = (e, t, n) => {
                   onClick: () => {
                     u || (A(!0, d), h(!0));
                   },
-                  className: `${be["interpreter-btn"]} ${be["interpreter-btn-switch"]} ${!s && !f && be["interpreter-btn-disable"]}`,
+                  className: `${me["interpreter-btn"]} ${me["interpreter-btn-switch"]} ${!s && !f && me["interpreter-btn-disable"]}`,
                   "aria-label": "Intérprete de lenguaje de señas",
                   children: [
-                    !s && !f && (n ? /* @__PURE__ */ p("img", { className: be["image-Video"], src: n, alt: "" }) : /* @__PURE__ */ I(
+                    !s && !f && (n ? /* @__PURE__ */ p("img", { className: me["image-Video"], src: n, alt: "" }) : /* @__PURE__ */ I(
                       "svg",
                       {
                         id: "Capa_1",
@@ -11245,7 +11244,7 @@ const ip = (e, t, n) => {
                         x: 0,
                         y: 0,
                         viewBox: "0 0 157.39 157.39",
-                        className: be["interpreter-btn-switch-svg"],
+                        className: me["interpreter-btn-switch-svg"],
                         style: {
                           enableBackground: "new 0 0 157.39 157.39"
                         },
@@ -11286,7 +11285,7 @@ const ip = (e, t, n) => {
                   "button",
                   {
                     tabIndex: -1,
-                    className: `${be["interpreter-btn"]} ${be["interpreter-btn--video"]}`,
+                    className: `${me["interpreter-btn"]} ${me["interpreter-btn--video"]}`,
                     onClick: () => {
                       f && A(!0, d);
                     },
@@ -11300,7 +11299,7 @@ const ip = (e, t, n) => {
                   "button",
                   {
                     tabIndex: -1,
-                    className: `${be["interpreter-btn"]} ${be["interpreter-btn--video"]}`,
+                    className: `${me["interpreter-btn"]} ${me["interpreter-btn--video"]}`,
                     onClick: () => {
                       s && A(!0, l);
                     },
@@ -11314,7 +11313,7 @@ const ip = (e, t, n) => {
                   "button",
                   {
                     tabIndex: -1,
-                    className: `${be["interpreter-btn"]}`,
+                    className: `${me["interpreter-btn"]}`,
                     onClick: () => !1,
                     onMouseEnter: () => h(!0),
                     onMouseLeave: () => h(!1),
@@ -11325,7 +11324,7 @@ const ip = (e, t, n) => {
                 /* @__PURE__ */ p(
                   "button",
                   {
-                    className: `${be["interpreter-btn"]} ${be["interpreter-btn--close"]}`,
+                    className: `${me["interpreter-btn"]} ${me["interpreter-btn--close"]}`,
                     onClick: () => {
                       d(!1), l(!1), N({
                         deltaPosition: {
@@ -11345,9 +11344,9 @@ const ip = (e, t, n) => {
             /* @__PURE__ */ p(
               "div",
               {
-                className: be["c-vid-container"],
+                className: me["c-vid-container"],
                 display: s || f ? "true" : "false",
-                children: /* @__PURE__ */ I("div", { className: be["c-vid"], style: { maxWidth: `${e}px` }, children: [
+                children: /* @__PURE__ */ I("div", { className: me["c-vid"], style: { maxWidth: `${e}px` }, children: [
                   s && /* @__PURE__ */ p(
                     "video",
                     {
@@ -11356,7 +11355,7 @@ const ip = (e, t, n) => {
                       onTimeUpdate: () => {
                         _(), k();
                       },
-                      className: `${be["no-captions"]}`
+                      className: `${me["no-captions"]}`
                     }
                   ),
                   f && /* @__PURE__ */ p(
@@ -11367,12 +11366,12 @@ const ip = (e, t, n) => {
                       onTimeUpdate: () => {
                         _(), k();
                       },
-                      className: `${be["no-captions"]}`
+                      className: `${me["no-captions"]}`
                     }
                   ),
-                  /* @__PURE__ */ I("div", { className: be["c-vid-controls"], children: [
+                  /* @__PURE__ */ I("div", { className: me["c-vid-controls"], children: [
                     /* @__PURE__ */ p("button", { "aria-label": b.label, onClick: C, children: b.icon }),
-                    /* @__PURE__ */ p("div", { className: be.flex, children: /* @__PURE__ */ I(
+                    /* @__PURE__ */ p("div", { className: me.flex, children: /* @__PURE__ */ I(
                       "svg",
                       {
                         xmlns: "http://www.w3.org/2000/svg",
@@ -11387,18 +11386,18 @@ const ip = (e, t, n) => {
                         ]
                       }
                     ) }),
-                    /* @__PURE__ */ p("p", { className: be["c-vid-controls-text"], children: /* @__PURE__ */ p("span", { children: i }) }),
-                    /* @__PURE__ */ p("div", { className: be["progress-content"], children: /* @__PURE__ */ p(
+                    /* @__PURE__ */ p("p", { className: me["c-vid-controls-text"], children: /* @__PURE__ */ p("span", { children: i }) }),
+                    /* @__PURE__ */ p("div", { className: me["progress-content"], children: /* @__PURE__ */ p(
                       "div",
                       {
                         ref: X,
-                        className: be.progress,
+                        className: me.progress,
                         onClick: O,
                         children: /* @__PURE__ */ p(
                           "div",
                           {
                             ref: re,
-                            className: be["progress-bar"],
+                            className: me["progress-bar"],
                             onChange: _
                           }
                         )
