@@ -9221,7 +9221,7 @@ const Mt = {
         { name: "eventListeners", enabled: a }
       ]
     }
-  ), R = () => ut(f) ? f : Os("p", { className: Mt["tour-description"] }, [
+  ), R = () => ut(f) ? f : Os("p", { role: "status", "aria-live": "polite", className: Mt["tour-description"] }, [
     f
   ]), C = () => {
     v.current.style.setProperty("--speed-movement", "0.8s"), x();

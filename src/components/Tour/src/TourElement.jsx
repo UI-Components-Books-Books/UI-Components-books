@@ -71,7 +71,7 @@ export const TourElement = ({
     if (isValidElement(content)) {
       return content
     }
-    return createElement('p', { className: css['tour-description'] }, [
+    return createElement('p', { role: 'status', 'aria-live': 'polite', className: css['tour-description'] }, [
       content
     ])
   }
