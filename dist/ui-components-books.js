@@ -4817,10 +4817,12 @@ const uu = (e) => {
         ou,
         {
           sensors: k,
-          screenReaderInstructions: {
-            draggable: s
+          accessibility: {
+            announcements: d,
+            screenReaderInstructions: {
+              draggable: s
+            }
           },
-          accessibility: { announcements: d },
           onDragStart: ({ active: L }) => x(L.id),
           onDragEnd: U,
           onDragCancel: () => x(null),

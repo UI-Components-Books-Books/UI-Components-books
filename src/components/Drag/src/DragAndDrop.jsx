@@ -437,10 +437,12 @@ export const DragAndDrop = ({
     >
       <DndContext
         sensors={sensors}
-        screenReaderInstructions={{
-          draggable: screenReaderInstructions
+        accessibility={{
+          announcements,
+          screenReaderInstructions: {
+            draggable: screenReaderInstructions
+          }
         }}
-        accessibility={{ announcements }}
         onDragStart={({ active }) => setActiveId(active.id)}
         onDragEnd={onDragEnd}
         onDragCancel={() => setActiveId(null)}
