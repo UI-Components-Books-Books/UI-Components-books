@@ -56,6 +56,7 @@ const PLAYER_ICONS = Object.freeze({
 })
 
 export const Audio = ({
+  id,
   src,
   format,
   a11y,
@@ -68,12 +69,20 @@ export const Audio = ({
   ...props
 }) => {
   /**
+   * Utilizado para identificar el elemento audio.
+   */
+  const reactId = useId()
+
+  /**
+   * Si `id` está definido, usa `id`; de lo contrario, usa `reactId`
+   */
+  const uid = id ?? reactId
+
+  /**
    * Es utilizado para conocer el estado del audio.
    */
   const [play, setPlay] = useState(false)
   const [openMenu, setOpenMenu] = useState(false)
-
-  const Id = useId()
 
   /**
    * Duración y tiempo actual del audio.
@@ -167,18 +176,18 @@ export const Audio = ({
         <div
           className={`${css['audio-bar']} ${addClass ?? ''}`}
           role='group'
-          aria-labelledby={`description${Id}`}
+          aria-labelledby={`description${uid}`}
           data-a11y={a11y}
           data-class='c-audio-bar'
         >
           {hasDescription
             ? (
-              <span id={`description${Id}`} className={css['hidden-description']}>
+              <span id={`description${uid}`} className={css['hidden-description']}>
                 {a11y ? 'Audio description' : `Barra de audio ${description}`}
               </span>
               )
             : (
-              <span id={`description${Id}`} hidden>
+              <span id={`description${uid}`} hidden>
                 {a11y ? 'Audio description' : 'Barra de audio'}
               </span>
               )}
@@ -210,12 +219,12 @@ export const Audio = ({
             / {String(Math.floor(duration / 60)).padStart(2, '0')}:
             {String(duration - 60 * Math.floor(duration / 60)).padStart(2, '0')}
           </small>
-          <label className='u-sr-only' htmlFor={`time${Id}`}>
+          <label className='u-sr-only' htmlFor={`time${uid}`}>
             Tiempo transcurrido
           </label>
           <input
             className={css.scrubber}
-            id={`time${Id}`}
+            id={`time${uid}`}
             value={mediaTime}
             min={0}
             max={duration}
@@ -249,11 +258,11 @@ export const Audio = ({
           {openMenu
             ? (
               <div className={css['volume-control']} ref={refVolumeSlider}>
-                <label className='u-sr-only' htmlFor={`volume${Id}`}>
+                <label className='u-sr-only' htmlFor={`volume${uid}`}>
                   Volumen
                 </label>
                 <input
-                  id={`volume${Id}`}
+                  id={`volume${uid}`}
                   value={volume}
                   min={0}
                   max={1}
@@ -272,6 +281,7 @@ export const Audio = ({
             : null}
         </div>
         <audio
+          id={uid}
           ref={refAudio}
           preload='metadata'
           controls
@@ -295,6 +305,7 @@ export const Audio = ({
     : (
       <>
         <audio
+          id={uid}
           ref={refAudio}
           src={src}
           type={format}
@@ -330,6 +341,7 @@ Audio.defaultProps = {
 }
 
 Audio.propTypes = {
+  id: PropTypes.string,
   src: PropTypes.string,
   a11y: PropTypes.bool,
   format: PropTypes.string,
