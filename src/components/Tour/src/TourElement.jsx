@@ -3,7 +3,7 @@ import { usePopper } from 'react-popper'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import { Button, TourContext } from '../../../components'
+import { Button, Icon, TourContext } from '../../../components'
 
 import css from './Tour.module.scss'
 
@@ -71,9 +71,15 @@ export const TourElement = ({
     if (isValidElement(content)) {
       return content
     }
-    return createElement('p', { role: 'status', 'aria-live': 'polite', className: css['tour-description'] }, [
-      content
-    ])
+    return createElement(
+      'p',
+      {
+        role: 'status',
+        'aria-live': 'polite',
+        className: css['tour-description']
+      },
+      [content]
+    )
   }
 
   /**
@@ -134,9 +140,19 @@ export const TourElement = ({
               label='Salir'
               data-class='c-button__close'
               onClick={onClose}
-              icon={{ path: new URL('/assets/icons/svg/close.svg', import.meta.url).href, size: 'big' }}
               {...(defaultStyle && { defaultStyle })}
-            />
+            >
+              <Icon>
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
+                  height='24'
+                  viewBox='0 -960 960 960'
+                  width='24'
+                >
+                  <path d='M480-424 284-228q-11 11-28 11t-28-11q-11-11-11-28t11-28l196-196-196-196q-11-11-11-28t11-28q11-11 28-11t28 11l196 196 196-196q11-11 28-11t28 11q11 11 11 28t-11 28L536-480l196 196q11 11 11 28t-11 28q-11 11-28 11t-28-11L480-424Z' />
+                </svg>
+              </Icon>
+            </Button>
           )}
 
           {!hideBackButton && (
@@ -146,9 +162,19 @@ export const TourElement = ({
               label='Anterior'
               data-class='c-button__before'
               onClick={onPrev}
-              icon={{ path: new URL('/assets/icons/svg/navigate_before.svg', import.meta.url).href, size: 'big' }}
               {...(defaultStyle && { defaultStyle })}
-            />
+            >
+              <Icon>
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
+                  height='24'
+                  viewBox='0 -960 960 960'
+                  width='24'
+                >
+                  <path d='m432-480 156 156q11 11 11 28t-11 28q-11 11-28 11t-28-11L348-452q-6-6-8.5-13t-2.5-15q0-8 2.5-15t8.5-13l184-184q11-11 28-11t28 11q11 11 11 28t-11 28L432-480Z' />
+                </svg>
+              </Icon>
+            </Button>
           )}
 
           <Button
@@ -157,9 +183,19 @@ export const TourElement = ({
             label='Siguiente'
             data-class='c-button__after'
             onClick={handleNextElement}
-            icon={{ path: new URL('/assets/icons/svg/navigate_next.svg', import.meta.url).href, size: 'big' }}
             {...(defaultStyle && { defaultStyle })}
-          />
+          >
+            <Icon>
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                height='24'
+                viewBox='0 -960 960 960'
+                width='24'
+              >
+                <path d='M504-480 348-636q-11-11-11-28t11-28q11-11 28-11t28 11l184 184q6 6 8.5 13t2.5 15q0 8-2.5 15t-8.5 13L404-268q-11 11-28 11t-28-11q-11-11-11-28t11-28l156-156Z' />
+              </svg>
+            </Icon>
+          </Button>
         </div>
       </div>
     </>
