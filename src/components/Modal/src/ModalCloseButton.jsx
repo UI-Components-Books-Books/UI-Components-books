@@ -7,7 +7,7 @@ export const ModalCloseButton = ({ children, onClick }) => {
   /**
    * Se obtienen la propiedad onCloseModal del contexto generado por el componente Modal.
    */
-  const { onCloseModal } = useContext(ModalContext)
+  const { onClose } = useContext(ModalContext)
 
   /**
    * Función creada para permitir que el
@@ -15,11 +15,9 @@ export const ModalCloseButton = ({ children, onClick }) => {
    * en el evento onClick además del onCloseModal.
    * @param {Event} event
    */
-  const handleClick = (e) => {
-    if (onClick) {
-      onClick(e)
-    }
-    onCloseModal()
+  const handleClick = (event) => {
+    onClick?.(event)
+    onClose?.()
   }
 
   /**

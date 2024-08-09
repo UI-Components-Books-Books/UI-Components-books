@@ -8,6 +8,14 @@ import { typeValidation } from '../../../utils/validations/typeValidation'
 
 import css from './Modal.module.scss'
 
+/**
+ * Se crea un objeto que no se puede cambiar para
+ * almacenar el keyCode de la tecla "ESC".
+ */
+const KEYCODE = Object.freeze({
+  ESC: 27
+})
+
 export const ModalContent = ({
   addClass,
   children,
@@ -21,12 +29,7 @@ export const ModalContent = ({
    * Se obtienen las propiedades isOpen, onKeyDown, onCloseModal
    * y refModal del contexto generado por el componente Modal.
    */
-  const {
-    isOpen,
-    onKeyDown: onKeyDownCloseModal,
-    onCloseModal,
-    refModal
-  } = useContext(ModalContext)
+  const { isOpen, onClose, refModal } = useContext(ModalContext)
 
   /**
    * Función creada para permitir que el
@@ -36,8 +39,7 @@ export const ModalContent = ({
    */
   const handleClick = (event) => {
     if (onClick && typeof onClick === 'function') onClick(event)
-
-    onCloseModal()
+    onClose?.()
   }
 
   /**
@@ -49,7 +51,9 @@ export const ModalContent = ({
   const handleKeyDown = (event) => {
     if (onKeyDown && typeof onKeyDown === 'function') onKeyDown(event)
 
-    onKeyDownCloseModal(event)
+    if ((event.keyCode || event.which) === KEYCODE.ESC) {
+      onClose?.()
+    }
   }
 
   return (
@@ -62,7 +66,7 @@ export const ModalContent = ({
       data-type={__TYPE}
       onKeyDown={handleKeyDown}
       className={classnames(
-        'animate__animated animate__fadeIn animate__faster video-interpreter-ui-modal',
+        'animate__animated animate__fadeIn  video-interpreter-ui-modal',
         {
           [`${css['c-modal']} u-px-3 u-py-3`]: !defaultStyle,
           [addClass]: addClass
@@ -74,7 +78,7 @@ export const ModalContent = ({
         className={classnames({ [css['c-modal-container']]: !defaultStyle })}
         data-class='c-modal__container'
       >
-        {isOpen ? children : null}
+        {children}
       </div>
       <Button
         addClass={classnames({ [css['c-close-button']]: !defaultStyle })}

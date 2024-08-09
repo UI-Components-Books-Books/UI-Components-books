@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import 'wicg-inert'
 
 import { Portal } from '../../../components'
-import { getChildrenByType } from '../../../utils/validations/getChildrenType'
 
 /**
  * Creamos un contexto para proveer a ciertos
@@ -13,19 +12,12 @@ import { getChildrenByType } from '../../../utils/validations/getChildrenType'
 export const ModalContext = createContext()
 
 /**
- * Se crea un objeto que no se puede cambiar para
- * almacenar el keyCode de la tecla "ESC".
- */
-const KEYCODE = Object.freeze({
-  ESC: 27
-})
-
-/**
  * Selectores que se utiliza
  * para comprobar si el finalFocusRef se
  * encuentra entre ellos.
  */
-const PARENT_ELEMENTS = "section[data-type='Section']:not([hidden]), div:not([hidden])"
+const PARENT_ELEMENTS =
+  "section[data-type='Section']:not([hidden]), div:not([hidden])"
 
 export const Modal = ({ children, isOpen, onClose, finalFocusRef }) => {
   /**
@@ -48,30 +40,14 @@ export const Modal = ({ children, isOpen, onClose, finalFocusRef }) => {
    * @param {bool} state - Estado.
    */
   const inertToggle = (state) => {
+    // Busca el elemento #root en el DOM
     const root = document.querySelector('#root')
+
+    // Si no se encuentra el elemento #root, salir de la función
+    if (!root) return
+
+    // Habilita o deshabilita la propiedad `inert` según el estado
     root.inert = state
-  }
-
-  /**
-   * Cierra el modal al presionar la tecla "ESC".
-   * @param {event} e - Evento del teclado
-   */
-  const onKeyDown = (e) => {
-    if ((e.keyCode || e.which) === KEYCODE.ESC) {
-      onCloseModal()
-    }
-  }
-
-  /**
-   * Se utiliza está función para cambiar las clases
-   * del modal asi permite dar una transición tanto
-   * de entrada como da salida suave.
-   *
-   * @param {String} to - Clase a replazar
-   * @param {String} from - Clase que remplaza
-   */
-  const changeStyle = (to, from) => {
-    refModal.current.classList.replace(to, from)
   }
 
   /**
@@ -92,26 +68,30 @@ export const Modal = ({ children, isOpen, onClose, finalFocusRef }) => {
   }
 
   /**
-   * Función que cambia las animaciones
-   * el enfoque después de cerrar el modal.
-   * @param {function} callback
+   * Efecto encargado de mostrar el componente
+   * cuando la propiedad isOpen es true.
    */
-  const changeStylesOnModalClose = async (callback) => {
-    try {
-      // Cambiamos el estilo de entrada por el estilo de salida.
-      changeStyle('animate__fadeIn', 'animate__fadeOut')
+  useEffect(() => {
+    if (isOpen && refModal.current) {
+      // Marcamos el estado de actualización como verdadero para rastrear si se ha actualizado.
+      flagUpdatedState.current = isOpen
 
-      // Esperamos 500 milisegundos.
-      await new Promise(resolve => setTimeout(resolve, 500))
-
-      // Cambiamos el estilo de salida por el estilo de entrada y restauramos la interacción.
-      changeStyle('animate__fadeOut', 'animate__fadeIn')
-      inertToggle(false)
-
-      // Si se proporciona una función de devolución de llamada, la ejecutamos.
-      if (typeof callback === 'function') {
-        callback()
+      // Si el modal está abierto y hay una referencia válida al elemento del modal
+      if (refModal.current) {
+        // Establecemos el enfoque en el elemento del modal para que el usuario pueda interactuar con él.
+        refModal.current.focus()
       }
+
+      // Aplicamos el estado inert al #root
+      inertToggle(isOpen)
+      return
+    }
+
+    // Cuando el modal se cierra
+    if (flagUpdatedState.current) {
+      flagUpdatedState.current = isOpen
+      // Quitamos el estado inert del #root
+      inertToggle(isOpen)
 
       // Manejo del enfoque en el cierre del modal.
       if (typeof finalFocusRef === 'string' || Array.isArray(finalFocusRef)) {
@@ -121,68 +101,12 @@ export const Modal = ({ children, isOpen, onClose, finalFocusRef }) => {
         // Si finalFocusRef es un objeto (como un ref), establecemos el enfoque en su elemento actual.
         finalFocusRef.current.focus()
       }
-    } catch (error) {
-      // En caso de que ocurra un error, lo registramos en la consola.
-      console.error('An error occurred:', error)
     }
-  }
-
-  /**
-   * Función utilizada para cerrar el modal.
-   * además agrega el focus al elemento contenido
-   * en la propiedad finalFocusRef.
-   */
-  const onCloseModal = () => {
-    changeStylesOnModalClose(onClose(!isOpen))
-  }
-
-  /**
-   * Efecto encargado de mostrar el componente
-   * cuando la propiedad isOpen es true.
-   */
-  useEffect(() => {
-    const handleClose = async () => {
-      if (isOpen || !flagUpdatedState.current) return
-
-      flagUpdatedState.current = false
-      inertToggle(false)
-
-      // Agregamos el focus al finalFocusRef y cambiamos las animaciones del modal.
-      await changeStylesOnModalClose()
-    }
-
-    if (isOpen) {
-      inertToggle(true)
-
-      // Marcamos el estado de actualización como verdadero para rastrear si se ha actualizado.
-      flagUpdatedState.current = true
-
-      if (refModal.current) {
-        // Establecemos el enfoque en el elemento del modal para que el usuario pueda interactuar con él.
-        refModal.current.focus()
-      }
-    }
-
-    handleClose()
-
-    return () => {
-      // Almacenamos el boolean que nos indica si existe o no la propiedad inert en el #root.
-      const hasAttribute = document
-        .querySelector('#root')
-        .hasAttribute('inert')
-
-      // Eliminamos el inert si el hasAttribute es true.
-      if (hasAttribute) inertToggle(false)
-    }
-  }, [isOpen])
+  }, [isOpen, refModal, finalFocusRef])
 
   return (
-    <ModalContext.Provider
-      value={{ isOpen, onKeyDown, onCloseModal, refModal }}
-    >
-      <Portal id='js-modal'>
-        {getChildrenByType(children, ['ModalContent', 'ModalOverlay'])}
-      </Portal>
+    <ModalContext.Provider value={{ isOpen, onClose, refModal }}>
+      <Portal id='js-modal'>{isOpen ? children : null}</Portal>
     </ModalContext.Provider>
   )
 }

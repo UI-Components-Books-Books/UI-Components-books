@@ -9,21 +9,20 @@ import css from './Modal.module.scss'
 
 export const ModalOverlay = ({ addClass, onClick, defaultStyle }) => {
   /**
-   * Se obtienen las propiedades isOpen y onCloseModal
+   * Se obtienen las propiedades isOpen y onClose
    * del contexto generado por el componente Modal.
    */
-  const { isOpen, onCloseModal } = useContext(ModalContext)
+  const { isOpen, onClose } = useContext(ModalContext)
 
   /**
    * Función creada para permitir que el
    * componente pueda ejecutar otro método
-   * en el evento onClick además del onCloseModal.
+   * en el evento onClick además del onClose.
    * @param {Event} event
    */
   const handleClick = (event) => {
     if (onClick && typeof onClick === 'function') onClick(event)
-
-    onCloseModal()
+    onClose?.()
   }
 
   return (
