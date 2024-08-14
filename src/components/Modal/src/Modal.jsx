@@ -102,6 +102,11 @@ export const Modal = ({ children, isOpen, onClose, finalFocusRef }) => {
         finalFocusRef.current.focus()
       }
     }
+
+    return () => {
+      // Quitamos el estado inert del #root
+      inertToggle(false)
+    }
   }, [isOpen, refModal, finalFocusRef])
 
   return (
