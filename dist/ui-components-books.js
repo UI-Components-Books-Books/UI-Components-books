@@ -6207,7 +6207,9 @@ const vr = dt(), xu = "section[data-type='Section']:not([hidden]), div:not([hidd
       i.current = t, a.current && a.current.focus(), c(t);
       return;
     }
-    i.current && (i.current = t, c(t), typeof r == "string" || Array.isArray(r) ? s(r) : typeof r == "object" && r.current.focus());
+    return i.current && (i.current = t, c(t), typeof r == "string" || Array.isArray(r) ? s(r) : typeof r == "object" && r.current.focus()), () => {
+      c(!1);
+    };
   }, [t, a, r]), /* @__PURE__ */ p(vr.Provider, { value: { isOpen: t, onClose: n, refModal: a }, children: /* @__PURE__ */ p(fn, { id: "js-modal", children: t ? e : null }) });
 };
 Pi.defaultProps = {
