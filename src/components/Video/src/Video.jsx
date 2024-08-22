@@ -414,32 +414,9 @@ export const Video = ({ src, width = '1000', hasDescription, description, addCla
     >
       <div className={`${css['c-vid__container']} ${addClass}`} data-video-full-screen={getStateScreen.state} ref={refCont}>
         <div className={css['c-vid__wrapper']}>
-          <video
-            preload='none'
-            ref={refVideo}
-            onTimeUpdate={(event) => initialValues(event.target)}
-            onLoadedData={(event) => initialValues(event.target)}
-            onClick={handlePlay}
-            className={`${css['c-vid__video']} ${captions ? '' : css['no-captions']}`}
-            {...(poster && { poster })}
+          <div
+            className={css['c-vid__icon-container']}
           >
-            <source src={src.video} />
-            {src.caption
-              ? (
-                <track
-                  ref={refCaptions}
-                  src={src.caption}
-                  label='Subtítulos en español'
-                  kind='subtitles'
-                  srcLang='es'
-                  default
-                />
-                )
-              : (
-                  ''
-                )}
-          </video>
-          <div className={css['c-vid__icon-container']}>
             <div ref={refRewindPulse} className={css['c-vid__icon']}>
               <Icon>
                 <svg xmlns='http://www.w3.org/2000/svg' height='48' width='48' viewBox='0 0 48 48'>
@@ -468,6 +445,34 @@ export const Video = ({ src, width = '1000', hasDescription, description, addCla
               </Icon>
             </div>
           </div>
+          <video
+            preload='none'
+            ref={refVideo}
+            onTimeUpdate={(event) => initialValues(event.target)}
+            onLoadedData={(event) => initialValues(event.target)}
+            className={`${css['c-vid__video']} ${captions ? '' : css['no-captions']}`}
+            onClick={() => {
+              handlePlay()
+              console.log('mezcla')
+            }}
+            {...(poster && { poster })}
+          >
+            <source src={src.video} />
+            {src.caption
+              ? (
+                <track
+                  ref={refCaptions}
+                  src={src.caption}
+                  label='Subtítulos en español'
+                  kind='subtitles'
+                  srcLang='es'
+                  default
+                />
+                )
+              : (
+                  ''
+                )}
+          </video>
         </div>
 
         <div className={css['progress-container']}>

@@ -1,10 +1,10 @@
 .c-vid {
-  --video-input-color: var(--clr-neutral-100);
-  --video-bg: var(--clr-complementary-900);
-  --video-caption-bg: var(--clr-complementary-800);
+  --video-input-color: #cacaca;
+  --video-bg: #121212;
+  --video-caption-bg: #121212;
   --video-progress-bg: var(--clr-primary-300);
   --video-progress-focus: var(--clr-primary-500);
-  --video-button-disabled: var(--clr-complementary-300);
+  --video-button-disabled: var(--clr-primary-500);
 }
 
 :where(.c-vid) {
