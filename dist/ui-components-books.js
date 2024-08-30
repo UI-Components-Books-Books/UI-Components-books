@@ -1781,9 +1781,7 @@ const Vs = "_scrubber_1x5l1_142", ht = {
     });
   }, U = () => {
     T.current && (Y(), T.current.paused ? T.current.play() : T.current.pause(), m(!h));
-  }, G = window.matchMedia(
-    "(any-hover: none) and (any-pointer: coarse)"
-  ).matches, oe = () => {
+  }, G = window.matchMedia("(any-hover: none) and (any-pointer: coarse)").matches, oe = () => {
     D(Math.round(T.current.duration)), k(G ? 1 : T.current.volume);
   }, X = () => {
     N(Math.round(T.current.currentTime));
@@ -1807,23 +1805,14 @@ const Vs = "_scrubber_1x5l1_142", ht = {
           r ? /* @__PURE__ */ p(ge, { children: /* @__PURE__ */ p("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 32 32", children: Qt.a11y }) }) : null,
           /* @__PURE__ */ I("button", { type: "button", onClick: U, children: [
             /* @__PURE__ */ p("div", { className: "u-sr-only", children: h ? "Pausar" : "Reproducir" }),
-            /* @__PURE__ */ p(ge, { size: "big", children: /* @__PURE__ */ p(
-              "svg",
-              {
-                xmlns: "http://www.w3.org/2000/svg",
-                width: "48",
-                height: "48",
-                viewBox: "0 -960 960 960",
-                children: h ? Qt.pause : Qt.play
-              }
-            ) })
+            /* @__PURE__ */ p(ge, { size: "big", children: /* @__PURE__ */ p("svg", { xmlns: "http://www.w3.org/2000/svg", width: "48", height: "48", viewBox: "0 -960 960 960", children: h ? Qt.pause : Qt.play }) })
           ] }),
           /* @__PURE__ */ I("small", { "aria-hidden": "true", children: [
             String(Math.floor(_ / 60)).padStart(2, "0"),
             ":",
             String(_ - 60 * Math.floor(_ / 60)).padStart(2, "0"),
+            " /",
             " ",
-            "/ ",
             String(Math.floor(P / 60)).padStart(2, "0"),
             ":",
             String(P - 60 * Math.floor(P / 60)).padStart(2, "0")
@@ -1852,16 +1841,7 @@ const Vs = "_scrubber_1x5l1_142", ht = {
               onClick: () => x(!b),
               children: [
                 /* @__PURE__ */ p("span", { className: "u-sr-only", children: "Controlar volumen" }),
-                /* @__PURE__ */ p(ge, { children: /* @__PURE__ */ p(
-                  "svg",
-                  {
-                    xmlns: "http://www.w3.org/2000/svg",
-                    width: "48",
-                    height: "48",
-                    viewBox: "0 -960 960 960",
-                    children: w === 0 ? Qt.volume_off : w <= 0.25 ? Qt.volume_down : Qt.volume_on
-                  }
-                ) })
+                /* @__PURE__ */ p(ge, { children: /* @__PURE__ */ p("svg", { xmlns: "http://www.w3.org/2000/svg", width: "48", height: "48", viewBox: "0 -960 960 960", children: w === 0 ? Qt.volume_off : w <= 0.25 ? Qt.volume_down : Qt.volume_on }) })
               ]
             }
           ),
@@ -1928,7 +1908,7 @@ const Vs = "_scrubber_1x5l1_142", ht = {
       Ut,
       {
         type: "button",
-        label: h ? "Pausar" : "Reproduccir",
+        label: h ? "Pausar" : "Reproducir",
         "data-a11y": r,
         "data-class": "c-audio-button",
         addClass: re({
@@ -6203,11 +6183,12 @@ const hr = dt(), xu = "section[data-type='Section']:not([hidden]), div:not([hidd
     });
   };
   return J(() => {
+    var u;
     if (t && a.current) {
       i.current = t, a.current && a.current.focus(), c(t);
       return;
     }
-    return i.current && (i.current = t, c(t), typeof r == "string" || Array.isArray(r) ? s(r) : typeof r == "object" && r.current.focus()), () => {
+    return i.current && (i.current = t, c(t), typeof r == "string" || Array.isArray(r) ? s(r) : typeof r == "object" && ((u = r == null ? void 0 : r.current) == null || u.focus())), () => {
       c(!1);
     };
   }, [t, a, r]), /* @__PURE__ */ p(hr.Provider, { value: { isOpen: t, onClose: n, refModal: a }, children: /* @__PURE__ */ p(fn, { id: "js-modal", children: t ? e : null }) });

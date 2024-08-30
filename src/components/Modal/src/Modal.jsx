@@ -99,7 +99,7 @@ export const Modal = ({ children, isOpen, onClose, finalFocusRef }) => {
         setElementFocusOnModalClose(finalFocusRef)
       } else if (typeof finalFocusRef === 'object') {
         // Si finalFocusRef es un objeto (como un ref), establecemos el enfoque en su elemento actual.
-        finalFocusRef.current.focus()
+        finalFocusRef?.current?.focus()
       }
     }
 
