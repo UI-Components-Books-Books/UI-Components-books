@@ -7,7 +7,7 @@ import { typeValidation } from '../../../utils/validations/typeValidation';
 
 import css from './Tabs.module.scss';
 
-export const TabPanel = ({ children, id, addClass, defaultStyle, __TYPE, ...props }) => {
+export const TabPanel = ({ children, id, addClass, defaultStyle, disableA11y, __TYPE, ...props }) => {
   // Obtenemos la función validation del contexto
   const { validation } = useContext(TabsContext);
 
@@ -31,7 +31,7 @@ export const TabPanel = ({ children, id, addClass, defaultStyle, __TYPE, ...prop
       className={classnames({
         [css['c-tab__panel--active']]: !defaultStyle && isSelected,
         [css['c-tab__panel']]: !defaultStyle && !isSelected,
-        ['video-interpreter-ui-tabpanel']: 'video-interpreter-ui-tabpanel',
+        ['video-interpreter-ui-tabpanel']: !disableA11y,
         [addClass]: addClass
       })}
       {...props}>
@@ -54,5 +54,6 @@ TabPanel.propTypes = {
 };
 
 TabPanel.defaultProps = {
-  __TYPE: 'TabPanel'
+  __TYPE: 'TabPanel',
+  disableA11y: false
 };
